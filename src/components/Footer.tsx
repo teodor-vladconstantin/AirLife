@@ -8,7 +8,7 @@ const Footer = () => {
           <div>
             <div className="flex items-center gap-2 mb-4">
               <Leaf className="w-6 h-6 text-primary" />
-              <span className="text-xl font-bold">Uplife</span>
+              <span className="text-xl font-bold">AirLife</span>
             </div>
             <p className="text-sm opacity-80">
               Soluții HVAC eco-friendly pentru un viitor mai curat și mai sănătos.
@@ -44,7 +44,7 @@ const Footer = () => {
         </div>
         
         <div className="border-t border-background/20 pt-8 text-center text-sm opacity-80">
-          <p>&copy; 2025 Uplife.ro. Toate drepturile rezervate.</p>
+          <p>&copy; 2025 AirLife.ro. Toate drepturile rezervate.</p>
         </div>
       </div>
     </footer>

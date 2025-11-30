@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Wind, Droplets, Sparkles } from "lucide-react";
@@ -78,9 +79,11 @@ const ProductCategories = () => {
                     ))}
                   </div>
                   
-                  <Button variant="outline" className="w-full border-primary/30 text-primary hover:bg-primary/5">
-                    Vezi Produsele
-                  </Button>
+                  <Link to="/products" className="w-full">
+                    <Button variant="outline" className="w-full border-primary/30 text-primary hover:bg-primary/5">
+                      Vezi Produsele
+                    </Button>
+                  </Link>
                 </div>
               </Card>
             );
