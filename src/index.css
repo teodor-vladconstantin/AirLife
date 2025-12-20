@@ -1,3 +1,15 @@
+body {
+  cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"><circle cx="12" cy="12" r="6" fill="%2322c55e"/></svg>') 12 12, auto;
+}
+/* Brand selection color: must be after all Tailwind/base layers to override */
+::selection {
+  background: #22c55e !important; /* Tailwind green-500 */
+  color: #fff !important;
+}
+::-moz-selection {
+  background: #22c55e !important;
+  color: #fff !important;
+}
 @tailwind base;
 @tailwind components;
 @tailwind utilities;

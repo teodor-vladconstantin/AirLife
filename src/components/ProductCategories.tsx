@@ -34,7 +34,7 @@ const ProductCategories = () => {
   return (
     <section className="py-24 bg-gradient-to-b from-background to-secondary/30">
       <div className="container mx-auto px-4">
-        <div className="text-center mb-16 animate-fade-in">
+        <div className="text-center mb-16 animate-in fade-in duration-700">
           <h2 className="text-4xl md:text-5xl font-bold mb-4 text-foreground">
             Gama Noastră de Produse
           </h2>
@@ -42,15 +42,15 @@ const ProductCategories = () => {
             Soluții complete pentru confortul și sănătatea ta
           </p>
         </div>
-        
+
         <div className="grid md:grid-cols-3 gap-8">
           {categories.map((category, index) => {
             const Icon = category.icon;
             return (
-              <Card 
-                key={index} 
-                className="group overflow-hidden border-border/50 hover:border-primary/30 transition-all duration-300 hover:shadow-lg bg-card/50 backdrop-blur-sm animate-scale-in"
-                style={{ animationDelay: `${index * 150}ms` }}
+              <Card
+                key={index}
+                className="group overflow-hidden border-border/50 hover:border-primary/30 transition-opacity duration-400 will-change-opacity hover:opacity-90 bg-card/50 backdrop-blur-sm animate-in fade-in"
+                style={{ animationDelay: `${(index + 2) * 150}ms`, animationDuration: '600ms' }}
               >
                 <div className="relative h-64 overflow-hidden">
                   <img 
@@ -80,7 +80,7 @@ const ProductCategories = () => {
                   </div>
                   
                   <Link to="/products" className="w-full">
-                    <Button variant="outline" className="w-full border-primary/30 text-primary hover:bg-primary/5">
+                    <Button variant="outline" className="w-full border-primary/30 text-primary hover:bg-primary/5 transition-all duration-300 hover:-translate-y-1 hover:shadow-md">
                       Vezi Produsele
                     </Button>
                   </Link>

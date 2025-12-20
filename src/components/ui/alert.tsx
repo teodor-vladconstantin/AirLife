@@ -22,7 +22,7 @@ const Alert = React.forwardRef<
   HTMLDivElement,
   React.HTMLAttributes<HTMLDivElement> & VariantProps<typeof alertVariants>
 >(({ className, variant, ...props }, ref) => (
-  <div ref={ref} role="alert" className={cn(alertVariants({ variant }), className)} {...props} />
+  <div ref={ref} role="alert" className={cn(alertVariants({ variant }), "transition-opacity duration-400 will-change-opacity hover:opacity-90", className)} {...props} />
 ));
 Alert.displayName = "Alert";
 

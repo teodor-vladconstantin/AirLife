@@ -1,4 +1,5 @@
 import { Leaf } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const Footer = () => {
   return (
@@ -14,31 +15,32 @@ const Footer = () => {
               Soluții HVAC eco-friendly pentru un viitor mai curat și mai sănătos.
             </p>
           </div>
-          
+
           <div>
             <h3 className="font-semibold mb-4">Produse</h3>
             <ul className="space-y-2 text-sm opacity-80">
-              <li><a href="#" className="hover:text-primary transition-colors">Aer Condiționat</a></li>
-              <li><a href="#" className="hover:text-primary transition-colors">Dezumidificatoare</a></li>
-              <li><a href="#" className="hover:text-primary transition-colors">Purificatoare</a></li>
+              <li><Link to="/products" className="hover:text-primary transition-colors">Toate Produsele</Link></li>
+              <li><Link to="/products" className="hover:text-primary transition-colors">Aer Condiționat</Link></li>
+              <li><Link to="/products" className="hover:text-primary transition-colors">Dezumidificatoare</Link></li>
+              <li><Link to="/products" className="hover:text-primary transition-colors">Purificatoare Aer</Link></li>
             </ul>
           </div>
-          
+
           <div>
             <h3 className="font-semibold mb-4">Companie</h3>
             <ul className="space-y-2 text-sm opacity-80">
-              <li><a href="#" className="hover:text-primary transition-colors">Despre Noi</a></li>
-              <li><a href="#" className="hover:text-primary transition-colors">Contact</a></li>
-              <li><a href="#" className="hover:text-primary transition-colors">Service</a></li>
+              <li><Link to="/about" className="hover:text-primary transition-colors">Despre Noi</Link></li>
+              <li><Link to="/contact" className="hover:text-primary transition-colors">Contact</Link></li>
+              <li><Link to="/my-orders" className="hover:text-primary transition-colors">Comenzile Mele</Link></li>
             </ul>
           </div>
-          
+
           <div>
             <h3 className="font-semibold mb-4">Legal</h3>
             <ul className="space-y-2 text-sm opacity-80">
-              <li><a href="#" className="hover:text-primary transition-colors">Termeni și Condiții</a></li>
-              <li><a href="#" className="hover:text-primary transition-colors">Politica de Confidențialitate</a></li>
-              <li><a href="#" className="hover:text-primary transition-colors">GDPR</a></li>
+              <li><Link to="/terms" className="hover:text-primary transition-colors">Termeni și Condiții</Link></li>
+              <li><Link to="/privacy" className="hover:text-primary transition-colors">Politica de Confidențialitate</Link></li>
+              <li><Link to="/contact" className="hover:text-primary transition-colors">Date de Contact</Link></li>
             </ul>
           </div>
         </div>
