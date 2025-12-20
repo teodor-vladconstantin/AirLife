@@ -1,8 +1,10 @@
 import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { useToast } from "@/hooks/use-toast";
+import { useCart } from "@/contexts/CartContext";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { Loader2 } from "lucide-react";
@@ -23,6 +25,12 @@ const Products = () => {
   const [loading, setLoading] = useState(true);
   const [selectedCategory, setSelectedCategory] = useState<string>("all");
   const { toast } = useToast();
+  const { addToCart } = useCart();
+
+  const truncateText = (text: string, maxLength: number = 100) => {
+    if (!text || text.length <= maxLength) return text;
+    return text.substring(0, maxLength).trim() + "...";
+  };
 
   useEffect(() => {
     fetchProducts();
@@ -52,6 +60,11 @@ const Products = () => {
     setLoading(false);
   };
 
+  const handleAddToCart = async (product: Product) => {
+    if (product.stock === 0) return;
+    await addToCart(product, 1);
+  };
+
   const categories = [
     { value: "all", label: "Toate Produsele" },
     { value: "Aer Condiționat", label: "Aer Condiționat" },
@@ -65,7 +78,7 @@ const Products = () => {
 
       <main className="flex-1 bg-gradient-to-b from-background to-secondary/30 py-12">
         <div className="container mx-auto px-4">
-          <div className="text-center mb-12">
+          <div className="text-center mb-12 animate-in fade-in duration-700">
             <h1 className="text-4xl md:text-5xl font-bold mb-4 text-foreground">
               Produsele Noastre
             </h1>
@@ -74,12 +87,14 @@ const Products = () => {
             </p>
           </div>
 
-          <div className="flex gap-2 mb-8 flex-wrap justify-center">
-            {categories.map((cat) => (
+          <div className="flex gap-2 mb-8 flex-wrap justify-center animate-in fade-in duration-500 delay-150">
+            {categories.map((cat, idx) => (
               <Button
                 key={cat.value}
                 variant={selectedCategory === cat.value ? "default" : "outline"}
                 onClick={() => setSelectedCategory(cat.value)}
+                className="transition-opacity duration-400 will-change-opacity hover:opacity-90"
+                style={{animationDelay: `${idx * 50}ms`}}
               >
                 {cat.label}
               </Button>
@@ -98,19 +113,20 @@ const Products = () => {
             </div>
           ) : (
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {products.map((product) => (
+              {products.map((product, idx) => (
                 <Card
                   key={product.id}
-                  className="group overflow-hidden border-border/50 hover:border-primary/30 transition-all duration-300 hover:shadow-lg bg-card/50 backdrop-blur-sm"
+                  className="group overflow-hidden border-border/50 hover:border-primary/30 transition-opacity duration-400 will-change-opacity hover:opacity-90 bg-card/50 backdrop-blur-sm animate-in fade-in"
+                  style={{animationDelay: `${idx * 100}ms`, animationDuration: '500ms'}}
                 >
                   {product.image_url && (
-                    <div className="relative h-64 overflow-hidden">
+                    <div className="relative flex items-center justify-center bg-white" style={{minHeight: '180px'}}>
                       <img
                         src={product.image_url}
                         alt={product.name}
-                        className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                        className="max-h-64 w-auto max-w-full object-contain transition-opacity duration-400 will-change-opacity group-hover:opacity-90"
+                        style={{display: 'block', margin: '0 auto'}}
                       />
-                      <div className="absolute inset-0 bg-gradient-to-t from-card via-transparent to-transparent opacity-90" />
                     </div>
                   )}
 
@@ -119,7 +135,7 @@ const Products = () => {
                       <span className="text-sm text-primary font-semibold">{product.category}</span>
                     </div>
                     <h3 className="text-2xl font-bold mb-3 text-foreground">{product.name}</h3>
-                    <p className="text-muted-foreground mb-4">{product.description}</p>
+                    <p className="text-muted-foreground mb-4">{truncateText(product.description, 100)}</p>
 
                     {product.features.length > 0 && (
                       <div className="flex gap-2 mb-4 flex-wrap">
@@ -141,9 +157,20 @@ const Products = () => {
                       </span>
                     </div>
 
-                    <Button className="w-full mt-4" disabled={product.stock === 0}>
-                      {product.stock > 0 ? "Comandă Acum" : "Indisponibil"}
-                    </Button>
+                    <div className="flex gap-2 mt-4">
+                      <Link to={`/products/${product.id}`} className="flex-1">
+                        <Button variant="outline" className="w-full">
+                          Vezi Descriere
+                        </Button>
+                      </Link>
+                      <Button
+                        className="flex-1"
+                        disabled={product.stock === 0}
+                        onClick={() => handleAddToCart(product)}
+                      >
+                        {product.stock > 0 ? "Adaugă în Coș" : "Indisponibil"}
+                      </Button>
+                    </div>
                   </CardContent>
                 </Card>
               ))}

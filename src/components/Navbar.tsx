@@ -2,13 +2,14 @@ import { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
-import { Leaf, User, LogOut, ShieldCheck } from "lucide-react";
+import { Leaf, User, LogOut, ShieldCheck, Package } from "lucide-react";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { CartButton } from "@/components/cart/CartButton";
 
 const Navbar = () => {
   const [user, setUser] = useState<any>(null);
@@ -64,6 +65,11 @@ const Navbar = () => {
             <Link to="/products">
               <Button variant="ghost">Produse</Button>
             </Link>
+            <Link to="/about">
+              <Button variant="ghost">Despre Noi</Button>
+            </Link>
+
+            <CartButton />
 
             {user ? (
               <DropdownMenu>
@@ -79,6 +85,10 @@ const Navbar = () => {
                       Panou Admin
                     </DropdownMenuItem>
                   )}
+                  <DropdownMenuItem onClick={() => navigate("/my-orders")}>
+                    <Package className="w-4 h-4 mr-2" />
+                    Comenzile Mele
+                  </DropdownMenuItem>
                   <DropdownMenuItem onClick={handleLogout}>
                     <LogOut className="w-4 h-4 mr-2" />
                     Deconectare

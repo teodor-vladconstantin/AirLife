@@ -10,7 +10,7 @@ const Label = React.forwardRef<
   React.ElementRef<typeof LabelPrimitive.Root>,
   React.ComponentPropsWithoutRef<typeof LabelPrimitive.Root> & VariantProps<typeof labelVariants>
 >(({ className, ...props }, ref) => (
-  <LabelPrimitive.Root ref={ref} className={cn(labelVariants(), className)} {...props} />
+  <LabelPrimitive.Root ref={ref} className={cn(labelVariants(), "transition-opacity duration-400 will-change-opacity hover:opacity-90", className)} {...props} />
 ));
 Label.displayName = LabelPrimitive.Root.displayName;
 
