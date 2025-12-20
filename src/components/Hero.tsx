@@ -38,7 +38,7 @@ const Hero = () => {
               <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
             </Button>
           </Link>
-          <Button size="lg" variant="outline" className="border-primary text-primary hover:bg-primary/5 transition-all duration-300 hover:-translate-y-1">
+          <Button size="lg" variant="outline" className="border-primary text-primary hover:bg-primary/5 hover:text-primary-foreground transition-all duration-300 hover:-translate-y-1">
             Află Mai Multe
           </Button>
         </div>
