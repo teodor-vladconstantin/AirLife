@@ -79,8 +79,8 @@ const ProductCategories = () => {
                     ))}
                   </div>
                   
-                  <Link to="/products" className="w-full">
-                    <Button variant="outline" className="w-full border-primary/30 text-primary hover:bg-primary/5 transition-all duration-300 hover:-translate-y-1 hover:shadow-md">
+                    <Link to="/products" className="w-full">
+                    <Button variant="outline" className="w-full border-primary/30 text-primary hover:bg-primary/5 hover:text-foreground transition-all duration-300 hover:-translate-y-1 hover:shadow-md">
                       Vezi Produsele
                     </Button>
                   </Link>
