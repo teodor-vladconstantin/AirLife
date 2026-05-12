@@ -21,7 +21,7 @@ const Contact = () => {
                 </CardTitle>
               </CardHeader>
               <CardContent>
-                <p className="text-muted-foreground mb-2">Pentru comenzi și informații:</p>
+                <p className="text-muted-foreground mb-2">Pentru cereri de ofertă și informații:</p>
                 <a href="mailto:contact@airlife.ro" className="text-primary hover:underline font-semibold">
                   contact@airlife.ro
                 </a>
@@ -110,10 +110,9 @@ const Contact = () => {
             </CardHeader>
             <CardContent className="space-y-4 text-muted-foreground">
               <div>
-                <h3 className="font-semibold text-foreground mb-2">Livrare</h3>
+                <h3 className="font-semibold text-foreground mb-2">Livrare / Montaj</h3>
                 <p>
-                  Livrăm în toată România prin curier rapid. Livrarea se face în 2-5 zile lucrătoare de la confirmarea comenzii.
-                  Livrare gratuită pentru comenzi peste 500 RON.
+                  Detaliile de livrare și montaj vor fi specificate în oferta pe care ți-o vom trimite. Pentru estimări generale, putem livra și programa montaj în funcție de disponibilitate.
                 </p>
               </div>
               <div>
@@ -126,7 +125,7 @@ const Contact = () => {
               <div>
                 <h3 className="font-semibold text-foreground mb-2">Întrebări Frecvente</h3>
                 <p>
-                  Pentru întrebări frecvente despre comenzi, livrare, plăți și garanție, vă rugăm să consultați secțiunea FAQ
+                  Pentru întrebări frecvente despre cereri, livrare, montaj și garanție, vă rugăm să consultați secțiunea FAQ
                   sau să ne contactați direct.
                 </p>
               </div>

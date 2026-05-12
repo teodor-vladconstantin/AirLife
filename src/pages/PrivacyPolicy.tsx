@@ -37,7 +37,7 @@ const PrivacyPolicy = () => {
                 <li>Date de identificare: nume, prenume</li>
                 <li>Date de contact: adresă de email, număr de telefon</li>
                 <li>Date de livrare: adresă completă de livrare</li>
-                <li>Date privind comenzile: produse comandate, prețuri, metoda de plată</li>
+                <li>Date privind comenzile/cererile: produse solicitate, prețuri, metoda de plată</li>
                 <li>Date de autentificare: email și parolă (criptată)</li>
               </ul>
             </CardContent>
@@ -50,8 +50,8 @@ const PrivacyPolicy = () => {
             <CardContent className="space-y-4 text-muted-foreground">
               <p>Prelucrăm datele dumneavoastră personale în următoarele scopuri:</p>
               <ul className="list-disc list-inside space-y-2 ml-4">
-                <li>Procesarea și livrarea comenzilor</li>
-                <li>Comunicarea cu clienții (confirmări, notificări despre status comenzii)</li>
+                <li>Procesarea cererilor de ofertă și, dacă este cazul, livrarea/instalarea produselor</li>
+                <li>Comunicarea cu clienții (confirmări, notificări despre statusul cererii/comenzii)</li>
                 <li>Gestionarea contului de utilizator</li>
                 <li>Îmbunătățirea serviciilor și experienței utilizatorilor</li>
                 <li>Respectarea obligațiilor legale (contabilitate, fiscalitate)</li>
@@ -83,7 +83,7 @@ const PrivacyPolicy = () => {
                 Datele dumneavoastră pot fi partajate cu următoarele categorii de destinatari:
               </p>
               <ul className="list-disc list-inside space-y-2 ml-4">
-                <li>Companii de curierat (pentru livrarea comenzilor)</li>
+                <li>Companii de curierat (pentru livrarea produselor când este cazul)</li>
                 <li>Procesatori de plăți (pentru tranzacții online)</li>
                 <li>Furnizori de servicii IT (hosting, mentenanță)</li>
                 <li>Autorități publice (când este cerut de lege)</li>
@@ -103,7 +103,7 @@ const PrivacyPolicy = () => {
                 Păstrăm datele dumneavoastră personale pe perioada necesară îndeplinirii scopurilor pentru care au fost colectate:
               </p>
               <ul className="list-disc list-inside space-y-2 ml-4">
-                <li>Date de comandă: 5 ani (conform legislației fiscale)</li>
+                <li>Date de comandă/cerere: 5 ani (conform legislației fiscale)</li>
                 <li>Cont utilizator: până la ștergerea contului</li>
                 <li>Date de marketing: până la retragerea consimțământului</li>
               </ul>

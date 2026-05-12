@@ -5,6 +5,7 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { CartProvider } from "./contexts/CartContext";
+import { QuoteProvider } from "./contexts/QuoteContext";
 import ScrollToTop from "./components/ScrollToTop";
 import Index from "./pages/Index";
 import Auth from "./pages/Auth";
@@ -15,6 +16,7 @@ import AboutUs from "./pages/AboutUs";
 import Checkout from "./pages/Checkout";
 import OrderConfirmation from "./pages/OrderConfirmation";
 import MyOrders from "./pages/MyOrders";
+import RequestQuote from "./pages/RequestQuote";
 import TermsAndConditions from "./pages/TermsAndConditions";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
 import Contact from "./pages/Contact";
@@ -29,10 +31,11 @@ const App = () => (
     <QueryClientProvider client={queryClient}>
       <TooltipProvider>
         <CartProvider>
-          <Toaster />
-          <Sonner />
-          <BrowserRouter>
-            <ScrollToTop />
+          <QuoteProvider>
+            <Toaster />
+            <Sonner />
+            <BrowserRouter>
+              <ScrollToTop />
             <Routes>
               <Route path="/" element={<FadeWrapper><Index /></FadeWrapper>} />
               <Route path="/auth" element={<FadeWrapper><Auth /></FadeWrapper>} />
@@ -40,6 +43,7 @@ const App = () => (
               <Route path="/products/:productId" element={<FadeWrapper><ProductDetails /></FadeWrapper>} />
               <Route path="/about" element={<FadeWrapper><AboutUs /></FadeWrapper>} />
               <Route path="/checkout" element={<FadeWrapper><Checkout /></FadeWrapper>} />
+              <Route path="/request-quote" element={<FadeWrapper><RequestQuote /></FadeWrapper>} />
               <Route path="/order-confirmation/:orderId" element={<FadeWrapper><OrderConfirmation /></FadeWrapper>} />
               <Route path="/my-orders" element={<FadeWrapper><MyOrders /></FadeWrapper>} />
               <Route path="/admin" element={<FadeWrapper><Admin /></FadeWrapper>} />
@@ -49,7 +53,8 @@ const App = () => (
               {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
               <Route path="*" element={<FadeWrapper><NotFound /></FadeWrapper>} />
             </Routes>
-          </BrowserRouter>
+            </BrowserRouter>
+          </QuoteProvider>
         </CartProvider>
       </TooltipProvider>
     </QueryClientProvider>

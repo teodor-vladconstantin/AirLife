@@ -6,6 +6,7 @@ import {
   DialogContent,
   DialogHeader,
   DialogTitle,
+  DialogDescription,
 } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -115,7 +116,7 @@ export const OrderDetailsDialog = ({
       console.error("Error fetching order details:", error);
       toast({
         title: "Eroare",
-        description: "Nu s-au putut încărca detaliile comenzii",
+        description: "Nu s-au putut încărca detaliile solicitării",
         variant: "destructive",
       });
     } finally {
@@ -189,7 +190,10 @@ export const OrderDetailsDialog = ({
     <Dialog open={open} onOpenChange={onClose}>
       <DialogContent className="max-w-3xl max-h-[90vh] overflow-y-auto">
         <DialogHeader>
-          <DialogTitle>Detalii Comandă</DialogTitle>
+          <DialogTitle>Detalii Cerere</DialogTitle>
+          <DialogDescription>
+            Vizualizează și actualizează statusul, detaliile de livrare și notițele interne pentru această cerere.
+          </DialogDescription>
         </DialogHeader>
 
         {loading ? (
@@ -233,13 +237,13 @@ export const OrderDetailsDialog = ({
 
             {/* Shipping Address */}
             <div>
-              <h4 className="font-semibold mb-3">Adresă de Livrare</h4>
+              <h4 className="font-semibold mb-3">Adresă (dacă este cazul)</h4>
               <p className="text-sm text-muted-foreground">
-                {order.shipping_address.address}
+                {order.shipping_address?.address || "-"}
                 <br />
-                {order.shipping_address.city}, {order.shipping_address.county}
+                {order.shipping_address?.city || ""}{order.shipping_address?.city ? ", " : ""}{order.shipping_address?.county || ""}
                 <br />
-                Cod Poștal: {order.shipping_address.postalCode}
+                Cod Poștal: {order.shipping_address?.postalCode || "-"}
               </p>
             </div>
 
@@ -247,7 +251,7 @@ export const OrderDetailsDialog = ({
 
             {/* Products */}
             <div>
-              <h4 className="font-semibold mb-3">Produse Comandate</h4>
+              <h4 className="font-semibold mb-3">Produse solicitate</h4>
               <div className="space-y-2">
                 {orderItems.map((item) => (
                   <div
@@ -291,9 +295,9 @@ export const OrderDetailsDialog = ({
 
             {/* Payment Info */}
             <div>
-              <h4 className="font-semibold mb-3">Informații Plată</h4>
+              <h4 className="font-semibold mb-3">Detalii procesare</h4>
               <p className="text-sm text-muted-foreground">
-                Metodă: {getPaymentMethodLabel(order.payment_method)}
+                Metodă: {order.payment_method ? getPaymentMethodLabel(order.payment_method) : "-"}
               </p>
             </div>
 
@@ -310,11 +314,11 @@ export const OrderDetailsDialog = ({
             <Separator />
 
             {/* Admin Controls */}
-            <div className="space-y-4">
-              <h4 className="font-semibold">Actualizare Comandă</h4>
+                <div className="space-y-4">
+              <h4 className="font-semibold">Actualizare Solicitare</h4>
 
               <div>
-                <Label htmlFor="status">Status Comandă</Label>
+                <Label htmlFor="status">Status</Label>
                 <Select value={status} onValueChange={setStatus}>
                   <SelectTrigger>
                     <SelectValue />
@@ -356,7 +360,7 @@ export const OrderDetailsDialog = ({
                   id="adminNotes"
                   value={adminNotes}
                   onChange={(e) => setAdminNotes(e.target.value)}
-                  placeholder="Notițe interne despre comandă"
+                  placeholder="Notițe interne"
                   rows={3}
                 />
               </div>

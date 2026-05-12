@@ -2,12 +2,12 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { ShoppingCart } from "lucide-react";
-import { useCart } from "@/contexts/CartContext";
+import { useQuote } from "@/contexts/QuoteContext";
 import { CartDrawer } from "./CartDrawer";
 
 export const CartButton = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const { itemCount } = useCart();
+  const { itemCount } = useQuote();
 
   return (
     <>

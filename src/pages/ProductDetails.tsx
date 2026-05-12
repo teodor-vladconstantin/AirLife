@@ -4,7 +4,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { useToast } from "@/hooks/use-toast";
-import { useCart } from "@/contexts/CartContext";
+import { useQuote } from "@/contexts/QuoteContext";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { Loader2, Minus, Plus, Package } from "lucide-react";
@@ -28,7 +28,7 @@ const ProductDetails = () => {
   const [loading, setLoading] = useState(true);
   const [quantity, setQuantity] = useState(1);
   const { toast } = useToast();
-  const { addToCart } = useCart();
+  const { addToQuote } = useQuote();
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -69,7 +69,7 @@ const ProductDetails = () => {
       return;
     }
 
-    await addToCart(product, quantity);
+    await addToQuote(product, quantity);
   };
 
   const incrementQuantity = () => {
@@ -112,6 +112,12 @@ const ProductDetails = () => {
                 &larr; Înapoi la produse
               </Button>
             </Link>
+          </div>
+          {/* Info banner: site de prezentare */}
+          <div className="mb-6">
+            <div className="rounded-md bg-primary/5 border border-primary/10 p-3 text-sm text-muted-foreground">
+              Acest site este de prezentare — nu vânzăm direct online. Pentru preț și ofertă personalizată, adaugă produsele dorite și cere o ofertă cu opțiuni de montaj și garanție.
+            </div>
           </div>
           {/* Product Main Section */}
           <div className="grid md:grid-cols-2 gap-8 mb-12 animate-in fade-in duration-700">
@@ -205,7 +211,7 @@ const ProductDetails = () => {
                   disabled={product.stock === 0}
                   onClick={handleAddToCart}
                 >
-                  {product.stock > 0 ? "Adaugă în Coș" : "Indisponibil"}
+                  {product.stock > 0 ? "Adaugă la ofertă" : "Indisponibil"}
                 </Button>
               </div>
             </div>

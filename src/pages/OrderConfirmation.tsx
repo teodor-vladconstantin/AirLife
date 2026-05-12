@@ -115,9 +115,9 @@ const OrderConfirmation = () => {
             <div className="inline-flex items-center justify-center w-20 h-20 bg-green-100 dark:bg-green-900/30 rounded-full mb-4">
               <CheckCircle className="w-12 h-12 text-green-600 dark:text-green-400" />
             </div>
-            <h1 className="text-4xl font-bold mb-2">Comanda ta a fost plasată!</h1>
+            <h1 className="text-4xl font-bold mb-2">Cererea ta a fost primită!</h1>
             <p className="text-xl text-muted-foreground">
-              Mulțumim pentru comandă. Vei primi un email de confirmare în curând.
+              Mulțumim — vom pregăti oferta și te vom contacta în curând.
             </p>
           </div>
 
@@ -125,7 +125,7 @@ const OrderConfirmation = () => {
           <Card className="mb-6">
             <CardContent className="pt-6">
               <div className="text-center">
-                <p className="text-sm text-muted-foreground mb-1">Număr Comandă</p>
+                <p className="text-sm text-muted-foreground mb-1">Număr Cerere</p>
                 <p className="text-3xl font-bold text-primary">{order.order_number}</p>
               </div>
             </CardContent>
@@ -136,13 +136,13 @@ const OrderConfirmation = () => {
             <CardHeader>
               <CardTitle className="flex items-center gap-2">
                 <Package className="h-5 w-5" />
-                Detalii Comandă
+                Detalii Cerere
               </CardTitle>
             </CardHeader>
             <CardContent className="space-y-4">
               {/* Products */}
               <div>
-                <h3 className="font-semibold mb-3">Produse Comandate</h3>
+                <h3 className="font-semibold mb-3">Produse solicitate</h3>
                 <div className="space-y-2">
                   {orderItems.map((item) => (
                     <div key={item.id} className="flex justify-between items-start border-b pb-2 last:border-0">
@@ -184,13 +184,13 @@ const OrderConfirmation = () => {
 
               {/* Shipping Address */}
               <div>
-                <h3 className="font-semibold mb-2">Adresă de Livrare</h3>
+                <h3 className="font-semibold mb-2">Adresă (dacă este cazul)</h3>
                 <p className="text-sm text-muted-foreground">
-                  {order.shipping_address.address}
+                  {order.shipping_address?.address || "-"}
                   <br />
-                  {order.shipping_address.city}, {order.shipping_address.county}
+                  {order.shipping_address?.city || ""}{order.shipping_address?.city ? ", " : ""}{order.shipping_address?.county || ""}
                   <br />
-                  Cod Poștal: {order.shipping_address.postalCode}
+                  Cod Poștal: {order.shipping_address?.postalCode || "-"}
                 </p>
               </div>
 
@@ -212,8 +212,8 @@ const OrderConfirmation = () => {
 
               {/* Payment Method */}
               <div>
-                <h3 className="font-semibold mb-2">Metodă de Plată</h3>
-                <p className="text-sm text-muted-foreground">{getPaymentMethodLabel(order.payment_method)}</p>
+                <h3 className="font-semibold mb-2">Detalii procesare</h3>
+                  <p className="text-sm text-muted-foreground">{order.payment_method ? getPaymentMethodLabel(order.payment_method) : "-"}</p>
               </div>
 
               {order.customer_notes && (
@@ -233,10 +233,9 @@ const OrderConfirmation = () => {
             <CardContent className="pt-6">
               <h3 className="font-semibold mb-2">Ce urmează?</h3>
               <ul className="space-y-2 text-sm text-muted-foreground">
-                <li>✓ Vei primi un email de confirmare la {order.customer_email}</li>
-                <li>✓ Comanda ta va fi procesată în 1-2 zile lucrătoare</li>
-                <li>✓ Vei fi contactat telefonic pentru confirmare</li>
-                <li>✓ Livrarea se va efectua în 2-5 zile lucrătoare</li>
+                <li>✓ Vom analiza cererea și pregătim o ofertă personalizată</li>
+                <li>✓ Vei primi un email la {order.customer_email} cu detalii</li>
+                <li>✓ Te vom contacta telefonic pentru detalii suplimentare</li>
               </ul>
             </CardContent>
           </Card>
@@ -246,13 +245,13 @@ const OrderConfirmation = () => {
             <Link to="/my-orders">
               <Button variant="outline" className="gap-2">
                 <Package className="h-4 w-4" />
-                Vezi Comenzile Mele
+                Vezi Solicitările Mele
               </Button>
             </Link>
             <Link to="/products">
               <Button className="gap-2">
                 <ShoppingBag className="h-4 w-4" />
-                Continuă Cumpărăturile
+                Vezi Produsele
               </Button>
             </Link>
           </div>
