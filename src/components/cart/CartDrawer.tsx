@@ -1,7 +1,7 @@
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetFooter } from "@/components/ui/sheet";
 import { Button } from "@/components/ui/button";
 import { ScrollArea } from "@/components/ui/scroll-area";
-import { useCart } from "@/contexts/CartContext";
+import { useQuote } from "@/contexts/QuoteContext";
 import { CartItem } from "./CartItem";
 import { useNavigate } from "react-router-dom";
 import { ShoppingCart } from "lucide-react";
@@ -12,12 +12,12 @@ interface CartDrawerProps {
 }
 
 export const CartDrawer = ({ open, onClose }: CartDrawerProps) => {
-  const { items, updateQuantity, removeFromCart, total, itemCount } = useCart();
+  const { items, updateQuantity, removeFromQuote, total, itemCount } = useQuote();
   const navigate = useNavigate();
 
   const handleCheckout = () => {
     onClose();
-    navigate("/checkout");
+    navigate("/request-quote");
   };
 
   return (
@@ -31,11 +31,11 @@ export const CartDrawer = ({ open, onClose }: CartDrawerProps) => {
         </SheetHeader>
 
         {items.length === 0 ? (
-          <div className="flex-1 flex flex-col items-center justify-center text-center p-8">
+            <div className="flex-1 flex flex-col items-center justify-center text-center p-8">
             <ShoppingCart className="h-16 w-16 text-muted-foreground mb-4" />
-            <h3 className="text-lg font-semibold mb-2">Coșul este gol</h3>
+            <h3 className="text-lg font-semibold mb-2">Lista ta este goală</h3>
             <p className="text-sm text-muted-foreground mb-6">
-              Adaugă produse în coș pentru a continua cumpărăturile.
+              Adaugă produse pentru a construi o cerere de ofertă.
             </p>
             <Button onClick={() => {
               onClose();
@@ -53,7 +53,7 @@ export const CartDrawer = ({ open, onClose }: CartDrawerProps) => {
                     key={item.id}
                     item={item}
                     onUpdateQuantity={updateQuantity}
-                    onRemove={removeFromCart}
+                    onRemove={removeFromQuote}
                   />
                 ))}
               </div>
@@ -87,7 +87,7 @@ export const CartDrawer = ({ open, onClose }: CartDrawerProps) => {
               </div>
 
               <Button onClick={handleCheckout} className="w-full" size="lg">
-                Finalizează Comanda
+                Cere ofertă
               </Button>
             </SheetFooter>
           </>

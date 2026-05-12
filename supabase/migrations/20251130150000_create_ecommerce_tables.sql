@@ -120,6 +120,15 @@ CREATE POLICY "Admins can update orders"
   TO authenticated
   USING (public.has_role(auth.uid(), 'admin'));
 
+-- Allow inserts for quote requests: permit anonymous (user_id IS NULL)
+-- or authenticated users inserting their own orders.
+CREATE POLICY "Allow insert orders for quotes"
+  ON public.orders FOR INSERT
+  TO authenticated, anon
+  WITH CHECK (
+    (user_id IS NULL) OR (user_id = auth.uid())
+  );
+
 CREATE TRIGGER on_order_updated
   BEFORE UPDATE ON public.orders
   FOR EACH ROW EXECUTE FUNCTION public.handle_updated_at();
@@ -158,6 +167,22 @@ CREATE POLICY "Users can view own order items"
       SELECT 1 FROM public.orders
       WHERE orders.id = order_items.order_id
       AND orders.user_id = auth.uid()
+    )
+  );
+
+-- Allow inserts into order_items for quote flows when the parent order
+-- belongs to an anonymous quote (user_id IS NULL) or to the authenticated user.
+CREATE POLICY "Allow insert order_items for quotes"
+  ON public.order_items FOR INSERT
+  TO authenticated, anon
+  WITH CHECK (
+    EXISTS (
+      SELECT 1 FROM public.orders
+      WHERE orders.id = order_items.order_id
+      AND (
+        orders.user_id IS NULL
+        OR orders.user_id = auth.uid()
+      )
     )
   );
 

@@ -283,7 +283,7 @@ const Admin = () => {
           <div className="mb-8">
             <h1 className="text-3xl font-bold">Panou Administrare</h1>
             <p className="text-muted-foreground mt-1">
-              Gestionează produsele și comenzile magazinului
+              Gestionează produsele și solicitările magazinului
             </p>
           </div>
         <Tabs defaultValue="products" className="space-y-6">
@@ -294,7 +294,7 @@ const Admin = () => {
             </TabsTrigger>
             <TabsTrigger value="orders" className="flex items-center gap-2">
               <Package className="h-4 w-4" />
-              Comenzi
+              Solicitări
             </TabsTrigger>
           </TabsList>
 

@@ -71,6 +71,8 @@ const Checkout = () => {
       });
       navigate("/products");
     }
+    // Redirect checkout route to request-quote (site is presentation-only)
+    navigate("/request-quote");
   }, [items, navigate]);
 
   const checkUser = async () => {
@@ -171,8 +173,8 @@ const Checkout = () => {
       await clearCart();
 
       toast({
-        title: "Comandă plasată cu succes!",
-        description: `Număr comandă: ${orderNumber}`,
+        title: "Cerere trimisă cu succes!",
+        description: `Număr cerere: ${orderNumber}`,
       });
 
       // Redirect to confirmation
@@ -195,7 +197,7 @@ const Checkout = () => {
 
       <main className="flex-1 bg-gradient-to-b from-background to-secondary/30 py-12">
         <div className="container mx-auto px-4 max-w-7xl">
-          <h1 className="text-4xl font-bold mb-8 text-center">Finalizare Comandă</h1>
+          <h1 className="text-4xl font-bold mb-8 text-center">Trimite Cerere de Ofertă</h1>
 
           <form onSubmit={handleSubmit(onSubmit)}>
             <div className="grid lg:grid-cols-3 gap-8">
@@ -331,13 +333,13 @@ const Checkout = () => {
 
                 {/* Notes */}
                 <Card>
-                  <CardHeader>
-                    <CardTitle>Notițe Comandă (Opțional)</CardTitle>
-                  </CardHeader>
+                    <CardHeader>
+                      <CardTitle>Notițe Cerere (Opțional)</CardTitle>
+                    </CardHeader>
                   <CardContent>
-                    <Textarea
+                      <Textarea
                       {...register("customerNotes")}
-                      placeholder="Observații despre comandă (ex: interval orar preferat pentru livrare)"
+                      placeholder="Observații despre cerere (ex: interval orar preferat pentru montaj/inspecție)"
                       rows={4}
                     />
                   </CardContent>
@@ -389,7 +391,7 @@ const Checkout = () => {
               <div className="lg:col-span-1">
                 <Card className="sticky top-24">
                   <CardHeader>
-                    <CardTitle>Sumar Comandă</CardTitle>
+                    <CardTitle>Sumar Cerere</CardTitle>
                   </CardHeader>
                   <CardContent className="space-y-4">
                     {/* Products */}

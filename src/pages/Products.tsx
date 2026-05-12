@@ -4,7 +4,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { useToast } from "@/hooks/use-toast";
-import { useCart } from "@/contexts/CartContext";
+import { useQuote } from "@/contexts/QuoteContext";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { Loader2 } from "lucide-react";
@@ -25,7 +25,7 @@ const Products = () => {
   const [loading, setLoading] = useState(true);
   const [selectedCategory, setSelectedCategory] = useState<string>("all");
   const { toast } = useToast();
-  const { addToCart } = useCart();
+  const { addToQuote } = useQuote();
 
   const truncateText = (text: string, maxLength: number = 100) => {
     if (!text || text.length <= maxLength) return text;
@@ -62,7 +62,7 @@ const Products = () => {
 
   const handleAddToCart = async (product: Product) => {
     if (product.stock === 0) return;
-    await addToCart(product, 1);
+    await addToQuote(product, 1);
   };
 
   const categories = [
@@ -168,7 +168,7 @@ const Products = () => {
                         disabled={product.stock === 0}
                         onClick={() => handleAddToCart(product)}
                       >
-                        {product.stock > 0 ? "Adaugă în Coș" : "Indisponibil"}
+                        {product.stock > 0 ? "Adaugă la ofertă" : "Indisponibil"}
                       </Button>
                     </div>
                   </CardContent>

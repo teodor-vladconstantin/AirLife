@@ -170,16 +170,16 @@ const MyOrders = () => {
       <main className="flex-1 bg-gradient-to-b from-background to-secondary/30 py-12">
         <div className="container mx-auto px-4 max-w-4xl">
           <div className="mb-8">
-            <h1 className="text-4xl font-bold mb-2">Comenzile Mele</h1>
-            <p className="text-muted-foreground">Vezi istoricul comenzilor tale</p>
+            <h1 className="text-4xl font-bold mb-2">Solicitările Mele</h1>
+            <p className="text-muted-foreground">Vezi istoricul solicitărilor tale de ofertă</p>
           </div>
 
           {orders.length === 0 ? (
             <Card>
               <CardContent className="flex flex-col items-center justify-center py-12">
                 <Package className="h-16 w-16 text-muted-foreground mb-4" />
-                <h3 className="text-xl font-semibold mb-2">Nu ai comenzi încă</h3>
-                <p className="text-muted-foreground mb-6">Explorează produsele noastre și plasează prima comandă!</p>
+                <h3 className="text-xl font-semibold mb-2">Nu ai solicitări încă</h3>
+                <p className="text-muted-foreground mb-6">Adaugă produse în listă și trimite o cerere de ofertă.</p>
                 <Button onClick={() => navigate("/products")}>Vezi Produsele</Button>
               </CardContent>
             </Card>
@@ -251,7 +251,7 @@ const MyOrders = () => {
                         <>
                           <Separator className="my-4" />
                           <div className="space-y-3">
-                            <h4 className="font-semibold">Produse comandate:</h4>
+                            <h4 className="font-semibold">Produse solicitate:</h4>
                             {items.map((item) => (
                               <div key={item.id} className="flex justify-between items-start">
                                 <div>

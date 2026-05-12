@@ -87,7 +87,7 @@ const Navbar = () => {
                   )}
                   <DropdownMenuItem onClick={() => navigate("/my-orders")}>
                     <Package className="w-4 h-4 mr-2" />
-                    Comenzile Mele
+                    Solicitările Mele
                   </DropdownMenuItem>
                   <DropdownMenuItem onClick={handleLogout}>
                     <LogOut className="w-4 h-4 mr-2" />

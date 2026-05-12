@@ -28,14 +28,14 @@ const TermsAndConditions = () => {
 
           <Card className="mb-6">
             <CardHeader>
-              <CardTitle>2. Comandă și Plată</CardTitle>
+              <CardTitle>2. Cereri și Plată</CardTitle>
             </CardHeader>
             <CardContent className="space-y-4 text-muted-foreground">
               <p>
-                Plasarea unei comenzi pe site-ul nostru constituie o ofertă de cumpărare. Toate comenzile sunt supuse acceptării noastre.
+                Plasarea unei cereri de ofertă sau a unei comenzi pe site-ul nostru constituie o solicitare către AirLife. Toate solicitările sunt supuse analizei și confirmării noastre.
               </p>
               <p>
-                Prețurile afișate sunt în LEI (RON) și includ TVA. Costul livrării va fi afișat separat la finalizarea comenzii.
+                Prețurile afișate sunt în LEI (RON) și includ TVA. Detaliile privind livrarea sau montajul vor fi comunicate în ofertă sau la confirmarea comenzii.
               </p>
               <p>
                 Acceptăm următoarele metode de plată: ramburs (plată cash la livrare) și transfer bancar.
@@ -47,15 +47,15 @@ const TermsAndConditions = () => {
             <CardHeader>
               <CardTitle>3. Livrare</CardTitle>
             </CardHeader>
-            <CardContent className="space-y-4 text-muted-foreground">
+              <CardContent className="space-y-4 text-muted-foreground">
               <p>
-                Livrarea se face prin curier rapid în toată România, în 2-5 zile lucrătoare de la confirmarea comenzii.
+                Livrarea și/sau montajul se vor realiza conform detaliilor specificate în oferta sau în confirmarea comenzii, în funcție de disponibilitate.
               </p>
               <p>
-                Livrarea este gratuită pentru comenzi de peste 500 RON. Pentru comenzi sub această valoare, costul livrării este de 20 RON.
+                Condițiile de livrare (inclusiv costuri) vor fi comunicate în ofertă sau la confirmare.
               </p>
               <p>
-                Clientul va fi contactat telefonic pentru confirmarea comenzii și stabilirea intervalului de livrare.
+                Clientul va fi contactat telefonic pentru confirmarea detaliilor și programării.
               </p>
             </CardContent>
           </Card>
