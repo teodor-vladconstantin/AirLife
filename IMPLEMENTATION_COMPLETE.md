@@ -101,7 +101,7 @@
 ## 📂 FIȘIERE NOI CREĂTE (30+)
 
 ### Database
-✅ `supabase/migrations/20250130_create_ecommerce_tables.sql`
+✅ `supabase/migrations/20251130150000_create_ecommerce_tables.sql`
 
 ### Contexts & Hooks
 ✅ `src/contexts/CartContext.tsx`
@@ -136,9 +136,9 @@
 
 ### 1. Rulează Migrația SQL în Supabase ⚡ IMPORTANT!
 ```
-1. Deschide Supabase Dashboard: https://supabase.com/dashboard/project/ayfsgsvtrvyihkfflgbj
+1. Deschide Supabase Dashboard: https://supabase.com/dashboard/project/nfrpgctvgoqizuvvwttw
 2. Mergi la SQL Editor
-3. Copiază conținutul din: d:\green-air-life\supabase\migrations\20250130_create_ecommerce_tables.sql
+3. Copiază conținutul din: f:\green-air-life\supabase\migrations\20251130150000_create_ecommerce_tables.sql
 4. Lipește și RUN
 5. Confirmă că toate tabelele au fost create (cart_items, orders, order_items, shipping_settings)
 ```
