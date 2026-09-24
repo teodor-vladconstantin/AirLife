@@ -22,6 +22,10 @@ import PrivacyPolicy from "./pages/PrivacyPolicy";
 import Contact from "./pages/Contact";
 import NotFound from "./pages/NotFound";
 import FadeWrapper from "@/components/FadeWrapper";
+import ComingSoon from "./pages/ComingSoon";
+
+// Set VITE_COMING_SOON=true to hide the site (only /auth and /admin stay reachable)
+const comingSoon = import.meta.env.VITE_COMING_SOON === "true";
 
 const queryClient = new QueryClient();
 
@@ -36,6 +40,13 @@ const App = () => (
             <Sonner />
             <BrowserRouter>
               <ScrollToTop />
+            {comingSoon ? (
+            <Routes>
+              <Route path="/auth" element={<Auth />} />
+              <Route path="/admin" element={<Admin />} />
+              <Route path="*" element={<ComingSoon />} />
+            </Routes>
+            ) : (
             <Routes>
               <Route path="/" element={<FadeWrapper><Index /></FadeWrapper>} />
               <Route path="/auth" element={<FadeWrapper><Auth /></FadeWrapper>} />
@@ -53,6 +64,7 @@ const App = () => (
               {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
               <Route path="*" element={<FadeWrapper><NotFound /></FadeWrapper>} />
             </Routes>
+            )}
             </BrowserRouter>
           </QuoteProvider>
         </CartProvider>
