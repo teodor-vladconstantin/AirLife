@@ -23,6 +23,7 @@ import Contact from "./pages/Contact";
 import NotFound from "./pages/NotFound";
 import FadeWrapper from "@/components/FadeWrapper";
 import ComingSoon from "./pages/ComingSoon";
+import { Analytics } from "@vercel/analytics/react";
 
 // Set VITE_COMING_SOON=true to hide the site (only /auth and /admin stay reachable)
 const comingSoon = import.meta.env.VITE_COMING_SOON === "true";
@@ -70,6 +71,7 @@ const App = () => (
         </CartProvider>
       </TooltipProvider>
     </QueryClientProvider>
+    <Analytics />
   </>
 );
 
