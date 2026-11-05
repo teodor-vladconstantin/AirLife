@@ -27,3 +27,7 @@ dist-ssr
 .env
 .claude/
 nul
+.env.*
+!.env.example
+supabase/.temp/
+2026-*-claude-*.txt
