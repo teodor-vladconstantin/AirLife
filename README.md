@@ -1,73 +1,33 @@
-# Welcome to your Lovable project
+# AirLife
 
-## Project info
+Magazin online (airlife.ro) pentru climatizare, purificare si dezumidificare a aerului, destinat clientilor din Romania. Include catalog de produse, cos si comenzi, cereri de oferta, pagini de servicii si ghiduri, pagini legale (termeni, confidentialitate, cookies, garantie, livrare/retur) si panou de administrare.
 
-**URL**: https://lovable.dev/projects/018a0523-3a9a-42ab-ad9a-7501233fe322
+Proiectul a fost pornit in Lovable; o parte din cod este generata cu ajutorul unui asistent AI.
 
-## How can I edit this code?
+## Stack
 
-There are several ways of editing your application.
+- Vite + React 18 + TypeScript
+- Tailwind CSS + shadcn/ui (Radix UI)
+- React Router, TanStack Query
+- Supabase (autentificare, baza de date Postgres cu RLS, migratii in `supabase/migrations`)
+- Deploy: Vercel (`vercel.json`)
 
-**Use Lovable**
+## Rulare locala
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/018a0523-3a9a-42ab-ad9a-7501233fe322) and start prompting.
-
-Changes made via Lovable will be committed automatically to this repo.
-
-**Use your preferred IDE**
-
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
-
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
-
-Follow these steps:
+Cerinte: Node.js 18+ si npm.
 
 ```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
-
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
-
-# Step 3: Install the necessary dependencies.
-npm i
-
-# Step 4: Start the development server with auto-reloading and an instant preview.
-npm run dev
+npm install
+cp .env.example .env   # completeaza valorile Supabase
+npm run dev            # http://localhost:8080 (portul din vite.config.ts)
 ```
 
-**Edit a file directly in GitHub**
+Alte comenzi: `npm run build`, `npm run preview`, `npm run lint`.
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+## Configurare
 
-**Use GitHub Codespaces**
+Variabilele de mediu sunt descrise in `.env.example`. Cheia Supabase folosita in frontend este cheia publica (anon); accesul la date este controlat prin politicile RLS din migratii. Nu pune in repo chei `service_role`, chei Stripe secrete sau parole de baza de date.
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+## Stare
 
-## What technologies are used for this project?
-
-This project is built with:
-
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
-
-## How can I deploy this project?
-
-Simply open [Lovable](https://lovable.dev/projects/018a0523-3a9a-42ab-ad9a-7501233fe322) and click on Share -> Publish.
-
-## Can I connect a custom domain to my Lovable project?
-
-Yes, you can!
-
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
-
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/features/custom-domain#custom-domain)
+Integrarea de plati Stripe este doar planificata (vezi `STRIPE_INTEGRATION.md`).
