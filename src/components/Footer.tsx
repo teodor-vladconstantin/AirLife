@@ -1,5 +1,7 @@
 import { Leaf, MapPin, Mail, Phone } from "lucide-react";
 import { Link } from "react-router-dom";
+import { PHONE_DISPLAY, PHONE_TEL } from "@/data/localSeo";
+import { trackClickToCall } from "@/lib/analytics";
 
 const Footer = () => {
   return (
@@ -21,6 +23,12 @@ const Footer = () => {
               <div className="flex items-center gap-2">
                 <MapPin className="w-4 h-4 text-primary flex-shrink-0" />
                 <span>Buzău, România (Arie servicii: municipiul Buzău și județ)</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <Phone className="w-4 h-4 text-primary flex-shrink-0" />
+                <a href={`tel:${PHONE_TEL}`} onClick={() => trackClickToCall("footer")} className="hover:underline">
+                  {PHONE_DISPLAY}
+                </a>
               </div>
               <div className="flex items-center gap-2">
                 <Mail className="w-4 h-4 text-primary flex-shrink-0" />

@@ -24,6 +24,8 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { CartButton } from "@/components/cart/CartButton";
+import { PHONE_DISPLAY, PHONE_TEL } from "@/data/localSeo";
+import { trackClickToCall } from "@/lib/analytics";
 
 const Navbar = () => {
   const [user, setUser] = useState<SupabaseUser | null>(null);
@@ -166,6 +168,23 @@ const Navbar = () => {
 
           {/* Right Action Buttons */}
           <div className="flex items-center gap-2 sm:gap-3">
+            <a
+              href={`tel:${PHONE_TEL}`}
+              onClick={() => trackClickToCall("navbar")}
+              className="hidden lg:inline-flex items-center gap-1.5 text-sm font-semibold text-primary hover:underline"
+              aria-label={`Sună la ${PHONE_DISPLAY}`}
+            >
+              <Phone className="w-4 h-4" />
+              {PHONE_DISPLAY}
+            </a>
+            <a
+              href={`tel:${PHONE_TEL}`}
+              onClick={() => trackClickToCall("navbar-mobile")}
+              className="lg:hidden p-2 rounded-md text-primary hover:bg-secondary"
+              aria-label={`Sună la ${PHONE_DISPLAY}`}
+            >
+              <Phone className="w-5 h-5" />
+            </a>
             <CartButton />
 
             {user ? (

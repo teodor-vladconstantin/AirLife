@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Mail, Wrench, PhoneCall } from "lucide-react";
 import { trackClickToCall } from "@/lib/analytics";
+import { PHONE_DISPLAY, PHONE_TEL } from "@/data/localSeo";
 
 const CTASection = () => {
   return (
@@ -22,6 +23,15 @@ const CTASection = () => {
           </p>
 
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-10">
+            <a href={`tel:${PHONE_TEL}`} onClick={() => trackClickToCall("home-cta")} className="w-full sm:w-auto">
+              <Button
+                size="lg"
+                className="bg-white text-foreground hover:bg-white/90 font-semibold shadow-md transition-all duration-300 hover:-translate-y-0.5 w-full sm:w-auto"
+              >
+                <PhoneCall className="mr-2 w-4 h-4 text-primary" />
+                Sună acum: {PHONE_DISPLAY}
+              </Button>
+            </a>
             <Link to="/contact">
               <Button
                 size="lg"
@@ -35,7 +45,7 @@ const CTASection = () => {
               <Button
                 size="lg"
                 variant="outline"
-                className="border-white text-white hover:bg-white/10 hover:text-white font-semibold transition-all duration-300 hover:-translate-y-0.5 w-full sm:w-auto"
+                className="bg-transparent border-white text-white hover:bg-white/10 hover:text-white font-semibold transition-all duration-300 hover:-translate-y-0.5 w-full sm:w-auto"
               >
                 <Wrench className="mr-2 w-4 h-4" />
                 Programare Montaj Buzău

@@ -28,6 +28,7 @@ const Index = () => {
         "@id": "https://airlife.ro/#localbusiness",
         "name": "AirLife",
         "url": "https://airlife.ro/",
+        "telephone": "+40722153525",
         "image": "https://airlife.ro/placeholder.svg",
         "priceRange": "$$",
         "areaServed": [

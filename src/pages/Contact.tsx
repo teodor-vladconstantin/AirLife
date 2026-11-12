@@ -9,6 +9,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Mail, Phone, MapPin, Clock, Send, CheckCircle2 } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { trackContactSubmit, trackClickToCall } from "@/lib/analytics";
+import { PHONE_DISPLAY, PHONE_TEL } from "@/data/localSeo";
 
 const Contact = () => {
   const { toast } = useToast();
@@ -58,6 +59,7 @@ const Contact = () => {
       "@type": "HVACBusiness",
       "name": "AirLife",
       "email": "contact@airlife.ro",
+      "telephone": PHONE_TEL,
       "areaServed": {
         "@type": "City",
         "name": "Buzău"
@@ -96,6 +98,25 @@ const Contact = () => {
           <div className="grid lg:grid-cols-3 gap-8 mb-12">
             {/* Contact Details Column */}
             <div className="space-y-6">
+              <Card>
+                <CardHeader className="pb-3">
+                  <CardTitle className="flex items-center gap-2 text-base font-bold">
+                    <Phone className="h-5 w-5 text-primary" />
+                    Telefon
+                  </CardTitle>
+                </CardHeader>
+                <CardContent className="text-sm">
+                  <span className="text-xs text-muted-foreground block">Programări montaj, igienizare și service:</span>
+                  <a
+                    href={`tel:${PHONE_TEL}`}
+                    onClick={() => trackClickToCall("contact-page")}
+                    className="text-primary hover:underline font-semibold text-lg"
+                  >
+                    {PHONE_DISPLAY}
+                  </a>
+                </CardContent>
+              </Card>
+
               <Card>
                 <CardHeader className="pb-3">
                   <CardTitle className="flex items-center gap-2 text-base font-bold">
