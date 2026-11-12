@@ -22,7 +22,7 @@ import {
 } from "lucide-react";
 import { trackServiceQuoteRequest, trackClickToCall } from "@/lib/analytics";
 
-const MontajAerConditionatBuzau = () => {
+const MontajAerConditionat = () => {
   const { toast } = useToast();
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
@@ -354,7 +354,7 @@ const MontajAerConditionatBuzau = () => {
                     <span className="text-xs text-muted-foreground block mb-2">Preferi să vorbești direct?</span>
                     <a
                       href="tel:+40722153525"
-                      onClick={() => trackClickToCall("Montaj Buzau Sidebar")}
+                      onClick={() => trackClickToCall("Montaj Sidebar")}
                       className="inline-flex items-center gap-2 text-primary hover:underline font-semibold text-sm"
                     >
                       <PhoneCall className="w-4 h-4" /> Solicită Asistență Telefonică
@@ -385,4 +385,4 @@ const MontajAerConditionatBuzau = () => {
   );
 };
 
-export default MontajAerConditionatBuzau;
+export default MontajAerConditionat;

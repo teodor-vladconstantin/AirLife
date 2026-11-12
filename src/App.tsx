@@ -30,11 +30,11 @@ import CookiePolicy from "./pages/CookiePolicy";
 import ShippingAndReturns from "./pages/ShippingAndReturns";
 import Warranty from "./pages/Warranty";
 import CategoryPage from "./pages/CategoryPage";
-import MontajAerConditionatBuzau from "./pages/services/MontajAerConditionatBuzau";
-import IgienizareAerConditionatBuzau from "./pages/services/IgienizareAerConditionatBuzau";
-import ServiceAerConditionatBuzau from "./pages/services/ServiceAerConditionatBuzau";
+import MontajAerConditionat from "./pages/services/MontajAerConditionat";
+import IgienizareAerConditionat from "./pages/services/IgienizareAerConditionat";
+import ServiceAerConditionat from "./pages/services/ServiceAerConditionat";
 import GhidIgienizare from "./pages/guides/GhidIgienizare";
-import GhidCostMontajBuzau from "./pages/guides/GhidCostMontajBuzau";
+import GhidCostMontaj from "./pages/guides/GhidCostMontaj";
 
 // Set VITE_COMING_SOON=true to hide the site (only /auth and /admin stay reachable)
 const comingSoon = import.meta.env.VITE_COMING_SOON === "true";
@@ -80,11 +80,11 @@ const App = () => (
               <Route path="/livrare-si-retur" element={<FadeWrapper><ShippingAndReturns /></FadeWrapper>} />
               <Route path="/garantie" element={<FadeWrapper><Warranty /></FadeWrapper>} />
               <Route path="/servicii" element={<FadeWrapper><Services /></FadeWrapper>} />
-              <Route path="/servicii/montaj-aer-conditionat" element={<FadeWrapper><MontajAerConditionatBuzau /></FadeWrapper>} />
-              <Route path="/servicii/igienizare-aer-conditionat" element={<FadeWrapper><IgienizareAerConditionatBuzau /></FadeWrapper>} />
-              <Route path="/servicii/service-aer-conditionat" element={<FadeWrapper><ServiceAerConditionatBuzau /></FadeWrapper>} />
+              <Route path="/servicii/montaj-aer-conditionat" element={<FadeWrapper><MontajAerConditionat /></FadeWrapper>} />
+              <Route path="/servicii/igienizare-aer-conditionat" element={<FadeWrapper><IgienizareAerConditionat /></FadeWrapper>} />
+              <Route path="/servicii/service-aer-conditionat" element={<FadeWrapper><ServiceAerConditionat /></FadeWrapper>} />
               <Route path="/ghid/igienizare-aer-conditionat" element={<FadeWrapper><GhidIgienizare /></FadeWrapper>} />
-              <Route path="/ghid/cost-montaj-aer-conditionat" element={<FadeWrapper><GhidCostMontajBuzau /></FadeWrapper>} />
+              <Route path="/ghid/cost-montaj-aer-conditionat" element={<FadeWrapper><GhidCostMontaj /></FadeWrapper>} />
               <Route path="/accesorii-aer-conditionat" element={<FadeWrapper><CategoryPage forcedSlug="accesorii-aer-conditionat" /></FadeWrapper>} />
               <Route path="/consumabile-hvac" element={<FadeWrapper><CategoryPage forcedSlug="consumabile-hvac" /></FadeWrapper>} />
               <Route path="/curatare-si-intretinere" element={<FadeWrapper><CategoryPage forcedSlug="curatare-si-intretinere" /></FadeWrapper>} />

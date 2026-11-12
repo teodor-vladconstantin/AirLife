@@ -9,7 +9,7 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/hooks/use-toast";
 import {
-  Sparkles,
+  Wrench,
   CheckCircle2,
   MapPin,
   Clock,
@@ -17,12 +17,12 @@ import {
   HelpCircle,
   PhoneCall,
   Calendar,
-  AlertTriangle,
-  HeartPulse,
+  AlertOctagon,
+  Gauge,
 } from "lucide-react";
 import { trackServiceQuoteRequest, trackClickToCall } from "@/lib/analytics";
 
-const IgienizareAerConditionatBuzau = () => {
+const ServiceAerConditionat = () => {
   const { toast } = useToast();
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
@@ -42,13 +42,13 @@ const IgienizareAerConditionatBuzau = () => {
     }
 
     setIsSubmitting(true);
-    trackServiceQuoteRequest("Igienizare Aer Conditionat Buzau");
+    trackServiceQuoteRequest("Service Aer Conditionat");
 
     setTimeout(() => {
       setIsSubmitting(false);
       toast({
-        title: "Cerere trimisă cu succes!",
-        description: "Vă vom contacta în scurt timp pentru stabilirea datei de igienizare.",
+        title: "Solicitare service recepționată!",
+        description: "Un tehnician vă va contacta pentru diagnosticare și stabilirea intervenției.",
       });
       setName("");
       setPhone("");
@@ -60,8 +60,8 @@ const IgienizareAerConditionatBuzau = () => {
   const structuredData = {
     "@context": "https://schema.org",
     "@type": "Service",
-    "name": "Igienizare Aer Condiționat",
-    "serviceType": "Curățare și Dezinfectare Climatizare",
+    "name": "Service Aer Condiționat",
+    "serviceType": "Reparații și Mentenanță Climatizare",
     "provider": {
       "@type": "HVACBusiness",
       "name": "AirLife",
@@ -81,14 +81,14 @@ const IgienizareAerConditionatBuzau = () => {
         "name": "Județul Buzău"
       }
     ],
-    "description": "Serviciu profesional de igienizare și dezinfectare a aparatelor de aer condiționat. Curățare vaporizator, turbină de ventilație, tăviță condens și tratament biocid autorizat.",
+    "description": "Diagnosticare și reparații sisteme de aer condiționat: remediere pierderi freon, completare agent frigorific, înlocuire condensatori, remediere scurgeri de apă și erori electronice.",
     "offers": {
       "@type": "Offer",
       "priceCurrency": "RON",
       "priceSpecification": {
         "@type": "UnitPriceSpecification",
         "priceType": "https://schema.org/StartingAtPrice",
-        "description": "Prețul depinde de numărul de aparate și starea de contaminare a unității."
+        "description": "Costul include constatarea inițială, urmând ca reparația efectivă și piesele să fie cotate transparent înainte de începerea lucrării."
       }
     }
   };
@@ -112,8 +112,8 @@ const IgienizareAerConditionatBuzau = () => {
       {
         "@type": "ListItem",
         "position": 3,
-        "name": "Igienizare Aer Condiționat",
-        "item": "https://airlife.ro/servicii/igienizare-aer-conditionat"
+        "name": "Service Aer Condiționat",
+        "item": "https://airlife.ro/servicii/service-aer-conditionat"
       }
     ]
   };
@@ -121,9 +121,9 @@ const IgienizareAerConditionatBuzau = () => {
   return (
     <div className="min-h-screen flex flex-col">
       <SEO
-        title="Igienizare Aer Condiționat | Curățare Profesională & Dezinfectare AirLife"
-        description="Igienizare profesională aer condiționat. Curățare profundă a vaporizatorului, turbinei și tăviței de condens. Eliminare mirosuri, bacterii și mucegai cu soluții avizate."
-        canonical="https://airlife.ro/servicii/igienizare-aer-conditionat"
+        title="Service Aer Condiționat | Reparații, Încărcare Freon & Mentenanță"
+        description="Service și reparații aer condiționat. Diagnosticare rapidă, verificare presiuni freon R32/R410A, reparare scurgeri de apă, înlocuire componente defecte. Intervenții rapide."
+        canonical="https://airlife.ro/servicii/service-aer-conditionat"
         structuredData={[structuredData, breadcrumbsData]}
       />
 
@@ -138,115 +138,105 @@ const IgienizareAerConditionatBuzau = () => {
                 <Link to="/" className="hover:text-primary transition-colors">Acasă</Link>
               </li>
               <li>/</li>
-              <li className="text-foreground font-medium">Igienizare Aer Condiționat</li>
+              <li className="text-foreground font-medium">Service Aer Condiționat</li>
             </ol>
           </nav>
 
           {/* Hero Section */}
           <div className="text-center max-w-3xl mx-auto mb-12">
             <div className="inline-flex items-center gap-2 px-3 py-1 bg-primary/10 text-primary rounded-full text-sm font-medium mb-4">
-              <MapPin className="w-4 h-4" /> Serviciu de igienizare și județ
+              <MapPin className="w-4 h-4" /> Asistență tehnică &amp; intervenții
             </div>
             <h1 className="text-4xl md:text-5xl font-bold tracking-tight mb-4 text-foreground">
-              Igienizare &amp; Curățare Aer Condiționat
+              Service &amp; Reparații Aer Condiționat
             </h1>
             <p className="text-lg text-muted-foreground leading-relaxed">
-              Respiră aer curat și proaspăt. Îndepărtăm praful acumulat, mucegaiul, ciupercile microscopice și bacteriile
-              din interiorul unității de aer condiționat folosind husă specială de protecție și soluții profesionale.
+              Aparatul nu mai răcește corespunzător, curge apă din unitatea internă sau afișează un cod de eroare?
+              Identificăm cauza exactă a defecțiunii și reparăm instalația transparent, fără costuri ascunse.
             </p>
           </div>
 
           <div className="grid lg:grid-cols-3 gap-8 mb-16">
             {/* Main Content */}
             <div className="lg:col-span-2 space-y-10">
-              {/* De ce este vitală igienizarea */}
+              {/* Defecțiuni comune */}
               <section className="bg-card p-6 md:p-8 rounded-xl border border-border shadow-sm">
                 <h2 className="text-2xl font-bold mb-4 text-foreground flex items-center gap-2">
-                  <HeartPulse className="w-6 h-6 text-primary" />
-                  De ce este esențială curățarea periodică a aparatului
-                </h2>
-                <p className="text-muted-foreground leading-relaxed mb-4">
-                  În timpul funcționării pe modul de răcire, vaporizatorul unității interne acumulează condens continuu. Umiditatea combinată cu particulele fine de praf creează mediul optim pentru dezvoltarea coloniilor de mucegai și bacterii (inclusiv specia Legionella), care sunt recirculate în încăpere de fiecare dată când pornești aparatul.
-                </p>
-                <div className="grid sm:grid-cols-2 gap-4 mt-4">
-                  <div className="p-4 rounded-lg bg-secondary/50 border border-border/50 text-sm">
-                    <strong className="block text-foreground mb-1 flex items-center gap-1.5">
-                      <AlertTriangle className="w-4 h-4 text-amber-500" /> Semne că ai nevoie de igienizare:
-                    </strong>
-                    <ul className="list-disc list-inside space-y-1 text-muted-foreground text-xs mt-2">
-                      <li>Miros neplăcut la pornirea aparatului</li>
-                      <li>Flux de aer scăzut, deși turația e maximă</li>
-                      <li>Strănut, alergii sau iritații oculare în cameră</li>
-                      <li>Consum crescut de curent electric</li>
-                    </ul>
-                  </div>
-                  <div className="p-4 rounded-lg bg-secondary/50 border border-border/50 text-sm">
-                    <strong className="block text-foreground mb-1 flex items-center gap-1.5">
-                      <CheckCircle2 className="w-4 h-4 text-primary" /> Beneficiile igienizării complete:
-                    </strong>
-                    <ul className="list-disc list-inside space-y-1 text-muted-foreground text-xs mt-2">
-                      <li>Aer sănătos și curat pentru întreaga familie</li>
-                      <li>Eficiență termică restabilită</li>
-                      <li>Reducerea zgomotului produs de turbină</li>
-                      <li>Durată de viață prelungită a compresorului</li>
-                    </ul>
-                  </div>
-                </div>
-              </section>
-
-              {/* Ce include procesul */}
-              <section className="bg-card p-6 md:p-8 rounded-xl border border-border shadow-sm">
-                <h2 className="text-2xl font-bold mb-4 text-foreground flex items-center gap-2">
-                  <Sparkles className="w-6 h-6 text-primary" />
-                  Ce include serviciul de igienizare profesională
+                  <AlertOctagon className="w-6 h-6 text-primary" />
+                  Defecțiuni frecvente pe care le remediem
                 </h2>
                 <div className="space-y-3 text-muted-foreground">
                   <div className="flex items-start gap-3">
                     <CheckCircle2 className="w-5 h-5 text-primary flex-shrink-0 mt-0.5" />
-                    <span><strong>Demontarea măștii frontale și a filtrelor:</strong> spălarea și dezinfectarea minuțioasă a filtrelor de aer.</span>
+                    <span><strong>Aparatul suflă aer, dar nu răcește:</strong> indică de regulă pierdere de freon, condensator de pornire defect sau blocaj compresor.</span>
                   </div>
                   <div className="flex items-start gap-3">
                     <CheckCircle2 className="w-5 h-5 text-primary flex-shrink-0 mt-0.5" />
-                    <span><strong>Instalarea husei de protecție pentru pereți și mobilier:</strong> apa și soluțiile reziduale sunt colectate direct în recipient dedicat, fără a murdări spațiul.</span>
+                    <span><strong>Picură sau curge apă din unitatea interioară:</strong> cauzată de obstrucția furtunului de evacuare condens, tăviță fisurată sau montaj fără pantă adecvată.</span>
                   </div>
                   <div className="flex items-start gap-3">
                     <CheckCircle2 className="w-5 h-5 text-primary flex-shrink-0 mt-0.5" />
-                    <span><strong>Curățarea profundă a fagurelui vaporizatorului:</strong> pulverizare sub presiune cu detergenți speciali degresanți și dezinfectanți.</span>
+                    <span><strong>Coduri de eroare pe afișaj (ex. E1, E4, EC, F0):</strong> citim și interpretăm codurile de eroare specifice fiecărui producător pentru depanarea plăcii electronice sau senzorilor.</span>
                   </div>
                   <div className="flex items-start gap-3">
                     <CheckCircle2 className="w-5 h-5 text-primary flex-shrink-0 mt-0.5" />
-                    <span><strong>Spălarea turbinei de ventilație:</strong> îndepărtarea crustei de praf aderent de pe palele ventilatorului.</span>
+                    <span><strong>Vibrații sau zgomote puternice la exterior:</strong> elice deformată, rulmenți uzați sau lipsa amortizoarelor de vibrații între unitate și console.</span>
                   </div>
                   <div className="flex items-start gap-3">
                     <CheckCircle2 className="w-5 h-5 text-primary flex-shrink-0 mt-0.5" />
-                    <span><strong>Curățarea și deblocarea tăviței de condens:</strong> prevenirea revărsării apei și eliminarea depunerilor vâscoase.</span>
-                  </div>
-                  <div className="flex items-start gap-3">
-                    <CheckCircle2 className="w-5 h-5 text-primary flex-shrink-0 mt-0.5" />
-                    <span><strong>Tratament antibacterian final &amp; parfumare proaspătă:</strong> aplicarea unui film protector cu remanență împotriva bacteriilor.</span>
+                    <span><strong>Gheață formată pe conductele exterioare sau pe vaporizator:</strong> semn clar de scădere a presiunii agentului frigorific sau debit de aer strangulat.</span>
                   </div>
                 </div>
               </section>
 
-              {/* Cât de des trebuie făcută */}
+              {/* Ce include diagnosticarea */}
+              <section className="bg-card p-6 md:p-8 rounded-xl border border-border shadow-sm">
+                <h2 className="text-2xl font-bold mb-4 text-foreground flex items-center gap-2">
+                  <Gauge className="w-6 h-6 text-primary" />
+                  Ce presupune o constatare tehnică la fața locului
+                </h2>
+                <div className="grid sm:grid-cols-2 gap-4 text-sm">
+                  <div className="p-4 rounded-lg bg-secondary/50 border border-border/50">
+                    <strong className="block text-foreground mb-1">Măsurare presiuni de lucru</strong>
+                    <span className="text-muted-foreground">Conectăm manometrele digitale pentru a verifica presiunea de evaporare și condensare (R32 / R410A).</span>
+                  </div>
+                  <div className="p-4 rounded-lg bg-secondary/50 border border-border/50">
+                    <strong className="block text-foreground mb-1">Testare etanșeitate traseu</strong>
+                    <span className="text-muted-foreground">Localizăm micro-fisurile sau pierderile la îmbinările holenderelor cu detector electronic de scurgeri.</span>
+                  </div>
+                  <div className="p-4 rounded-lg bg-secondary/50 border border-border/50">
+                    <strong className="block text-foreground mb-1">Verificare componente electrice</strong>
+                    <span className="text-muted-foreground">Testăm tensiunea de alimentare, condensatorul de capacitate, siguranțele și senzorii de temperatură.</span>
+                  </div>
+                  <div className="p-4 rounded-lg bg-secondary/50 border border-border/50">
+                    <strong className="block text-foreground mb-1">Deviz clar înainte de execuție</strong>
+                    <span className="text-muted-foreground">Îți comunicăm costul total al pieselor și manoperei. Reparația începe numai după acordul tău.</span>
+                  </div>
+                </div>
+              </section>
+
+              {/* Încărcare cu freon: realitate vs mit */}
               <section className="bg-card p-6 md:p-8 rounded-xl border border-border shadow-sm">
                 <h2 className="text-2xl font-bold mb-3 text-foreground flex items-center gap-2">
-                  <Clock className="w-6 h-6 text-primary" />
-                  Cât de des este recomandată igienizarea
+                  <ShieldCheck className="w-6 h-6 text-primary" />
+                  Politica noastră: Fără încărcare oarbă cu freon!
                 </h2>
+                <p className="text-muted-foreground leading-relaxed mb-3">
+                  Sistemul frigorific al unui aer condiționat este un circuit închis ermetic. Freonul nu „se consumă” și nu „expiră”. Dacă aparatul tău nu mai are agent frigorific, înseamnă că există o neetanșeitate sau o pierdere.
+                </p>
                 <p className="text-muted-foreground leading-relaxed">
-                  Pentru locuințele rezidențiale, recomandăm igienizarea <strong>cel puțin o dată pe an</strong>, ideal primăvara înainte de începerea sezonului cald sau toamna dacă aparatul este folosit și pentru încălzire. În spații comerciale, birouri sau cabinete medicale, igienizarea se recomandă semestrial.
+                  Completarea cu freon fără remedierea pierderii duce inevitabil la o nouă descărcare în câteva săptămâni. De aceea, la Airlife identificăm și reetanșăm întotdeauna traseul înainte de vidare și recântărirea agentului frigorific conform specificațiilor de pe eticheta aparatului.
                 </p>
               </section>
 
               {/* Zona deservită */}
               <section className="bg-card p-6 md:p-8 rounded-xl border border-border shadow-sm">
                 <h2 className="text-2xl font-bold mb-3 text-foreground flex items-center gap-2">
-                  <ShieldCheck className="w-6 h-6 text-primary" />
-                  Acoperire locală în județul
+                  <Clock className="w-6 h-6 text-primary" />
+                  Timp de răspuns și arie de operare
                 </h2>
                 <p className="text-muted-foreground leading-relaxed">
-                  Ne deplasăm operativ în tot orașul Buzău (Micro 3, Micro 5, Micro 14, Dorobanți, Centru, Broșteni, Orizont) și în localitățile limitrofe. Intervenția durează între 45 și 75 de minute per aparat.
+                  Intervenim cu prioritate în municipiul Buzău și localitățile învecinate. În perioadele caniculare, programările se fac în ordinea recepționării solicitărilor, acordând prioritate urgențelor medicale sau spațiilor comerciale sensibile.
                 </p>
               </section>
 
@@ -254,19 +244,19 @@ const IgienizareAerConditionatBuzau = () => {
               <section className="bg-card p-6 md:p-8 rounded-xl border border-border shadow-sm">
                 <h2 className="text-2xl font-bold mb-4 text-foreground flex items-center gap-2">
                   <HelpCircle className="w-6 h-6 text-primary" />
-                  Întrebări frecvente despre igienizare
+                  Întrebări frecvente despre service
                 </h2>
                 <div className="space-y-4">
                   <div>
-                    <h3 className="font-semibold text-foreground">Riscă să se murdărească peretele sau parchetul?</h3>
+                    <h3 className="font-semibold text-foreground">Cât costă o constatare?</h3>
                     <p className="text-sm text-muted-foreground mt-1">
-                      Nu. Folosim o husă etanșă cu drenaj impermeabil montată direct sub unitatea internă, care conduce lichidul spălat direct într-un recipient special.
+                      Deplasarea și constatarea tehnică au un tarif fix în Buzău. Dacă decizi să efectuezi reparația cu noi, valoarea constatării se poate deduce parțial sau integral din costul final al manoperei.
                     </p>
                   </div>
                   <div>
-                    <h3 className="font-semibold text-foreground">Soluțiile folosite sunt toxice pentru animale sau copii?</h3>
+                    <h3 className="font-semibold text-foreground">Ce mărci de aparate reparați?</h3>
                     <p className="text-sm text-muted-foreground mt-1">
-                      Folosim soluții profesionale biodegradabile avizate pentru climatizare. După clătire și uscare, aparatul este gata de utilizare în deplină siguranță.
+                      Deservim majoritatea mărcilor de pe piață: Daikin, Gree, Midea, Mitsubishi, Cooper&amp;Hunter, Yamato, Vortex, Beko, Whirlpool, LG, Samsung și altele.
                     </p>
                   </div>
                 </div>
@@ -279,10 +269,10 @@ const IgienizareAerConditionatBuzau = () => {
                 <CardContent className="p-6">
                   <h3 className="text-xl font-bold mb-2 text-foreground flex items-center gap-2">
                     <Calendar className="w-5 h-5 text-primary" />
-                    Programează o igienizare
+                    Solicită Service
                   </h3>
                   <p className="text-sm text-muted-foreground mb-4">
-                    Completează formularul pentru o igienizare rapidă și eficientă a aparatului tău.
+                    Descrie problema pe scurt și un specialist te va contacta pentru o evaluare rapidă.
                   </p>
 
                   <form onSubmit={handleSubmit} className="space-y-3">
@@ -290,7 +280,7 @@ const IgienizareAerConditionatBuzau = () => {
                       <label className="text-xs font-semibold text-foreground block mb-1">Nume și Prenume *</label>
                       <Input
                         required
-                        placeholder="ex. Elena Ionescu"
+                        placeholder="ex. George Radu"
                         value={name}
                         onChange={(e) => setName(e.target.value)}
                       />
@@ -308,51 +298,51 @@ const IgienizareAerConditionatBuzau = () => {
                     </div>
 
                     <div>
-                      <label className="text-xs font-semibold text-foreground block mb-1">Adresă / Cartier</label>
+                      <label className="text-xs font-semibold text-foreground block mb-1">Locație (Adresă / Cartier)</label>
                       <Input
-                        placeholder="ex. Buzău, Str. Unirii"
+                        placeholder="ex. Buzău, Str. Mesteacănului"
                         value={location}
                         onChange={(e) => setLocation(e.target.value)}
                       />
                     </div>
 
                     <div>
-                      <label className="text-xs font-semibold text-foreground block mb-1">Număr de aparate și observații</label>
+                      <label className="text-xs font-semibold text-foreground block mb-1">Simptom defecțiune (ce se întâmplă?)</label>
                       <Textarea
                         rows={3}
-                        placeholder="ex. 1 aparat living, miroase ușor la pornire"
+                        placeholder="ex. Aparatul pornește dar nu dă aer rece, pe afișaj apare E3"
                         value={details}
                         onChange={(e) => setDetails(e.target.value)}
                       />
                     </div>
 
                     <Button type="submit" disabled={isSubmitting} className="w-full mt-2">
-                      {isSubmitting ? "Se trimite..." : "Solicită Programare"}
+                      {isSubmitting ? "Se trimite..." : "Cere Intervenție Service"}
                     </Button>
                   </form>
 
                   <div className="mt-6 pt-4 border-t border-border text-center">
-                    <span className="text-xs text-muted-foreground block mb-2">Urgență sau întrebări?</span>
+                    <span className="text-xs text-muted-foreground block mb-2">Problemă urgentă?</span>
                     <a
                       href="tel:+40722153525"
-                      onClick={() => trackClickToCall("Igienizare Buzau Sidebar")}
+                      onClick={() => trackClickToCall("Service Sidebar")}
                       className="inline-flex items-center gap-2 text-primary hover:underline font-semibold text-sm"
                     >
-                      <PhoneCall className="w-4 h-4" /> Apelează Suportul Local
+                      <PhoneCall className="w-4 h-4" /> Sună pentru Programare
                     </a>
                   </div>
                 </CardContent>
               </Card>
 
-              {/* Cross-linking to Ecommerce Consumables */}
+              {/* Cross-link to accessories and consumables */}
               <Card className="bg-secondary/30">
                 <CardContent className="p-5 text-sm space-y-3">
-                  <h4 className="font-semibold text-foreground">Preferi să întreții singur filtrele?</h4>
+                  <h4 className="font-semibold text-foreground">Ai nevoie de piese de schimb sau consumabile?</h4>
                   <p className="text-muted-foreground text-xs leading-relaxed">
-                    În magazinul nostru găsești spray-uri de curățare, spume active și pastile antibacteriene pentru tăvița de condens.
+                    Găsești în stoc consumabile uzuale: furtunuri flexibile condens, benzi matisare și conectori frigorifici.
                   </p>
-                  <Link to="/curatare-si-intretinere" className="text-primary font-semibold text-xs inline-block hover:underline">
-                    Vezi Produse de Curățare &rarr;
+                  <Link to="/consumabile-hvac" className="text-primary font-semibold text-xs inline-block hover:underline">
+                    Vezi Consumabile HVAC &rarr;
                   </Link>
                 </CardContent>
               </Card>
@@ -366,4 +356,4 @@ const IgienizareAerConditionatBuzau = () => {
   );
 };
 
-export default IgienizareAerConditionatBuzau;
+export default ServiceAerConditionat;

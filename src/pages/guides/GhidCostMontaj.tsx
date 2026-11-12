@@ -6,7 +6,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { CheckCircle2, AlertOctagon, Wrench, Clock, BookOpen, ArrowRight } from "lucide-react";
 
-const GhidCostMontajBuzau = () => {
+const GhidCostMontaj = () => {
   const structuredData = {
     "@context": "https://schema.org",
     "@type": "Article",
@@ -186,4 +186,4 @@ const GhidCostMontajBuzau = () => {
   );
 };
 
-export default GhidCostMontajBuzau;
+export default GhidCostMontaj;

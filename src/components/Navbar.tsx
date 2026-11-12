@@ -95,7 +95,7 @@ const Navbar = () => {
               </Button>
             </Link>
 
-            {/* Servicii Buzau Dropdown */}
+            {/* Servicii Dropdown */}
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
                 <Button variant="ghost" size="sm" className="flex items-center gap-1">

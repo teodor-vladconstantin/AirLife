@@ -11,20 +11,20 @@ import AboutUs from "./pages/AboutUs";
 import Contact from "./pages/Contact";
 import ShippingAndReturns from "./pages/ShippingAndReturns";
 import Warranty from "./pages/Warranty";
-import MontajAerConditionatBuzau from "./pages/services/MontajAerConditionatBuzau";
-import IgienizareAerConditionatBuzau from "./pages/services/IgienizareAerConditionatBuzau";
-import ServiceAerConditionatBuzau from "./pages/services/ServiceAerConditionatBuzau";
+import MontajAerConditionat from "./pages/services/MontajAerConditionat";
+import IgienizareAerConditionat from "./pages/services/IgienizareAerConditionat";
+import ServiceAerConditionat from "./pages/services/ServiceAerConditionat";
 import GhidIgienizare from "./pages/guides/GhidIgienizare";
-import GhidCostMontajBuzau from "./pages/guides/GhidCostMontajBuzau";
+import GhidCostMontaj from "./pages/guides/GhidCostMontaj";
 
 const PAGES: Record<string, () => JSX.Element> = {
   "/": Index,
   "/servicii": Services,
-  "/servicii/montaj-aer-conditionat": MontajAerConditionatBuzau,
-  "/servicii/igienizare-aer-conditionat": IgienizareAerConditionatBuzau,
-  "/servicii/service-aer-conditionat": ServiceAerConditionatBuzau,
+  "/servicii/montaj-aer-conditionat": MontajAerConditionat,
+  "/servicii/igienizare-aer-conditionat": IgienizareAerConditionat,
+  "/servicii/service-aer-conditionat": ServiceAerConditionat,
   "/ghid/igienizare-aer-conditionat": GhidIgienizare,
-  "/ghid/cost-montaj-aer-conditionat": GhidCostMontajBuzau,
+  "/ghid/cost-montaj-aer-conditionat": GhidCostMontaj,
   "/despre-noi": AboutUs,
   "/contact": Contact,
   "/livrare-si-retur": ShippingAndReturns,
