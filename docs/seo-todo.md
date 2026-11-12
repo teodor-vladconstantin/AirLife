@@ -12,14 +12,17 @@ Actualizat: 12 noiembrie 2026. Tot ce ține de cod, schema, prerender, conținut
 ## Verificări de făcut peste câteva zile
 - [ ] **Search Console:** paginile cerute la indexare (pilon blog, montaj, igienizare, service, /aer-conditionat, /blog) apar indexate? Homepage-ul a fost doar re-cerut (neconfirmat).
 - [ ] **Merchant Center:** 2 produse respinse cu „Image not processed" (ventilator A80i-FS-K, ventilator baie A100 FS NL). Imaginile răspund corect (200, webp), deci probabil se rezolvă singure; re-verifică. Politica de retur în review (până la 10 zile).
-- [ ] **Viteza reală:** rulează Lighthouse local sau PageSpeed (cota API s-a terminat azi) pe / și /servicii/montaj-aer-conditionat, după code-splitting (intrarea JS: 1,43 MB → ~400 KB).
+- [x] **Viteza (Lighthouse mobil, 12 nov):** homepage performanță 72, SEO 100, best-practices 100, accesibilitate 91, CLS 0, FCP 1,8 s, TBT 160 ms; /servicii/montaj-aer-conditionat performanță 74, LCP 5,3 s. LCP rămâne slab pe homepage (8,3 s simulat).
 - [ ] **PostHog:** după ce apar vizite cu consimțământ, verifică dacă apar replay și heatmaps (proiect AirLife, EU, phc_kKD7vU…). Opțional: oprește „Capture console logs" din Settings → Session replay.
 
-## Mici îmbunătățiri de cod
-- [ ] Ordinea fixă a clusterelor pe pagina `/blog` (pilon → sateliți), acum apar în ordinea articolelor.
-- [ ] Descrierea articolului-pilon `cum-alegi-aerul-conditionat-ghid-complet` are 168 de caractere (limită 165), se scurtează din /admin.
+## Performanță: următorul pas (risc mediu, de făcut cu test)
+- [ ] **LCP homepage ~8 s:** elementul LCP este `<h1>`-ul din hero. HTML-ul prerenderat apare devreme, dar `createRoot` îl înlocuiește după încărcarea JS, iar înlocuirea resetează măsurătoarea. Soluție: `hydrateRoot` cu randare completă a aplicației în prerender (StaticRouter + aceleași provideri, inclusiv CookieBanner), ca DOM-ul să fie reutilizat. Cere test pe toate rutele (mismatch de hidratare). Până atunci hero-ul e WebP cu srcset și fetchpriority high.
 - [ ] Un produs are titlu foarte lung (A80i-FS-K), cosmetic.
-- [ ] Limba sursei de produse din Merchant e acum „Romanian"; dacă adaugi produse noi, feed-ul se regenerează la fiecare build.
+
+## Făcute în sesiunea 12 nov (la finalul zilei)
+- [x] Ordine fixă a clusterelor pe `/blog` (pilon primul), în `src/data/blogClusters.ts`.
+- [x] Descrierea pilonului scurtată (133 caractere), live.
+- [x] Hero WebP (1024/1920) cu srcset, și corectat HTML-ul prerenderat care trimitea la `/src/assets/...` (cale inexistentă în producție).
 
 ## Backlog conținut (cerere confirmată, neacoperit)
 Vezi `docs/seo-keywords.md`: cât costă igienizarea, cel mai bun purificator pentru apartament/copii, multisplit, de ce îngheață/nu merge dezumidificatorul, cum măsori umiditatea, montaj ventilator de baie, recuperator pentru apartament (preț și montaj, după ce ai prețuri reale).
