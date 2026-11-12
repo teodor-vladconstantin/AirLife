@@ -8,7 +8,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useToast } from "@/hooks/use-toast";
-import { Plus, Trash2, Package, ShoppingBag } from "lucide-react";
+import { Plus, Trash2, Package, ShoppingBag, FileText, Mail } from "lucide-react";
 import {
   Select,
   SelectContent,
@@ -17,6 +17,9 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { OrdersTable } from "@/components/admin/OrdersTable";
+import { BlogManager } from "@/components/admin/BlogManager";
+import { slugify } from "@/lib/markdown";
+import { LeadsTable } from "@/components/admin/LeadsTable";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 
@@ -65,7 +68,7 @@ const Admin = () => {
     setUploading(true);
     const fileExt = file.name.split('.').pop();
     const fileName = `${Date.now()}-${Math.random().toString(36).substring(2, 8)}.${fileExt}`;
-    const { data, error } = await supabase.storage.from('product-images').upload(fileName, file);
+    const { data, error } = await supabase.storage.from('media').upload(fileName, file);
     if (error) {
       toast({
         title: "Eroare upload imagine",
@@ -75,7 +78,7 @@ const Admin = () => {
       setUploading(false);
       return;
     }
-    const { data: urlData } = supabase.storage.from('product-images').getPublicUrl(fileName);
+    const { data: urlData } = supabase.storage.from('media').getPublicUrl(fileName);
     setFormData({ ...formData, image_url: urlData?.publicUrl || "" });
     setUploading(false);
     toast({ title: "Imagine încărcată!" });
@@ -107,7 +110,7 @@ const Admin = () => {
     setEditUploading(true);
     const fileExt = file.name.split('.').pop();
     const fileName = `${Date.now()}-${Math.random().toString(36).substring(2, 8)}.${fileExt}`;
-    const { data, error } = await supabase.storage.from('product-images').upload(fileName, file);
+    const { data, error } = await supabase.storage.from('media').upload(fileName, file);
     if (error) {
       toast({
         title: "Eroare upload imagine",
@@ -117,7 +120,7 @@ const Admin = () => {
       setEditUploading(false);
       return;
     }
-    const { data: urlData } = supabase.storage.from('product-images').getPublicUrl(fileName);
+    const { data: urlData } = supabase.storage.from('media').getPublicUrl(fileName);
     setEditFormData({ ...editFormData, image_url: urlData?.publicUrl || "" });
     setEditUploading(false);
     toast({ title: "Imagine încărcată!" });
@@ -221,6 +224,7 @@ const Admin = () => {
 
     const { error } = await supabase.from("products").insert({
       name: formData.name,
+      slug: slugify(formData.name),
       description: formData.description,
       price: parseFloat(formData.price),
       category: formData.category,
@@ -283,11 +287,11 @@ const Admin = () => {
           <div className="mb-8">
             <h1 className="text-3xl font-bold">Panou Administrare</h1>
             <p className="text-muted-foreground mt-1">
-              Gestionează produsele și solicitările magazinului
+              Gestionează produsele, comenzile, articolele de blog și lead-urile
             </p>
           </div>
         <Tabs defaultValue="products" className="space-y-6">
-          <TabsList className="grid w-full max-w-md grid-cols-2">
+          <TabsList className="grid w-full max-w-2xl grid-cols-4">
             <TabsTrigger value="products" className="flex items-center gap-2">
               <ShoppingBag className="h-4 w-4" />
               Produse
@@ -295,6 +299,14 @@ const Admin = () => {
             <TabsTrigger value="orders" className="flex items-center gap-2">
               <Package className="h-4 w-4" />
               Solicitări
+            </TabsTrigger>
+            <TabsTrigger value="blog" className="flex items-center gap-2">
+              <FileText className="h-4 w-4" />
+              Blog
+            </TabsTrigger>
+            <TabsTrigger value="leads" className="flex items-center gap-2">
+              <Mail className="h-4 w-4" />
+              Leads
             </TabsTrigger>
           </TabsList>
 
@@ -565,6 +577,14 @@ const Admin = () => {
 
           <TabsContent value="orders">
             <OrdersTable />
+          </TabsContent>
+
+          <TabsContent value="blog">
+            <BlogManager />
+          </TabsContent>
+
+          <TabsContent value="leads">
+            <LeadsTable />
           </TabsContent>
         </Tabs>
         </div>

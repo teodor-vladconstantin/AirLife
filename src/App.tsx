@@ -23,6 +23,20 @@ import Contact from "./pages/Contact";
 import NotFound from "./pages/NotFound";
 import FadeWrapper from "@/components/FadeWrapper";
 import ComingSoon from "./pages/ComingSoon";
+import Blog from "./pages/Blog";
+import BlogPost from "./pages/BlogPost";
+import LocalService from "./pages/LocalService";
+import CookieBanner from "./components/CookieBanner";
+import Services from "./pages/Services";
+import CookiePolicy from "./pages/CookiePolicy";
+import ShippingAndReturns from "./pages/ShippingAndReturns";
+import Warranty from "./pages/Warranty";
+import CategoryPage from "./pages/CategoryPage";
+import MontajAerConditionatBuzau from "./pages/services/MontajAerConditionatBuzau";
+import IgienizareAerConditionatBuzau from "./pages/services/IgienizareAerConditionatBuzau";
+import ServiceAerConditionatBuzau from "./pages/services/ServiceAerConditionatBuzau";
+import GhidIgienizare from "./pages/guides/GhidIgienizare";
+import GhidCostMontajBuzau from "./pages/guides/GhidCostMontajBuzau";
 
 // Set VITE_COMING_SOON=true to hide the site (only /auth and /admin stay reachable)
 const comingSoon = import.meta.env.VITE_COMING_SOON === "true";
@@ -40,6 +54,7 @@ const App = () => (
             <Sonner />
             <BrowserRouter>
               <ScrollToTop />
+              <CookieBanner />
             {comingSoon ? (
             <Routes>
               <Route path="/auth" element={<Auth />} />
@@ -61,6 +76,31 @@ const App = () => (
               <Route path="/terms" element={<FadeWrapper><TermsAndConditions /></FadeWrapper>} />
               <Route path="/privacy" element={<FadeWrapper><PrivacyPolicy /></FadeWrapper>} />
               <Route path="/contact" element={<FadeWrapper><Contact /></FadeWrapper>} />
+              <Route path="/despre-noi" element={<FadeWrapper><AboutUs /></FadeWrapper>} />
+              <Route path="/termeni-si-conditii" element={<FadeWrapper><TermsAndConditions /></FadeWrapper>} />
+              <Route path="/politica-de-confidentialitate" element={<FadeWrapper><PrivacyPolicy /></FadeWrapper>} />
+              <Route path="/politica-de-cookies" element={<FadeWrapper><CookiePolicy /></FadeWrapper>} />
+              <Route path="/livrare-si-retur" element={<FadeWrapper><ShippingAndReturns /></FadeWrapper>} />
+              <Route path="/garantie" element={<FadeWrapper><Warranty /></FadeWrapper>} />
+              <Route path="/servicii" element={<FadeWrapper><Services /></FadeWrapper>} />
+              <Route path="/servicii/montaj-aer-conditionat-buzau" element={<FadeWrapper><MontajAerConditionatBuzau /></FadeWrapper>} />
+              <Route path="/servicii/igienizare-aer-conditionat-buzau" element={<FadeWrapper><IgienizareAerConditionatBuzau /></FadeWrapper>} />
+              <Route path="/servicii/service-aer-conditionat-buzau" element={<FadeWrapper><ServiceAerConditionatBuzau /></FadeWrapper>} />
+              <Route path="/ghid/igienizare-aer-conditionat" element={<FadeWrapper><GhidIgienizare /></FadeWrapper>} />
+              <Route path="/ghid/cost-montaj-aer-conditionat-buzau" element={<FadeWrapper><GhidCostMontajBuzau /></FadeWrapper>} />
+              <Route path="/accesorii-aer-conditionat" element={<FadeWrapper><CategoryPage forcedSlug="accesorii-aer-conditionat" /></FadeWrapper>} />
+              <Route path="/consumabile-hvac" element={<FadeWrapper><CategoryPage forcedSlug="consumabile-hvac" /></FadeWrapper>} />
+              <Route path="/curatare-si-intretinere" element={<FadeWrapper><CategoryPage forcedSlug="curatare-si-intretinere" /></FadeWrapper>} />
+              <Route path="/filtre-purificatoare" element={<FadeWrapper><CategoryPage forcedSlug="filtre-purificatoare" /></FadeWrapper>} />
+              <Route path="/purificatoare-aer" element={<FadeWrapper><CategoryPage forcedSlug="purificatoare-aer" /></FadeWrapper>} />
+              <Route path="/dezumidificatoare" element={<FadeWrapper><CategoryPage forcedSlug="dezumidificatoare" /></FadeWrapper>} />
+              <Route path="/blog" element={<FadeWrapper><Blog /></FadeWrapper>} />
+              <Route path="/blog/:slug" element={<FadeWrapper><BlogPost /></FadeWrapper>} />
+              <Route path="/servicii/:service/:locality" element={<FadeWrapper><LocalService /></FadeWrapper>} />
+              <Route path="/aer-conditionat" element={<FadeWrapper><CategoryPage forcedSlug="aer-conditionat" /></FadeWrapper>} />
+              <Route path="/aer-conditionat-fara-unitate-exterioara" element={<FadeWrapper><CategoryPage forcedSlug="aer-conditionat-fara-unitate-exterioara" /></FadeWrapper>} />
+              <Route path="/recuperatoare-caldura" element={<FadeWrapper><CategoryPage forcedSlug="recuperatoare-caldura" /></FadeWrapper>} />
+              <Route path="/ventilatoare-baie" element={<FadeWrapper><CategoryPage forcedSlug="ventilatoare-baie" /></FadeWrapper>} />
               {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
               <Route path="*" element={<FadeWrapper><NotFound /></FadeWrapper>} />
             </Routes>

@@ -1,10 +1,16 @@
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import SEO from "@/components/SEO";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
 const PrivacyPolicy = () => {
   return (
     <div className="min-h-screen flex flex-col">
+      <SEO
+        title="Politica de Confidențialitate (GDPR) | AirLife.ro"
+        description="Află cum colectăm, utilizăm și protejăm datele tale cu caracter personal pe AirLife.ro, în deplină conformitate cu GDPR."
+        canonical="https://airlife.ro/politica-de-confidentialitate"
+      />
       <Navbar />
 
       <main className="flex-1 bg-gradient-to-b from-background to-secondary/30 py-12">
@@ -168,7 +174,7 @@ const PrivacyPolicy = () => {
               <p>
                 Email: privacy@airlife.ro
                 <br />
-                Telefon: +40 XXX XXX XXX
+                Telefon: +40 722 15 35 25
               </p>
             </CardContent>
           </Card>

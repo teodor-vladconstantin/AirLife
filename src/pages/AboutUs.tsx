@@ -1,13 +1,28 @@
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import SEO from "@/components/SEO";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Target, Eye, Award, Leaf, Users, HeartHandshake, Sparkles } from "lucide-react";
+import { Target, Eye, Award, Leaf, Users, HeartHandshake, Sparkles, MapPin } from "lucide-react";
 import { Link } from "react-router-dom";
 
 const AboutUs = () => {
+  const structuredData = {
+    "@context": "https://schema.org",
+    "@type": "AboutPage",
+    "name": "Despre AirLife",
+    "url": "https://airlife.ro/despre-noi",
+    "description": "Povestea AirLife: soluții HVAC de încredere, accesorii durabile și servicii de climatizare dedicate în Buzău."
+  };
+
   return (
     <div className="min-h-screen flex flex-col">
+      <SEO
+        title="Despre Noi | Misiunea & Valorile AirLife Buzău"
+        description="Află mai multe despre AirLife: magazin online HVAC și echipă dedicată de montaj și igienizare sisteme de aer condiționat în Buzău. Corectitudine și eficiență."
+        canonical="https://airlife.ro/despre-noi"
+        structuredData={structuredData}
+      />
       <Navbar />
 
       <main className="flex-1 bg-gradient-to-b from-background to-secondary/30 py-12">

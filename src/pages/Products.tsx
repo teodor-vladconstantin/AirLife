@@ -15,6 +15,7 @@ interface Product {
   description: string;
   price: number;
   category: string;
+  slug?: string | null;
   image_url: string | null;
   features: any;
   stock: number;
@@ -158,7 +159,7 @@ const Products = () => {
                     </div>
 
                     <div className="flex gap-2 mt-4">
-                      <Link to={`/products/${product.id}`} className="flex-1">
+                      <Link to={`/products/${product.slug ?? product.id}`} className="flex-1">
                         <Button variant="outline" className="w-full">
                           Vezi Descriere
                         </Button>

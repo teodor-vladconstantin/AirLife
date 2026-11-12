@@ -1,136 +1,270 @@
+import { useState } from "react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import SEO from "@/components/SEO";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Mail, Phone, MapPin, Clock } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
+import { Mail, Phone, MapPin, Clock, Send, CheckCircle2 } from "lucide-react";
+import { useToast } from "@/hooks/use-toast";
+import { trackContactSubmit, trackClickToCall } from "@/lib/analytics";
 
 const Contact = () => {
+  const { toast } = useToast();
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [phone, setPhone] = useState("");
+  const [subject, setSubject] = useState("");
+  const [message, setMessage] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitted, setSubmitted] = useState(false);
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!name || !email || !message) {
+      toast({
+        title: "Câmpuri obligatorii",
+        description: "Vă rugăm să completați numele, adresa de email și mesajul.",
+        variant: "destructive",
+      });
+      return;
+    }
+
+    setIsSubmitting(true);
+    trackContactSubmit(subject || "Mesaj general de contact");
+
+    setTimeout(() => {
+      setIsSubmitting(false);
+      setSubmitted(true);
+      toast({
+        title: "Mesaj expediat!",
+        description: "Îți mulțumim pentru mesaj. Echipa AirLife te va contacta în cel mai scurt timp posibil.",
+      });
+      setName("");
+      setEmail("");
+      setPhone("");
+      setSubject("");
+      setMessage("");
+    }, 600);
+  };
+
+  const contactStructuredData = {
+    "@context": "https://schema.org",
+    "@type": "ContactPage",
+    "name": "Contact AirLife",
+    "url": "https://airlife.ro/contact",
+    "mainEntity": {
+      "@type": "HVACBusiness",
+      "name": "AirLife",
+      "email": "contact@airlife.ro",
+      "areaServed": {
+        "@type": "City",
+        "name": "Buzău"
+      },
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Buzău",
+        "addressRegion": "Buzău",
+        "addressCountry": "RO"
+      }
+    }
+  };
+
   return (
     <div className="min-h-screen flex flex-col">
+      <SEO
+        title="Contact & Suport | AirLife Buzău"
+        description="Contactează echipa AirLife. Informații despre comenzi, livrare accesorii HVAC și programări pentru montaj sau igienizare aer condiționat în Buzău."
+        canonical="https://airlife.ro/contact"
+        structuredData={contactStructuredData}
+      />
+
       <Navbar />
 
       <main className="flex-1 bg-gradient-to-b from-background to-secondary/30 py-12">
-        <div className="container mx-auto px-4 max-w-4xl">
-          <h1 className="text-4xl font-bold mb-8 text-center">Contact</h1>
-
-          <div className="grid md:grid-cols-2 gap-6 mb-8">
-            <Card>
-              <CardHeader>
-                <CardTitle className="flex items-center gap-2">
-                  <Mail className="h-5 w-5 text-primary" />
-                  Email
-                </CardTitle>
-              </CardHeader>
-              <CardContent>
-                <p className="text-muted-foreground mb-2">Pentru cereri de ofertă și informații:</p>
-                <a href="mailto:contact@airlife.ro" className="text-primary hover:underline font-semibold">
-                  contact@airlife.ro
-                </a>
-                <p className="text-muted-foreground mt-4 mb-2">Pentru suport tehnic:</p>
-                <a href="mailto:support@airlife.ro" className="text-primary hover:underline font-semibold">
-                  support@airlife.ro
-                </a>
-              </CardContent>
-            </Card>
-
-            <Card>
-              <CardHeader>
-                <CardTitle className="flex items-center gap-2">
-                  <Phone className="h-5 w-5 text-primary" />
-                  Telefon
-                </CardTitle>
-              </CardHeader>
-              <CardContent>
-                <p className="text-muted-foreground mb-2">Serviciu Clienți:</p>
-                <a href="tel:+40XXXXXXXXX" className="text-primary hover:underline font-semibold text-lg">
-                  +40 XXX XXX XXX
-                </a>
-                <p className="text-sm text-muted-foreground mt-2">
-                  Luni - Vineri: 09:00 - 18:00
-                  <br />
-                  Sâmbătă: 10:00 - 14:00
-                </p>
-              </CardContent>
-            </Card>
+        <div className="container mx-auto px-4 max-w-5xl">
+          <div className="text-center max-w-2xl mx-auto mb-12">
+            <h1 className="text-3xl md:text-5xl font-bold mb-4 text-foreground tracking-tight">
+              Contact &amp; Asistență Clienți
+            </h1>
+            <p className="text-muted-foreground text-base md:text-lg">
+              Ai o întrebare despre produsele noastre sau dorești o programare pentru montaj ori igienizare în Buzău? Scrie-ne și îți răspundem cu plăcere.
+            </p>
           </div>
 
-          <Card className="mb-8">
-            <CardHeader>
-              <CardTitle className="flex items-center gap-2">
-                <MapPin className="h-5 w-5 text-primary" />
-                Adresă
-              </CardTitle>
-            </CardHeader>
-            <CardContent>
-              <p className="font-semibold mb-2">AirLife SRL</p>
-              <p className="text-muted-foreground">
-                Str. Exemplu, Nr. 123
-                <br />
-                Sector X, București
-                <br />
-                Cod Poștal: 010101
-                <br />
-                România
-              </p>
-              <p className="mt-4 text-sm text-muted-foreground">
-                CUI: ROXXXXXXXX
-                <br />
-                Reg. Com.: J40/XXXX/2024
-              </p>
-            </CardContent>
-          </Card>
+          <div className="grid lg:grid-cols-3 gap-8 mb-12">
+            {/* Contact Details Column */}
+            <div className="space-y-6">
+              <Card>
+                <CardHeader className="pb-3">
+                  <CardTitle className="flex items-center gap-2 text-base font-bold">
+                    <Mail className="h-5 w-5 text-primary" />
+                    Adrese de E-mail
+                  </CardTitle>
+                </CardHeader>
+                <CardContent className="space-y-3 text-sm">
+                  <div>
+                    <span className="text-xs text-muted-foreground block">Informații comenzi &amp; oferte:</span>
+                    <a href="mailto:contact@airlife.ro" className="text-primary hover:underline font-semibold">
+                      contact@airlife.ro
+                    </a>
+                  </div>
+                  <div>
+                    <span className="text-xs text-muted-foreground block">Garanții &amp; suport tehnic:</span>
+                    <a href="mailto:support@airlife.ro" className="text-primary hover:underline font-semibold">
+                      support@airlife.ro
+                    </a>
+                  </div>
+                </CardContent>
+              </Card>
 
-          <Card className="mb-8">
-            <CardHeader>
-              <CardTitle className="flex items-center gap-2">
-                <Clock className="h-5 w-5 text-primary" />
-                Program de Lucru
-              </CardTitle>
-            </CardHeader>
-            <CardContent>
-              <div className="space-y-2 text-muted-foreground">
-                <div className="flex justify-between">
-                  <span>Luni - Vineri:</span>
-                  <span className="font-semibold">09:00 - 18:00</span>
-                </div>
-                <div className="flex justify-between">
-                  <span>Sâmbătă:</span>
-                  <span className="font-semibold">10:00 - 14:00</span>
-                </div>
-                <div className="flex justify-between">
-                  <span>Duminică:</span>
-                  <span className="font-semibold">Închis</span>
-                </div>
-              </div>
-            </CardContent>
-          </Card>
+              <Card>
+                <CardHeader className="pb-3">
+                  <CardTitle className="flex items-center gap-2 text-base font-bold">
+                    <MapPin className="h-5 w-5 text-primary" />
+                    Zonă de Activitate
+                  </CardTitle>
+                </CardHeader>
+                <CardContent className="text-sm text-muted-foreground leading-relaxed">
+                  <p className="font-semibold text-foreground mb-1">AirLife (Sediu Operațional Buzău)</p>
+                  <p>Municipiul Buzău, Județul Buzău, România</p>
+                  <p className="text-xs mt-2 italic">
+                    *Serviciu de intervenție direct la domiciliul sau sediul clientului (Service Area Business) în tot municipiul Buzău și localitățile învecinate.
+                  </p>
+                </CardContent>
+              </Card>
 
-          <Card>
-            <CardHeader>
-              <CardTitle>Informații Utile</CardTitle>
-            </CardHeader>
-            <CardContent className="space-y-4 text-muted-foreground">
-              <div>
-                <h3 className="font-semibold text-foreground mb-2">Livrare / Montaj</h3>
-                <p>
-                  Detaliile de livrare și montaj vor fi specificate în oferta pe care ți-o vom trimite. Pentru estimări generale, putem livra și programa montaj în funcție de disponibilitate.
-                </p>
-              </div>
-              <div>
-                <h3 className="font-semibold text-foreground mb-2">Retur și Garanție</h3>
-                <p>
-                  Aveți dreptul de retur în 14 zile de la primirea produsului. Toate produsele beneficiază de garanție conform
-                  specificațiilor producătorului.
-                </p>
-              </div>
-              <div>
-                <h3 className="font-semibold text-foreground mb-2">Întrebări Frecvente</h3>
-                <p>
-                  Pentru întrebări frecvente despre cereri, livrare, montaj și garanție, vă rugăm să consultați secțiunea FAQ
-                  sau să ne contactați direct.
-                </p>
-              </div>
-            </CardContent>
-          </Card>
+              <Card>
+                <CardHeader className="pb-3">
+                  <CardTitle className="flex items-center gap-2 text-base font-bold">
+                    <Clock className="h-5 w-5 text-primary" />
+                    Program de Lucru
+                  </CardTitle>
+                </CardHeader>
+                <CardContent className="text-sm text-muted-foreground space-y-2">
+                  <div className="flex justify-between">
+                    <span>Luni – Vineri:</span>
+                    <span className="font-semibold text-foreground">09:00 – 18:00</span>
+                  </div>
+                  <div className="flex justify-between">
+                    <span>Sâmbătă:</span>
+                    <span className="font-semibold text-foreground">10:00 – 14:00</span>
+                  </div>
+                  <div className="flex justify-between">
+                    <span>Duminică:</span>
+                    <span className="font-semibold text-foreground">Închis</span>
+                  </div>
+                </CardContent>
+              </Card>
+            </div>
+
+            {/* Contact Form Column */}
+            <div className="lg:col-span-2">
+              <Card className="border-border shadow-sm">
+                <CardHeader>
+                  <CardTitle className="text-2xl font-bold text-foreground">
+                    Trimite-ne un Mesaj
+                  </CardTitle>
+                  <p className="text-sm text-muted-foreground">
+                    Completează formularul de mai jos și un membru al echipei noastre îți va răspunde în maximum 24 de ore lucrătoare.
+                  </p>
+                </CardHeader>
+                <CardContent>
+                  {submitted ? (
+                    <div className="p-8 text-center bg-primary/10 rounded-xl border border-primary/20 space-y-3 animate-in fade-in">
+                      <CheckCircle2 className="w-12 h-12 text-primary mx-auto" />
+                      <h3 className="text-xl font-bold text-foreground">Mesaj Trimis cu Succes!</h3>
+                      <p className="text-sm text-muted-foreground max-w-md mx-auto">
+                        Am primit solicitarea ta și o analizăm cu atenție. Te vom contacta pe email sau telefonic în cel mai scurt timp.
+                      </p>
+                      <Button variant="outline" size="sm" onClick={() => setSubmitted(false)}>
+                        Trimite alt mesaj
+                      </Button>
+                    </div>
+                  ) : (
+                    <form onSubmit={handleSubmit} className="space-y-4">
+                      <div className="grid sm:grid-cols-2 gap-4">
+                        <div>
+                          <label className="text-xs font-semibold text-foreground block mb-1">
+                            Nume și Prenume *
+                          </label>
+                          <Input
+                            required
+                            placeholder="ex. Andrei Popa"
+                            value={name}
+                            onChange={(e) => setName(e.target.value)}
+                          />
+                        </div>
+                        <div>
+                          <label className="text-xs font-semibold text-foreground block mb-1">
+                            Adresă de E-mail *
+                          </label>
+                          <Input
+                            required
+                            type="email"
+                            placeholder="ex. andrei@exemplu.ro"
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)}
+                          />
+                        </div>
+                      </div>
+
+                      <div className="grid sm:grid-cols-2 gap-4">
+                        <div>
+                          <label className="text-xs font-semibold text-foreground block mb-1">
+                            Număr de Telefon (opțional)
+                          </label>
+                          <Input
+                            type="tel"
+                            placeholder="ex. 07xxxxxxxx"
+                            value={phone}
+                            onChange={(e) => setPhone(e.target.value)}
+                          />
+                        </div>
+                        <div>
+                          <label className="text-xs font-semibold text-foreground block mb-1">
+                            Subiect
+                          </label>
+                          <Input
+                            placeholder="ex. Întrebare produs / Montaj Buzău"
+                            value={subject}
+                            onChange={(e) => setSubject(e.target.value)}
+                          />
+                        </div>
+                      </div>
+
+                      <div>
+                        <label className="text-xs font-semibold text-foreground block mb-1">
+                          Mesajul tău *
+                        </label>
+                        <Textarea
+                          required
+                          rows={5}
+                          placeholder="Descrie pe scurt produsul dorit sau cererea ta de asistență..."
+                          value={message}
+                          onChange={(e) => setMessage(e.target.value)}
+                        />
+                      </div>
+
+                      <p className="text-[11px] text-muted-foreground">
+                        *Prin trimiterea acestui formular confirmi că ești de acord cu prelucrarea datelor cu caracter personal conform{" "}
+                        <a href="/politica-de-confidentialitate" className="text-primary underline">
+                          Politicii de Confidențialitate
+                        </a>
+                        .
+                      </p>
+
+                      <Button type="submit" disabled={isSubmitting} className="w-full sm:w-auto">
+                        <Send className="w-4 h-4 mr-2" />
+                        {isSubmitting ? "Se trimite..." : "Trimite Solicitarea"}
+                      </Button>
+                    </form>
+                  )}
+                </CardContent>
+              </Card>
+            </div>
+          </div>
         </div>
       </main>
 

@@ -1,87 +1,114 @@
 import { Link } from "react-router-dom";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Wind, Droplets, Sparkles } from "lucide-react";
+import { Sparkles, Wrench, Shield, Filter, ArrowRight } from "lucide-react";
 import airConditioner from "@/assets/air-conditioner.jpg";
 import dehumidifier from "@/assets/dehumidifier.jpg";
 import airPurifier from "@/assets/air-purifier.jpg";
 
 const categories = [
   {
-    title: "Aer Condiționat",
-    description: "Climatizare eficientă cu tehnologie eco-friendly. Confort maxim, consum minim.",
-    icon: Wind,
-    image: airConditioner,
-    features: ["A+++", "Inverter", "Wi-Fi"]
-  },
-  {
-    title: "Dezumidificatoare",
-    description: "Controlează umiditatea pentru un mediu sănătos. Previn mucegaiul și alergiile.",
-    icon: Droplets,
-    image: dehumidifier,
-    features: ["Silențios", "Auto-stop", "Eficient"]
-  },
-  {
-    title: "Purificatoare Aer",
-    description: "Elimină poluanții, alergenii și virușii. Aer pur pentru toată familia.",
+    title: "Curățare & Igienizare",
+    slug: "curatare-si-intretinere",
+    description: "Spray-uri cu spumă activă, soluții dezinfectante pentru vaporizator și huse de curățare pe perete.",
     icon: Sparkles,
+    image: airConditioner,
+    features: ["Spumă Activă", "Anti-mucegai", "Husă Protecție"],
+  },
+  {
+    title: "Accesorii Aer Condiționat",
+    slug: "accesorii-aer-conditionat",
+    description: "Console rabatabile rezistente, tampoane antivibrante din cauciuc și elemente de fixare sigure.",
+    icon: Wrench,
+    image: dehumidifier,
+    features: ["Console 450mm", "Tampoane M8", "Fără Vibrații"],
+  },
+  {
+    title: "Consumabile HVAC",
+    slug: "consumabile-hvac",
+    description: "Furtun condens spiralat antistrivire, bandă de matisare protecție UV și izolații pentru trasee frigorifice.",
+    icon: Shield,
     image: airPurifier,
-    features: ["HEPA", "Ionizare", "Smart"]
-  }
+    features: ["Furtun Ø16mm", "Bandă UV", "Drenaj Sigur"],
+  },
+  {
+    title: "Filtre Purificatoare & AC",
+    slug: "filtre-purificatoare",
+    description: "Filtre cu cărbune activ și filtre HEPA pentru reținerea alergenilor și neutralizarea mirosurilor neplăcute.",
+    icon: Filter,
+    image: airPurifier,
+    features: ["Carbon Activ", "HEPA", "Aer Pur"],
+  },
 ];
 
 const ProductCategories = () => {
   return (
-    <section className="py-24 bg-gradient-to-b from-background to-secondary/30">
+    <section className="py-20 bg-gradient-to-b from-background to-secondary/30">
       <div className="container mx-auto px-4">
         <div className="text-center mb-16 animate-in fade-in duration-700">
-          <h2 className="text-4xl md:text-5xl font-bold mb-4 text-foreground">
-            Gama Noastră de Produse
+          <span className="text-xs font-semibold uppercase tracking-wider text-primary mb-2 block">
+            Magazin Online HVAC
+          </span>
+          <h2 className="text-3xl md:text-5xl font-bold mb-4 text-foreground">
+            Categorii de Produse
           </h2>
-          <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-            Soluții complete pentru confortul și sănătatea ta
+          <p className="text-base md:text-lg text-muted-foreground max-w-2xl mx-auto">
+            Accesorii calitative și soluții de curățare pentru un sistem de climatizare fiabil și un aer sănătos în casă.
           </p>
         </div>
 
-        <div className="grid md:grid-cols-3 gap-8">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
           {categories.map((category, index) => {
             const Icon = category.icon;
             return (
               <Card
                 key={index}
-                className="group overflow-hidden border-border/50 hover:border-primary/30 transition-opacity duration-400 will-change-opacity hover:opacity-90 bg-card/50 backdrop-blur-sm animate-in fade-in"
-                style={{ animationDelay: `${(index + 2) * 150}ms`, animationDuration: '600ms' }}
+                className="group flex flex-col justify-between overflow-hidden border-border/60 hover:border-primary/40 transition-all duration-300 hover:shadow-lg bg-card/60 backdrop-blur-sm"
               >
-                <div className="relative h-64 overflow-hidden">
-                  <img 
-                    src={category.image} 
-                    alt={category.title}
-                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-card via-transparent to-transparent opacity-90" />
-                  <div className="absolute bottom-4 left-4 bg-primary text-primary-foreground p-3 rounded-full">
-                    <Icon className="w-6 h-6" />
+                <div>
+                  <div className="relative h-48 overflow-hidden bg-secondary">
+                    <img
+                      src={category.image}
+                      alt={category.title}
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                      loading="lazy"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-card via-transparent to-transparent opacity-90" />
+                    <div className="absolute bottom-3 left-3 bg-primary text-primary-foreground p-2.5 rounded-xl shadow-md">
+                      <Icon className="w-5 h-5" />
+                    </div>
+                  </div>
+
+                  <div className="p-5">
+                    <h3 className="text-lg font-bold mb-2 text-foreground group-hover:text-primary transition-colors">
+                      {category.title}
+                    </h3>
+                    <p className="text-xs text-muted-foreground mb-4 leading-relaxed line-clamp-3">
+                      {category.description}
+                    </p>
+
+                    <div className="flex flex-wrap gap-1.5 mb-4">
+                      {category.features.map((feature, idx) => (
+                        <span
+                          key={idx}
+                          className="px-2 py-0.5 bg-primary/10 text-primary text-[11px] font-medium rounded-md"
+                        >
+                          {feature}
+                        </span>
+                      ))}
+                    </div>
                   </div>
                 </div>
-                
-                <div className="p-6">
-                  <h3 className="text-2xl font-bold mb-3 text-foreground">{category.title}</h3>
-                  <p className="text-muted-foreground mb-4">{category.description}</p>
-                  
-                  <div className="flex gap-2 mb-6">
-                    {category.features.map((feature, idx) => (
-                      <span 
-                        key={idx}
-                        className="px-3 py-1 bg-primary/10 text-primary text-sm rounded-full border border-primary/20"
-                      >
-                        {feature}
-                      </span>
-                    ))}
-                  </div>
-                  
-                    <Link to="/products" className="w-full">
-                    <Button variant="outline" className="w-full border-primary/30 text-primary hover:bg-primary/5 hover:text-foreground transition-all duration-300 hover:-translate-y-1 hover:shadow-md">
-                      Vezi Produsele
+
+                <div className="p-5 pt-0">
+                  <Link to={`/${category.slug}`} className="w-full block">
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      className="w-full justify-between text-xs group-hover:border-primary/40 group-hover:bg-primary/5"
+                    >
+                      Explorează Categoria
+                      <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
                     </Button>
                   </Link>
                 </div>

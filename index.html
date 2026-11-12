@@ -1,30 +1,94 @@
 <!doctype html>
-<html lang="en">
+<html lang="ro">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>AirLife - Magazin Online HVAC | Aer Condiționat, Purificatoare, Dezumidificatoare</title>
-    <meta name="description" content="AirLife - Cumpără online produse HVAC eco-friendly: aer condiționat eficient, purificatoare HEPA, dezumidificatoare silențioase. Prețuri competitive, livrare rapidă în România." />
+    <title>AirLife | Magazin HVAC &amp; Servicii Aer Condiționat Buzău</title>
+    <meta name="description" content="AirLife.ro — Magazin online HVAC cu accesorii, consumabile și soluții de climatizare. Servicii complete de montaj, igienizare și service aer condiționat în Buzău." />
     <meta name="author" content="AirLife" />
-    <meta name="keywords" content="magazin online, cumpără aer condiționat, purificator aer preț, dezumidificator, HVAC România, eco-friendly, eficiență energetică, comenzi online" />
-    
+    <meta name="robots" content="index, follow" />
+    <meta name="theme-color" content="#16a34a" />
+
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://airlife.ro/" />
+
+    <!-- Geo Metadata for Buzău Local SEO -->
+    <meta name="geo.region" content="RO-BZ" />
+    <meta name="geo.placename" content="Buzău" />
+    <meta name="geo.position" content="45.1500;26.8167" />
+    <meta name="ICBM" content="45.1500, 26.8167" />
+
+    <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
-    <meta property="og:title" content="AirLife - Magazin Online HVAC Eco-Friendly" />
-    <meta property="og:description" content="Cumpără produse HVAC sustenabile pentru casa ta. Prețuri competitive și livrare rapidă." />
+    <!-- Open Graph -->
+    <meta property="og:site_name" content="AirLife" />
+    <meta property="og:locale" content="ro_RO" />
+    <meta property="og:title" content="AirLife | Magazin HVAC &amp; Servicii Aer Condiționat Buzău" />
+    <meta property="og:description" content="Magazin online accesorii &amp; consumabile HVAC și servicii profesionale de montaj, igienizare și service aer condiționat în Buzău." />
     <meta property="og:type" content="website" />
-    <meta property="og:image" content="https://lovable.dev/opengraph-image-p98pqg.png" />
+    <meta property="og:url" content="https://airlife.ro/" />
+    <meta property="og:image" content="https://airlife.ro/placeholder.svg" />
 
+    <!-- Twitter Cards -->
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="AirLife - Magazin Online HVAC Eco-Friendly" />
-    <meta name="twitter:description" content="Cumpără produse HVAC sustenabile pentru casa ta. Prețuri competitive și livrare rapidă." />
-    <meta name="twitter:image" content="https://lovable.dev/opengraph-image-p98pqg.png" />
+    <meta name="twitter:title" content="AirLife | Magazin HVAC &amp; Servicii Aer Condiționat Buzău" />
+    <meta name="twitter:description" content="Magazin online accesorii &amp; consumabile HVAC și servicii profesionale de montaj, igienizare și service aer condiționat în Buzău." />
+    <meta name="twitter:image" content="https://airlife.ro/placeholder.svg" />
+
+    <!-- Structured Data (JSON-LD) Organization + HVACBusiness -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "Organization",
+          "@id": "https://airlife.ro/#organization",
+          "name": "AirLife",
+          "url": "https://airlife.ro/",
+          "logo": "https://airlife.ro/favicon.ico",
+          "contactPoint": {
+            "@type": "ContactPoint",
+            "contactType": "customer service",
+            "areaServed": "RO",
+            "availableLanguage": ["Romanian"]
+          }
+        },
+        {
+          "@type": "HVACBusiness",
+          "@id": "https://airlife.ro/#localbusiness",
+          "name": "AirLife - Servicii Climatizare Buzău",
+          "url": "https://airlife.ro/",
+          "image": "https://airlife.ro/placeholder.svg",
+          "areaServed": [
+            {
+              "@type": "City",
+              "name": "Buzău"
+            },
+            {
+              "@type": "AdministrativeArea",
+              "name": "Județul Buzău"
+            }
+          ],
+          "priceRange": "$$",
+          "description": "Servicii de montaj, igienizare profesională și service pentru sisteme de aer condiționat în municipiul Buzău și localitățile limitrofe."
+        }
+      ]
+    }
+    </script>
   </head>
 
   <body>
     <div id="root"></div>
+    <noscript>
+      <div style="font-family: sans-serif; padding: 2rem; max-width: 800px; margin: 0 auto; line-height: 1.6;">
+        <h1>AirLife — Magazin HVAC &amp; Servicii Aer Condiționat Buzău</h1>
+        <p>Bun venit pe AirLife.ro. Oferim accesorii și consumabile HVAC, precum și servicii profesionale de montaj, igienizare și service aer condiționat în Buzău.</p>
+        <p>Pentru o experiență completă, vă rugăm să activați JavaScript în browserul dumneavoastră.</p>
+      </div>
+    </noscript>
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>

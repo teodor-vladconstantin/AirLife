@@ -1,10 +1,16 @@
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import SEO from "@/components/SEO";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
 const TermsAndConditions = () => {
   return (
     <div className="min-h-screen flex flex-col">
+      <SEO
+        title="Termeni și Condiții de Utilizare | AirLife.ro"
+        description="Termenii și condițiile de utilizare a platformei AirLife.ro și desfășurarea comenzilor online conform legislației comerțului electronic din România."
+        canonical="https://airlife.ro/termeni-si-conditii"
+      />
       <Navbar />
 
       <main className="flex-1 bg-gradient-to-b from-background to-secondary/30 py-12">
@@ -118,7 +124,7 @@ const TermsAndConditions = () => {
               <p>
                 Email: contact@airlife.ro
                 <br />
-                Telefon: +40 XXX XXX XXX
+                Telefon: +40 722 15 35 25
               </p>
             </CardContent>
           </Card>

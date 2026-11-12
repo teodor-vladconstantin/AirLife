@@ -1,43 +1,60 @@
+import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { Mail, Phone } from "lucide-react";
+import { Mail, Wrench, PhoneCall } from "lucide-react";
+import { trackClickToCall } from "@/lib/analytics";
 
 const CTASection = () => {
   return (
-    <section className="py-24 bg-gradient-to-br from-primary via-primary to-accent relative overflow-hidden">
-      <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PHBhdHRlcm4gaWQ9ImdyaWQiIHdpZHRoPSI2MCIgaGVpZ2h0PSI2MCIgcGF0dGVyblVuaXRzPSJ1c2VyU3BhY2VPblVzZSI+PHBhdGggZD0iTSAxMCAwIEwgMCAwIDAgMTAiIGZpbGw9Im5vbmUiIHN0cm9rZT0id2hpdGUiIHN0cm9rZS1vcGFjaXR5PSIwLjEiIHN0cm9rZS13aWR0aD0iMSIvPjwvcGF0dGVybj48L2RlZnM+PHJlY3Qgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgZmlsbD0idXJsKCNncmlkKSIvPjwvc3ZnPg==')] opacity-30" />
-      
+    <section className="py-20 bg-gradient-to-br from-primary via-primary to-emerald-700 relative overflow-hidden text-primary-foreground">
       <div className="container mx-auto px-4 relative z-10">
-        <div className="max-w-3xl mx-auto text-center text-primary-foreground animate-fade-in">
-          <h2 className="text-4xl md:text-5xl font-bold mb-6" style={{textShadow: '0 2px 16px rgba(0,0,0,0.32)'}}>
-            Începe Să Respiri Mai Sănătos Astăzi
+        <div className="max-w-3xl mx-auto text-center animate-in fade-in duration-700">
+          <h2
+            className="text-3xl md:text-5xl font-bold mb-4"
+            style={{ textShadow: "0 2px 12px rgba(0,0,0,0.3)" }}
+          >
+            Pregătit pentru un Aer Curat și Confortabil?
           </h2>
-          <p className="text-xl mb-10 opacity-90" style={{textShadow: '0 2px 12px rgba(0,0,0,0.24)'}}>
-            Contactează-ne pentru o consultație gratuită și descoperă soluția perfectă pentru casa ta
+          <p
+            className="text-base md:text-lg mb-8 opacity-90 max-w-2xl mx-auto leading-relaxed"
+            style={{ textShadow: "0 2px 8px rgba(0,0,0,0.2)" }}
+          >
+            Fie că ai nevoie de produse și accesorii HVAC livrate rapid sau de montaj și igienizare profesională în Buzău, echipa AirLife îți stă la dispoziție.
           </p>
-          
-          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-12">
-              <Button size="lg" className="bg-white text-black hover:bg-white hover:text-black transition-all duration-300 hover:-translate-y-1">
-              <Mail className="mr-2 w-5 h-5" />
-              Trimite Mesaj
+
+          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-10">
+            <Link to="/contact">
+              <Button
+                size="lg"
+                className="bg-white text-foreground hover:bg-white/90 font-semibold shadow-md transition-all duration-300 hover:-translate-y-0.5 w-full sm:w-auto"
+              >
+                <Mail className="mr-2 w-4 h-4 text-primary" />
+                Trimite un Mesaj
               </Button>
-              <Button size="lg" variant="outline" className="bg-white text-black hover:bg-white hover:text-black transition-all duration-300 hover:-translate-y-1">
-              <Phone className="mr-2 w-5 h-5" />
-              Sună Acum
-            </Button>
+            </Link>
+            <Link to="/servicii/montaj-aer-conditionat-buzau">
+              <Button
+                size="lg"
+                variant="outline"
+                className="border-white text-white hover:bg-white/10 hover:text-white font-semibold transition-all duration-300 hover:-translate-y-0.5 w-full sm:w-auto"
+              >
+                <Wrench className="mr-2 w-4 h-4" />
+                Programare Montaj Buzău
+              </Button>
+            </Link>
           </div>
-          
-          <div className="flex flex-col sm:flex-row gap-8 justify-center text-sm opacity-90" style={{textShadow: '0 2px 8px rgba(0,0,0,0.18)'}}>
+
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 pt-8 border-t border-white/20 text-xs opacity-90">
             <div>
-              <div className="font-semibold mb-1">Program</div>
-              <div>Luni - Vineri: 9:00 - 18:00</div>
+              <div className="font-bold text-sm mb-0.5">Program Asistență</div>
+              <div>Luni – Vineri: 09:00 – 18:00</div>
             </div>
             <div>
-              <div className="font-semibold mb-1">Livrare</div>
-              <div>Gratuită în toată România</div>
+              <div className="font-bold text-sm mb-0.5">Livrare Curier</div>
+              <div>20 RON / Gratuit peste 500 RON</div>
             </div>
             <div>
-              <div className="font-semibold mb-1">Instalare</div>
-              <div>Profesională inclusă</div>
+              <div className="font-bold text-sm mb-0.5">Servicii Locale</div>
+              <div>Buzău &amp; Localități Limitrofe</div>
             </div>
           </div>
         </div>

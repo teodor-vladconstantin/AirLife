@@ -31,3 +31,6 @@ nul
 !.env.example
 supabase/.temp/
 2026-*-claude-*.txt
+
+.vercel
+.env*
