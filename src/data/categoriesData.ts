@@ -15,7 +15,7 @@ export const CATEGORIES_DATA: Record<string, CategoryInfo> = {
   "aer-conditionat": {
     slug: "aer-conditionat",
     name: "Aer Condiționat",
-    title: "Aer Condiționat Inverter Wi-Fi | Heiko Mora, Qira, Rosa | AirLife",
+    title: "Aer Condiționat Inverter Wi-Fi 9000–21000 BTU | AirLife",
     metaDescription:
       "Aparate de aer condiționat inverter cu Wi-Fi, în mai multe capacități (9000–21000 BTU). Montaj profesional și județ.",
     h1: "Aer Condiționat cu Unitate Exterioară",
@@ -33,7 +33,7 @@ export const CATEGORIES_DATA: Record<string, CategoryInfo> = {
   "aer-conditionat-fara-unitate-exterioara": {
     slug: "aer-conditionat-fara-unitate-exterioara",
     name: "Aer Condiționat fără Unitate Exterioară",
-    title: "Aer Condiționat fără Unitate Exterioară | Montaj fără fațadă | AirLife",
+    title: "Aer Condiționat fără Unitate Exterioară | AirLife",
     metaDescription:
       "Aparate de aer condiționat fără unitate exterioară, pentru locuințe unde nu se poate monta unitate pe fațadă. Răcire și încălzire, control din aplicație.",
     h1: "Aer Condiționat fără Unitate Exterioară",
@@ -51,7 +51,7 @@ export const CATEGORIES_DATA: Record<string, CategoryInfo> = {
   "recuperatoare-caldura": {
     slug: "recuperatoare-caldura",
     name: "Recuperatoare de Căldură",
-    title: "Recuperatoare de Căldură Descentralizate | Ventilație cu Recuperare | AirLife",
+    title: "Recuperatoare de Căldură Descentralizate | AirLife",
     metaDescription:
       "Recuperatoare de căldură descentralizate NovingAIR și SEVentilation pentru ventilație cu aer proaspăt, fără pierderi mari de căldură. Montaj în perete.",
     h1: "Recuperatoare de Căldură Descentralizate",
@@ -69,7 +69,7 @@ export const CATEGORIES_DATA: Record<string, CategoryInfo> = {
   "ventilatoare-baie": {
     slug: "ventilatoare-baie",
     name: "Ventilatoare Baie",
-    title: "Ventilatoare Baie Silențioase | Senzori Umiditate & Accesorii | AirLife",
+    title: "Ventilatoare Baie Silențioase cu Senzor Umiditate | AirLife",
     metaDescription:
       "Ventilatoare pentru baie și camere umede: silențioase, cu senzor de umiditate sau de prezență, plus carcase, valve și controlere.",
     h1: "Ventilatoare pentru Baie și Camere Umede",
@@ -87,7 +87,7 @@ export const CATEGORIES_DATA: Record<string, CategoryInfo> = {
   "accesorii-aer-conditionat": {
     slug: "accesorii-aer-conditionat",
     name: "Accesorii Aer Condiționat",
-    title: "Accesorii Aer Condiționat | Console, Amortizoare & Suporturi AirLife",
+    title: "Accesorii Aer Condiționat: Console și Suporturi | AirLife",
     metaDescription:
       "Cumpără accesorii pentru montaj și fixare aer condiționat: console exterioare electrostatice, tampoane antivibrante din cauciuc tehnic, tubulatură și protecții.",
     h1: "Accesorii pentru Aer Condiționat",
@@ -105,7 +105,7 @@ export const CATEGORIES_DATA: Record<string, CategoryInfo> = {
   "consumabile-hvac": {
     slug: "consumabile-hvac",
     name: "Consumabile HVAC",
-    title: "Consumabile HVAC | Furtun Condens, Bandă Matisat & Izolație Termică",
+    title: "Consumabile HVAC: Furtun Condens, Bandă, Izolație | AirLife",
     metaDescription:
       "Consumabile profesionale pentru instalații de climatizare și HVAC: furtun evacuare condens spiralat, benzi adezive de matisare rezistente UV și protecții termice.",
     h1: "Consumabile HVAC & Climatizare",
@@ -123,9 +123,9 @@ export const CATEGORIES_DATA: Record<string, CategoryInfo> = {
   "curatare-si-intretinere": {
     slug: "curatare-si-intretinere",
     name: "Curățare și Întreținere",
-    title: "Curățare & Igienizare Aer Condiționat | Spray-uri & Soluții Dezinfectante",
+    title: "Curățare și Igienizare Aer Condiționat: Spray-uri | AirLife",
     metaDescription:
-      "Soluții profesionale pentru curățarea aparatelor de aer condiționat: spray spumă activă pentru vaporizator, dezinfectant biocid și pastile antibacteriene tavă condens.",
+      "Soluții pentru curățarea aparatelor de aer condiționat: spray spumă pentru vaporizator, dezinfectant biocid și pastile antibacteriene pentru tava de condens.",
     h1: "Produse pentru Curățare și Întreținere HVAC",
     description:
       "Menține aerul curat și elimină mirosurile neplăcute din casă cu spray-uri și soluții testate pentru vaporizatoare, turbine și filtre de aer condiționat.",
@@ -142,7 +142,7 @@ export const CATEGORIES_DATA: Record<string, CategoryInfo> = {
   "filtre-purificatoare": {
     slug: "filtre-purificatoare",
     name: "Filtre Purificatoare",
-    title: "Filtre Purificatoare Aer & Climatizare | Filtre HEPA & Carbon Activ",
+    title: "Filtre HEPA și Carbon Activ pentru Purificatoare | AirLife",
     metaDescription:
       "Filtre de rezervă HEPA H13 și carbon activ pentru purificatoare și sisteme de climatizare. Rețin 99.97% din particulele fine, alergeni și mirosuri neplăcute.",
     h1: "Filtre pentru Purificatoare de Aer și Climatizare",
@@ -160,7 +160,7 @@ export const CATEGORIES_DATA: Record<string, CategoryInfo> = {
   "purificatoare-aer": {
     slug: "purificatoare-aer",
     name: "Purificatoare Aer",
-    title: "Purificatoare de Aer | Filtrare HEPA & Tehnologie Silențioasă AirLife",
+    title: "Purificatoare de Aer cu Filtru HEPA | AirLife",
     metaDescription:
       "Purificatoare de aer eficiente energetic pentru dormitor, living sau birou. Filtrare multistrat HEPA, senzori calitatea aerului și mod nocturn silențios.",
     h1: "Purificatoare de Aer Rezidențiale",
@@ -178,7 +178,7 @@ export const CATEGORIES_DATA: Record<string, CategoryInfo> = {
   "dezumidificatoare": {
     slug: "dezumidificatoare",
     name: "Dezumidificatoare",
-    title: "Dezumidificatoare de Aer | Combatere Umiditate & Mucegai AirLife",
+    title: "Dezumidificatoare de Aer: Umiditate și Mucegai | AirLife",
     metaDescription:
       "Dezumidificatoare casnice eficiente cu higrostat electronic. Previn formarea condensului, a igrasiei și a mucegaiului în apartamente și case.",
     h1: "Dezumidificatoare de Aer pentru Casă",

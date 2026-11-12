@@ -52,7 +52,7 @@ const Services = () => {
   return (
     <div className="min-h-screen flex flex-col">
       <SEO
-        title="Servicii Aer Condiționat | Montaj, Igienizare & Service AirLife"
+        title="Servicii Aer Condiționat: Montaj, Igienizare, Service | AirLife"
         description="Servicii complete de climatizare: montaj autorizat cu vidare, igienizare profesională a vaporizatorului și turbinei, depanare și reparații aer condiționat."
         canonical="https://airlife.ro/servicii"
         structuredData={structuredData}

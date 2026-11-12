@@ -121,8 +121,8 @@ const ServiceAerConditionat = () => {
   return (
     <div className="min-h-screen flex flex-col">
       <SEO
-        title="Service Aer Condiționat | Reparații, Încărcare Freon & Mentenanță"
-        description="Service și reparații aer condiționat. Diagnosticare rapidă, verificare presiuni freon R32/R410A, reparare scurgeri de apă, înlocuire componente defecte. Intervenții rapide."
+        title="Service Aer Condiționat | Reparații și Freon | AirLife"
+        description="Service și reparații aer condiționat. Diagnosticare rapidă, verificare freon R32/R410A, remediere scurgeri de apă și înlocuire componente defecte."
         canonical="https://airlife.ro/servicii/service-aer-conditionat"
         structuredData={[structuredData, breadcrumbsData]}
       />

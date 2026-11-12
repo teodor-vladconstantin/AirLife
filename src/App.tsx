@@ -2,44 +2,52 @@ import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { Suspense, lazy } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { CartProvider } from "./contexts/CartContext";
 import { QuoteProvider } from "./contexts/QuoteContext";
 import ScrollToTop from "./components/ScrollToTop";
 import Index from "./pages/Index";
-import Auth from "./pages/Auth";
-import Admin from "./pages/Admin";
-import Products from "./pages/Products";
-import ProductDetails from "./pages/ProductDetails";
-import AboutUs from "./pages/AboutUs";
-import Checkout from "./pages/Checkout";
-import OrderConfirmation from "./pages/OrderConfirmation";
-import MyOrders from "./pages/MyOrders";
-import RequestQuote from "./pages/RequestQuote";
-import TermsAndConditions from "./pages/TermsAndConditions";
-import PrivacyPolicy from "./pages/PrivacyPolicy";
-import Contact from "./pages/Contact";
-import NotFound from "./pages/NotFound";
 import FadeWrapper from "@/components/FadeWrapper";
-import ComingSoon from "./pages/ComingSoon";
-import Blog from "./pages/Blog";
-import BlogPost from "./pages/BlogPost";
 import CookieBanner from "./components/CookieBanner";
-import Services from "./pages/Services";
-import CookiePolicy from "./pages/CookiePolicy";
-import ShippingAndReturns from "./pages/ShippingAndReturns";
-import Warranty from "./pages/Warranty";
-import CategoryPage from "./pages/CategoryPage";
-import MontajAerConditionat from "./pages/services/MontajAerConditionat";
-import IgienizareAerConditionat from "./pages/services/IgienizareAerConditionat";
-import ServiceAerConditionat from "./pages/services/ServiceAerConditionat";
-import GhidIgienizare from "./pages/guides/GhidIgienizare";
-import GhidCostMontaj from "./pages/guides/GhidCostMontaj";
+
+const Auth = lazy(() => import("./pages/Auth"));
+const Admin = lazy(() => import("./pages/Admin"));
+const Products = lazy(() => import("./pages/Products"));
+const ProductDetails = lazy(() => import("./pages/ProductDetails"));
+const AboutUs = lazy(() => import("./pages/AboutUs"));
+const Checkout = lazy(() => import("./pages/Checkout"));
+const OrderConfirmation = lazy(() => import("./pages/OrderConfirmation"));
+const MyOrders = lazy(() => import("./pages/MyOrders"));
+const RequestQuote = lazy(() => import("./pages/RequestQuote"));
+const TermsAndConditions = lazy(() => import("./pages/TermsAndConditions"));
+const PrivacyPolicy = lazy(() => import("./pages/PrivacyPolicy"));
+const Contact = lazy(() => import("./pages/Contact"));
+const NotFound = lazy(() => import("./pages/NotFound"));
+const ComingSoon = lazy(() => import("./pages/ComingSoon"));
+const Blog = lazy(() => import("./pages/Blog"));
+const BlogPost = lazy(() => import("./pages/BlogPost"));
+const Services = lazy(() => import("./pages/Services"));
+const CookiePolicy = lazy(() => import("./pages/CookiePolicy"));
+const ShippingAndReturns = lazy(() => import("./pages/ShippingAndReturns"));
+const Warranty = lazy(() => import("./pages/Warranty"));
+const CategoryPage = lazy(() => import("./pages/CategoryPage"));
+const MontajAerConditionat = lazy(() => import("./pages/services/MontajAerConditionat"));
+const IgienizareAerConditionat = lazy(() => import("./pages/services/IgienizareAerConditionat"));
+const ServiceAerConditionat = lazy(() => import("./pages/services/ServiceAerConditionat"));
+const GhidIgienizare = lazy(() => import("./pages/guides/GhidIgienizare"));
+const GhidCostMontaj = lazy(() => import("./pages/guides/GhidCostMontaj"));
 
 // Set VITE_COMING_SOON=true to hide the site (only /auth and /admin stay reachable)
 const comingSoon = import.meta.env.VITE_COMING_SOON === "true";
 
 const queryClient = new QueryClient();
+
+// Shows the server-prerendered HTML (if any) while a lazy route chunk loads, so there is no blank flash.
+const PrerenderFallback = () => {
+  const html = typeof window === "undefined" ? "" : (window as unknown as { __PRERENDER__?: string }).__PRERENDER__ ?? "";
+  return <div className="min-h-screen" dangerouslySetInnerHTML={{ __html: html }} />;
+};
 
 const App = () => (
   <>
@@ -52,6 +60,7 @@ const App = () => (
             <BrowserRouter>
               <ScrollToTop />
               <CookieBanner />
+              <Suspense fallback={<PrerenderFallback />}>
             {comingSoon ? (
             <Routes>
               <Route path="/auth" element={<Auth />} />
@@ -101,6 +110,7 @@ const App = () => (
               <Route path="*" element={<FadeWrapper><NotFound /></FadeWrapper>} />
             </Routes>
             )}
+              </Suspense>
             </BrowserRouter>
           </QuoteProvider>
         </CartProvider>

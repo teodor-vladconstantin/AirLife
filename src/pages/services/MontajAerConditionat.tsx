@@ -121,7 +121,7 @@ const MontajAerConditionat = () => {
   return (
     <div className="min-h-screen flex flex-col">
       <SEO
-        title="Montaj Aer Condiționat | Instalare Profesională & Garanție AirLife"
+        title="Montaj Aer Condiționat | Instalare Profesională | AirLife"
         description="Montaj aer condiționat. Instalare curată, vidare traseu frigorific cu pompă de vid, materiale de calitate și probă completă de funcționare."
         canonical="https://airlife.ro/servicii/montaj-aer-conditionat"
         structuredData={[structuredData, breadcrumbsData]}

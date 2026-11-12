@@ -10,10 +10,13 @@ import { supabase } from "@/integrations/supabase/client";
 import type { Tables } from "@/integrations/supabase/types";
 import { renderMarkdown } from "@/lib/markdown";
 import { PHONE_DISPLAY, PHONE_TEL } from "@/data/localSeo";
+import { bylineName } from "@/data/author";
+import { postSchemas, roDate } from "@/lib/blogSchema";
 
 const BlogPost = () => {
   const { slug = "" } = useParams();
   const [post, setPost] = useState<Tables<"blog_posts"> | null | undefined>(undefined); // undefined = loading
+  const [related, setRelated] = useState<{ slug: string; title: string }[]>([]);
 
   useEffect(() => {
     setPost(undefined);
@@ -23,25 +26,20 @@ const BlogPost = () => {
       .eq("slug", slug)
       .eq("status", "published")
       .maybeSingle()
-      .then(({ data }) => setPost(data));
+      .then(({ data }) => {
+        setPost(data);
+        if (data?.category) {
+          supabase.from("blog_posts").select("slug,title").eq("status", "published").eq("category", data.category).neq("slug", slug).limit(3)
+            .then(({ data: r }) => setRelated(r ?? []));
+        }
+      });
   }, [slug]);
 
   if (post === undefined) return <div className="min-h-screen flex items-center justify-center">Se încarcă...</div>;
   if (post === null) return <NotFound />;
 
   const url = `https://airlife.ro/blog/${post.slug}`;
-  const structuredData = {
-    "@context": "https://schema.org",
-    "@type": "BlogPosting",
-    headline: post.title,
-    description: post.meta_description || post.excerpt || undefined,
-    image: post.cover_image || undefined,
-    datePublished: post.published_at,
-    dateModified: post.updated_at,
-    mainEntityOfPage: url,
-    author: { "@type": "Organization", name: "AirLife" },
-    publisher: { "@type": "Organization", name: "AirLife", url: "https://airlife.ro/" },
-  };
+  const structuredData = postSchemas(post);
 
   return (
     <div className="min-h-screen flex flex-col">
@@ -61,13 +59,24 @@ const BlogPost = () => {
             {post.category && <> · {post.category}</>}
           </nav>
           <h1 className="text-3xl md:text-5xl font-bold tracking-tight">{post.title}</h1>
-          {post.published_at && (
-            <time dateTime={post.published_at} className="block text-sm text-muted-foreground">
-              {new Date(post.published_at).toLocaleDateString("ro-RO", { day: "numeric", month: "long", year: "numeric" })}
-            </time>
-          )}
+          <p className="text-sm text-muted-foreground">
+            De <strong>{bylineName()}</strong>
+            {post.published_at && <> · Publicat <time dateTime={post.published_at}>{roDate(post.published_at)}</time></>}
+            {post.updated_at && roDate(post.updated_at) !== roDate(post.published_at) && <> · Actualizat <time dateTime={post.updated_at}>{roDate(post.updated_at)}</time></>}
+          </p>
           {post.cover_image && <img src={post.cover_image} alt={post.title} className="w-full rounded-xl" />}
           <div className="prose prose-neutral prose-lg max-w-none" dangerouslySetInnerHTML={{ __html: renderMarkdown(post.content) }} />
+
+          {related.length > 0 && (
+            <section aria-labelledby="related" className="space-y-3">
+              <h2 id="related" className="text-xl font-semibold">Citește și</h2>
+              <ul className="space-y-2">
+                {related.map((r) => (
+                  <li key={r.slug}><Link to={`/blog/${r.slug}`} className="text-primary hover:underline font-medium">{r.title}</Link></li>
+                ))}
+              </ul>
+            </section>
+          )}
 
           <div className="rounded-xl border bg-card p-6 space-y-3">
             <p className="font-semibold">Ai nevoie de montaj, igienizare sau service?</p>

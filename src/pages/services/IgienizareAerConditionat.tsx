@@ -121,8 +121,8 @@ const IgienizareAerConditionat = () => {
   return (
     <div className="min-h-screen flex flex-col">
       <SEO
-        title="Igienizare Aer Condiționat | Curățare Profesională & Dezinfectare AirLife"
-        description="Igienizare profesională aer condiționat. Curățare profundă a vaporizatorului, turbinei și tăviței de condens. Eliminare mirosuri, bacterii și mucegai cu soluții avizate."
+        title="Igienizare Aer Condiționat | Curățare Profesională | AirLife"
+        description="Igienizare profesională aer condiționat. Curățare profundă a vaporizatorului, turbinei și tăviței de condens. Elimină mirosurile, bacteriile și mucegaiul."
         canonical="https://airlife.ro/servicii/igienizare-aer-conditionat"
         structuredData={[structuredData, breadcrumbsData]}
       />

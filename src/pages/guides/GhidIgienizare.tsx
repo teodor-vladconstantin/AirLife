@@ -33,8 +33,8 @@ const GhidIgienizare = () => {
   return (
     <div className="min-h-screen flex flex-col">
       <SEO
-        title="Când și Cum se Curăță un Aer Condiționat | Ghid Complet AirLife"
-        description="Ghid practic pentru igienizarea aparatului de aer condiționat. Află cum se curăță filtrele, vaporizatorul și turbina, ce produse se folosesc și când este nevoie de tehnician."
+        title="Când și Cum se Curăță un Aer Condiționat | Ghid AirLife"
+        description="Ghid pentru igienizarea aerului condiționat: cum se curăță filtrele, vaporizatorul și turbina și când ai nevoie de tehnician."
         canonical="https://airlife.ro/ghid/igienizare-aer-conditionat"
         structuredData={structuredData}
       />

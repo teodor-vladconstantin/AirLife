@@ -40,20 +40,24 @@ const Blog = () => {
           {posts === null && <p className="text-muted-foreground">Se încarcă...</p>}
           {posts?.length === 0 && <p className="text-muted-foreground">Articolele apar în curând.</p>}
 
+          {[...new Set(posts?.map((p) => p.category ?? "Ghiduri"))].map((cat) => (
+            <section key={cat} className="space-y-4">
+              <h2 className="text-2xl font-bold">{cat}</h2>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {posts?.map((p) => (
+            {posts?.filter((p) => (p.category ?? "Ghiduri") === cat).map((p) => (
               <Link key={p.id} to={`/blog/${p.slug}`}>
                 <Card className="h-full overflow-hidden hover:shadow-lg transition-shadow">
                   {p.cover_image && <img src={p.cover_image} alt={p.title} loading="lazy" className="w-full h-40 object-cover" />}
                   <CardContent className="p-5 space-y-2">
-                    {p.category && <p className="text-xs uppercase tracking-wide text-primary">{p.category}</p>}
-                    <h2 className="font-semibold text-lg leading-snug">{p.title}</h2>
+                    <h3 className="font-semibold text-lg leading-snug">{p.title}</h3>
                     {p.excerpt && <p className="text-sm text-muted-foreground">{p.excerpt}</p>}
                   </CardContent>
                 </Card>
               </Link>
             ))}
           </div>
+            </section>
+          ))}
 
           <LeadMagnetForm
             magnet="checklist-intretinere-ac"

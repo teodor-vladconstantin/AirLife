@@ -1,7 +1,10 @@
 // GA4 + PostHog + Sentry for AirLife. Everything is env-gated: no key, no-op.
 // GA4 follows Ecommerce Schema & Consent Mode v2; PostHog is opt-in after consent.
-import posthog from "posthog-js";
-import * as Sentry from "@sentry/react";
+import type { PostHog } from "posthog-js";
+
+// PostHog and Sentry are loaded on demand so they stay out of the entry bundle.
+let posthog: PostHog | null = null;
+const phQueue: Array<[string, Record<string, unknown>]> = [];
 
 // G-XXXX (gtag.js) or GTM-XXXX (container)
 const GA4_ID = import.meta.env.VITE_GTAG_ID as string | undefined;
@@ -42,18 +45,20 @@ const applyConsent = (accepted: boolean) => {
       ad_storage: "denied", // no ads yet; flip when Google Ads is connected
     });
   }
-  if (PH_KEY) accepted ? posthog.opt_in_capturing() : posthog.opt_out_capturing();
+  if (posthog) accepted ? posthog.opt_in_capturing() : posthog.opt_out_capturing();
 };
 
 export const initAnalytics = () => {
   if (typeof window === "undefined") return;
 
   if (SENTRY_DSN) {
-    Sentry.init({
-      dsn: SENTRY_DSN,
-      environment: import.meta.env.MODE,
-      tracesSampleRate: 0.1,
-    });
+    import("@sentry/react").then((Sentry) =>
+      Sentry.init({
+        dsn: SENTRY_DSN,
+        environment: import.meta.env.MODE,
+        tracesSampleRate: 0.1,
+      }),
+    );
   }
 
   if (GA4_ID) {
@@ -80,11 +85,16 @@ export const initAnalytics = () => {
   }
 
   if (PH_KEY) {
-    posthog.init(PH_KEY, {
-      api_host: PH_HOST,
-      opt_out_capturing_by_default: true,
-      capture_pageview: "history_change",
-      person_profiles: "identified_only",
+    import("posthog-js").then(({ default: ph }) => {
+      ph.init(PH_KEY, {
+        api_host: PH_HOST,
+        opt_out_capturing_by_default: true,
+        capture_pageview: "history_change",
+        person_profiles: "identified_only",
+      });
+      posthog = ph;
+      applyConsent(getCookieConsent());
+      phQueue.splice(0).forEach(([name, params]) => ph.capture(name, params));
     });
   }
 
@@ -103,7 +113,7 @@ const sendEvent = (eventName: string, params: Record<string, unknown> = {}) => {
   if (typeof window.gtag === "function") {
     window.gtag("event", eventName, params);
   }
-  if (PH_KEY) posthog.capture(eventName, params);
+  if (PH_KEY) (posthog ? posthog.capture(eventName, params) : phQueue.push([eventName, params]));
 };
 
 export const trackViewItem = (item: AnalyticsItem) => {

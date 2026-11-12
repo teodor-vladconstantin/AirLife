@@ -8,6 +8,8 @@ import { dirname, join } from "node:path";
 import { createServer, loadEnv } from "vite";
 import { createClient } from "@supabase/supabase-js";
 import { marked } from "marked";
+import { bylineName } from "../src/data/author";
+import { postSchemas, roDate } from "../src/lib/blogSchema";
 import { CATEGORIES_DATA } from "../src/data/categoriesData";
 
 const DIST = "dist";
@@ -86,12 +88,16 @@ try {
     .order("published_at", { ascending: false });
   if (error) throw error;
   const posts = data ?? [];
+  const related = (p: (typeof posts)[number]) => {
+    const rel = posts.filter((o) => o.category === p.category && o.slug !== p.slug).slice(0, 3);
+    return rel.length ? `<h2>Citește și</h2><ul>${rel.map((o) => `<li><a href="/blog/${o.slug}">${esc(o.title)}</a></li>`).join("")}</ul>` : "";
+  };
 
   pages.push({
     path: "/blog",
     title: "Blog | Sfaturi aer condiționat Buzău | AirLife",
     description: "Ghiduri practice despre alegerea, montajul, igienizarea și service-ul aerului condiționat. Sfaturi de la specialiștii AirLife din Buzău.",
-    body: `<h1>Blog AirLife</h1><ul>${posts.map((p) => `<li><a href="/blog/${p.slug}">${esc(p.title)}</a>${p.excerpt ? ` – ${esc(p.excerpt)}` : ""}</li>`).join("")}</ul>`,
+    body: `<h1>Blog AirLife</h1>${[...new Set(posts.map((p) => p.category ?? "Ghiduri"))].map((c) => `<h2>${esc(c)}</h2><ul>${posts.filter((p) => (p.category ?? "Ghiduri") === c).map((p) => `<li><a href="/blog/${p.slug}">${esc(p.title)}</a>${p.excerpt ? ` – ${esc(p.excerpt)}` : ""}</li>`).join("")}</ul>`).join("")}`,
   });
   for (const p of posts) {
     lastmod.set(`/blog/${p.slug}`, String(p.updated_at ?? p.published_at).slice(0, 10));
@@ -101,13 +107,8 @@ try {
       description: p.meta_description || p.excerpt || p.title,
       ogType: "article",
       ogImage: p.cover_image ?? undefined,
-      jsonLd: [{
-        "@context": "https://schema.org", "@type": "BlogPosting", headline: p.title,
-        description: p.meta_description || p.excerpt, image: p.cover_image, datePublished: p.published_at, dateModified: p.updated_at,
-        mainEntityOfPage: `${SITE}/blog/${p.slug}`,
-        author: { "@type": "Organization", name: "AirLife" }, publisher: { "@type": "Organization", name: "AirLife", url: `${SITE}/` },
-      }],
-      body: `<article><h1>${esc(p.title)}</h1>${marked.parse(p.content, { async: false })}</article>`,
+      jsonLd: postSchemas(p),
+      body: `<article><h1>${esc(p.title)}</h1><p>De <strong>${esc(bylineName())}</strong> · Publicat ${roDate(p.published_at)}${roDate(p.updated_at) !== roDate(p.published_at) ? ` · Actualizat ${roDate(p.updated_at)}` : ""}</p>${marked.parse(p.content, { async: false })}</article>${related(p)}`,
     });
   }
 } catch (e) {
@@ -134,6 +135,20 @@ try {
     const list = products.filter((p) => p.category === c.name);
     const page = pages.find((p) => p.path === `/${c.slug}`)!;
     page.body += `<ul>${list.map((p) => `<li><a href="/products/${p.slug}">${esc(p.name)}</a> – ${Number(p.price).toFixed(2)} RON</li>`).join("")}</ul>`;
+    page.body += `<h2>${esc(c.buyingGuide.title)}</h2><ul>${c.buyingGuide.tips.map((t) => `<li>${esc(t)}</li>`).join("")}</ul>`;
+    page.jsonLd = [
+      {
+        "@context": "https://schema.org", "@type": "CollectionPage", name: c.h1, description: c.metaDescription, url: `${SITE}/${c.slug}`, inLanguage: "ro-RO",
+        mainEntity: { "@type": "ItemList", numberOfItems: list.length, itemListElement: list.map((p, i) => ({ "@type": "ListItem", position: i + 1, url: `${SITE}/products/${p.slug}`, name: p.name })) },
+      },
+      {
+        "@context": "https://schema.org", "@type": "BreadcrumbList",
+        itemListElement: [
+          { "@type": "ListItem", position: 1, name: "Acasă", item: `${SITE}/` },
+          { "@type": "ListItem", position: 2, name: c.name, item: `${SITE}/${c.slug}` },
+        ],
+      },
+    ];
   }
 
   // Google Merchant Center feed (RSS 2.0 + g: namespace). Shipping/returns are set in the Merchant account.
@@ -158,8 +173,8 @@ ${products.filter((p) => p.price > 0).map(item).join("\n")}
     const cat = Object.values(CATEGORIES_DATA).find((c) => c.name === p.category);
     pages.push({
       path: `/products/${p.slug}`,
-      title: `${p.name} | AirLife Magazin HVAC`,
-      description: p.description.length > 155 ? p.description.slice(0, 155).replace(/\s+\S*$/, "…") : p.description,
+      title: p.name.length + 10 <= 65 ? `${p.name} | AirLife` : p.name,
+      description: ((d) => (d.length > 158 ? d.slice(0, 158).replace(/\s+\S*$/, "…") : d))(`${p.name}. ${p.description}`),
       ogType: "product",
       ogImage: p.image_url ?? undefined,
       jsonLd: [
