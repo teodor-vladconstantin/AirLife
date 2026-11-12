@@ -3,7 +3,7 @@
 // React replaces #root on load (createRoot), so there is no hydration to keep in sync.
 // Vercel serves these files before the SPA rewrite. Also regenerates dist/sitemap.xml.
 // Blog markdown comes from admins only and is not sanitised here.
-import { mkdirSync, readFileSync, writeFileSync } from "node:fs";
+import { mkdirSync, readdirSync, readFileSync, writeFileSync } from "node:fs";
 import { dirname, join } from "node:path";
 import { createServer, loadEnv } from "vite";
 import { createClient } from "@supabase/supabase-js";
@@ -245,7 +245,14 @@ try {
 
 // --- write pages + sitemap
 const shell = readFileSync(join(DIST, "index.html"), "utf8");
-for (const p of pages) write(p.path, render(shell, p));
+// Vite SSR emits dev asset URLs (/src/assets/x.webp); point them at the hashed files from the client build.
+const assetMap = new Map<string, string>();
+for (const f of readdirSync(join(DIST, "assets"))) {
+  const m = f.match(/^(.+)-[\w-]{8}\.(\w+)$/);
+  if (m) assetMap.set(`${m[1]}.${m[2]}`, f);
+}
+const fixAssets = (h: string) => h.replace(/\/src\/assets\/([\w.-]+)/g, (m, f) => (assetMap.has(f) ? `/assets/${assetMap.get(f)}` : m));
+for (const p of pages) write(p.path, fixAssets(render(shell, p)));
 
 const existing = [...readFileSync(join(DIST, "sitemap.xml"), "utf8").matchAll(/<loc>([^<]+)<\/loc>/g)].map((m) => m[1].replace(SITE, ""));
 const paths = [...new Set([...existing, ...pages.map((p) => p.path)])];
