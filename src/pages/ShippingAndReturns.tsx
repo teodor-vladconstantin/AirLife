@@ -19,7 +19,7 @@ const ShippingAndReturns = () => {
     <div className="min-h-screen flex flex-col">
       <SEO
         title="Politica de Livrare și Retur | AirLife.ro"
-        description="Află condițiile de livrare rapidă (20 RON sau Gratuit peste 500 RON) și procedura legală de retur în 14 zile conform OUG 34/2014 pe AirLife.ro."
+        description="Află condițiile de livrare rapidă (20 RON sau Gratuit peste 1000 RON) și procedura legală de retur în 14 zile conform OUG 34/2014 pe AirLife.ro."
         canonical="https://airlife.ro/livrare-si-retur"
         structuredData={structuredData}
       />
@@ -64,8 +64,8 @@ const ShippingAndReturns = () => {
                     <div className="p-4 rounded-xl bg-secondary/50 border border-border/50">
                       <strong className="block text-foreground mb-1">Costul de Transport:</strong>
                       <ul className="space-y-1 text-xs">
-                        <li>• <strong>20,00 RON</strong> tarif fix pentru comenzi cu valoare sub 500 RON.</li>
-                        <li>• <strong>GRATUIT</strong> pentru orice comandă ce depășește valoarea de <strong>500 RON</strong>.</li>
+                        <li>• <strong>20,00 RON</strong> tarif fix pentru comenzi cu valoare sub 1000 RON.</li>
+                        <li>• <strong>GRATUIT</strong> pentru orice comandă ce depășește valoarea de <strong>1000 RON</strong>.</li>
                       </ul>
                     </div>
                     <div className="p-4 rounded-xl bg-secondary/50 border border-border/50">

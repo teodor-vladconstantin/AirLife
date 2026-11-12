@@ -83,7 +83,7 @@ const Checkout = () => {
     }
   };
 
-  const shippingCost = total >= 500 ? 0 : 20;
+  const shippingCost = total >= 1000 ? 0 : 20;
   const grandTotal = total + shippingCost;
 
   const onSubmit = async (data: CheckoutFormData) => {
@@ -418,9 +418,9 @@ const Checkout = () => {
                         <span className="text-muted-foreground">Livrare</span>
                         <span className="font-semibold">{shippingCost === 0 ? "GRATUIT" : `${shippingCost.toFixed(2)} RON`}</span>
                       </div>
-                      {total < 500 && (
+                      {total < 1000 && (
                         <p className="text-xs text-muted-foreground">
-                          Mai adaugă {(500 - total).toFixed(2)} RON pentru livrare gratuită!
+                          Mai adaugă {(1000 - total).toFixed(2)} RON pentru livrare gratuită!
                         </p>
                       )}
                     </div>

@@ -171,10 +171,10 @@ ${products.filter((p) => p.price > 0).map(item).join("\n")}
             "@type": "Offer", url: `${SITE}/products/${p.slug}`, priceCurrency: "RON", price: Number(p.price).toFixed(2),
             availability: p.stock > 0 ? "https://schema.org/InStock" : "https://schema.org/OutOfStock",
             itemCondition: "https://schema.org/NewCondition", seller: { "@type": "Organization", name: "AirLife" },
-            // mirrors /livrare-si-retur: 20 RON under 500 RON, free above; 24-48 working hours; 14-day return (OUG 34/2014)
+            // mirrors /livrare-si-retur: 20 RON under 1000 RON, free above; 24-48 working hours; 14-day return (OUG 34/2014)
             shippingDetails: {
               "@type": "OfferShippingDetails",
-              shippingRate: { "@type": "MonetaryAmount", value: Number(p.price) >= 500 ? 0 : 20, currency: "RON" },
+              shippingRate: { "@type": "MonetaryAmount", value: Number(p.price) >= 1000 ? 0 : 20, currency: "RON" },
               shippingDestination: { "@type": "DefinedRegion", addressCountry: "RO" },
               deliveryTime: {
                 "@type": "ShippingDeliveryTime",

@@ -74,7 +74,7 @@ const Hero = () => {
               <Truck className="w-6 h-6 text-primary" />
             </div>
             <div className="text-lg font-bold text-white mb-0.5">Livrare Rapidă</div>
-            <div className="text-xs text-white/80">Gratuit peste 500 RON</div>
+            <div className="text-xs text-white/80">Gratuit peste 1000 RON</div>
           </div>
           <div className="text-center animate-in fade-in duration-700">
             <div className="flex justify-center mb-2">

@@ -68,20 +68,20 @@ export const CartDrawer = ({ open, onClose }: CartDrawerProps) => {
                 <div className="flex justify-between text-sm">
                   <span className="text-muted-foreground">Livrare</span>
                   <span className="font-semibold">
-                    {total >= 500 ? "GRATUIT" : "20.00 RON"}
+                    {total >= 1000 ? "GRATUIT" : "20.00 RON"}
                   </span>
                 </div>
                 <div className="pt-2 border-t">
                   <div className="flex justify-between">
                     <span className="font-bold">Total</span>
                     <span className="font-bold text-primary text-lg">
-                      {(total + (total >= 500 ? 0 : 20)).toFixed(2)} RON
+                      {(total + (total >= 1000 ? 0 : 20)).toFixed(2)} RON
                     </span>
                   </div>
                 </div>
-                {total < 500 && (
+                {total < 1000 && (
                   <p className="text-xs text-muted-foreground text-center pt-2">
-                    Mai adaugă {(500 - total).toFixed(2)} RON pentru livrare gratuită!
+                    Mai adaugă {(1000 - total).toFixed(2)} RON pentru livrare gratuită!
                   </p>
                 )}
               </div>

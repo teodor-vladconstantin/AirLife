@@ -60,7 +60,7 @@ const CTASection = () => {
             </div>
             <div>
               <div className="font-bold text-sm mb-0.5">Livrare Curier</div>
-              <div>20 RON / Gratuit peste 500 RON</div>
+              <div>20 RON / Gratuit peste 1000 RON</div>
             </div>
             <div>
               <div className="font-bold text-sm mb-0.5">Servicii Locale</div>
