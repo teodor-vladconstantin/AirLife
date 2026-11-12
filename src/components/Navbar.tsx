@@ -99,17 +99,17 @@ const Navbar = () => {
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
                 <Button variant="ghost" size="sm" className="flex items-center gap-1">
-                  <span>Servicii Buzău</span>
+                  <span>Servicii</span>
                   <ChevronDown className="w-3.5 h-3.5 opacity-70" />
                 </Button>
               </DropdownMenuTrigger>
               <DropdownMenuContent align="start" className="w-64 p-2">
                 <DropdownMenuItem onClick={() => navigate("/servicii")} className="cursor-pointer">
-                  <div className="font-semibold text-foreground">Toate Serviciile Buzău</div>
+                  <div className="font-semibold text-foreground">Toate Serviciile</div>
                 </DropdownMenuItem>
                 <div className="h-px bg-border my-1" />
                 <DropdownMenuItem
-                  onClick={() => navigate("/servicii/montaj-aer-conditionat-buzau")}
+                  onClick={() => navigate("/servicii/montaj-aer-conditionat")}
                   className="cursor-pointer"
                 >
                   <Wrench className="w-4 h-4 mr-2 text-primary" />
@@ -121,7 +121,7 @@ const Navbar = () => {
                   </div>
                 </DropdownMenuItem>
                 <DropdownMenuItem
-                  onClick={() => navigate("/servicii/igienizare-aer-conditionat-buzau")}
+                  onClick={() => navigate("/servicii/igienizare-aer-conditionat")}
                   className="cursor-pointer"
                 >
                   <Sparkles className="w-4 h-4 mr-2 text-primary" />
@@ -133,7 +133,7 @@ const Navbar = () => {
                   </div>
                 </DropdownMenuItem>
                 <DropdownMenuItem
-                  onClick={() => navigate("/servicii/service-aer-conditionat-buzau")}
+                  onClick={() => navigate("/servicii/service-aer-conditionat")}
                   className="cursor-pointer"
                 >
                   <Activity className="w-4 h-4 mr-2 text-primary" />
@@ -241,24 +241,24 @@ const Navbar = () => {
               Toate Produsele
             </Link>
             <div className="px-3 py-1 text-xs font-semibold uppercase text-primary tracking-wider">
-              Servicii Buzău
+              Servicii
             </div>
             <Link
-              to="/servicii/montaj-aer-conditionat-buzau"
+              to="/servicii/montaj-aer-conditionat"
               onClick={() => setMobileMenuOpen(false)}
               className="block px-4 py-1.5 rounded-md hover:bg-secondary text-xs text-muted-foreground hover:text-foreground"
             >
-              • Montaj Aer Condiționat Buzău
+              • Montaj Aer Condiționat
             </Link>
             <Link
-              to="/servicii/igienizare-aer-conditionat-buzau"
+              to="/servicii/igienizare-aer-conditionat"
               onClick={() => setMobileMenuOpen(false)}
               className="block px-4 py-1.5 rounded-md hover:bg-secondary text-xs text-muted-foreground hover:text-foreground"
             >
               • Igienizare &amp; Dezinfectare AC
             </Link>
             <Link
-              to="/servicii/service-aer-conditionat-buzau"
+              to="/servicii/service-aer-conditionat"
               onClick={() => setMobileMenuOpen(false)}
               className="block px-4 py-1.5 rounded-md hover:bg-secondary text-xs text-muted-foreground hover:text-foreground"
             >

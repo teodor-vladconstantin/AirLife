@@ -25,7 +25,6 @@ import FadeWrapper from "@/components/FadeWrapper";
 import ComingSoon from "./pages/ComingSoon";
 import Blog from "./pages/Blog";
 import BlogPost from "./pages/BlogPost";
-import LocalService from "./pages/LocalService";
 import CookieBanner from "./components/CookieBanner";
 import Services from "./pages/Services";
 import CookiePolicy from "./pages/CookiePolicy";
@@ -83,11 +82,11 @@ const App = () => (
               <Route path="/livrare-si-retur" element={<FadeWrapper><ShippingAndReturns /></FadeWrapper>} />
               <Route path="/garantie" element={<FadeWrapper><Warranty /></FadeWrapper>} />
               <Route path="/servicii" element={<FadeWrapper><Services /></FadeWrapper>} />
-              <Route path="/servicii/montaj-aer-conditionat-buzau" element={<FadeWrapper><MontajAerConditionatBuzau /></FadeWrapper>} />
-              <Route path="/servicii/igienizare-aer-conditionat-buzau" element={<FadeWrapper><IgienizareAerConditionatBuzau /></FadeWrapper>} />
-              <Route path="/servicii/service-aer-conditionat-buzau" element={<FadeWrapper><ServiceAerConditionatBuzau /></FadeWrapper>} />
+              <Route path="/servicii/montaj-aer-conditionat" element={<FadeWrapper><MontajAerConditionatBuzau /></FadeWrapper>} />
+              <Route path="/servicii/igienizare-aer-conditionat" element={<FadeWrapper><IgienizareAerConditionatBuzau /></FadeWrapper>} />
+              <Route path="/servicii/service-aer-conditionat" element={<FadeWrapper><ServiceAerConditionatBuzau /></FadeWrapper>} />
               <Route path="/ghid/igienizare-aer-conditionat" element={<FadeWrapper><GhidIgienizare /></FadeWrapper>} />
-              <Route path="/ghid/cost-montaj-aer-conditionat-buzau" element={<FadeWrapper><GhidCostMontajBuzau /></FadeWrapper>} />
+              <Route path="/ghid/cost-montaj-aer-conditionat" element={<FadeWrapper><GhidCostMontajBuzau /></FadeWrapper>} />
               <Route path="/accesorii-aer-conditionat" element={<FadeWrapper><CategoryPage forcedSlug="accesorii-aer-conditionat" /></FadeWrapper>} />
               <Route path="/consumabile-hvac" element={<FadeWrapper><CategoryPage forcedSlug="consumabile-hvac" /></FadeWrapper>} />
               <Route path="/curatare-si-intretinere" element={<FadeWrapper><CategoryPage forcedSlug="curatare-si-intretinere" /></FadeWrapper>} />
@@ -96,7 +95,6 @@ const App = () => (
               <Route path="/dezumidificatoare" element={<FadeWrapper><CategoryPage forcedSlug="dezumidificatoare" /></FadeWrapper>} />
               <Route path="/blog" element={<FadeWrapper><Blog /></FadeWrapper>} />
               <Route path="/blog/:slug" element={<FadeWrapper><BlogPost /></FadeWrapper>} />
-              <Route path="/servicii/:service/:locality" element={<FadeWrapper><LocalService /></FadeWrapper>} />
               <Route path="/aer-conditionat" element={<FadeWrapper><CategoryPage forcedSlug="aer-conditionat" /></FadeWrapper>} />
               <Route path="/aer-conditionat-fara-unitate-exterioara" element={<FadeWrapper><CategoryPage forcedSlug="aer-conditionat-fara-unitate-exterioara" /></FadeWrapper>} />
               <Route path="/recuperatoare-caldura" element={<FadeWrapper><CategoryPage forcedSlug="recuperatoare-caldura" /></FadeWrapper>} />

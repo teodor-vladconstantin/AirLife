@@ -16,7 +16,7 @@ const Index = () => {
         "@id": "https://airlife.ro/#website",
         "url": "https://airlife.ro/",
         "name": "AirLife",
-        "description": "Magazin online HVAC și servicii locale de climatizare în Buzău",
+        "description": "Magazin online HVAC și servicii locale de climatizare",
         "potentialAction": {
           "@type": "SearchAction",
           "target": "https://airlife.ro/products?q={search_term_string}",
@@ -41,7 +41,7 @@ const Index = () => {
             "name": "Județul Buzău"
           }
         ],
-        "description": "Magazin online accesorii & consumabile HVAC și servicii profesionale de montaj, igienizare și service aer condiționat în Buzău."
+        "description": "Magazin online accesorii & consumabile HVAC și servicii profesionale de montaj, igienizare și service aer condiționat."
       }
     ]
   };
@@ -49,8 +49,8 @@ const Index = () => {
   return (
     <div className="min-h-screen flex flex-col">
       <SEO
-        title="AirLife | Magazin Online HVAC & Servicii Aer Condiționat Buzău"
-        description="AirLife.ro — Magazin online HVAC cu accesorii, consumabile și soluții de climatizare. Servicii complete de montaj, igienizare și service aer condiționat în Buzău."
+        title="AirLife | Magazin Online HVAC & Servicii Aer Condiționat"
+        description="AirLife.ro — Magazin online HVAC cu accesorii, consumabile și soluții de climatizare. Servicii complete de montaj, igienizare și service aer condiționat."
         canonical="https://airlife.ro/"
         structuredData={homeStructuredData}
       />

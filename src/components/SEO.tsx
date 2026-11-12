@@ -12,7 +12,7 @@ export interface SEOProps {
 }
 
 const DEFAULT_DOMAIN = "https://airlife.ro";
-const DEFAULT_IMAGE = `${DEFAULT_DOMAIN}/placeholder.svg`;
+const DEFAULT_IMAGE = `${DEFAULT_DOMAIN}/og-image.jpg`;
 
 export const SEO = ({
   title,
@@ -25,6 +25,10 @@ export const SEO = ({
 }: SEOProps) => {
   const location = useLocation();
   const canonicalUrl = canonical || `${DEFAULT_DOMAIN}${location.pathname}`;
+  // Prerender (SSR): hand the props to scripts/prerender.ts, effects do not run on the server.
+  if (typeof window === "undefined") {
+    (globalThis as { __SEO__?: unknown }).__SEO__ = { title, description, canonical: canonicalUrl, ogImage, structuredData };
+  }
 
   useEffect(() => {
     // 1. Update Document Title

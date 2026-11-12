@@ -5,24 +5,24 @@ import { Wrench, Sparkles, Activity, MapPin, ArrowRight, CheckCircle2 } from "lu
 
 const services = [
   {
-    title: "Montaj Aer Condiționat Buzău",
-    slug: "montaj-aer-conditionat-buzau",
+    title: "Montaj Aer Condiționat",
+    slug: "montaj-aer-conditionat",
     icon: Wrench,
     badge: "Instalare Autorizată",
     desc: "Instalare curată cu pompă de vidare, scule speciale, kituri rezistente și probe funcționale complete.",
     features: ["Vidare obligatorie traseu", "Console cu protecție UV", "Garanție manoperă"],
   },
   {
-    title: "Igienizare & Curățare Buzău",
-    slug: "igienizare-aer-conditionat-buzau",
+    title: "Igienizare & Curățare",
+    slug: "igienizare-aer-conditionat",
     icon: Sparkles,
     badge: "Curățare Profundă",
     desc: "Spălare cu husă etanșă pentru pereți, degresare vaporizator, curățare turbină și tratament antibacterian.",
     features: ["Fără stropi pe perete", "Soluții biocide sigure", "Eliminare mirosuri"],
   },
   {
-    title: "Service & Reparații Buzău",
-    slug: "service-aer-conditionat-buzau",
+    title: "Service & Reparații",
+    slug: "service-aer-conditionat",
     icon: Activity,
     badge: "Diagnosticare & Remediere",
     desc: "Identificare pierderi freon R32/R410A, reparare scurgeri de apă, înlocuire condensatori și senzori defecți.",
@@ -39,7 +39,7 @@ export const HomeServicesSection = () => {
             <MapPin className="w-3.5 h-3.5" /> Servicii Locale în Județul Buzău
           </div>
           <h2 className="text-3xl md:text-5xl font-bold mb-4 text-foreground">
-            Montaj &amp; Mentenanță Climatizare în Buzău
+            Montaj &amp; Mentenanță Climatizare
           </h2>
           <p className="text-base md:text-lg text-muted-foreground max-w-2xl mx-auto">
             Ai nevoie de montaj, igienizare profesională sau reparație pentru aparatul tău de aer condiționat? Echipa AirLife intervine operativ în municipiul Buzău și localitățile învecinate.
@@ -92,7 +92,7 @@ export const HomeServicesSection = () => {
         <div className="text-center">
           <Link to="/servicii">
             <Button variant="link" className="text-primary font-semibold text-sm">
-              Vezi toate serviciile oferite în Buzău &rarr;
+              Vezi toate serviciile oferite &rarr;
             </Button>
           </Link>
         </div>

@@ -10,9 +10,9 @@ const GhidCostMontajBuzau = () => {
   const structuredData = {
     "@context": "https://schema.org",
     "@type": "Article",
-    "headline": "Cât Costă Montajul unui Aer Condiționat în Buzău: Ghid Complet de Prețuri și Greșeli de Evitat",
+    "headline": "Cât Costă Montajul unui Aer Condiționat: Ghid Complet de Prețuri și Greșeli de Evitat",
     "description":
-      "Află ce include o instalare standard de aer condiționat în Buzău, care sunt costurile suplimentare justificate și de ce vidarea cu pompă este obligatorie.",
+      "Află ce include o instalare standard de aer condiționat, care sunt costurile suplimentare justificate și de ce vidarea cu pompă este obligatorie.",
     "author": {
       "@type": "Organization",
       "name": "AirLife"
@@ -27,15 +27,15 @@ const GhidCostMontajBuzau = () => {
     },
     "datePublished": "2025-02-05",
     "dateModified": "2026-10-27",
-    "mainEntityOfPage": "https://airlife.ro/ghid/cost-montaj-aer-conditionat-buzau"
+    "mainEntityOfPage": "https://airlife.ro/ghid/cost-montaj-aer-conditionat"
   };
 
   return (
     <div className="min-h-screen flex flex-col">
       <SEO
-        title="Cât Costă Montajul unui Aer Condiționat în Buzău | Ghid Transparent AirLife"
-        description="Ghid de prețuri pentru montaj aer condiționat în Buzău: ce conține un montaj standard, ce factori cresc prețul (metri traseu, înălțime, carotare) și cum eviți montajul neconform."
-        canonical="https://airlife.ro/ghid/cost-montaj-aer-conditionat-buzau"
+        title="Cât Costă Montajul unui Aer Condiționat | Ghid Transparent AirLife"
+        description="Ghid de prețuri pentru montaj aer condiționat: ce conține un montaj standard, ce factori cresc prețul (metri traseu, înălțime, carotare) și cum eviți montajul neconform."
+        canonical="https://airlife.ro/ghid/cost-montaj-aer-conditionat"
         structuredData={structuredData}
       />
 
@@ -57,19 +57,19 @@ const GhidCostMontajBuzau = () => {
                 </Link>
               </li>
               <li>/</li>
-              <li className="text-foreground font-medium">Ghid Cost Montaj Aer Condiționat Buzău</li>
+              <li className="text-foreground font-medium">Ghid Cost Montaj Aer Condiționat</li>
             </ol>
           </nav>
 
           <header className="mb-10">
             <div className="inline-flex items-center gap-2 px-3 py-1 bg-primary/10 text-primary rounded-full text-xs font-semibold mb-4">
-              <BookOpen className="w-3.5 h-3.5" /> Ghid Local Buzău
+              <BookOpen className="w-3.5 h-3.5" /> Ghid Local
             </div>
             <h1 className="text-3xl md:text-5xl font-bold tracking-tight mb-4 text-foreground">
-              Cât Costă Montajul unui Aer Condiționat în Buzău? Ghid Transparent de Prețuri
+              Cât Costă Montajul unui Aer Condiționat? Ghid Transparent de Prețuri
             </h1>
             <div className="flex items-center gap-4 text-xs text-muted-foreground">
-              <span>Echipa Tehnică AirLife Buzău</span>
+              <span>Echipa Tehnică AirLife</span>
               <span>•</span>
               <span className="flex items-center gap-1">
                 <Clock className="w-3 h-3" /> Timp de citire: 7 minute
@@ -85,11 +85,11 @@ const GhidCostMontajBuzau = () => {
             <Card className="border-border">
               <CardContent className="p-6 md:p-8 space-y-4">
                 <h2 className="text-2xl font-bold text-foreground">
-                  1. Ce include o instalare standard în Buzău
+                  1. Ce include o instalare standard
                 </h2>
                 <div className="space-y-3 text-sm text-muted-foreground">
                   <p>
-                    În piața locală din Buzău, o instalare standard (pentru unități 9.000 – 12.000 BTU) include în mod normal:
+                    În piața locală, o instalare standard (pentru unități 9.000 – 12.000 BTU) include în mod normal:
                   </p>
                   <ul className="space-y-2">
                     <li className="flex items-start gap-2">
@@ -158,16 +158,16 @@ const GhidCostMontajBuzau = () => {
             <div className="bg-primary/5 border border-primary/20 rounded-2xl p-6 md:p-8 flex flex-col sm:flex-row items-center justify-between gap-6 my-10">
               <div>
                 <h3 className="text-xl font-bold text-foreground mb-2">
-                  Vrei un montaj curat și corect în Buzău?
+                  Vrei un montaj curat și corect?
                 </h3>
                 <p className="text-sm text-muted-foreground max-w-xl">
                   La AirLife folosim întotdeauna pompă de vid, scule cu aspirare de praf și materiale de calitate. Vezi pagina dedicată pentru programări.
                 </p>
               </div>
               <div className="flex flex-col sm:flex-row gap-3 flex-shrink-0 w-full sm:w-auto">
-                <Link to="/servicii/montaj-aer-conditionat-buzau" className="w-full sm:w-auto">
+                <Link to="/servicii/montaj-aer-conditionat" className="w-full sm:w-auto">
                   <Button className="w-full flex items-center gap-2">
-                    <Wrench className="w-4 h-4" /> Programează Montaj Buzău
+                    <Wrench className="w-4 h-4" /> Programează Montaj
                   </Button>
                 </Link>
                 <Link to="/accesorii-aer-conditionat" className="w-full sm:w-auto">

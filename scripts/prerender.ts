@@ -1,15 +1,14 @@
-// Runs after `vite build`. Writes dist/<path>/index.html for blog + programmatic pages with real
+// Runs after `vite build`. Writes dist/<path>/index.html for blog, category and product pages with real
 // content, title, meta and JSON-LD already in the HTML, so crawlers do not depend on JS rendering.
 // React replaces #root on load (createRoot), so there is no hydration to keep in sync.
 // Vercel serves these files before the SPA rewrite. Also regenerates dist/sitemap.xml.
 // Blog markdown comes from admins only and is not sanitised here.
 import { mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import { dirname, join } from "node:path";
-import { loadEnv } from "vite";
+import { createServer, loadEnv } from "vite";
 import { createClient } from "@supabase/supabase-js";
 import { marked } from "marked";
 import { CATEGORIES_DATA } from "../src/data/categoriesData";
-import { allLocalPaths, getLocalPage, PHONE_DISPLAY, PHONE_TEL } from "../src/data/localSeo";
 
 const DIST = "dist";
 const SITE = "https://airlife.ro";
@@ -35,6 +34,7 @@ interface Page {
   ogImage?: string;
   jsonLd?: unknown[];
   body: string;
+  html?: string; // full server-rendered markup, replaces the plain body wrapper
 }
 
 const setMeta = (html: string, attr: "name" | "property", key: string, content: string) => {
@@ -60,6 +60,7 @@ const render = (shell: string, p: Page) => {
   }
   const ld = (p.jsonLd ?? []).map((j) => `<script type="application/ld+json">${JSON.stringify(j)}</script>`).join("\n");
   h = h.replace("</head>", `${ld}\n</head>`);
+  if (p.html) return h.replace('<div id="root"></div>', () => `<div id="root">${p.html}</div>`);
   return h.replace('<div id="root"></div>', `<div id="root"><main style="max-width:48rem;margin:0 auto;padding:2rem 1rem;font-family:Inter,sans-serif">${p.body}</main></div>`);
 };
 
@@ -70,27 +71,7 @@ const write = (path: string, html: string) => {
 };
 
 const pages: Page[] = [];
-
-// --- programmatic local pages
-for (const path of allLocalPaths()) {
-  const [, , service, locality] = path.split("/");
-  const lp = getLocalPage(service, locality)!;
-  pages.push({
-    path,
-    title: lp.title,
-    description: lp.description,
-    jsonLd: [
-      { "@context": "https://schema.org", "@type": "Service", name: lp.h1, provider: { "@type": "HVACBusiness", name: "AirLife", telephone: PHONE_TEL, url: `${SITE}/` } },
-      { "@context": "https://schema.org", "@type": "FAQPage", mainEntity: lp.faqs.map((f) => ({ "@type": "Question", name: f.q, acceptedAnswer: { "@type": "Answer", text: f.a } })) },
-    ],
-    body: `<h1>${esc(lp.h1)}</h1><p>${esc(lp.intro)}</p><p>${esc(lp.localNote)}</p>
-<p><a href="tel:${PHONE_TEL}">${PHONE_DISPLAY}</a> · <a href="/request-quote">Cere ofertă online</a></p>
-<h2>Ce include</h2><ul>${lp.includes.map((i) => `<li>${esc(i)}</li>`).join("")}</ul>
-<h2>Cum decurge</h2><ol>${lp.steps.map((i) => `<li>${esc(i)}</li>`).join("")}</ol>
-<h2>Întrebări frecvente</h2>${lp.faqs.map((f) => `<h3>${esc(f.q)}</h3><p>${esc(f.a)}</p>`).join("")}
-<h2>Vezi și</h2><ul>${lp.related.map((r) => `<li><a href="${r.path}">${esc(r.label)}</a></li>`).join("")}</ul>`,
-  });
-}
+const lastmod = new Map<string, string>(); // only paths with a real modification date
 
 // --- blog (from Supabase; a failure skips the blog but never fails the build)
 try {
@@ -113,6 +94,7 @@ try {
     body: `<h1>Blog AirLife</h1><ul>${posts.map((p) => `<li><a href="/blog/${p.slug}">${esc(p.title)}</a>${p.excerpt ? ` – ${esc(p.excerpt)}` : ""}</li>`).join("")}</ul>`,
   });
   for (const p of posts) {
+    lastmod.set(`/blog/${p.slug}`, String(p.updated_at ?? p.published_at).slice(0, 10));
     pages.push({
       path: `/blog/${p.slug}`,
       title: p.meta_title || `${p.title} | AirLife`,
@@ -161,7 +143,7 @@ try {
     pages.push({
       path: `/products/${p.slug}`,
       title: `${p.name} | AirLife Magazin HVAC`,
-      description: p.description.slice(0, 155),
+      description: p.description.length > 155 ? p.description.slice(0, 155).replace(/\s+\S*$/, "…") : p.description,
       ogType: "product",
       ogImage: p.image_url ?? undefined,
       jsonLd: [
@@ -173,6 +155,21 @@ try {
             "@type": "Offer", url: `${SITE}/products/${p.slug}`, priceCurrency: "RON", price: Number(p.price).toFixed(2),
             availability: p.stock > 0 ? "https://schema.org/InStock" : "https://schema.org/OutOfStock",
             itemCondition: "https://schema.org/NewCondition", seller: { "@type": "Organization", name: "AirLife" },
+            // mirrors /livrare-si-retur: 20 RON under 500 RON, free above; 24-48 working hours; 14-day return (OUG 34/2014)
+            shippingDetails: {
+              "@type": "OfferShippingDetails",
+              shippingRate: { "@type": "MonetaryAmount", value: Number(p.price) >= 500 ? 0 : 20, currency: "RON" },
+              shippingDestination: { "@type": "DefinedRegion", addressCountry: "RO" },
+              deliveryTime: {
+                "@type": "ShippingDeliveryTime",
+                handlingTime: { "@type": "QuantitativeValue", minValue: 0, maxValue: 1, unitCode: "DAY" },
+                transitTime: { "@type": "QuantitativeValue", minValue: 1, maxValue: 2, unitCode: "DAY" },
+              },
+            },
+            hasMerchantReturnPolicy: {
+              "@type": "MerchantReturnPolicy", applicableCountry: "RO", returnPolicyCategory: "https://schema.org/MerchantReturnFiniteReturnWindow",
+              merchantReturnDays: 14, returnMethod: "https://schema.org/ReturnByMail", returnFees: "https://schema.org/ReturnShippingFees",
+            },
           },
         },
         {
@@ -194,18 +191,37 @@ ${specs.length ? `<table>${specs.map(([k, v]) => `<tr><th>${esc(k)}</th><td>${es
   console.warn("[prerender] products skipped:", (e as Error).message);
 }
 
+// --- static React pages (home, services, guides, about, contact...) rendered with Vite SSR
+// supabase client touches localStorage at import time; a no-op stub is enough on the server
+(globalThis as { localStorage?: unknown }).localStorage ??= { getItem: () => null, setItem: () => {}, removeItem: () => {} };
+try {
+  const vite = await createServer({ server: { middlewareMode: true }, appType: "custom", logLevel: "error" });
+  try {
+    const { renderPage, staticPaths } = await vite.ssrLoadModule("/src/prerender-entry.tsx");
+    for (const path of staticPaths as string[]) {
+      const { html, seo } = renderPage(path);
+      if (!seo) { console.warn(`[prerender] ${path}: no SEO props, skipped`); continue; }
+      const ld = seo.structuredData ? (Array.isArray(seo.structuredData) ? seo.structuredData : [seo.structuredData]) : [];
+      pages.push({ path, title: seo.title, description: seo.description, ogImage: seo.ogImage, jsonLd: ld, body: "", html });
+    }
+  } finally {
+    await vite.close();
+  }
+} catch (e) {
+  console.warn("[prerender] static pages skipped:", (e as Error).message);
+}
+
 // --- write pages + sitemap
 const shell = readFileSync(join(DIST, "index.html"), "utf8");
 for (const p of pages) write(p.path, render(shell, p));
 
-const today = new Date().toISOString().slice(0, 10);
 const existing = [...readFileSync(join(DIST, "sitemap.xml"), "utf8").matchAll(/<loc>([^<]+)<\/loc>/g)].map((m) => m[1].replace(SITE, ""));
 const paths = [...new Set([...existing, ...pages.map((p) => p.path)])];
 const prio = (p: string) => (p === "/" ? "1.0" : p.startsWith("/blog/") || p.split("/").length > 3 ? "0.6" : "0.8");
 writeFileSync(
   join(DIST, "sitemap.xml"),
   `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${paths
-    .map((p) => `  <url><loc>${SITE}${p}</loc><lastmod>${today}</lastmod><priority>${prio(p)}</priority></url>`)
+    .map((p) => `  <url><loc>${SITE}${p}</loc>${lastmod.has(p) ? `<lastmod>${lastmod.get(p)}</lastmod>` : ""}<priority>${prio(p)}</priority></url>`)
     .join("\n")}\n</urlset>\n`,
 );
 console.log(`[prerender] ${pages.length} pages, ${paths.length} sitemap URLs`);

@@ -19,7 +19,7 @@ const Warranty = () => {
     <div className="min-h-screen flex flex-col">
       <SEO
         title="Condiții de Garanție | AirLife.ro"
-        description="Află termenii de garanție legală de conformitate (OUG 140/2021) pentru echipamentele și accesoriile HVAC, precum și garanția pentru manopera de montaj în Buzău."
+        description="Află termenii de garanție legală de conformitate (OUG 140/2021) pentru echipamentele și accesoriile HVAC, precum și garanția pentru manopera de montaj."
         canonical="https://airlife.ro/garantie"
         structuredData={structuredData}
       />
@@ -94,9 +94,9 @@ const Warranty = () => {
                     Păstrați factura fiscală și procesul-verbal de montaj sau fișa de instalare completată și ștampilată de instalator, deoarece acestea constituie dovada necesară în cazul unei solicitări de service în perioada de garanție a aparatului.
                   </p>
                   <div className="p-4 rounded-xl bg-primary/5 border border-primary/20 text-xs text-foreground space-y-1">
-                    <strong className="block">Efectuezi montajul în Buzău cu echipa AirLife?</strong>
+                    <strong className="block">Efectuezi montajul cu echipa AirLife?</strong>
                     <span>
-                      Dacă apelezi la serviciul nostru de montaj în Buzău, beneficiezi automat de completarea documentației oficiale de instalare și de garanția manoperei de montaj.
+                      Dacă apelezi la serviciul nostru de montaj, beneficiezi automat de completarea documentației oficiale de instalare și de garanția manoperei de montaj.
                     </span>
                   </div>
                 </div>
@@ -132,7 +132,7 @@ const Warranty = () => {
                   <p>În cazul apariției unei disfuncționalități în perioada de garanție:</p>
                   <ol className="list-decimal list-inside space-y-2 text-xs">
                     <li>Trimiteți un e-mail la <strong>support@airlife.ro</strong> cu datele din factura fiscală, modelul aparatului și o scurtă descriere a comportamentului reclamat (inclusiv eventuale coduri de eroare).</li>
-                    <li>Vă vom îndruma către centrul de service autorizat al producătorului sau vom programa o constatare tehnică direct la sediul/locația dumneavoastră dacă vă aflați în aria de acoperire a echipei AirLife din Buzău.</li>
+                    <li>Vă vom îndruma către centrul de service autorizat al producătorului sau vom programa o constatare tehnică direct la sediul/locația dumneavoastră dacă vă aflați în aria de acoperire a echipei AirLife.</li>
                     <li>Remedierea neconformității se realizează gratuit în termenul legal prevăzut de OUG 140/2021 (maximum 15 zile calendaristice de la aducerea la cunoștință a defecțiunii).</li>
                   </ol>
                 </div>

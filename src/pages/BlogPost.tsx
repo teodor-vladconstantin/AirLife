@@ -70,7 +70,7 @@ const BlogPost = () => {
           <div className="prose prose-neutral prose-lg max-w-none" dangerouslySetInnerHTML={{ __html: renderMarkdown(post.content) }} />
 
           <div className="rounded-xl border bg-card p-6 space-y-3">
-            <p className="font-semibold">Ai nevoie de montaj, igienizare sau service în Buzău?</p>
+            <p className="font-semibold">Ai nevoie de montaj, igienizare sau service?</p>
             <div className="flex flex-wrap gap-3">
               <Button asChild><a href={`tel:${PHONE_TEL}`}>{PHONE_DISPLAY}</a></Button>
               <Button asChild variant="outline"><Link to="/request-quote">Cere ofertă online</Link></Button>

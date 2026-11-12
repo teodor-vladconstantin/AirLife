@@ -153,16 +153,16 @@ const GhidIgienizare = () => {
             <div className="bg-primary/5 border border-primary/20 rounded-2xl p-6 md:p-8 flex flex-col sm:flex-row items-center justify-between gap-6 my-10">
               <div>
                 <h3 className="text-xl font-bold text-foreground mb-2">
-                  Locuiești în Buzău? Lasă specialiștii să se ocupe!
+                  Locuiești? Lasă specialiștii să se ocupe!
                 </h3>
                 <p className="text-sm text-muted-foreground max-w-xl">
-                  Echipa AirLife realizează igienizarea profesională completă cu husă impermeabilă, degresare vaporizator și tratament biocid direct la tine acasă în Buzău.
+                  Echipa AirLife realizează igienizarea profesională completă cu husă impermeabilă, degresare vaporizator și tratament biocid direct la tine acasă.
                 </p>
               </div>
               <div className="flex flex-col sm:flex-row gap-3 flex-shrink-0 w-full sm:w-auto">
-                <Link to="/servicii/igienizare-aer-conditionat-buzau" className="w-full sm:w-auto">
+                <Link to="/servicii/igienizare-aer-conditionat" className="w-full sm:w-auto">
                   <Button className="w-full flex items-center gap-2">
-                    <Sparkles className="w-4 h-4" /> Serviciu Igienizare Buzău
+                    <Sparkles className="w-4 h-4" /> Serviciu Igienizare
                   </Button>
                 </Link>
                 <Link to="/curatare-si-intretinere" className="w-full sm:w-auto">

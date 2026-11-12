@@ -15,12 +15,12 @@ export const CATEGORIES_DATA: Record<string, CategoryInfo> = {
   "aer-conditionat": {
     slug: "aer-conditionat",
     name: "Aer Condiționat",
-    title: "Aer Condiționat Inverter Wi-Fi | Heiko Mora, Qira, Rosa | AirLife Buzău",
+    title: "Aer Condiționat Inverter Wi-Fi | Heiko Mora, Qira, Rosa | AirLife",
     metaDescription:
-      "Aparate de aer condiționat inverter cu Wi-Fi, în mai multe capacități (9000–21000 BTU). Montaj profesional în Buzău și județ.",
+      "Aparate de aer condiționat inverter cu Wi-Fi, în mai multe capacități (9000–21000 BTU). Montaj profesional și județ.",
     h1: "Aer Condiționat cu Unitate Exterioară",
     description:
-      "Aparate split inverter pentru apartamente, case și birouri, disponibile în mai multe capacități. La cerere, le montăm noi, în Buzău și în localitățile din jur.",
+      "Aparate split inverter pentru apartamente, case și birouri, disponibile în mai multe capacități. La cerere, le montăm noi, și în localitățile din jur.",
     buyingGuide: {
       title: "Cum alegi capacitatea potrivită?",
       tips: [

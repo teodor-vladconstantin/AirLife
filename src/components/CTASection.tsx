@@ -19,7 +19,7 @@ const CTASection = () => {
             className="text-base md:text-lg mb-8 opacity-90 max-w-2xl mx-auto leading-relaxed"
             style={{ textShadow: "0 2px 8px rgba(0,0,0,0.2)" }}
           >
-            Fie că ai nevoie de produse și accesorii HVAC livrate rapid sau de montaj și igienizare profesională în Buzău, echipa AirLife îți stă la dispoziție.
+            Fie că ai nevoie de produse și accesorii HVAC livrate rapid sau de montaj și igienizare profesională, echipa AirLife îți stă la dispoziție.
           </p>
 
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-10">
@@ -41,14 +41,14 @@ const CTASection = () => {
                 Trimite un Mesaj
               </Button>
             </Link>
-            <Link to="/servicii/montaj-aer-conditionat-buzau">
+            <Link to="/servicii/montaj-aer-conditionat">
               <Button
                 size="lg"
                 variant="outline"
                 className="bg-transparent border-white text-white hover:bg-white/10 hover:text-white font-semibold transition-all duration-300 hover:-translate-y-0.5 w-full sm:w-auto"
               >
                 <Wrench className="mr-2 w-4 h-4" />
-                Programare Montaj Buzău
+                Programare Montaj
               </Button>
             </Link>
           </div>

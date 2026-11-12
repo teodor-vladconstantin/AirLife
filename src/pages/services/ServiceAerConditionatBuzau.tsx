@@ -60,7 +60,7 @@ const ServiceAerConditionatBuzau = () => {
   const structuredData = {
     "@context": "https://schema.org",
     "@type": "Service",
-    "name": "Service Aer Condiționat Buzău",
+    "name": "Service Aer Condiționat",
     "serviceType": "Reparații și Mentenanță Climatizare",
     "provider": {
       "@type": "HVACBusiness",
@@ -81,7 +81,7 @@ const ServiceAerConditionatBuzau = () => {
         "name": "Județul Buzău"
       }
     ],
-    "description": "Diagnosticare și reparații sisteme de aer condiționat în Buzău: remediere pierderi freon, completare agent frigorific, înlocuire condensatori, remediere scurgeri de apă și erori electronice.",
+    "description": "Diagnosticare și reparații sisteme de aer condiționat: remediere pierderi freon, completare agent frigorific, înlocuire condensatori, remediere scurgeri de apă și erori electronice.",
     "offers": {
       "@type": "Offer",
       "priceCurrency": "RON",
@@ -112,8 +112,8 @@ const ServiceAerConditionatBuzau = () => {
       {
         "@type": "ListItem",
         "position": 3,
-        "name": "Service Aer Condiționat Buzău",
-        "item": "https://airlife.ro/servicii/service-aer-conditionat-buzau"
+        "name": "Service Aer Condiționat",
+        "item": "https://airlife.ro/servicii/service-aer-conditionat"
       }
     ]
   };
@@ -121,9 +121,9 @@ const ServiceAerConditionatBuzau = () => {
   return (
     <div className="min-h-screen flex flex-col">
       <SEO
-        title="Service Aer Condiționat Buzău | Reparații, Încărcare Freon & Mentenanță"
-        description="Service și reparații aer condiționat în Buzău. Diagnosticare rapidă, verificare presiuni freon R32/R410A, reparare scurgeri de apă, înlocuire componente defecte. Intervenții rapide."
-        canonical="https://airlife.ro/servicii/service-aer-conditionat-buzau"
+        title="Service Aer Condiționat | Reparații, Încărcare Freon & Mentenanță"
+        description="Service și reparații aer condiționat. Diagnosticare rapidă, verificare presiuni freon R32/R410A, reparare scurgeri de apă, înlocuire componente defecte. Intervenții rapide."
+        canonical="https://airlife.ro/servicii/service-aer-conditionat"
         structuredData={[structuredData, breadcrumbsData]}
       />
 
@@ -138,17 +138,17 @@ const ServiceAerConditionatBuzau = () => {
                 <Link to="/" className="hover:text-primary transition-colors">Acasă</Link>
               </li>
               <li>/</li>
-              <li className="text-foreground font-medium">Service Aer Condiționat Buzău</li>
+              <li className="text-foreground font-medium">Service Aer Condiționat</li>
             </ol>
           </nav>
 
           {/* Hero Section */}
           <div className="text-center max-w-3xl mx-auto mb-12">
             <div className="inline-flex items-center gap-2 px-3 py-1 bg-primary/10 text-primary rounded-full text-sm font-medium mb-4">
-              <MapPin className="w-4 h-4" /> Asistență tehnică &amp; intervenții în Buzău
+              <MapPin className="w-4 h-4" /> Asistență tehnică &amp; intervenții
             </div>
             <h1 className="text-4xl md:text-5xl font-bold tracking-tight mb-4 text-foreground">
-              Service &amp; Reparații Aer Condiționat în Buzău
+              Service &amp; Reparații Aer Condiționat
             </h1>
             <p className="text-lg text-muted-foreground leading-relaxed">
               Aparatul nu mai răcește corespunzător, curge apă din unitatea internă sau afișează un cod de eroare?
@@ -269,7 +269,7 @@ const ServiceAerConditionatBuzau = () => {
                 <CardContent className="p-6">
                   <h3 className="text-xl font-bold mb-2 text-foreground flex items-center gap-2">
                     <Calendar className="w-5 h-5 text-primary" />
-                    Solicită Service în Buzău
+                    Solicită Service
                   </h3>
                   <p className="text-sm text-muted-foreground mb-4">
                     Descrie problema pe scurt și un specialist te va contacta pentru o evaluare rapidă.
@@ -298,7 +298,7 @@ const ServiceAerConditionatBuzau = () => {
                     </div>
 
                     <div>
-                      <label className="text-xs font-semibold text-foreground block mb-1">Locație (Adresă / Cartier în Buzău)</label>
+                      <label className="text-xs font-semibold text-foreground block mb-1">Locație (Adresă / Cartier)</label>
                       <Input
                         placeholder="ex. Buzău, Str. Mesteacănului"
                         value={location}

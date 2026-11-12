@@ -1,0 +1,26 @@
+# AirLife
+
+> AirLife (airlife.ro) este un magazin online românesc de aer condiționat, purificatoare, dezumidificatoare, recuperatoare de căldură, filtre, accesorii și consumabile HVAC, cu livrare în toată țara. Oferă și servicii de montaj, igienizare și service aer condiționat (zona Buzău).
+
+## Magazin
+- [Aer condiționat](https://airlife.ro/aer-conditionat)
+- [Aer condiționat fără unitate exterioară](https://airlife.ro/aer-conditionat-fara-unitate-exterioara)
+- [Purificatoare de aer](https://airlife.ro/purificatoare-aer)
+- [Dezumidificatoare](https://airlife.ro/dezumidificatoare)
+- [Recuperatoare de căldură](https://airlife.ro/recuperatoare-caldura)
+- [Filtre purificatoare](https://airlife.ro/filtre-purificatoare)
+- [Accesorii aer condiționat](https://airlife.ro/accesorii-aer-conditionat)
+- [Consumabile HVAC](https://airlife.ro/consumabile-hvac)
+
+## Servicii și ghiduri
+- [Montaj aer condiționat](https://airlife.ro/servicii/montaj-aer-conditionat)
+- [Igienizare aer condiționat](https://airlife.ro/servicii/igienizare-aer-conditionat)
+- [Service aer condiționat](https://airlife.ro/servicii/service-aer-conditionat)
+- [Ghid: cost montaj aer condiționat](https://airlife.ro/ghid/cost-montaj-aer-conditionat)
+- [Ghid: igienizare aer condiționat](https://airlife.ro/ghid/igienizare-aer-conditionat)
+- [Blog](https://airlife.ro/blog)
+
+## Informații
+- [Livrare și retur](https://airlife.ro/livrare-si-retur)
+- [Garanție](https://airlife.ro/garantie)
+- [Contact](https://airlife.ro/contact): +40 722 15 35 25

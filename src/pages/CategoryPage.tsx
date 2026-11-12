@@ -345,11 +345,11 @@ const CategoryPage = ({ forcedSlug }: CategoryPageProps) => {
             </ul>
           </div>
 
-          {/* Contextual Link to Local Services in Buzău */}
+          {/* Contextual Link to Local Services in */}
           <div className="bg-primary/5 border border-primary/20 rounded-2xl p-6 md:p-8 flex flex-col sm:flex-row items-center justify-between gap-6">
             <div>
               <span className="text-xs font-semibold uppercase tracking-wider text-primary">
-                Servicii HVAC Buzău
+                Servicii HVAC
               </span>
               <h3 className="text-xl font-bold text-foreground mt-1 mb-2">
                 Ai nevoie de ajutor cu montajul sau igienizarea?
@@ -360,15 +360,15 @@ const CategoryPage = ({ forcedSlug }: CategoryPageProps) => {
             </div>
             <div className="flex gap-3 flex-shrink-0 w-full sm:w-auto">
               {activeSlug.includes("curatare") ? (
-                <Link to="/servicii/igienizare-aer-conditionat-buzau" className="w-full sm:w-auto">
+                <Link to="/servicii/igienizare-aer-conditionat" className="w-full sm:w-auto">
                   <Button className="w-full sm:w-auto flex items-center gap-2">
-                    <Sparkles className="w-4 h-4" /> Serviciu Igienizare Buzău
+                    <Sparkles className="w-4 h-4" /> Serviciu Igienizare
                   </Button>
                 </Link>
               ) : (
-                <Link to="/servicii/montaj-aer-conditionat-buzau" className="w-full sm:w-auto">
+                <Link to="/servicii/montaj-aer-conditionat" className="w-full sm:w-auto">
                   <Button className="w-full sm:w-auto flex items-center gap-2">
-                    <Wrench className="w-4 h-4" /> Serviciu Montaj Buzău
+                    <Wrench className="w-4 h-4" /> Serviciu Montaj
                   </Button>
                 </Link>
               )}

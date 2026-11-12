@@ -12,14 +12,14 @@ const AboutUs = () => {
     "@type": "AboutPage",
     "name": "Despre AirLife",
     "url": "https://airlife.ro/despre-noi",
-    "description": "Povestea AirLife: soluții HVAC de încredere, accesorii durabile și servicii de climatizare dedicate în Buzău."
+    "description": "Povestea AirLife: soluții HVAC de încredere, accesorii durabile și servicii de climatizare dedicate."
   };
 
   return (
     <div className="min-h-screen flex flex-col">
       <SEO
-        title="Despre Noi | Misiunea & Valorile AirLife Buzău"
-        description="Află mai multe despre AirLife: magazin online HVAC și echipă dedicată de montaj și igienizare sisteme de aer condiționat în Buzău. Corectitudine și eficiență."
+        title="Despre Noi | Misiunea & Valorile AirLife"
+        description="Află mai multe despre AirLife: magazin online HVAC și echipă dedicată de montaj și igienizare sisteme de aer condiționat. Corectitudine și eficiență."
         canonical="https://airlife.ro/despre-noi"
         structuredData={structuredData}
       />

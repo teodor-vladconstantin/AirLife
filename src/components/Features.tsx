@@ -3,8 +3,8 @@ import { Shield, Zap, Heart, Wrench } from "lucide-react";
 const features = [
   {
     icon: Wrench,
-    title: "Montaj & Service în Buzău",
-    description: "Instalare curată cu pompă de vidare și asistență promptă în municipiul Buzău și zonele limitrofe.",
+    title: "Montaj & Service",
+    description: "Instalare curată cu pompă de vidare și asistență promptă.",
   },
   {
     icon: Zap,

@@ -8,8 +8,8 @@ import { Wrench, Sparkles, Activity, MapPin, ArrowRight, ShieldCheck, CheckCircl
 
 const servicesList = [
   {
-    title: "Montaj Aer Condiționat Buzău",
-    path: "/servicii/montaj-aer-conditionat-buzau",
+    title: "Montaj Aer Condiționat",
+    path: "/servicii/montaj-aer-conditionat",
     icon: Wrench,
     badge: "Instalare Profesională",
     description:
@@ -17,8 +17,8 @@ const servicesList = [
     highlights: ["Vidare traseu frigorific", "Console rezistente", "Probă răcire / încălzire"],
   },
   {
-    title: "Igienizare & Curățare Aer Condiționat Buzău",
-    path: "/servicii/igienizare-aer-conditionat-buzau",
+    title: "Igienizare & Curățare Aer Condiționat",
+    path: "/servicii/igienizare-aer-conditionat",
     icon: Sparkles,
     badge: "Sănătate & Confort",
     description:
@@ -26,8 +26,8 @@ const servicesList = [
     highlights: ["Husă colectoare etanșă", "Soluții biocide avizate", "Eliminare mirosuri neplăcute"],
   },
   {
-    title: "Service & Reparații Climatizare Buzău",
-    path: "/servicii/service-aer-conditionat-buzau",
+    title: "Service & Reparații Climatizare",
+    path: "/servicii/service-aer-conditionat",
     icon: Activity,
     badge: "Intervenție Rapidă",
     description:
@@ -40,7 +40,7 @@ const Services = () => {
   const structuredData = {
     "@context": "https://schema.org",
     "@type": "HVACBusiness",
-    "name": "AirLife Servicii Climatizare Buzău",
+    "name": "AirLife Servicii Climatizare",
     "url": "https://airlife.ro/servicii",
     "areaServed": {
       "@type": "City",
@@ -52,8 +52,8 @@ const Services = () => {
   return (
     <div className="min-h-screen flex flex-col">
       <SEO
-        title="Servicii Aer Condiționat Buzău | Montaj, Igienizare & Service AirLife"
-        description="Servicii complete de climatizare în Buzău: montaj autorizat cu vidare, igienizare profesională a vaporizatorului și turbinei, depanare și reparații aer condiționat."
+        title="Servicii Aer Condiționat | Montaj, Igienizare & Service AirLife"
+        description="Servicii complete de climatizare: montaj autorizat cu vidare, igienizare profesională a vaporizatorului și turbinei, depanare și reparații aer condiționat."
         canonical="https://airlife.ro/servicii"
         structuredData={structuredData}
       />
@@ -64,10 +64,10 @@ const Services = () => {
         <div className="container mx-auto px-4 max-w-5xl">
           <div className="text-center max-w-3xl mx-auto mb-16">
             <div className="inline-flex items-center gap-2 px-3 py-1 bg-primary/10 text-primary rounded-full text-sm font-medium mb-4">
-              <MapPin className="w-4 h-4" /> Disponibil în Buzău și localități limitrofe
+              <MapPin className="w-4 h-4" /> Disponibil și localități limitrofe
             </div>
             <h1 className="text-4xl md:text-5xl font-bold tracking-tight mb-4 text-foreground">
-              Servicii Climatizare &amp; HVAC în Buzău
+              Servicii Climatizare &amp; HVAC
             </h1>
             <p className="text-lg text-muted-foreground leading-relaxed">
               Echipa AirLife oferă servicii tehnice dedicate pentru sistemele de aer condiționat rezidențiale și comerciale.
@@ -126,10 +126,10 @@ const Services = () => {
               </div>
               <div>
                 <h3 className="text-2xl font-bold text-foreground mb-2">
-                  De ce să alegi serviciile locale AirLife în Buzău?
+                  De ce să alegi serviciile locale AirLife?
                 </h3>
                 <p className="text-muted-foreground text-sm leading-relaxed mb-4">
-                  Suntem dedicați pieței locale din Buzău. Ne asigurăm că fiecare client primește o estimare corectă înainte de începerea lucrării, folosim numai materiale de calitate (țevi de cupru calibrate, console tratate anticoroziv) și vidăm obligatoriu fiecare instalație nouă.
+                  Suntem dedicați pieței locale. Ne asigurăm că fiecare client primește o estimare corectă înainte de începerea lucrării, folosim numai materiale de calitate (țevi de cupru calibrate, console tratate anticoroziv) și vidăm obligatoriu fiecare instalație nouă.
                 </p>
                 <div className="flex flex-wrap gap-4 text-xs text-muted-foreground">
                   <span className="flex items-center gap-1.5 font-medium">

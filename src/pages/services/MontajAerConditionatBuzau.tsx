@@ -42,7 +42,7 @@ const MontajAerConditionatBuzau = () => {
     }
 
     setIsSubmitting(true);
-    trackServiceQuoteRequest("Montaj Aer Condiționat Buzău");
+    trackServiceQuoteRequest("Montaj Aer Condiționat");
 
     setTimeout(() => {
       setIsSubmitting(false);
@@ -60,7 +60,7 @@ const MontajAerConditionatBuzau = () => {
   const structuredData = {
     "@context": "https://schema.org",
     "@type": "Service",
-    "name": "Montaj Aer Condiționat Buzău",
+    "name": "Montaj Aer Condiționat",
     "serviceType": "Instalare Sisteme de Climatizare",
     "provider": {
       "@type": "HVACBusiness",
@@ -81,7 +81,7 @@ const MontajAerConditionatBuzau = () => {
         "name": "Județul Buzău"
       }
     ],
-    "description": "Serviciu autorizat de instalare aer condiționat în municipiul Buzău și zonele limitrofe. Include fixare console, perforare perete, vidare traseu frigorific și probe funcționale.",
+    "description": "Serviciu autorizat de instalare aer condiționat. Include fixare console, perforare perete, vidare traseu frigorific și probe funcționale.",
     "offers": {
       "@type": "Offer",
       "priceCurrency": "RON",
@@ -112,8 +112,8 @@ const MontajAerConditionatBuzau = () => {
       {
         "@type": "ListItem",
         "position": 3,
-        "name": "Montaj Aer Condiționat Buzău",
-        "item": "https://airlife.ro/servicii/montaj-aer-conditionat-buzau"
+        "name": "Montaj Aer Condiționat",
+        "item": "https://airlife.ro/servicii/montaj-aer-conditionat"
       }
     ]
   };
@@ -121,9 +121,9 @@ const MontajAerConditionatBuzau = () => {
   return (
     <div className="min-h-screen flex flex-col">
       <SEO
-        title="Montaj Aer Condiționat Buzău | Instalare Profesională & Garanție AirLife"
-        description="Montaj aer condiționat în Buzău și județul Buzău. Instalare curată, vidare traseu frigorific cu pompă de vid, materiale de calitate și probă completă de funcționare."
-        canonical="https://airlife.ro/servicii/montaj-aer-conditionat-buzau"
+        title="Montaj Aer Condiționat | Instalare Profesională & Garanție AirLife"
+        description="Montaj aer condiționat. Instalare curată, vidare traseu frigorific cu pompă de vid, materiale de calitate și probă completă de funcționare."
+        canonical="https://airlife.ro/servicii/montaj-aer-conditionat"
         structuredData={[structuredData, breadcrumbsData]}
       />
 
@@ -138,17 +138,17 @@ const MontajAerConditionatBuzau = () => {
                 <Link to="/" className="hover:text-primary transition-colors">Acasă</Link>
               </li>
               <li>/</li>
-              <li className="text-foreground font-medium">Montaj Aer Condiționat Buzău</li>
+              <li className="text-foreground font-medium">Montaj Aer Condiționat</li>
             </ol>
           </nav>
 
           {/* Hero Section */}
           <div className="text-center max-w-3xl mx-auto mb-12">
             <div className="inline-flex items-center gap-2 px-3 py-1 bg-primary/10 text-primary rounded-full text-sm font-medium mb-4">
-              <MapPin className="w-4 h-4" /> Serviciu disponibil în Buzău &amp; localități limitrofe
+              <MapPin className="w-4 h-4" /> Serviciu disponibil &amp; localități limitrofe
             </div>
             <h1 className="text-4xl md:text-5xl font-bold tracking-tight mb-4 text-foreground">
-              Montaj Aer Condiționat în Buzău
+              Montaj Aer Condiționat
             </h1>
             <p className="text-lg text-muted-foreground leading-relaxed">
               Instalare meticuloasă cu scule profesionale, pompă de vidare, materiale calitative și respectarea tuturor
@@ -208,7 +208,7 @@ const MontajAerConditionatBuzau = () => {
                   <div className="p-4 rounded-lg bg-secondary/50 border border-border/50">
                     <span className="text-primary font-bold text-lg block mb-1">Pasul 2</span>
                     <strong className="block text-foreground mb-1">Stabilire Dată</strong>
-                    <span className="text-muted-foreground">Convenim de comun acord data și intervalul orar pentru intervenție în Buzău.</span>
+                    <span className="text-muted-foreground">Convenim de comun acord data și intervalul orar pentru intervenție.</span>
                   </div>
                   <div className="p-4 rounded-lg bg-secondary/50 border border-border/50">
                     <span className="text-primary font-bold text-lg block mb-1">Pasul 3</span>
@@ -298,7 +298,7 @@ const MontajAerConditionatBuzau = () => {
                 <CardContent className="p-6">
                   <h3 className="text-xl font-bold mb-2 text-foreground flex items-center gap-2">
                     <Calendar className="w-5 h-5 text-primary" />
-                    Cere o programare în Buzău
+                    Cere o programare
                   </h3>
                   <p className="text-sm text-muted-foreground mb-4">
                     Completează datele și te contactăm pentru stabilirea datei și estimarea exactă a costului.

@@ -60,7 +60,7 @@ const IgienizareAerConditionatBuzau = () => {
   const structuredData = {
     "@context": "https://schema.org",
     "@type": "Service",
-    "name": "Igienizare Aer Condiționat Buzău",
+    "name": "Igienizare Aer Condiționat",
     "serviceType": "Curățare și Dezinfectare Climatizare",
     "provider": {
       "@type": "HVACBusiness",
@@ -81,7 +81,7 @@ const IgienizareAerConditionatBuzau = () => {
         "name": "Județul Buzău"
       }
     ],
-    "description": "Serviciu profesional de igienizare și dezinfectare a aparatelor de aer condiționat în Buzău. Curățare vaporizator, turbină de ventilație, tăviță condens și tratament biocid autorizat.",
+    "description": "Serviciu profesional de igienizare și dezinfectare a aparatelor de aer condiționat. Curățare vaporizator, turbină de ventilație, tăviță condens și tratament biocid autorizat.",
     "offers": {
       "@type": "Offer",
       "priceCurrency": "RON",
@@ -112,8 +112,8 @@ const IgienizareAerConditionatBuzau = () => {
       {
         "@type": "ListItem",
         "position": 3,
-        "name": "Igienizare Aer Condiționat Buzău",
-        "item": "https://airlife.ro/servicii/igienizare-aer-conditionat-buzau"
+        "name": "Igienizare Aer Condiționat",
+        "item": "https://airlife.ro/servicii/igienizare-aer-conditionat"
       }
     ]
   };
@@ -121,9 +121,9 @@ const IgienizareAerConditionatBuzau = () => {
   return (
     <div className="min-h-screen flex flex-col">
       <SEO
-        title="Igienizare Aer Condiționat Buzău | Curățare Profesională & Dezinfectare AirLife"
-        description="Igienizare profesională aer condiționat în Buzău. Curățare profundă a vaporizatorului, turbinei și tăviței de condens. Eliminare mirosuri, bacterii și mucegai cu soluții avizate."
-        canonical="https://airlife.ro/servicii/igienizare-aer-conditionat-buzau"
+        title="Igienizare Aer Condiționat | Curățare Profesională & Dezinfectare AirLife"
+        description="Igienizare profesională aer condiționat. Curățare profundă a vaporizatorului, turbinei și tăviței de condens. Eliminare mirosuri, bacterii și mucegai cu soluții avizate."
+        canonical="https://airlife.ro/servicii/igienizare-aer-conditionat"
         structuredData={[structuredData, breadcrumbsData]}
       />
 
@@ -138,17 +138,17 @@ const IgienizareAerConditionatBuzau = () => {
                 <Link to="/" className="hover:text-primary transition-colors">Acasă</Link>
               </li>
               <li>/</li>
-              <li className="text-foreground font-medium">Igienizare Aer Condiționat Buzău</li>
+              <li className="text-foreground font-medium">Igienizare Aer Condiționat</li>
             </ol>
           </nav>
 
           {/* Hero Section */}
           <div className="text-center max-w-3xl mx-auto mb-12">
             <div className="inline-flex items-center gap-2 px-3 py-1 bg-primary/10 text-primary rounded-full text-sm font-medium mb-4">
-              <MapPin className="w-4 h-4" /> Serviciu de igienizare în Buzău și județ
+              <MapPin className="w-4 h-4" /> Serviciu de igienizare și județ
             </div>
             <h1 className="text-4xl md:text-5xl font-bold tracking-tight mb-4 text-foreground">
-              Igienizare &amp; Curățare Aer Condiționat în Buzău
+              Igienizare &amp; Curățare Aer Condiționat
             </h1>
             <p className="text-lg text-muted-foreground leading-relaxed">
               Respiră aer curat și proaspăt. Îndepărtăm praful acumulat, mucegaiul, ciupercile microscopice și bacteriile
@@ -243,7 +243,7 @@ const IgienizareAerConditionatBuzau = () => {
               <section className="bg-card p-6 md:p-8 rounded-xl border border-border shadow-sm">
                 <h2 className="text-2xl font-bold mb-3 text-foreground flex items-center gap-2">
                   <ShieldCheck className="w-6 h-6 text-primary" />
-                  Acoperire locală în județul Buzău
+                  Acoperire locală în județul
                 </h2>
                 <p className="text-muted-foreground leading-relaxed">
                   Ne deplasăm operativ în tot orașul Buzău (Micro 3, Micro 5, Micro 14, Dorobanți, Centru, Broșteni, Orizont) și în localitățile limitrofe. Intervenția durează între 45 și 75 de minute per aparat.
@@ -282,7 +282,7 @@ const IgienizareAerConditionatBuzau = () => {
                     Programează o igienizare
                   </h3>
                   <p className="text-sm text-muted-foreground mb-4">
-                    Completează formularul pentru o igienizare rapidă și eficientă a aparatului tău în Buzău.
+                    Completează formularul pentru o igienizare rapidă și eficientă a aparatului tău.
                   </p>
 
                   <form onSubmit={handleSubmit} className="space-y-3">
@@ -308,7 +308,7 @@ const IgienizareAerConditionatBuzau = () => {
                     </div>
 
                     <div>
-                      <label className="text-xs font-semibold text-foreground block mb-1">Adresă / Cartier în Buzău</label>
+                      <label className="text-xs font-semibold text-foreground block mb-1">Adresă / Cartier</label>
                       <Input
                         placeholder="ex. Buzău, Str. Unirii"
                         value={location}

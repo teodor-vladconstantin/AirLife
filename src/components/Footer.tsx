@@ -17,7 +17,7 @@ const Footer = () => {
               <span className="text-2xl font-bold tracking-tight text-white">AirLife</span>
             </Link>
             <p className="text-sm opacity-80 max-w-sm leading-relaxed">
-              Magazin online HVAC și servicii locale dedicate pentru sisteme de climatizare în Buzău. Accesorii, consumabile și montaj profesional executat curat, cu pompă de vidare.
+              Magazin online HVAC și servicii locale dedicate pentru sisteme de climatizare. Accesorii, consumabile și montaj profesional executat curat, cu pompă de vidare.
             </p>
             <div className="space-y-2 text-xs opacity-75 pt-2">
               <div className="flex items-center gap-2">
@@ -71,9 +71,9 @@ const Footer = () => {
             </ul>
           </div>
 
-          {/* Servicii Locale Buzău */}
+          {/* Servicii Locale */}
           <div>
-            <h3 className="font-semibold text-sm mb-4 text-white uppercase tracking-wider">Servicii Buzău</h3>
+            <h3 className="font-semibold text-sm mb-4 text-white uppercase tracking-wider">Servicii</h3>
             <ul className="space-y-2 text-sm opacity-80">
               <li>
                 <Link to="/servicii" className="hover:text-primary transition-colors">
@@ -81,22 +81,22 @@ const Footer = () => {
                 </Link>
               </li>
               <li>
-                <Link to="/servicii/montaj-aer-conditionat-buzau" className="hover:text-primary transition-colors">
+                <Link to="/servicii/montaj-aer-conditionat" className="hover:text-primary transition-colors">
                   Montaj Aer Condiționat
                 </Link>
               </li>
               <li>
-                <Link to="/servicii/igienizare-aer-conditionat-buzau" className="hover:text-primary transition-colors">
+                <Link to="/servicii/igienizare-aer-conditionat" className="hover:text-primary transition-colors">
                   Igienizare &amp; Dezinfectare
                 </Link>
               </li>
               <li>
-                <Link to="/servicii/service-aer-conditionat-buzau" className="hover:text-primary transition-colors">
+                <Link to="/servicii/service-aer-conditionat" className="hover:text-primary transition-colors">
                   Service &amp; Reparații
                 </Link>
               </li>
               <li>
-                <Link to="/ghid/cost-montaj-aer-conditionat-buzau" className="hover:text-primary transition-colors">
+                <Link to="/ghid/cost-montaj-aer-conditionat" className="hover:text-primary transition-colors">
                   Ghid Cost Montaj
                 </Link>
               </li>

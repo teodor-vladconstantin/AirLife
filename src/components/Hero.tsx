@@ -20,7 +20,7 @@ const Hero = () => {
         <div className="inline-flex items-center gap-2 px-4 py-1.5 bg-primary/20 border border-primary/40 rounded-full mb-6 animate-in fade-in duration-700 backdrop-blur-sm">
           <MapPin className="w-4 h-4 text-primary" />
           <span className="text-sm font-medium text-white">
-            Magazin HVAC Online &amp; Servicii Locale în Buzău
+            Magazin HVAC Online &amp; Servicii Locale
           </span>
         </div>
 
@@ -56,7 +56,7 @@ const Hero = () => {
               className="bg-transparent border-white/60 text-white hover:bg-white/10 hover:text-white transition-all duration-300 hover:-translate-y-0.5 w-full sm:w-auto font-semibold px-8"
             >
               <Wrench className="mr-2 w-4 h-4" />
-              Servicii în Buzău
+              Servicii
             </Button>
           </Link>
         </div>

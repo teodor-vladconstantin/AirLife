@@ -76,8 +76,8 @@ const Contact = () => {
   return (
     <div className="min-h-screen flex flex-col">
       <SEO
-        title="Contact & Suport | AirLife Buzău"
-        description="Contactează echipa AirLife. Informații despre comenzi, livrare accesorii HVAC și programări pentru montaj sau igienizare aer condiționat în Buzău."
+        title="Contact & Suport | AirLife"
+        description="Contactează echipa AirLife. Informații despre comenzi, livrare accesorii HVAC și programări pentru montaj sau igienizare aer condiționat."
         canonical="https://airlife.ro/contact"
         structuredData={contactStructuredData}
       />
@@ -91,7 +91,7 @@ const Contact = () => {
               Contact &amp; Asistență Clienți
             </h1>
             <p className="text-muted-foreground text-base md:text-lg">
-              Ai o întrebare despre produsele noastre sau dorești o programare pentru montaj ori igienizare în Buzău? Scrie-ne și îți răspundem cu plăcere.
+              Ai o întrebare despre produsele noastre sau dorești o programare pentru montaj ori igienizare? Scrie-ne și îți răspundem cu plăcere.
             </p>
           </div>
 
@@ -248,7 +248,7 @@ const Contact = () => {
                             Subiect
                           </label>
                           <Input
-                            placeholder="ex. Întrebare produs / Montaj Buzău"
+                            placeholder="ex. Întrebare produs / Montaj"
                             value={subject}
                             onChange={(e) => setSubject(e.target.value)}
                           />

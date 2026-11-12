@@ -25,8 +25,8 @@ const Blog = () => {
   return (
     <div className="min-h-screen flex flex-col">
       <SEO
-        title="Blog | Sfaturi aer condiționat Buzău | AirLife"
-        description="Ghiduri practice despre alegerea, montajul, igienizarea și service-ul aerului condiționat. Sfaturi de la specialiștii AirLife din Buzău."
+        title="Blog | Sfaturi aer condiționat | AirLife"
+        description="Ghiduri practice despre alegerea, montajul, igienizarea și service-ul aerului condiționat. Sfaturi de la specialiștii AirLife."
         canonical="https://airlife.ro/blog"
       />
       <Navbar />
@@ -34,7 +34,7 @@ const Blog = () => {
         <div className="container mx-auto px-4 max-w-5xl space-y-10">
           <header className="max-w-2xl">
             <h1 className="text-3xl md:text-5xl font-bold tracking-tight mb-3">Blog AirLife</h1>
-            <p className="text-muted-foreground text-lg">Sfaturi practice despre aerul condiționat, de la echipa care îl montează și îl întreține în Buzău.</p>
+            <p className="text-muted-foreground text-lg">Sfaturi practice despre aerul condiționat, de la echipa care îl montează și îl întreține.</p>
           </header>
 
           {posts === null && <p className="text-muted-foreground">Se încarcă...</p>}
