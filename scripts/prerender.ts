@@ -9,6 +9,7 @@ import { createServer, loadEnv } from "vite";
 import { createClient } from "@supabase/supabase-js";
 import { marked } from "marked";
 import { bylineName } from "../src/data/author";
+import { inCluster, orderedClusters } from "../src/data/blogClusters";
 import { postSchemas, roDate } from "../src/lib/blogSchema";
 import { CATEGORIES_DATA } from "../src/data/categoriesData";
 
@@ -97,7 +98,7 @@ try {
     path: "/blog",
     title: "Blog | Sfaturi aer condiționat Buzău | AirLife",
     description: "Ghiduri practice despre alegerea, montajul, igienizarea și service-ul aerului condiționat. Sfaturi de la specialiștii AirLife din Buzău.",
-    body: `<h1>Blog AirLife</h1>${[...new Set(posts.map((p) => p.category ?? "Ghiduri"))].map((c) => `<h2>${esc(c)}</h2><ul>${posts.filter((p) => (p.category ?? "Ghiduri") === c).map((p) => `<li><a href="/blog/${p.slug}">${esc(p.title)}</a>${p.excerpt ? ` – ${esc(p.excerpt)}` : ""}</li>`).join("")}</ul>`).join("")}`,
+    body: `<h1>Blog AirLife</h1>${orderedClusters(posts).map((c) => `<h2>${esc(c)}</h2><ul>${inCluster(posts, c).map((p) => `<li><a href="/blog/${p.slug}">${esc(p.title)}</a>${p.excerpt ? ` – ${esc(p.excerpt)}` : ""}</li>`).join("")}</ul>`).join("")}`,
   });
   for (const p of posts) {
     lastmod.set(`/blog/${p.slug}`, String(p.updated_at ?? p.published_at).slice(0, 10));

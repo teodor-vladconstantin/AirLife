@@ -7,6 +7,7 @@ import LeadMagnetForm from "@/components/LeadMagnetForm";
 import { Card, CardContent } from "@/components/ui/card";
 import { supabase } from "@/integrations/supabase/client";
 import type { Tables } from "@/integrations/supabase/types";
+import { inCluster, orderedClusters } from "@/data/blogClusters";
 
 type Post = Pick<Tables<"blog_posts">, "id" | "slug" | "title" | "excerpt" | "cover_image" | "category" | "published_at">;
 
@@ -40,11 +41,11 @@ const Blog = () => {
           {posts === null && <p className="text-muted-foreground">Se încarcă...</p>}
           {posts?.length === 0 && <p className="text-muted-foreground">Articolele apar în curând.</p>}
 
-          {[...new Set(posts?.map((p) => p.category ?? "Ghiduri"))].map((cat) => (
+          {orderedClusters(posts ?? []).map((cat) => (
             <section key={cat} className="space-y-4">
               <h2 className="text-2xl font-bold">{cat}</h2>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {posts?.filter((p) => (p.category ?? "Ghiduri") === cat).map((p) => (
+            {inCluster(posts ?? [], cat).map((p) => (
               <Link key={p.id} to={`/blog/${p.slug}`}>
                 <Card className="h-full overflow-hidden hover:shadow-lg transition-shadow">
                   {p.cover_image && <img src={p.cover_image} alt={p.title} loading="lazy" className="w-full h-40 object-cover" />}
