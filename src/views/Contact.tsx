@@ -7,7 +7,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import { Mail, Phone, MapPin, Clock, Send, CheckCircle2 } from "lucide-react";
+import { Mail, Phone, Clock, Send, CheckCircle2 } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { trackContactSubmit, trackClickToCall } from "@/lib/analytics";
 import { PHONE_DISPLAY, PHONE_TEL } from "@/data/localSeo";
@@ -134,22 +134,6 @@ const Contact = () => {
                       contact@airlife.ro
                     </a>
                   </div>
-                </CardContent>
-              </Card>
-
-              <Card>
-                <CardHeader className="pb-3">
-                  <CardTitle className="flex items-center gap-2 text-base font-bold">
-                    <MapPin className="h-5 w-5 text-primary" />
-                    Sediu
-                  </CardTitle>
-                </CardHeader>
-                <CardContent className="text-sm text-muted-foreground leading-relaxed">
-                  <p className="font-semibold text-foreground mb-1">AirLife (Sediu)</p>
-                  <p>Str. Centrală nr. 169, sat Mărăcineni, jud. Buzău, 127325, România</p>
-                  <p className="text-xs mt-2 italic">
-                    *Serviciu de intervenție direct la domiciliul sau sediul clientului (Service Area Business) în toată țara.
-                  </p>
                 </CardContent>
               </Card>
 
