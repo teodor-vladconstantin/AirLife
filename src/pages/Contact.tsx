@@ -66,10 +66,10 @@ const Contact = () => {
       },
       "address": {
         "@type": "PostalAddress",
-        "streetAddress": "Frăsinet nr. 15",
-        "addressLocality": "Frăsinet",
+        "streetAddress": "Str. Centrală nr. 169",
+        "addressLocality": "Mărăcineni",
         "addressRegion": "Buzău",
-        "postalCode": "127133",
+        "postalCode": "127325",
         "addressCountry": "RO"
       }
     }
@@ -150,8 +150,8 @@ const Contact = () => {
                   </CardTitle>
                 </CardHeader>
                 <CardContent className="text-sm text-muted-foreground leading-relaxed">
-                  <p className="font-semibold text-foreground mb-1">AirLife (Sediu Operațional Buzău)</p>
-                  <p>Frăsinet nr. 15, 127133, Județul Buzău, România</p>
+                  <p className="font-semibold text-foreground mb-1">AirLife (Sediu)</p>
+                  <p>Str. Centrală nr. 169, sat Mărăcineni, jud. Buzău, 127325, România</p>
                   <p className="text-xs mt-2 italic">
                     *Serviciu de intervenție direct la domiciliul sau sediul clientului (Service Area Business) în toată țara.
                   </p>
