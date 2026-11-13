@@ -21,7 +21,7 @@ const ShippingAndReturns = () => {
     <div className="min-h-screen flex flex-col">
       <SEO
         title="Politica de Livrare și Retur | AirLife.ro"
-        description="Află condițiile de livrare rapidă (20 RON sau Gratuit peste 1000 RON) și procedura legală de retur în 14 zile conform OUG 34/2014 pe AirLife.ro."
+        description="Află condițiile de livrare rapidă (gratuită peste 1000 RON) și procedura legală de retur în 14 zile conform OUG 34/2014 pe AirLife.ro."
         canonical="https://airlife.ro/livrare-si-retur"
         structuredData={structuredData}
       />

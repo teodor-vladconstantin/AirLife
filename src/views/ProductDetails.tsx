@@ -338,7 +338,7 @@ const ProductDetails = ({ initial }: { initial: Loaded }) => {
                 </div>
 
                 <p className="text-[11px] text-muted-foreground">
-                  Livrare 20 RON sau <strong>GRATUITĂ</strong> pentru comenzi peste 1000 RON.
+                  Livrare <strong>GRATUITĂ</strong> pentru comenzi peste 1000 RON.
                 </p>
               </div>
             </div>

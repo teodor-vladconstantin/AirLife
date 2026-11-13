@@ -23,7 +23,7 @@ const Footer = () => {
             <div className="space-y-2 text-xs opacity-75 pt-2">
               <div className="flex items-center gap-2">
                 <MapPin className="w-4 h-4 text-primary flex-shrink-0" />
-                <span>România (servicii în toată țara)</span>
+                <span>România</span>
               </div>
               <div className="flex items-center gap-2">
                 <Phone className="w-4 h-4 text-primary flex-shrink-0" />
@@ -156,7 +156,7 @@ const Footer = () => {
         <div className="border-t border-background/20 pt-8 flex flex-col sm:flex-row items-center justify-between text-xs opacity-75 gap-4">
           <div className="space-y-1 text-center sm:text-left">
             <p>&copy; {new Date().getFullYear()} AirLife.ro. Toate drepturile rezervate.</p>
-            <p className="text-[11px]">{company.legalName} | CUI {company.cui} | {company.regCom} | {company.address}</p>
+            <p className="text-[11px]">{company.legalName} | CUI {company.cui} | {company.regCom}</p>
             <p className="text-[11px]">
               <a href={SAL_URL} target="_blank" rel="noopener noreferrer" aria-label="ANPC Soluționarea Alternativă a Litigiilor">
                 <img src="/legal/anpc-sal-badge.png" alt="ANPC SAL - Soluționarea Alternativă a Litigiilor" width={250} height={62} className="inline-block h-auto w-[250px] max-w-full rounded bg-white" loading="lazy" />

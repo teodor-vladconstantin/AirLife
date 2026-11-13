@@ -60,11 +60,11 @@ const CTASection = () => {
             </div>
             <div>
               <div className="font-bold text-sm mb-0.5">Livrare Curier</div>
-              <div>20 RON / Gratuit peste 1000 RON</div>
+              <div>Gratuit peste 1000 RON</div>
             </div>
             <div>
               <div className="font-bold text-sm mb-0.5">Servicii Montaj</div>
-              <div>În toată țara</div>
+              <div>Contactează echipa AirLife</div>
             </div>
           </div>
         </div>

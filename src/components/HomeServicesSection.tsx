@@ -42,7 +42,7 @@ export const HomeServicesSection = () => {
             Montaj &amp; Mentenanță Climatizare
           </h2>
           <p className="text-base md:text-lg text-muted-foreground max-w-2xl mx-auto">
-            Ai nevoie de montaj, igienizare profesională sau reparație pentru aparatul tău de aer condiționat? Echipa AirLife intervine operativ, în toată țara.
+            Ai nevoie de montaj, igienizare profesională sau reparație pentru aparatul tău de aer condiționat? Contactează echipa AirLife.
           </p>
         </div>
 
