@@ -1,27 +1,4 @@
 {
-  "headers": [
-    {
-      "source": "/(.*)",
-      "headers": [
-        { "key": "X-Content-Type-Options", "value": "nosniff" },
-        { "key": "X-Frame-Options", "value": "SAMEORIGIN" },
-        { "key": "Referrer-Policy", "value": "strict-origin-when-cross-origin" },
-        { "key": "Permissions-Policy", "value": "camera=(), microphone=(), geolocation=()" }
-      ]
-    },
-    {
-      "source": "/assets/(.*)",
-      "headers": [{ "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }]
-    }
-  ],
-  "redirects": [
-    { "source": "/servicii/montaj-aer-conditionat-buzau", "destination": "/servicii/montaj-aer-conditionat", "permanent": true },
-    { "source": "/servicii/igienizare-aer-conditionat-buzau", "destination": "/servicii/igienizare-aer-conditionat", "permanent": true },
-    { "source": "/servicii/service-aer-conditionat-buzau", "destination": "/servicii/service-aer-conditionat", "permanent": true },
-    { "source": "/ghid/cost-montaj-aer-conditionat-buzau", "destination": "/ghid/cost-montaj-aer-conditionat", "permanent": true },
-    { "source": "/servicii/montaj-aer-conditionat/:locality", "destination": "/servicii/montaj-aer-conditionat", "permanent": true },
-    { "source": "/servicii/igienizare-aer-conditionat/:locality", "destination": "/servicii/igienizare-aer-conditionat", "permanent": true },
-    { "source": "/servicii/service-aer-conditionat/:locality", "destination": "/servicii/service-aer-conditionat", "permanent": true }
-  ],
-  "rewrites": [{ "source": "/(.*)", "destination": "/index.html" }]
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "framework": "nextjs"
 }

@@ -7,8 +7,6 @@ export const company = {
   regCom: "J2007001135104",
   address: "Str. Centrală nr. 169, sat Mărăcineni, jud. Buzău, cod poștal 127325, România",
   email: "contact@airlife.ro",
-  supportEmail: "support@airlife.ro",
-  privacyEmail: "privacy@airlife.ro",
   phone: "+40 722 15 35 25",
   effectiveDate: "13 noiembrie 2026",
 };

@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link } from "@/lib/router";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Sparkles, Wrench, Shield, Filter, ArrowRight } from "lucide-react";
@@ -12,7 +12,7 @@ const categories = [
     slug: "curatare-si-intretinere",
     description: "Spray-uri cu spumă activă, soluții dezinfectante pentru vaporizator și huse de curățare pe perete.",
     icon: Sparkles,
-    image: airConditioner,
+    image: airConditioner.src,
     features: ["Spumă Activă", "Anti-mucegai", "Husă Protecție"],
   },
   {
@@ -20,7 +20,7 @@ const categories = [
     slug: "accesorii-aer-conditionat",
     description: "Console rabatabile rezistente, tampoane antivibrante din cauciuc și elemente de fixare sigure.",
     icon: Wrench,
-    image: dehumidifier,
+    image: dehumidifier.src,
     features: ["Console 450mm", "Tampoane M8", "Fără Vibrații"],
   },
   {
@@ -28,7 +28,7 @@ const categories = [
     slug: "consumabile-hvac",
     description: "Furtun condens spiralat antistrivire, bandă de matisare protecție UV și izolații pentru trasee frigorifice.",
     icon: Shield,
-    image: airPurifier,
+    image: airPurifier.src,
     features: ["Furtun Ø16mm", "Bandă UV", "Drenaj Sigur"],
   },
   {
@@ -36,7 +36,7 @@ const categories = [
     slug: "filtre-purificatoare",
     description: "Filtre cu cărbune activ și filtre HEPA pentru reținerea alergenilor și neutralizarea mirosurilor neplăcute.",
     icon: Filter,
-    image: airPurifier,
+    image: airPurifier.src,
     features: ["Carbon Activ", "HEPA", "Aer Pur"],
   },
 ];

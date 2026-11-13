@@ -1,8 +1,11 @@
 import { marked } from "marked";
 import DOMPurify from "dompurify";
 
-export const renderMarkdown = (md: string): string =>
-  DOMPurify.sanitize(marked.parse(md, { async: false }) as string);
+// ponytail: server render skips DOMPurify (needs a DOM); post content is admin-only. Add isomorphic-dompurify if authors ever include untrusted users.
+export const renderMarkdown = (md: string): string => {
+  const html = marked.parse(md, { async: false }) as string;
+  return typeof window === "undefined" ? html : DOMPurify.sanitize(html);
+};
 
 // "Cât costează montajul?" -> "cat-costa-montajul"
 export const slugify = (s: string): string =>

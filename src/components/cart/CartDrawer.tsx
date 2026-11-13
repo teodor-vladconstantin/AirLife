@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { useQuote } from "@/contexts/QuoteContext";
 import { CartItem } from "./CartItem";
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from "@/lib/router";
 import { ShoppingCart } from "lucide-react";
 
 interface CartDrawerProps {

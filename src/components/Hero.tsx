@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link } from "@/lib/router";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Wrench, ShieldCheck, MapPin, Truck } from "lucide-react";
 import hero1920 from "@/assets/hero-image-1920.webp";
@@ -9,8 +9,8 @@ const Hero = () => {
     <section className="relative min-h-[85vh] flex items-center justify-center overflow-hidden bg-gradient-to-br from-background via-secondary to-background">
       <div className="absolute inset-0">
         <img
-          src={hero1920}
-          srcSet={`${hero1024} 1024w, ${hero1920} 1920w`}
+          src={hero1920.src}
+          srcSet={`${hero1024.src} 1024w, ${hero1920.src} 1920w`}
           sizes="100vw"
           width={1920}
           height={1080}

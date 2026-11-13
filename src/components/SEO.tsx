@@ -1,5 +1,6 @@
+"use client";
 import { useEffect } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation } from "@/lib/router";
 
 export interface SEOProps {
   title: string;
@@ -23,91 +24,37 @@ export const SEO = ({
   noindex = false,
   structuredData,
 }: SEOProps) => {
-  const location = useLocation();
-  const canonicalUrl = canonical || `${DEFAULT_DOMAIN}${location.pathname}`;
-  // Prerender (SSR): hand the props to scripts/prerender.ts, effects do not run on the server.
-  if (typeof window === "undefined") {
-    (globalThis as { __SEO__?: unknown }).__SEO__ = { title, description, canonical: canonicalUrl, ogImage, structuredData };
-  }
+  const { pathname } = useLocation();
+  const canonicalUrl = canonical || `${DEFAULT_DOMAIN}${pathname}`;
 
+  // React 19 hoists <title>/<meta>/<link> into <head>, on the server too, so crawlers see them in the first HTML.
   useEffect(() => {
-    // 1. Update Document Title
-    document.title = title;
+    const win = window as unknown as { dataLayer?: Array<Record<string, unknown>> };
+    win.dataLayer?.push?.({ event: "page_view", page_title: title, page_location: window.location.href, page_path: pathname });
+  }, [title, pathname]);
 
-    // Helper function to update or create meta tags
-    const setMetaTag = (attrName: string, attrVal: string, content: string) => {
-      let tag = document.querySelector(`meta[${attrName}="${attrVal}"]`);
-      if (!tag) {
-        tag = document.createElement("meta");
-        tag.setAttribute(attrName, attrVal);
-        document.head.appendChild(tag);
-      }
-      tag.setAttribute("content", content);
-    };
-
-    // 2. Standard Meta Tags
-    setMetaTag("name", "description", description);
-    setMetaTag("name", "robots", noindex ? "noindex, nofollow" : "index, follow");
-
-    // 3. Canonical Link
-    let canonicalLink = document.querySelector('link[rel="canonical"]') as HTMLLinkElement | null;
-    if (!canonicalLink) {
-      canonicalLink = document.createElement("link");
-      canonicalLink.setAttribute("rel", "canonical");
-      document.head.appendChild(canonicalLink);
-    }
-    canonicalLink.setAttribute("href", canonicalUrl);
-
-    // 4. Open Graph Tags
-    setMetaTag("property", "og:title", title);
-    setMetaTag("property", "og:description", description);
-    setMetaTag("property", "og:type", ogType);
-    setMetaTag("property", "og:url", canonicalUrl);
-    setMetaTag("property", "og:image", ogImage);
-    setMetaTag("property", "og:locale", "ro_RO");
-    setMetaTag("property", "og:site_name", "AirLife");
-
-    // 5. Twitter Card Tags
-    setMetaTag("name", "twitter:card", "summary_large_image");
-    setMetaTag("name", "twitter:title", title);
-    setMetaTag("name", "twitter:description", description);
-    setMetaTag("name", "twitter:image", ogImage);
-
-    // 6. JSON-LD Structured Data
-    const SCRIPT_ID = "page-structured-data";
-    let scriptTag = document.getElementById(SCRIPT_ID) as HTMLScriptElement | null;
-
-    if (structuredData) {
-      if (!scriptTag) {
-        scriptTag = document.createElement("script");
-        scriptTag.id = SCRIPT_ID;
-        scriptTag.type = "application/ld+json";
-        document.head.appendChild(scriptTag);
-      }
-      scriptTag.textContent = JSON.stringify(structuredData);
-    } else if (scriptTag) {
-      scriptTag.remove();
-    }
-
-    // 7. Fire analytics page_view event if window.dataLayer or gtag is available
-    if (typeof window !== "undefined") {
-      const win = window as unknown as { dataLayer?: Array<Record<string, unknown>> };
-      if (Array.isArray(win.dataLayer)) {
-        win.dataLayer.push({
-          event: "page_view",
-          page_title: title,
-          page_location: window.location.href,
-          page_path: location.pathname,
-        });
-      }
-    }
-
-    return () => {
-      // Optional cleanup on unmount if needed
-    };
-  }, [title, description, canonicalUrl, ogType, ogImage, noindex, structuredData, location.pathname]);
-
-  return null;
+  return (
+    <>
+      <title>{title}</title>
+      <meta name="description" content={description} />
+      <meta name="robots" content={noindex ? "noindex, nofollow" : "index, follow"} />
+      <link rel="canonical" href={canonicalUrl} />
+      <meta property="og:title" content={title} />
+      <meta property="og:description" content={description} />
+      <meta property="og:type" content={ogType} />
+      <meta property="og:url" content={canonicalUrl} />
+      <meta property="og:image" content={ogImage} />
+      <meta property="og:locale" content="ro_RO" />
+      <meta property="og:site_name" content="AirLife" />
+      <meta name="twitter:card" content="summary_large_image" />
+      <meta name="twitter:title" content={title} />
+      <meta name="twitter:description" content={description} />
+      <meta name="twitter:image" content={ogImage} />
+      {structuredData && (
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData).split("<").join(String.fromCharCode(92) + "u003c") }} />
+      )}
+    </>
+  );
 };
 
 export default SEO;

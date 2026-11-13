@@ -7,10 +7,10 @@ let posthog: PostHog | null = null;
 const phQueue: Array<[string, Record<string, unknown>]> = [];
 
 // G-XXXX (gtag.js) or GTM-XXXX (container)
-const GA4_ID = import.meta.env.VITE_GTAG_ID as string | undefined;
-const PH_KEY = import.meta.env.VITE_POSTHOG_KEY as string | undefined;
-const PH_HOST = (import.meta.env.VITE_POSTHOG_HOST as string | undefined) || "https://eu.i.posthog.com";
-const SENTRY_DSN = import.meta.env.VITE_SENTRY_DSN as string | undefined;
+const GA4_ID = process.env.NEXT_PUBLIC_GTAG_ID as string | undefined;
+const PH_KEY = process.env.NEXT_PUBLIC_POSTHOG_KEY as string | undefined;
+const PH_HOST = (process.env.NEXT_PUBLIC_POSTHOG_HOST as string | undefined) || "https://eu.i.posthog.com";
+const SENTRY_DSN = process.env.NEXT_PUBLIC_SENTRY_DSN as string | undefined;
 
 declare global {
   interface Window {
@@ -44,7 +44,7 @@ const startSentry = () => {
   if (!SENTRY_DSN || sentryStarted) return;
   sentryStarted = true;
   import("@sentry/react").then((Sentry) =>
-    Sentry.init({ dsn: SENTRY_DSN, environment: import.meta.env.MODE, tracesSampleRate: 0.1 }),
+    Sentry.init({ dsn: SENTRY_DSN, environment: process.env.NODE_ENV, tracesSampleRate: 0.1 }),
   );
 };
 

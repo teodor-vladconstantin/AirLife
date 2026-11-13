@@ -1,37 +1,30 @@
-// Run after `npm run build`: npm run seo:audit
-// Checks every prerendered page in dist/: title/description length, one <h1>, canonical, image alt,
+// Run against a running build (set the site visible: VITE_COMING_SOON=false):
+//   npx next build && npx next start -p 3000   then   npm run seo:audit   (BASE=http://localhost:3000 by default)
+// Crawls every URL in /sitemap.xml: title/description length, one <h1>, canonical, image alt,
 // duplicate titles/descriptions, and internal links that point nowhere. Exit code 1 if any error.
-import { existsSync, readdirSync, readFileSync, statSync } from "node:fs";
-import { join } from "node:path";
+import { readFileSync } from "node:fs";
 
-const DIST = "dist";
+const BASE = process.env.BASE ?? "http://localhost:3000";
 const SITE = "https://airlife.ro";
 const errors: string[] = [];
 const warns: string[] = [];
 
-const walk = (dir: string): string[] =>
-  readdirSync(dir).flatMap((f) => {
-    const p = join(dir, f);
-    return statSync(p).isDirectory() ? (f === "assets" ? [] : walk(p)) : f === "index.html" ? [p] : [];
-  });
-
-// valid app routes (React Router) so SPA-only pages are not reported as broken
-const app = readFileSync("src/App.tsx", "utf8");
-const routeRes = [...app.matchAll(/path="(\/[^"]*)"/g)].map((m) => new RegExp("^" + m[1].replace(/:[^/]+/g, "[^/]+") + "$"));
-const redirects = new Set([...readFileSync("vercel.json", "utf8").matchAll(/"source":\s*"([^":]+)"/g)].map((m) => m[1]));
-
-const exists = (path: string) => {
+const get = (path: string) => fetch(BASE + path, { redirect: "manual" });
+const redirects = new Set([...readFileSync("next.config.mjs", "utf8").matchAll(/r\("([^":]+)"/g)].map((m) => m[1]));
+const status = new Map<string, number>();
+const exists = async (path: string) => {
   const clean = path.split("#")[0].split("?")[0].replace(/\/$/, "") || "/";
-  return clean === "/" || existsSync(join(DIST, clean, "index.html")) || existsSync(join(DIST, clean)) || routeRes.some((r) => r.test(clean));
+  if (!status.has(clean)) status.set(clean, (await get(clean)).status);
+  return status.get(clean)! < 400;
 };
 
+const sitemap = await (await get("/sitemap.xml")).text();
+const paths = [...sitemap.matchAll(/<loc>([^<]+)<\/loc>/g)].map((m) => m[1].replace(SITE, "") || "/");
 const titles = new Map<string, string[]>();
 const descs = new Map<string, string[]>();
-const pages = walk(DIST);
 
-for (const file of pages) {
-  const path = "/" + file.replace(/\\/g, "/").replace(DIST + "/", "").replace(/index\.html$/, "").replace(/\/$/, "");
-  const html = readFileSync(file, "utf8");
+for (const path of paths) {
+  const html = await (await get(path)).text();
   const title = html.match(/<title>([\s\S]*?)<\/title>/)?.[1]?.trim() ?? "";
   const desc = html.match(/<meta name="description" content="([^"]*)"/)?.[1] ?? "";
   const h1 = (html.match(/<h1[\s>]/g) ?? []).length;
@@ -56,14 +49,14 @@ for (const file of pages) {
     const href = m[1];
     if (href.startsWith("//")) continue;
     if (redirects.has(href)) errors.push(tag(`link to redirected URL ${href}`));
-    else if (!exists(href)) errors.push(tag(`broken internal link ${href}`));
+    else if (!(await exists(href))) errors.push(tag(`broken internal link ${href}`));
   }
 }
 for (const [t, ps] of titles) if (t && ps.length > 1) errors.push(`duplicate title "${t}" on ${ps.join(", ")}`);
 for (const [d, ps] of descs) if (ps.length > 1) warns.push(`duplicate description on ${ps.join(", ")}`);
 
 const uniq = (a: string[]) => [...new Set(a)];
-console.log(`[seo-audit] ${pages.length} pages · ${uniq(errors).length} errors · ${uniq(warns).length} warnings`);
+console.log(`[seo-audit] ${paths.length} pages · ${uniq(errors).length} errors · ${uniq(warns).length} warnings`);
 for (const e of uniq(errors)) console.log("  ERROR ", e);
 for (const w of uniq(warns)) console.log("  warn  ", w);
 process.exit(errors.length ? 1 : 0);

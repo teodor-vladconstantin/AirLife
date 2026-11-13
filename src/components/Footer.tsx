@@ -1,5 +1,5 @@
 import { Leaf, MapPin, Mail, Phone } from "lucide-react";
-import { Link } from "react-router-dom";
+import { Link } from "@/lib/router";
 import { PHONE_DISPLAY, PHONE_TEL } from "@/data/localSeo";
 import { trackClickToCall } from "@/lib/analytics";
 import { company, SAL_URL, ANPC_URL } from "@/data/company";

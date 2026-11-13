@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link } from "@/lib/router";
 import { Button } from "@/components/ui/button";
 import { ShieldCheck } from "lucide-react";
 import { setCookieConsent } from "@/lib/analytics";
