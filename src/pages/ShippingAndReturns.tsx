@@ -3,6 +3,7 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import SEO from "@/components/SEO";
 import { Card, CardContent } from "@/components/ui/card";
+import { company } from "@/data/company";
 import { Truck, RotateCcw, ShieldCheck, CheckCircle2 } from "lucide-react";
 
 const ShippingAndReturns = () => {
@@ -105,7 +106,7 @@ const ShippingAndReturns = () => {
                     </li>
                     <li className="flex items-start gap-2">
                       <CheckCircle2 className="w-4 h-4 text-primary flex-shrink-0 mt-0.5" />
-                      <span>Nu se acceptă produse care prezintă urme vizibile de montaj, zgârieturi, lovituri, componente electrice arse sau sigilii desigilate.</span>
+                      <span>Dacă produsul prezintă urme de montaj, zgârieturi, lovituri sau componente arse, valoarea lui diminuată din cauza manipulării necorespunzătoare poate fi scăzută din suma restituită, în limitele legii.</span>
                     </li>
                     <li className="flex items-start gap-2">
                       <CheckCircle2 className="w-4 h-4 text-primary flex-shrink-0 mt-0.5" />
@@ -113,13 +114,15 @@ const ShippingAndReturns = () => {
                     </li>
                   </ul>
 
+                  <p className="text-xs">Excepțiile legale de la retragere (produse desigilate din motive de igienă, servicii prestate integral etc.) și formularul-tip de retragere sunt în <Link to="/termeni-si-conditii" className="text-primary underline">Termeni și Condiții</Link>.</p>
+
                   <h3 className="font-semibold text-foreground text-base mt-4 mb-2">
                     Procedura de exercitare a returului:
                   </h3>
                   <ol className="list-decimal list-inside space-y-1.5 text-xs">
                     <li>Trimiteți o notificare scrisă de retur pe adresa de e-mail <strong>contact@airlife.ro</strong>, menționând numărul comenzii și contul IBAN pentru restituire.</li>
                     <li>Ambalați produsul corespunzător pentru a fi protejat pe durata transportului.</li>
-                    <li>Expediați coletul prin orice firmă de curierat rapid (fără ramburs) la adresa specificată de operatorul nostru. Conform legii, cheltuielile directe legate de returnarea produselor sunt suportate de către consumator.</li>
+                    <li>Expediați coletul prin orice firmă de curierat rapid (fără ramburs) la adresa {company.legalName}, {company.address} (confirmăm adresa exactă de retur în răspunsul la notificare). Costul de transport al returului îl suportă consumatorul, dacă nu s-a convenit altfel înainte de comandă. Conform legii, cheltuielile directe legate de returnarea produselor sunt suportate de către consumator.</li>
                     <li>După recepționarea și verificarea stării produsului, contravaloarea acestuia va fi restituită în termen de maximum <strong>14 zile</strong> în contul bancar indicat.</li>
                   </ol>
                 </div>

@@ -381,7 +381,7 @@ const ProductDetails = () => {
                   <span className="text-3xl sm:text-4xl font-bold text-primary">
                     {product.price.toFixed(2)} RON
                   </span>
-                  <span className="text-xs text-muted-foreground">TVA inclus</span>
+                  <span className="text-xs text-muted-foreground">Preț fără TVA (neplătitor TVA)</span>
                 </div>
               </div>
 

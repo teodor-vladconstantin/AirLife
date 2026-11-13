@@ -38,6 +38,16 @@ export const setCookieConsent = (accepted: boolean) => {
   applyConsent(accepted);
 };
 
+let sentryStarted = false;
+// Error monitoring starts only after cookie consent (it sends IP/browser data to a processor).
+const startSentry = () => {
+  if (!SENTRY_DSN || sentryStarted) return;
+  sentryStarted = true;
+  import("@sentry/react").then((Sentry) =>
+    Sentry.init({ dsn: SENTRY_DSN, environment: import.meta.env.MODE, tracesSampleRate: 0.1 }),
+  );
+};
+
 const applyConsent = (accepted: boolean) => {
   if (typeof window.gtag === "function") {
     window.gtag("consent", "update", {
@@ -45,21 +55,12 @@ const applyConsent = (accepted: boolean) => {
       ad_storage: "denied", // no ads yet; flip when Google Ads is connected
     });
   }
+  if (accepted) startSentry();
   if (posthog) accepted ? posthog.opt_in_capturing() : posthog.opt_out_capturing();
 };
 
 export const initAnalytics = () => {
   if (typeof window === "undefined") return;
-
-  if (SENTRY_DSN) {
-    import("@sentry/react").then((Sentry) =>
-      Sentry.init({
-        dsn: SENTRY_DSN,
-        environment: import.meta.env.MODE,
-        tracesSampleRate: 0.1,
-      }),
-    );
-  }
 
   if (GA4_ID) {
     window.dataLayer = window.dataLayer || [];

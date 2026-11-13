@@ -110,8 +110,14 @@ const CookiePolicy = () => {
                       Aceste cookie-uri (de exemplu Google Analytics 4) colectează informații agregate și anonimizate despre modul în care vizitatorii utilizează site-ul: paginile cele mai vizitate, timpul petrecut pe pagină și eventualele erori tehnice întâmpinate. Ele sunt activate doar cu acordul dumneavoastră explicit.
                     </p>
                     <span className="text-[11px] text-muted-foreground italic">
-                      Exemple: _ga, _ga_*, evenimente de navigare anonime.
+                      Exemple: Google Analytics 4 (_ga, _ga_*) și PostHog, servere în UE (identificator de vizitator, evenimente de navigare, înregistrări ale sesiunii și hărți de interacțiune). Se activează numai după ce apeși „Accept toate”. Furnizori: Google Ireland Ltd. și PostHog Inc.
                     </span>
+                  </div>
+                  <div className="p-4 rounded-xl bg-secondary/50 border border-border/50">
+                    <strong className="block text-foreground text-base mb-1">C. Monitorizare tehnică</strong>
+                    <p className="text-xs mb-2">
+                      Folosim Sentry pentru a detecta erorile site-ului (tip de eroare, pagină, browser). Nu folosim cookie-uri de publicitate sau de urmărire între site-uri. Pornește numai după ce apeși „Accept toate”.
+                    </p>
                   </div>
                 </div>
               </CardContent>

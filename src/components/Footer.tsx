@@ -2,6 +2,7 @@ import { Leaf, MapPin, Mail, Phone } from "lucide-react";
 import { Link } from "react-router-dom";
 import { PHONE_DISPLAY, PHONE_TEL } from "@/data/localSeo";
 import { trackClickToCall } from "@/lib/analytics";
+import { company, SAL_URL, ANPC_URL } from "@/data/company";
 
 const Footer = () => {
   return (
@@ -153,7 +154,17 @@ const Footer = () => {
 
         {/* Bottom row */}
         <div className="border-t border-background/20 pt-8 flex flex-col sm:flex-row items-center justify-between text-xs opacity-75 gap-4">
-          <p>&copy; {new Date().getFullYear()} AirLife.ro — Toate drepturile rezervate.</p>
+          <div className="space-y-1 text-center sm:text-left">
+            <p>&copy; {new Date().getFullYear()} AirLife.ro. Toate drepturile rezervate.</p>
+            <p className="text-[11px]">{company.legalName} | CUI {company.cui} | {company.regCom} | {company.address}</p>
+            <p className="text-[11px]">
+              <a href={SAL_URL} target="_blank" rel="noopener noreferrer" aria-label="ANPC Soluționarea Alternativă a Litigiilor">
+                <img src="/legal/anpc-sal-badge.png" alt="ANPC SAL - Soluționarea Alternativă a Litigiilor" width={250} height={62} className="inline-block h-auto w-[250px] max-w-full rounded bg-white" loading="lazy" />
+              </a>
+              {" | "}
+              <a href={ANPC_URL} target="_blank" rel="noopener noreferrer" className="hover:underline">ANPC</a>
+            </p>
+          </div>
           <div className="flex items-center gap-4">
             <span className="text-[11px]">România</span>
             <span>•</span>
