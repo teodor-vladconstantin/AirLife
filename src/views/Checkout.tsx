@@ -64,14 +64,6 @@ const Checkout = () => {
 
   useEffect(() => {
     checkUser();
-    // Redirect if cart is empty
-    if (items.length === 0) {
-      toast({
-        title: "Coșul este gol",
-        description: "Adaugă produse în coș pentru a continua.",
-      });
-      navigate("/products");
-    }
     // Redirect checkout route to request-quote (site is presentation-only)
     navigate("/request-quote");
   }, [items, navigate]);
