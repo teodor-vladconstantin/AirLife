@@ -8,6 +8,8 @@ import { useQuote } from "@/contexts/QuoteContext";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { Loader2 } from "lucide-react";
+import { CATEGORIES_DATA } from "@/data/categoriesData";
+import { INITIAL_PRODUCTS } from "@/data/initialProducts";
 
 interface Product {
   id: string;
@@ -17,7 +19,7 @@ interface Product {
   category: string;
   slug?: string | null;
   image_url: string | null;
-  features: any;
+  features: string[];
   stock: number;
 }
 
@@ -35,29 +37,29 @@ const Products = () => {
 
   useEffect(() => {
     fetchProducts();
-  }, [selectedCategory]);
+  }, []);
 
   const fetchProducts = async () => {
     setLoading(true);
-    let query = supabase.from("products").select("*").order("created_at", { ascending: false });
-
-    if (selectedCategory !== "all") {
-      query = query.eq("category", selectedCategory);
-    }
-
-    const { data, error } = await query;
+    const { data, error } = await supabase.from("products").select("*").order("created_at", { ascending: false });
 
     if (error) {
       toast({
         title: "Eroare",
-        description: "Nu s-au putut încărca produsele",
+        description: "Nu s-au putut încărca produsele din baza de date; se afișează catalogul local",
         variant: "destructive",
       });
-      setLoading(false);
-      return;
     }
 
-    setProducts(data || []);
+    const db: Product[] = (data || []).map((p: any) => ({
+      ...p,
+      price: Number(p.price),
+      features: Array.isArray(p.features) ? p.features : [],
+    }));
+    // Catalogul static (accesorii, consumabile etc.) completează produsele din DB, fără dubluri după nume
+    const seen = new Set(db.map((p) => p.name.toLowerCase()));
+    const local: Product[] = INITIAL_PRODUCTS.filter((p) => !seen.has(p.name.toLowerCase()));
+    setProducts([...db, ...local]);
     setLoading(false);
   };
 
@@ -68,10 +70,11 @@ const Products = () => {
 
   const categories = [
     { value: "all", label: "Toate Produsele" },
-    { value: "Aer Condiționat", label: "Aer Condiționat" },
-    { value: "Dezumidificatoare", label: "Dezumidificatoare" },
-    { value: "Purificatoare Aer", label: "Purificatoare Aer" },
+    ...Object.values(CATEGORIES_DATA)
+      .map((c) => ({ value: c.name, label: c.name })),
   ];
+  const visible = selectedCategory === "all" ? products : products.filter((p) => p.category === selectedCategory);
+
 
   return (
     <div className="min-h-screen flex flex-col">
@@ -106,15 +109,15 @@ const Products = () => {
             <div className="flex justify-center items-center py-20">
               <Loader2 className="w-8 h-8 animate-spin text-primary" />
             </div>
-          ) : products.length === 0 ? (
+          ) : visible.length === 0 ? (
             <div className="text-center py-20">
               <p className="text-xl text-muted-foreground">
-                Nu există produse în această categorie
+                Produsele din această categorie vor fi adăugate în curând. Cere-ne o ofertă și îți răspundem rapid.
               </p>
             </div>
           ) : (
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {products.map((product, idx) => (
+              {visible.map((product, idx) => (
                 <Card
                   key={product.id}
                   className="group overflow-hidden border-border/50 hover:border-primary/30 transition-opacity duration-400 will-change-opacity hover:opacity-90 bg-card/50 backdrop-blur-sm animate-in fade-in"
