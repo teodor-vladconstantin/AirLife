@@ -31,16 +31,7 @@ const Index = () => {
         "telephone": "+40722153525",
         "image": "https://airlife.ro/placeholder.svg",
         "priceRange": "$$",
-        "areaServed": [
-          {
-            "@type": "City",
-            "name": "Buzău"
-          },
-          {
-            "@type": "AdministrativeArea",
-            "name": "Județul Buzău"
-          }
-        ],
+        "areaServed": { "@type": "Country", "name": "România" },
         "description": "Magazin online accesorii & consumabile HVAC și servicii profesionale de montaj, igienizare și service aer condiționat."
       }
     ]

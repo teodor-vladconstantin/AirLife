@@ -17,10 +17,10 @@ export const CATEGORIES_DATA: Record<string, CategoryInfo> = {
     name: "Aer Condiționat",
     title: "Aer Condiționat Inverter Wi-Fi 9000–21000 BTU | AirLife",
     metaDescription:
-      "Aparate de aer condiționat inverter cu Wi-Fi, în mai multe capacități (9000–21000 BTU). Montaj profesional și județ.",
+      "Aparate de aer condiționat inverter cu Wi-Fi, în mai multe capacități (9000–21000 BTU). Montaj profesional în toată țara.",
     h1: "Aer Condiționat cu Unitate Exterioară",
     description:
-      "Aparate split inverter pentru apartamente, case și birouri, disponibile în mai multe capacități. La cerere, le montăm noi, și în localitățile din jur.",
+      "Aparate split inverter pentru apartamente, case și birouri, disponibile în mai multe capacități. La cerere, le montăm noi, oriunde în țară.",
     buyingGuide: {
       title: "Cum alegi capacitatea potrivită?",
       tips: [

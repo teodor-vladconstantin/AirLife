@@ -66,21 +66,9 @@ const ServiceAerConditionat = () => {
       "@type": "HVACBusiness",
       "name": "AirLife",
       "url": "https://airlife.ro",
-      "areaServed": {
-        "@type": "City",
-        "name": "Buzău"
-      }
+      "areaServed": { "@type": "Country", "name": "România" }
     },
-    "areaServed": [
-      {
-        "@type": "City",
-        "name": "Buzău"
-      },
-      {
-        "@type": "AdministrativeArea",
-        "name": "Județul Buzău"
-      }
-    ],
+    "areaServed": { "@type": "Country", "name": "România" },
     "description": "Diagnosticare și reparații sisteme de aer condiționat: remediere pierderi freon, completare agent frigorific, înlocuire condensatori, remediere scurgeri de apă și erori electronice.",
     "offers": {
       "@type": "Offer",
@@ -236,7 +224,7 @@ const ServiceAerConditionat = () => {
                   Timp de răspuns și arie de operare
                 </h2>
                 <p className="text-muted-foreground leading-relaxed">
-                  Intervenim cu prioritate în municipiul Buzău și localitățile învecinate. În perioadele caniculare, programările se fac în ordinea recepționării solicitărilor, acordând prioritate urgențelor medicale sau spațiilor comerciale sensibile.
+                  Intervenim în toată țara. În perioadele caniculare, programările se fac în ordinea recepționării solicitărilor, acordând prioritate urgențelor medicale sau spațiilor comerciale sensibile.
                 </p>
               </section>
 
@@ -250,7 +238,7 @@ const ServiceAerConditionat = () => {
                   <div>
                     <h3 className="font-semibold text-foreground">Cât costă o constatare?</h3>
                     <p className="text-sm text-muted-foreground mt-1">
-                      Deplasarea și constatarea tehnică au un tarif fix în Buzău. Dacă decizi să efectuezi reparația cu noi, valoarea constatării se poate deduce parțial sau integral din costul final al manoperei.
+                      Deplasarea și constatarea tehnică au un tarif fix. Dacă decizi să efectuezi reparația cu noi, valoarea constatării se poate deduce parțial sau integral din costul final al manoperei.
                     </p>
                   </div>
                   <div>
@@ -300,7 +288,7 @@ const ServiceAerConditionat = () => {
                     <div>
                       <label className="text-xs font-semibold text-foreground block mb-1">Locație (Adresă / Cartier)</label>
                       <Input
-                        placeholder="ex. Buzău, Str. Mesteacănului"
+                        placeholder="ex. Oraș, Str. Exemplu"
                         value={location}
                         onChange={(e) => setLocation(e.target.value)}
                       />

@@ -63,8 +63,8 @@ const CTASection = () => {
               <div>20 RON / Gratuit peste 1000 RON</div>
             </div>
             <div>
-              <div className="font-bold text-sm mb-0.5">Servicii Locale</div>
-              <div>Buzău &amp; Localități Limitrofe</div>
+              <div className="font-bold text-sm mb-0.5">Servicii Montaj</div>
+              <div>În toată țara</div>
             </div>
           </div>
         </div>

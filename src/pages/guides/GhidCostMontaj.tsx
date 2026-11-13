@@ -63,7 +63,7 @@ const GhidCostMontaj = () => {
 
           <header className="mb-10">
             <div className="inline-flex items-center gap-2 px-3 py-1 bg-primary/10 text-primary rounded-full text-xs font-semibold mb-4">
-              <BookOpen className="w-3.5 h-3.5" /> Ghid Local
+              <BookOpen className="w-3.5 h-3.5" /> Ghid
             </div>
             <h1 className="text-3xl md:text-5xl font-bold tracking-tight mb-4 text-foreground">
               Cât Costă Montajul unui Aer Condiționat? Ghid Transparent de Prețuri

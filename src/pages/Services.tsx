@@ -44,9 +44,9 @@ const Services = () => {
     "url": "https://airlife.ro/servicii",
     "areaServed": {
       "@type": "City",
-      "name": "Buzău"
+      "name": "România"
     },
-    "description": "Servicii complete de montaj, igienizare și service aer condiționat în municipiul Buzău și localitățile învecinate."
+    "description": "Servicii complete de montaj, igienizare și service aer condiționat în toată țara."
   };
 
   return (
@@ -64,7 +64,7 @@ const Services = () => {
         <div className="container mx-auto px-4 max-w-5xl">
           <div className="text-center max-w-3xl mx-auto mb-16">
             <div className="inline-flex items-center gap-2 px-3 py-1 bg-primary/10 text-primary rounded-full text-sm font-medium mb-4">
-              <MapPin className="w-4 h-4" /> Disponibil și localități limitrofe
+              <MapPin className="w-4 h-4" /> Disponibil în toată țara
             </div>
             <h1 className="text-4xl md:text-5xl font-bold tracking-tight mb-4 text-foreground">
               Servicii Climatizare &amp; HVAC
@@ -126,10 +126,10 @@ const Services = () => {
               </div>
               <div>
                 <h3 className="text-2xl font-bold text-foreground mb-2">
-                  De ce să alegi serviciile locale AirLife?
+                  De ce să alegi serviciile AirLife?
                 </h3>
                 <p className="text-muted-foreground text-sm leading-relaxed mb-4">
-                  Suntem dedicați pieței locale. Ne asigurăm că fiecare client primește o estimare corectă înainte de începerea lucrării, folosim numai materiale de calitate (țevi de cupru calibrate, console tratate anticoroziv) și vidăm obligatoriu fiecare instalație nouă.
+                  Ne asigurăm că fiecare client primește o estimare corectă înainte de începerea lucrării, folosim numai materiale de calitate (țevi de cupru calibrate, console tratate anticoroziv) și vidăm obligatoriu fiecare instalație nouă.
                 </p>
                 <div className="flex flex-wrap gap-4 text-xs text-muted-foreground">
                   <span className="flex items-center gap-1.5 font-medium">

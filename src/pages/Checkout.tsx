@@ -260,7 +260,7 @@ const Checkout = () => {
                         <Input
                           id="county"
                           {...register("county")}
-                          placeholder="Ex: București"
+                          placeholder="Ex: Oraș"
                         />
                         {errors.county && (
                           <p className="text-sm text-destructive mt-1">{errors.county.message}</p>
@@ -269,7 +269,7 @@ const Checkout = () => {
 
                       <div>
                         <Label htmlFor="city">Oraș *</Label>
-                        <Input id="city" {...register("city")} placeholder="Ex: București" />
+                        <Input id="city" {...register("city")} placeholder="Ex: Oraș" />
                         {errors.city && (
                           <p className="text-sm text-destructive mt-1">{errors.city.message}</p>
                         )}

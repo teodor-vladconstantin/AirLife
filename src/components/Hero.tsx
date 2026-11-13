@@ -27,7 +27,7 @@ const Hero = () => {
         <div className="inline-flex items-center gap-2 px-4 py-1.5 bg-primary/20 border border-primary/40 rounded-full mb-6 animate-in fade-in duration-700 backdrop-blur-sm">
           <MapPin className="w-4 h-4 text-primary" />
           <span className="text-sm font-medium text-white">
-            Magazin HVAC Online &amp; Servicii Locale
+            Magazin HVAC Online &amp; Servicii
           </span>
         </div>
 
@@ -43,7 +43,7 @@ const Hero = () => {
           className="text-lg md:text-xl text-white/90 mb-10 max-w-2xl mx-auto animate-in fade-in duration-700 leading-relaxed"
           style={{ textShadow: "0 2px 12px rgba(0,0,0,0.3)" }}
         >
-          Accesorii și consumabile HVAC cu livrare rapidă în toată țara, plus montaj profesional, igienizare și service autorizat în municipiul Buzău.
+          Accesorii și consumabile HVAC cu livrare rapidă în toată țara, plus montaj profesional, igienizare și service autorizat.
         </p>
 
         <div className="flex flex-col sm:flex-row gap-4 justify-center items-center animate-in fade-in duration-700">
@@ -73,8 +73,8 @@ const Hero = () => {
             <div className="flex justify-center mb-2">
               <MapPin className="w-6 h-6 text-primary" />
             </div>
-            <div className="text-lg font-bold text-white mb-0.5">Buzău &amp; Județ</div>
-            <div className="text-xs text-white/80">Montaj &amp; igienizare locală</div>
+            <div className="text-lg font-bold text-white mb-0.5">Toată țara</div>
+            <div className="text-xs text-white/80">Montaj &amp; igienizare</div>
           </div>
           <div className="text-center animate-in fade-in duration-700">
             <div className="flex justify-center mb-2">

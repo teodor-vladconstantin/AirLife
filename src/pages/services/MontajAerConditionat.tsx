@@ -66,21 +66,9 @@ const MontajAerConditionat = () => {
       "@type": "HVACBusiness",
       "name": "AirLife",
       "url": "https://airlife.ro",
-      "areaServed": {
-        "@type": "City",
-        "name": "Buzău"
-      }
+      "areaServed": { "@type": "Country", "name": "România" }
     },
-    "areaServed": [
-      {
-        "@type": "City",
-        "name": "Buzău"
-      },
-      {
-        "@type": "AdministrativeArea",
-        "name": "Județul Buzău"
-      }
-    ],
+    "areaServed": { "@type": "Country", "name": "România" },
     "description": "Serviciu autorizat de instalare aer condiționat. Include fixare console, perforare perete, vidare traseu frigorific și probe funcționale.",
     "offers": {
       "@type": "Offer",
@@ -145,7 +133,7 @@ const MontajAerConditionat = () => {
           {/* Hero Section */}
           <div className="text-center max-w-3xl mx-auto mb-12">
             <div className="inline-flex items-center gap-2 px-3 py-1 bg-primary/10 text-primary rounded-full text-sm font-medium mb-4">
-              <MapPin className="w-4 h-4" /> Serviciu disponibil &amp; localități limitrofe
+              <MapPin className="w-4 h-4" /> Serviciu disponibil în toată țara
             </div>
             <h1 className="text-4xl md:text-5xl font-bold tracking-tight mb-4 text-foreground">
               Montaj Aer Condiționat
@@ -256,7 +244,7 @@ const MontajAerConditionat = () => {
                   Arie de acoperire și garanția lucrării
                 </h2>
                 <p className="text-muted-foreground mb-3">
-                  Echipa Airlife operează în <strong>municipiul Buzău</strong> și localitățile învecinate (Mărăcineni, Poșta Câlnău, Vernești, Vadu Pașii, Tintesti, Merei).
+                  Echipa Airlife operează în <strong>toată țara</strong>.
                 </p>
                 <p className="text-muted-foreground">
                   Lucrările de montaj beneficiază de garanție de execuție, iar aparatul tău își păstrează garanția legală de la producător mulțumită vidării corecte și respectării fișei tehnice.
@@ -327,9 +315,9 @@ const MontajAerConditionat = () => {
                     </div>
 
                     <div>
-                      <label className="text-xs font-semibold text-foreground block mb-1">Locație (Buzău / Cartier / Comună)</label>
+                      <label className="text-xs font-semibold text-foreground block mb-1">Localitate</label>
                       <Input
-                        placeholder="ex. Buzău, Cartier Micro 14"
+                        placeholder="ex. Oraș, Cartier"
                         value={location}
                         onChange={(e) => setLocation(e.target.value)}
                       />

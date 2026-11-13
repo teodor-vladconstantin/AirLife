@@ -96,8 +96,8 @@ try {
 
   pages.push({
     path: "/blog",
-    title: "Blog | Sfaturi aer condiționat Buzău | AirLife",
-    description: "Ghiduri practice despre alegerea, montajul, igienizarea și service-ul aerului condiționat. Sfaturi de la specialiștii AirLife din Buzău.",
+    title: "Blog | Sfaturi aer condiționat | AirLife",
+    description: "Ghiduri practice despre alegerea, montajul, igienizarea și service-ul aerului condiționat. Sfaturi de la specialiștii AirLife.",
     body: `<h1>Blog AirLife</h1>${orderedClusters(posts).map((c) => `<h2>${esc(c)}</h2><ul>${inCluster(posts, c).map((p) => `<li><a href="/blog/${p.slug}">${esc(p.title)}</a>${p.excerpt ? ` – ${esc(p.excerpt)}` : ""}</li>`).join("")}</ul>`).join("")}`,
   });
   for (const p of posts) {

@@ -299,7 +299,7 @@ const CategoryPage = ({ forcedSlug }: CategoryPageProps) => {
                           <span className="text-2xl font-bold text-primary">
                             {product.price.toFixed(2)} RON
                           </span>
-                          <span className="block text-[11px] text-muted-foreground">TVA inclus</span>
+                          <span className="block text-[11px] text-muted-foreground">Preț fără TVA (neplătitor TVA)</span>
                         </div>
                         <div className="text-right text-[11px] text-muted-foreground flex items-center gap-1">
                           <Package className="w-3.5 h-3.5" />
@@ -355,7 +355,7 @@ const CategoryPage = ({ forcedSlug }: CategoryPageProps) => {
                 Ai nevoie de ajutor cu montajul sau igienizarea?
               </h3>
               <p className="text-sm text-muted-foreground max-w-xl">
-                Echipa Airlife asigură montaj autorizat, igienizare profesională și mentenanță periodică pentru sistemele de aer condiționat în municipiul Buzău și localitățile învecinate.
+                Echipa Airlife asigură montaj autorizat, igienizare profesională și mentenanță periodică pentru sistemele de aer condiționat în toată țara.
               </p>
             </div>
             <div className="flex gap-3 flex-shrink-0 w-full sm:w-auto">

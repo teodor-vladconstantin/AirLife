@@ -17,12 +17,12 @@ const Footer = () => {
               <span className="text-2xl font-bold tracking-tight text-white">AirLife</span>
             </Link>
             <p className="text-sm opacity-80 max-w-sm leading-relaxed">
-              Magazin online HVAC și servicii locale dedicate pentru sisteme de climatizare. Accesorii, consumabile și montaj profesional executat curat, cu pompă de vidare.
+              Magazin online HVAC și servicii dedicate pentru sisteme de climatizare. Accesorii, consumabile și montaj profesional executat curat, cu pompă de vidare.
             </p>
             <div className="space-y-2 text-xs opacity-75 pt-2">
               <div className="flex items-center gap-2">
                 <MapPin className="w-4 h-4 text-primary flex-shrink-0" />
-                <span>Buzău, România (Arie servicii: municipiul Buzău și județ)</span>
+                <span>România (servicii în toată țara)</span>
               </div>
               <div className="flex items-center gap-2">
                 <Phone className="w-4 h-4 text-primary flex-shrink-0" />
@@ -155,7 +155,7 @@ const Footer = () => {
         <div className="border-t border-background/20 pt-8 flex flex-col sm:flex-row items-center justify-between text-xs opacity-75 gap-4">
           <p>&copy; {new Date().getFullYear()} AirLife.ro — Toate drepturile rezervate.</p>
           <div className="flex items-center gap-4">
-            <span className="text-[11px]">Buzău, România</span>
+            <span className="text-[11px]">România</span>
             <span>•</span>
             <Link to="/politica-de-cookies" className="hover:underline">
               Setări Cookies

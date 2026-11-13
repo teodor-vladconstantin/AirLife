@@ -66,21 +66,9 @@ const IgienizareAerConditionat = () => {
       "@type": "HVACBusiness",
       "name": "AirLife",
       "url": "https://airlife.ro",
-      "areaServed": {
-        "@type": "City",
-        "name": "Buzău"
-      }
+      "areaServed": { "@type": "Country", "name": "România" }
     },
-    "areaServed": [
-      {
-        "@type": "City",
-        "name": "Buzău"
-      },
-      {
-        "@type": "AdministrativeArea",
-        "name": "Județul Buzău"
-      }
-    ],
+    "areaServed": { "@type": "Country", "name": "România" },
     "description": "Serviciu profesional de igienizare și dezinfectare a aparatelor de aer condiționat. Curățare vaporizator, turbină de ventilație, tăviță condens și tratament biocid autorizat.",
     "offers": {
       "@type": "Offer",
@@ -145,7 +133,7 @@ const IgienizareAerConditionat = () => {
           {/* Hero Section */}
           <div className="text-center max-w-3xl mx-auto mb-12">
             <div className="inline-flex items-center gap-2 px-3 py-1 bg-primary/10 text-primary rounded-full text-sm font-medium mb-4">
-              <MapPin className="w-4 h-4" /> Serviciu de igienizare și județ
+              <MapPin className="w-4 h-4" /> Serviciu de igienizare
             </div>
             <h1 className="text-4xl md:text-5xl font-bold tracking-tight mb-4 text-foreground">
               Igienizare &amp; Curățare Aer Condiționat
@@ -243,10 +231,10 @@ const IgienizareAerConditionat = () => {
               <section className="bg-card p-6 md:p-8 rounded-xl border border-border shadow-sm">
                 <h2 className="text-2xl font-bold mb-3 text-foreground flex items-center gap-2">
                   <ShieldCheck className="w-6 h-6 text-primary" />
-                  Acoperire locală în județul
+                  Acoperire
                 </h2>
                 <p className="text-muted-foreground leading-relaxed">
-                  Ne deplasăm operativ în tot orașul Buzău (Micro 3, Micro 5, Micro 14, Dorobanți, Centru, Broșteni, Orizont) și în localitățile limitrofe. Intervenția durează între 45 și 75 de minute per aparat.
+                  Ne deplasăm operativ, în toată țara. Intervenția durează între 45 și 75 de minute per aparat.
                 </p>
               </section>
 
@@ -310,7 +298,7 @@ const IgienizareAerConditionat = () => {
                     <div>
                       <label className="text-xs font-semibold text-foreground block mb-1">Adresă / Cartier</label>
                       <Input
-                        placeholder="ex. Buzău, Str. Unirii"
+                        placeholder="ex. Oraș, Str. Exemplu"
                         value={location}
                         onChange={(e) => setLocation(e.target.value)}
                       />
@@ -338,7 +326,7 @@ const IgienizareAerConditionat = () => {
                       onClick={() => trackClickToCall("Igienizare Sidebar")}
                       className="inline-flex items-center gap-2 text-primary hover:underline font-semibold text-sm"
                     >
-                      <PhoneCall className="w-4 h-4" /> Apelează Suportul Local
+                      <PhoneCall className="w-4 h-4" /> Apelează Suportul
                     </a>
                   </div>
                 </CardContent>
