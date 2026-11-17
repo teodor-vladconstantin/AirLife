@@ -14,7 +14,7 @@ const servicesList = [
     icon: Wrench,
     badge: "Instalare Profesională",
     description:
-      "Montaj cu pompă de vidare, scule profesionale, kit de instalare calitativ și poziționare optimă pentru randament maxim și păstrarea garanției aparatului.",
+      "Montaj cu echipa proprie sau parteneri, scule profesionale, kit de instalare calitativ și poziționare optimă pentru randament maxim și păstrarea garanției aparatului.",
     highlights: ["Vidare traseu frigorific", "Console rezistente", "Probă răcire / încălzire"],
   },
   {
