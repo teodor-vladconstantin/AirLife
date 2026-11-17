@@ -1,5 +1,6 @@
 "use client";
 import { useState } from "react";
+import { faqSchema } from "@/lib/blogSchema";
 import { Link } from "@/lib/router";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -22,6 +23,21 @@ import {
   Gauge,
 } from "lucide-react";
 import { trackServiceQuoteRequest, trackClickToCall } from "@/lib/analytics";
+
+const FAQS = [
+  {
+    "q": "Cât costă o constatare?",
+    "a": "Deplasarea și constatarea tehnică au un tarif fix. Dacă decizi să efectuezi reparația cu noi, valoarea constatării se poate deduce parțial sau integral din costul final al manoperei."
+  },
+  {
+    "q": "Ce mărci de aparate reparați?",
+    "a": "Deservim majoritatea mărcilor de pe piață: Daikin, Gree, Midea, Mitsubishi, Cooper&Hunter, Yamato, Vortex, Beko, Whirlpool, LG, Samsung și altele."
+  },
+  {
+    "q": "Faceți intervenții în localitatea mea?",
+    "a": "Montajul, igienizarea și service-ul nu sunt disponibile în toată țara: le facem la cerere, doar în zonele acoperite de echipa noastră. Trimite-ne localitatea prin formular sau telefonic și îți confirmăm disponibilitatea înainte de programare. Produsele și accesoriile le livrăm prin curier în toată țara."
+  }
+];
 
 const ServiceAerConditionat = () => {
   const { toast } = useToast();
@@ -66,10 +82,8 @@ const ServiceAerConditionat = () => {
     "provider": {
       "@type": "HVACBusiness",
       "name": "AirLife",
-      "url": "https://airlife.ro",
-      "areaServed": { "@type": "Country", "name": "România" }
+      "url": "https://airlife.ro"
     },
-    "areaServed": { "@type": "Country", "name": "România" },
     "description": "Diagnosticare și reparații sisteme de aer condiționat: remediere pierderi freon, completare agent frigorific, înlocuire condensatori, remediere scurgeri de apă și erori electronice.",
     "offers": {
       "@type": "Offer",
@@ -113,7 +127,7 @@ const ServiceAerConditionat = () => {
         title="Service Aer Condiționat | Reparații și Freon | AirLife"
         description="Service și reparații aer condiționat. Diagnosticare rapidă, verificare freon R32/R410A, remediere scurgeri de apă și înlocuire componente defecte."
         canonical="https://airlife.ro/servicii/service-aer-conditionat"
-        structuredData={[structuredData, breadcrumbsData]}
+        structuredData={[structuredData, breadcrumbsData, faqSchema(FAQS)]}
       />
 
       <Navbar />
@@ -225,7 +239,7 @@ const ServiceAerConditionat = () => {
                   Timp de răspuns și arie de operare
                 </h2>
                 <p className="text-muted-foreground leading-relaxed">
-                  Intervenim în toată țara. În perioadele caniculare, programările se fac în ordinea recepționării solicitărilor, acordând prioritate urgențelor medicale sau spațiilor comerciale sensibile.
+                  Intervenim în zonele acoperite de echipa noastră; îți confirmăm disponibilitatea la cerere. În perioadele caniculare, programările se fac în ordinea recepționării solicitărilor, acordând prioritate urgențelor medicale sau spațiilor comerciale sensibile.
                 </p>
               </section>
 
@@ -236,18 +250,12 @@ const ServiceAerConditionat = () => {
                   Întrebări frecvente despre service
                 </h2>
                 <div className="space-y-4">
-                  <div>
-                    <h3 className="font-semibold text-foreground">Cât costă o constatare?</h3>
-                    <p className="text-sm text-muted-foreground mt-1">
-                      Deplasarea și constatarea tehnică au un tarif fix. Dacă decizi să efectuezi reparația cu noi, valoarea constatării se poate deduce parțial sau integral din costul final al manoperei.
-                    </p>
-                  </div>
-                  <div>
-                    <h3 className="font-semibold text-foreground">Ce mărci de aparate reparați?</h3>
-                    <p className="text-sm text-muted-foreground mt-1">
-                      Deservim majoritatea mărcilor de pe piață: Daikin, Gree, Midea, Mitsubishi, Cooper&amp;Hunter, Yamato, Vortex, Beko, Whirlpool, LG, Samsung și altele.
-                    </p>
-                  </div>
+                  {FAQS.map((f) => (
+                    <div key={f.q}>
+                      <h3 className="font-semibold text-foreground">{f.q}</h3>
+                      <p className="text-sm text-muted-foreground mt-1">{f.a}</p>
+                    </div>
+                  ))}
                 </div>
               </section>
             </div>

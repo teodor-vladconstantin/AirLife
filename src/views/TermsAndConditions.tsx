@@ -15,7 +15,7 @@ const sections: LegalSection[] = [
           <li>Sediul social: {c.address}</li>
           <li>E-mail: <a href={`mailto:${c.email}`}>{c.email}</a>; telefon: {c.phone}</li>
         </ul>
-        <p>Serviciile la domiciliul clientului se prestează la cerere, în toată țara, conform disponibilității echipei.</p>
+        <p>Serviciile la domiciliul clientului se prestează la cerere, doar în zonele acoperite de echipă și conform disponibilității acesteia, confirmată înainte de programare. Livrarea produselor se face în toată țara.</p>
       </>
     ),
   },

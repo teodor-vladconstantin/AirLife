@@ -194,12 +194,19 @@ export const trackContactSubmit = (subject: string) => {
   sendEvent("contact_form_submission", {
     form_subject: subject,
   });
+  trackLead("contact", subject);
 };
 
 export const trackServiceQuoteRequest = (serviceName: string) => {
   sendEvent("service_quote_request", {
     service_name: serviceName,
   });
+  trackLead("service_quote", serviceName);
+};
+
+// Product quote request (the checkout path): GA4 key event generate_lead with cart value.
+export const trackQuoteRequest = (value: number) => {
+  sendEvent("generate_lead", { currency: "RON", value, lead_magnet: "product_quote", lead_source: "request-quote" });
 };
 
 export const trackLead = (magnet: string, source: string) => {

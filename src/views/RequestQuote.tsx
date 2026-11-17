@@ -2,6 +2,7 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "@/lib/router";
 import { useQuote } from "@/contexts/QuoteContext";
+import { trackQuoteRequest } from "@/lib/analytics";
 import { useToast } from "@/hooks/use-toast";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -54,6 +55,7 @@ const RequestQuote = () => {
         },
       });
       if (res.error) throw res.error;
+      trackQuoteRequest(total);
       // prefer showing the friendly order number (AL00000...) instead of UUID
       toast({ title: "Cerere trimisă", description: `Număr cerere: ${(res as { orderNumber?: string }).orderNumber || res.id}` });
       navigate(`/order-confirmation/${res.id}`);

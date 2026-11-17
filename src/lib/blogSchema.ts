@@ -47,9 +47,14 @@ export const postSchemas = (p: PostLike) => {
       ],
     },
     ...(faq.length
-      ? [{ "@context": "https://schema.org", "@type": "FAQPage", mainEntity: faq.map((f) => ({ "@type": "Question", name: f.q, acceptedAnswer: { "@type": "Answer", text: f.a } })) }]
+      ? [faqSchema(faq)]
       : []),
   ];
 };
 
 export const roDate = (iso?: string | null) => (iso ? new Date(iso).toLocaleDateString("ro-RO", { day: "numeric", month: "long", year: "numeric" }) : "");
+
+export const faqSchema = (faq: { q: string; a: string }[]) => ({
+  "@context": "https://schema.org", "@type": "FAQPage",
+  mainEntity: faq.map((f) => ({ "@type": "Question", name: f.q, acceptedAnswer: { "@type": "Answer", text: f.a } })),
+});

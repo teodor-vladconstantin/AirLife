@@ -1,5 +1,6 @@
 "use client";
 import { useState } from "react";
+import { faqSchema } from "@/lib/blogSchema";
 import { Link } from "@/lib/router";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -22,6 +23,21 @@ import {
   HeartPulse,
 } from "lucide-react";
 import { trackServiceQuoteRequest, trackClickToCall } from "@/lib/analytics";
+
+const FAQS = [
+  {
+    "q": "Riscă să se murdărească peretele sau parchetul?",
+    "a": "Nu. Folosim o husă etanșă cu drenaj impermeabil montată direct sub unitatea internă, care conduce lichidul spălat direct într-un recipient special."
+  },
+  {
+    "q": "Soluțiile folosite sunt toxice pentru animale sau copii?",
+    "a": "Folosim soluții profesionale biodegradabile avizate pentru climatizare. După clătire și uscare, aparatul este gata de utilizare în deplină siguranță."
+  },
+  {
+    "q": "Faceți intervenții în localitatea mea?",
+    "a": "Montajul, igienizarea și service-ul nu sunt disponibile în toată țara: le facem la cerere, doar în zonele acoperite de echipa noastră. Trimite-ne localitatea prin formular sau telefonic și îți confirmăm disponibilitatea înainte de programare. Produsele și accesoriile le livrăm prin curier în toată țara."
+  }
+];
 
 const IgienizareAerConditionat = () => {
   const { toast } = useToast();
@@ -66,10 +82,8 @@ const IgienizareAerConditionat = () => {
     "provider": {
       "@type": "HVACBusiness",
       "name": "AirLife",
-      "url": "https://airlife.ro",
-      "areaServed": { "@type": "Country", "name": "România" }
+      "url": "https://airlife.ro"
     },
-    "areaServed": { "@type": "Country", "name": "România" },
     "description": "Serviciu profesional de igienizare și dezinfectare a aparatelor de aer condiționat. Curățare vaporizator, turbină de ventilație, tăviță condens și tratament biocid autorizat.",
     "offers": {
       "@type": "Offer",
@@ -113,7 +127,7 @@ const IgienizareAerConditionat = () => {
         title="Igienizare Aer Condiționat | Curățare Profesională | AirLife"
         description="Igienizare profesională aer condiționat. Curățare profundă a vaporizatorului, turbinei și tăviței de condens. Elimină mirosurile, bacteriile și mucegaiul."
         canonical="https://airlife.ro/servicii/igienizare-aer-conditionat"
-        structuredData={[structuredData, breadcrumbsData]}
+        structuredData={[structuredData, breadcrumbsData, faqSchema(FAQS)]}
       />
 
       <Navbar />
@@ -235,7 +249,7 @@ const IgienizareAerConditionat = () => {
                   Acoperire
                 </h2>
                 <p className="text-muted-foreground leading-relaxed">
-                  Ne deplasăm operativ, în toată țara. Intervenția durează între 45 și 75 de minute per aparat.
+                  Intervenim în zonele acoperite de echipa noastră; îți confirmăm disponibilitatea la cerere. Intervenția durează între 45 și 75 de minute per aparat.
                 </p>
               </section>
 
@@ -246,18 +260,12 @@ const IgienizareAerConditionat = () => {
                   Întrebări frecvente despre igienizare
                 </h2>
                 <div className="space-y-4">
-                  <div>
-                    <h3 className="font-semibold text-foreground">Riscă să se murdărească peretele sau parchetul?</h3>
-                    <p className="text-sm text-muted-foreground mt-1">
-                      Nu. Folosim o husă etanșă cu drenaj impermeabil montată direct sub unitatea internă, care conduce lichidul spălat direct într-un recipient special.
-                    </p>
-                  </div>
-                  <div>
-                    <h3 className="font-semibold text-foreground">Soluțiile folosite sunt toxice pentru animale sau copii?</h3>
-                    <p className="text-sm text-muted-foreground mt-1">
-                      Folosim soluții profesionale biodegradabile avizate pentru climatizare. După clătire și uscare, aparatul este gata de utilizare în deplină siguranță.
-                    </p>
-                  </div>
+                  {FAQS.map((f) => (
+                    <div key={f.q}>
+                      <h3 className="font-semibold text-foreground">{f.q}</h3>
+                      <p className="text-sm text-muted-foreground mt-1">{f.a}</p>
+                    </div>
+                  ))}
                 </div>
               </section>
             </div>

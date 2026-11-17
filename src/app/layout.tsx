@@ -26,7 +26,7 @@ const orgSchema = {
         { "@type": "OpeningHoursSpecification", dayOfWeek: "Saturday", opens: "10:00", closes: "14:00" },
       ],
       image: "https://airlife.ro/og-image.jpg", areaServed: { "@type": "Country", name: "România" },
-      description: "Servicii de montaj, igienizare profesională și service pentru sisteme de aer condiționat la nivel național.",
+      description: "Magazin online HVAC cu livrare în toată țara. Servicii de montaj, igienizare și service aer condiționat la cerere, în zonele acoperite.",
     },
   ],
 };

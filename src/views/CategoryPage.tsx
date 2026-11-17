@@ -303,7 +303,7 @@ const CategoryPage = ({ forcedSlug, products }: CategoryPageProps) => {
                 Ai nevoie de ajutor cu montajul sau igienizarea?
               </h3>
               <p className="text-sm text-muted-foreground max-w-xl">
-                Echipa Airlife asigură montaj autorizat, igienizare profesională și mentenanță periodică pentru sistemele de aer condiționat în toată țara.
+                Echipa Airlife asigură montaj autorizat, igienizare profesională și mentenanță periodică pentru sistemele de aer condiționat, în zonele acoperite de echipa noastră.
               </p>
             </div>
             <div className="flex gap-3 flex-shrink-0 w-full sm:w-auto">

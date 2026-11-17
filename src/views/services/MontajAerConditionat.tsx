@@ -1,5 +1,6 @@
 "use client";
 import { useState } from "react";
+import { faqSchema } from "@/lib/blogSchema";
 import { Link } from "@/lib/router";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -22,6 +23,25 @@ import {
   FileCheck,
 } from "lucide-react";
 import { trackServiceQuoteRequest, trackClickToCall } from "@/lib/analytics";
+
+const FAQS = [
+  {
+    "q": "De ce este obligatorie vidarea cu pompă de vid?",
+    "a": "Vidarea îndepărtează aerul și umiditatea din țevile de cupru înainte de a deschide freonul. Fără vidare, umiditatea poate reacționa cu uleiul din compresor, ducând la acidifiere și defectarea prematură a compresorului."
+  },
+  {
+    "q": "Cât durează un montaj tipic?",
+    "a": "O instalare standard durează între 2 și 3,5 ore, în funcție de grosimea peretelui și traseul frigorific."
+  },
+  {
+    "q": "Asigurați și accesorii HVAC dacă lipsesc din pachet?",
+    "a": "Da, prin magazinul nostru online punem la dispoziție console, suporturi cu amortizoare, trasee frigorifice și soluții de drenaj condens."
+  },
+  {
+    "q": "Faceți intervenții în localitatea mea?",
+    "a": "Montajul, igienizarea și service-ul nu sunt disponibile în toată țara: le facem la cerere, doar în zonele acoperite de echipa noastră. Trimite-ne localitatea prin formular sau telefonic și îți confirmăm disponibilitatea înainte de programare. Produsele și accesoriile le livrăm prin curier în toată țara."
+  }
+];
 
 const MontajAerConditionat = () => {
   const { toast } = useToast();
@@ -66,10 +86,8 @@ const MontajAerConditionat = () => {
     "provider": {
       "@type": "HVACBusiness",
       "name": "AirLife",
-      "url": "https://airlife.ro",
-      "areaServed": { "@type": "Country", "name": "România" }
+      "url": "https://airlife.ro"
     },
-    "areaServed": { "@type": "Country", "name": "România" },
     "description": "Serviciu autorizat de instalare aer condiționat. Include fixare console, perforare perete, vidare traseu frigorific și probe funcționale.",
     "offers": {
       "@type": "Offer",
@@ -113,7 +131,7 @@ const MontajAerConditionat = () => {
         title="Montaj Aer Condiționat | Instalare Profesională | AirLife"
         description="Montaj aer condiționat. Instalare curată, vidare traseu frigorific cu pompă de vid, materiale de calitate și probă completă de funcționare."
         canonical="https://airlife.ro/servicii/montaj-aer-conditionat"
-        structuredData={[structuredData, breadcrumbsData]}
+        structuredData={[structuredData, breadcrumbsData, faqSchema(FAQS)]}
       />
 
       <Navbar />
@@ -134,7 +152,7 @@ const MontajAerConditionat = () => {
           {/* Hero Section */}
           <div className="text-center max-w-3xl mx-auto mb-12">
             <div className="inline-flex items-center gap-2 px-3 py-1 bg-primary/10 text-primary rounded-full text-sm font-medium mb-4">
-              <MapPin className="w-4 h-4" /> Serviciu disponibil în toată țara
+              <MapPin className="w-4 h-4" /> Disponibilitate confirmată la cerere
             </div>
             <h1 className="text-4xl md:text-5xl font-bold tracking-tight mb-4 text-foreground">
               Montaj Aer Condiționat
@@ -245,7 +263,7 @@ const MontajAerConditionat = () => {
                   Arie de acoperire și garanția lucrării
                 </h2>
                 <p className="text-muted-foreground mb-3">
-                  Echipa Airlife operează în <strong>toată țara</strong>.
+                  Montajul se face în zonele acoperite de echipa Airlife. Trimite-ne localitatea și îți confirmăm disponibilitatea. Aparatele și accesoriile le livrăm în toată țara.
                 </p>
                 <p className="text-muted-foreground">
                   Lucrările de montaj beneficiază de garanție de execuție, iar aparatul tău își păstrează garanția legală de la producător mulțumită vidării corecte și respectării fișei tehnice.
@@ -259,24 +277,12 @@ const MontajAerConditionat = () => {
                   Întrebări frecvente despre montaj
                 </h2>
                 <div className="space-y-4">
-                  <div>
-                    <h3 className="font-semibold text-foreground">De ce este obligatorie vidarea cu pompă de vid?</h3>
-                    <p className="text-sm text-muted-foreground mt-1">
-                      Vidarea îndepărtează aerul și umiditatea din țevile de cupru înainte de a deschide freonul. Fără vidare, umiditatea poate reacționa cu uleiul din compresor, ducând la acidifiere și defectarea prematură a compresorului.
-                    </p>
-                  </div>
-                  <div>
-                    <h3 className="font-semibold text-foreground">Cât durează un montaj tipic?</h3>
-                    <p className="text-sm text-muted-foreground mt-1">
-                      O instalare standard durează între 2 și 3,5 ore, în funcție de grosimea peretelui și traseul frigorific.
-                    </p>
-                  </div>
-                  <div>
-                    <h3 className="font-semibold text-foreground">Asigurați și accesorii HVAC dacă lipsesc din pachet?</h3>
-                    <p className="text-sm text-muted-foreground mt-1">
-                      Da, prin magazinul nostru online punem la dispoziție console, suporturi cu amortizoare, trasee frigorifice și soluții de drenaj condens.
-                    </p>
-                  </div>
+                  {FAQS.map((f) => (
+                    <div key={f.q}>
+                      <h3 className="font-semibold text-foreground">{f.q}</h3>
+                      <p className="text-sm text-muted-foreground mt-1">{f.a}</p>
+                    </div>
+                  ))}
                 </div>
               </section>
             </div>
