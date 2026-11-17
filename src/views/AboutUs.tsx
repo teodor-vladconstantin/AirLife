@@ -48,9 +48,9 @@ const AboutUs = () => {
                 impact redus asupra mediului înconjurător.
               </p>
               <p>
-                Ne angajăm să aducem pe piața românească produse eco-friendly care combină eficiența
-                energetică cu tehnologia de ultimă generație, pentru a crea spații de locuit și de
-                lucru mai sănătoase pentru toți clienții noștri.
+                Îți propunem produse eco-friendly care combină eficiența energetică cu tehnologia de
+                ultimă generație, pentru a crea spații de locuit și de lucru mai sănătoase pentru
+                toți clienții noștri.
               </p>
             </CardContent>
           </Card>
