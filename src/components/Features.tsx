@@ -9,7 +9,7 @@ const features = [
   {
     icon: Zap,
     title: "Eficiență & Randament Maxim",
-    description: "Accesorii și consumabile calitative care asigură funcționarea aparatului la randamentul nominal.",
+    description: "Accesorii și consumabile calitative care asigură funcționarea echipamentului la randamentul nominal.",
   },
   {
     icon: Shield,
