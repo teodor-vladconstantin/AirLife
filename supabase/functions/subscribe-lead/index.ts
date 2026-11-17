@@ -47,7 +47,7 @@ Deno.serve(async (req) => {
       reply_to: "contact@airlife.ro",
       subject: m.subject,
       html: `<p>Bună!</p><p>Mulțumim că ești alături de AirLife. Aici ai <a href="${SITE}${m.path}">${m.title}</a>.</p>
-<p>Ai nevoie de igienizare sau service în Buzău? Sună-ne la <a href="tel:+40722153525">+40 722 15 35 25</a>.</p>
+<p>Ai nevoie de igienizare sau service? Sună-ne la <a href="tel:+40722153525">+40 722 15 35 25</a>.</p>
 <p style="color:#888;font-size:12px">Nu mai vrei emailuri? Răspunde cu „STOP”.</p>`,
     }),
   });

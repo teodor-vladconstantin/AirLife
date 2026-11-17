@@ -1,5 +1,6 @@
 import { Leaf, MapPin, Mail, Phone } from "lucide-react";
 import { Link } from "@/lib/router";
+import SubscribeForm from "@/components/SubscribeForm";
 import { PHONE_DISPLAY, PHONE_TEL } from "@/data/localSeo";
 import { trackClickToCall } from "@/lib/analytics";
 import { company, SAL_URL, ANPC_URL } from "@/data/company";
@@ -150,6 +151,15 @@ const Footer = () => {
               </li>
             </ul>
           </div>
+        </div>
+
+        {/* Newsletter (double opt-in) */}
+        <div className="border-t border-background/20 py-8 grid md:grid-cols-2 gap-6 items-start">
+          <div>
+            <h3 className="font-semibold text-white">Sfaturi și remindere de întreținere</h3>
+            <p className="text-sm opacity-80 mt-1">Câteva emailuri pe an: ce verifici înainte de sezon și când e momentul pentru igienizare.</p>
+          </div>
+          <SubscribeForm source="footer" dark />
         </div>
 
         {/* Bottom row */}
