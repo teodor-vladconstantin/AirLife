@@ -3,9 +3,30 @@ import { Link } from "@/lib/router";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import SEO from "@/components/SEO";
+import { FaqSection } from "@/components/FaqSection";
+import { faqSchema } from "@/lib/blogSchema";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { CheckCircle2, AlertTriangle, Sparkles, Clock, BookOpen, ArrowRight } from "lucide-react";
+
+const FAQS = [
+  {
+    "q": "Cât de des trebuie curățat aerul condiționat?",
+    "a": "Filtrele le poți spăla singur la 3–4 săptămâni în sezonul de utilizare. Igienizarea profesională a vaporizatorului și a turbinei se face cel puțin o dată pe an, ideal înainte de sezonul cald, și mai des dacă folosești aparatul și pentru încălzire."
+  },
+  {
+    "q": "Pot curăța singur aparatul de aer condiționat?",
+    "a": "Da, filtrele și carcasa. Vaporizatorul și turbina, unde se adună mucegaiul și bacteriile, necesită spumă specială, husă de colectare și clătire sub presiune, așa că pentru ele e mai sigur un tehnician."
+  },
+  {
+    "q": "Care sunt semnele că aerul condiționat are nevoie de igienizare?",
+    "a": "Miros de mucegai sau de umezeală la pornire, debit de aer mai slab, picurare de apă din unitatea interioară sau puncte negre pe turbină. Toate arată depuneri care trebuie curățate."
+  },
+  {
+    "q": "Ce dezinfectant se folosește pentru aerul condiționat?",
+    "a": "Se folosesc spume și soluții dedicate climatizării, care nu corodează lamelele de aluminiu, plus tratament biocid pentru tăvița de condens. Evită dezinfectanții de uz casnic cu clor, care pot deteriora vaporizatorul."
+  }
+];
 
 const GhidIgienizare = () => {
   const structuredData = {
@@ -37,7 +58,7 @@ const GhidIgienizare = () => {
         title="Când și Cum se Curăță un Aer Condiționat | Ghid AirLife"
         description="Ghid pentru igienizarea aerului condiționat: cum se curăță filtrele, vaporizatorul și turbina și când ai nevoie de tehnician."
         canonical="https://airlife.ro/ghid/igienizare-aer-conditionat"
-        structuredData={structuredData}
+        structuredData={[structuredData, faqSchema(FAQS)]}
       />
 
       <Navbar />
@@ -150,14 +171,16 @@ const GhidIgienizare = () => {
               </CardContent>
             </Card>
 
+            <FaqSection title="Întrebări frecvente" faq={FAQS} />
+
             {/* CTA Box */}
             <div className="bg-primary/5 border border-primary/20 rounded-2xl p-6 md:p-8 flex flex-col sm:flex-row items-center justify-between gap-6 my-10">
               <div>
                 <h3 className="text-xl font-bold text-foreground mb-2">
-                  Locuiești? Lasă specialiștii să se ocupe!
+                  Vrei o igienizare profesională?
                 </h3>
                 <p className="text-sm text-muted-foreground max-w-xl">
-                  Echipa AirLife realizează igienizarea profesională completă cu husă impermeabilă, degresare vaporizator și tratament biocid direct la tine acasă.
+                  Echipa AirLife realizează igienizarea profesională completă cu husă impermeabilă, degresare vaporizator și tratament biocid, la cerere, în zonele acoperite de echipa noastră sau de parteneri.
                 </p>
               </div>
               <div className="flex flex-col sm:flex-row gap-3 flex-shrink-0 w-full sm:w-auto">

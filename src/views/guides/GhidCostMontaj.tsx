@@ -3,9 +3,34 @@ import { Link } from "@/lib/router";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import SEO from "@/components/SEO";
+import { FaqSection } from "@/components/FaqSection";
+import { faqSchema } from "@/lib/blogSchema";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { CheckCircle2, AlertOctagon, Wrench, Clock, BookOpen, ArrowRight } from "lucide-react";
+
+const FAQS = [
+  {
+    "q": "Cât durează montarea unui aparat de aer condiționat?",
+    "a": "Un montaj standard durează între 2 și 3,5 ore, în funcție de grosimea peretelui, lungimea traseului frigorific și locul în care se montează unitatea exterioară."
+  },
+  {
+    "q": "Ce influențează prețul instalării unui aer condiționat?",
+    "a": "Prețul pornește de la montajul standard și crește cu traseul frigorific peste lungimea inclusă, lucrul la înălțime, carotarea pereților groși sau din beton armat și accesoriile suplimentare, cum ar fi consolele sau pompa de condens."
+  },
+  {
+    "q": "Ce garanție ar trebui să primesc pentru un aer condiționat montat de o firmă?",
+    "a": "Aparatul are garanția legală de 24 de luni pentru persoane fizice, iar firma care face montajul ar trebui să ofere garanție pentru manoperă. Cere factura și fișa de instalare completată de un instalator atestat pentru gaze fluorurate: fără ele, producătorul poate refuza garanția."
+  },
+  {
+    "q": "Cum calculez consumul unui aer condiționat?",
+    "a": "Înmulțește puterea electrică absorbită (în kW, din fișa tehnică) cu numărul de ore de funcționare. Un aparat inverter lucrează mare parte din timp sub puterea nominală, așa că consumul real este de obicei mai mic decât rezultatul acestui calcul."
+  },
+  {
+    "q": "Faceți montaj în localitatea mea?",
+    "a": "Montajul se face la cerere, doar în zonele acoperite de echipa noastră sau de parteneri. Trimite-ne localitatea și îți confirmăm disponibilitatea; aparatele și accesoriile le livrăm prin curier în toată țara."
+  }
+];
 
 const GhidCostMontaj = () => {
   const structuredData = {
@@ -37,7 +62,7 @@ const GhidCostMontaj = () => {
         title="Cât Costă Montajul unui Aer Condiționat | Ghid AirLife"
         description="Ghid de prețuri pentru montaj aer condiționat: ce conține un montaj standard, ce factori cresc prețul (traseu, înălțime, carotare) și cum eviți un montaj neconform."
         canonical="https://airlife.ro/ghid/cost-montaj-aer-conditionat"
-        structuredData={structuredData}
+        structuredData={[structuredData, faqSchema(FAQS)]}
       />
 
       <Navbar />
@@ -154,6 +179,8 @@ const GhidCostMontaj = () => {
                 </div>
               </CardContent>
             </Card>
+
+            <FaqSection title="Întrebări frecvente" faq={FAQS} />
 
             {/* CTA Box */}
             <div className="bg-primary/5 border border-primary/20 rounded-2xl p-6 md:p-8 flex flex-col sm:flex-row items-center justify-between gap-6 my-10">
