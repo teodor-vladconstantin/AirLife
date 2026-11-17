@@ -1,5 +1,6 @@
 "use client";
 import { useState } from "react";
+import { submitRequest } from "@/lib/requests";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import SEO from "@/components/SEO";
@@ -34,21 +35,22 @@ const Contact = () => {
     }
 
     setIsSubmitting(true);
-    trackContactSubmit(subject || "Mesaj general de contact");
-
-    setTimeout(() => {
-      setIsSubmitting(false);
-      setSubmitted(true);
-      toast({
-        title: "Mesaj expediat!",
-        description: "Îți mulțumim pentru mesaj. Echipa AirLife te va contacta în cel mai scurt timp posibil.",
-      });
-      setName("");
-      setEmail("");
-      setPhone("");
-      setSubject("");
-      setMessage("");
-    }, 600);
+    submitRequest("Contact", { name, email, phone, details: `${subject || "Mesaj general"}: ${message}` })
+      .then(() => {
+        trackContactSubmit(subject || "Mesaj general de contact");
+        setSubmitted(true);
+        toast({
+          title: "Mesaj expediat!",
+          description: "Îți mulțumim pentru mesaj. Echipa AirLife te va contacta în cel mai scurt timp posibil.",
+        });
+        setName("");
+        setEmail("");
+        setPhone("");
+        setSubject("");
+        setMessage("");
+      })
+      .catch(() => toast({ title: "Eroare", description: "Cererea nu a putut fi trimisă. Sună-ne la +40 722 15 35 25.", variant: "destructive" }))
+      .finally(() => setIsSubmitting(false));
   };
 
   const contactStructuredData = {

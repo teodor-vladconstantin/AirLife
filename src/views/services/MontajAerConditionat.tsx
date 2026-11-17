@@ -1,6 +1,7 @@
 "use client";
 import { useState } from "react";
 import { faqSchema } from "@/lib/blogSchema";
+import { submitRequest } from "@/lib/requests";
 import { Link } from "@/lib/router";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -63,19 +64,20 @@ const MontajAerConditionat = () => {
     }
 
     setIsSubmitting(true);
-    trackServiceQuoteRequest("Montaj Aer Condiționat");
-
-    setTimeout(() => {
-      setIsSubmitting(false);
-      toast({
-        title: "Cerere trimisă cu succes!",
-        description: "Vă vom contacta în cel mai scurt timp pentru confirmarea detaliilor și a programării.",
-      });
-      setName("");
-      setPhone("");
-      setLocation("");
-      setDetails("");
-    }, 600);
+    submitRequest("Montaj Aer Condiționat", { name, phone, details: `Localitate: ${location || "-"}. ${details}` })
+      .then(() => {
+        trackServiceQuoteRequest("Montaj Aer Condiționat");
+        toast({
+          title: "Cerere trimisă cu succes!",
+          description: "Vă vom contacta în cel mai scurt timp pentru confirmarea detaliilor și a programării.",
+        });
+        setName("");
+        setPhone("");
+        setLocation("");
+        setDetails("");
+      })
+      .catch(() => toast({ title: "Eroare", description: "Cererea nu a putut fi trimisă. Sună-ne la +40 722 15 35 25.", variant: "destructive" }))
+      .finally(() => setIsSubmitting(false));
   };
 
   const structuredData = {
