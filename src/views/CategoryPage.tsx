@@ -5,6 +5,7 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import SEO from "@/components/SEO";
 import { CATEGORIES_DATA } from "@/data/categoriesData";
+import { faqSchema } from "@/lib/blogSchema";
 import type { StaticProduct } from "@/data/initialProducts";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -126,7 +127,7 @@ const CategoryPage = ({ forcedSlug, products }: CategoryPageProps) => {
         title={categoryInfo.title}
         description={categoryInfo.metaDescription}
         canonical={`https://airlife.ro/${categoryInfo.slug}`}
-        structuredData={[structuredData, breadcrumbsData]}
+        structuredData={categoryInfo.faq ? [structuredData, breadcrumbsData, faqSchema(categoryInfo.faq)] : [structuredData, breadcrumbsData]}
       />
 
       <Navbar />
@@ -292,6 +293,20 @@ const CategoryPage = ({ forcedSlug, products }: CategoryPageProps) => {
               ))}
             </ul>
           </div>
+
+          {categoryInfo.faq && (
+            <section className="bg-card border border-border p-6 md:p-8 rounded-2xl mb-12 shadow-sm">
+              <h2 className="text-2xl font-bold text-foreground mb-4">Întrebări frecvente: {categoryInfo.name}</h2>
+              <div className="space-y-4">
+                {categoryInfo.faq.map((f) => (
+                  <div key={f.q}>
+                    <h3 className="font-semibold text-foreground">{f.q}</h3>
+                    <p className="text-sm text-muted-foreground mt-1">{f.a}</p>
+                  </div>
+                ))}
+              </div>
+            </section>
+          )}
 
           {/* Contextual Link to Local Services in */}
           <div className="bg-primary/5 border border-primary/20 rounded-2xl p-6 md:p-8 flex flex-col sm:flex-row items-center justify-between gap-6">

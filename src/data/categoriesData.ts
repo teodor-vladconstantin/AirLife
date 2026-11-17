@@ -9,6 +9,7 @@ export interface CategoryInfo {
     title: string;
     tips: string[];
   };
+  faq?: { q: string; a: string }[];
 }
 
 export const CATEGORIES_DATA: Record<string, CategoryInfo> = {
@@ -18,9 +19,9 @@ export const CATEGORIES_DATA: Record<string, CategoryInfo> = {
     title: "Aer Condiționat Inverter Wi-Fi 9000–21000 BTU | AirLife",
     metaDescription:
       "Aparate de aer condiționat inverter cu Wi-Fi, în mai multe capacități (9000–21000 BTU). Livrare în toată țara, montaj profesional la cerere.",
-    h1: "Aer Condiționat cu Unitate Exterioară",
+    h1: "Aer Condiționat Inverter cu Wi-Fi",
     description:
-      "Aparate split inverter pentru apartamente, case și birouri, disponibile în mai multe capacități. Livrare în toată țara; montajul se face la cerere, în funcție de zonă.",
+      "Un aer condiționat inverter își reglează continuu turația compresorului în loc să pornească și să se oprească, așa că menține temperatura constantă și consumă mai puțin decât un aparat clasic. Aici găsești aparate split inverter pentru apartamente, case și birouri, în mai multe capacități. Livrare în toată țara; montajul se face la cerere, în funcție de zonă.",
     buyingGuide: {
       title: "Cum alegi capacitatea potrivită?",
       tips: [
@@ -29,11 +30,18 @@ export const CATEGORIES_DATA: Record<string, CategoryInfo> = {
         "Clasa energetică A++ și compresorul inverter reduc consumul, iar funcția Wi-Fi permite pornirea aparatului înainte să ajungi acasă.",
       ],
     },
+    faq: [
+      { q: "Ce înseamnă aer condiționat inverter?", a: "Inverter înseamnă că turația compresorului se reglează continuu în funcție de cât de departe este camera de temperatura setată. Aparatul nu mai pornește și oprește compresorul la putere maximă, ci lucrează mai lin, cu consum mai mic și temperatură mai stabilă." },
+      { q: "Merită un aer condiționat inverter față de unul clasic?", a: "Da, pentru utilizare zilnică. Un inverter consumă de regulă mai puțin curent decât un aparat on/off, face mai puțin zgomot și menține temperatura mai constantă. Diferența de preț se recuperează în timp, mai ales dacă folosești aparatul și pentru încălzire." },
+      { q: "Câți BTU îmi trebuie pentru camera mea?", a: "Orientativ: 9000 BTU pentru camere de până la 25 mp, 12000 BTU pentru 25–35 mp și 18000 BTU sau mai mult pentru spații mai mari. Camerele orientate spre sud, de la ultimul etaj sau cu geamuri mari au nevoie de o capacitate mai mare." },
+      { q: "Poate un aer condiționat inverter să încălzească iarna?", a: "Da, aparatele split inverter funcționează și ca pompă de căldură. Randamentul scade la temperaturi exterioare foarte scăzute, așa că verifică în fișa tehnică temperatura minimă de funcționare la încălzire." },
+      { q: "Livrați și montați aparatul?", a: "Livrăm prin curier în toată țara. Montajul profesional îl facem la cerere, doar în zonele acoperite de echipa noastră; trimite-ne localitatea și îți confirmăm disponibilitatea." },
+    ],
   },
   "aer-conditionat-fara-unitate-exterioara": {
     slug: "aer-conditionat-fara-unitate-exterioara",
     name: "Aer Condiționat fără Unitate Exterioară",
-    title: "Aer Condiționat fără Unitate Exterioară | AirLife",
+    title: "Aer Condiționat fără Unitate Exterioară (Monobloc) | AirLife",
     metaDescription:
       "Aparate de aer condiționat fără unitate exterioară, pentru locuințe unde nu se poate monta unitate pe fațadă. Răcire și încălzire, control din aplicație.",
     h1: "Aer Condiționat fără Unitate Exterioară",
@@ -47,6 +55,13 @@ export const CATEGORIES_DATA: Record<string, CategoryInfo> = {
         "Dacă locuința se încălzește greu iarna, variantele cu încălzitor electric ajută la temperaturi foarte scăzute.",
       ],
     },
+    faq: [
+      { q: "Cum funcționează un aer condiționat fără unitate exterioară?", a: "Este un aparat monobloc: compresorul și toate componentele sunt într-o singură unitate montată pe peretele interior. Schimbul de căldură cu exteriorul se face prin două orificii în perete, prin care aerul intră și iese, așa că pe fațadă rămân vizibile doar două grile." },
+      { q: "Când merită un aer condiționat fără unitate exterioară?", a: "Când nu poți monta o unitate pe fațadă: clădiri istorice, blocuri unde asociația nu permite, fațade termoizolate sau apartamente fără balcon. Verifică totuși regulile clădirii înainte de a da găurile în perete." },
+      { q: "Este mai zgomotos decât un aer condiționat split?", a: "Da, puțin. Pentru că și compresorul este în interior, nivelul de zgomot este mai mare decât la unitatea interioară a unui split. Modelele moderne sunt totuși suficient de silențioase pentru dormitoare și birouri." },
+      { q: "Consumă mai mult curent decât un split inverter?", a: "La aceeași capacitate, un monobloc are de regulă un randament ceva mai mic decât un split inverter. Diferența este compensată de faptul că nu ai nevoie de unitate exterioară și de un montaj mai simplu." },
+      { q: "Poate încălzi iarna?", a: "Da, majoritatea modelelor fac atât răcire, cât și încălzire. Pentru temperaturi exterioare foarte scăzute, variantele cu rezistență electrică suplimentară ajută la menținerea confortului." },
+    ],
   },
   "recuperatoare-caldura": {
     slug: "recuperatoare-caldura",

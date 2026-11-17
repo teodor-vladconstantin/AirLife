@@ -24,3 +24,6 @@
 - [Livrare și retur](https://airlife.ro/livrare-si-retur)
 - [Garanție](https://airlife.ro/garantie)
 - [Contact](https://airlife.ro/contact): +40 722 15 35 25
+
+## Opțional
+- [Informații complete (llms-full.txt)](https://airlife.ro/llms-full.txt): livrare, retur, garanție, servicii, întrebări frecvente
