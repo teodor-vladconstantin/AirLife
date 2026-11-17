@@ -84,8 +84,8 @@ const AboutUs = () => {
               </CardHeader>
               <CardContent className="text-muted-foreground">
                 <p>
-                  Selectăm doar produse de la producători de renume mondial, oferind garanții complete
-                  și suport tehnic dedicat pentru fiecare produs comercializat.
+                  Furnizori de încredere care pot oferi garanții complete și suport tehnic dedicat
+                  pentru fiecare produs comercializat.
                 </p>
               </CardContent>
             </Card>
