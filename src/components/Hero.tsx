@@ -73,7 +73,7 @@ const Hero = () => {
             <div className="flex justify-center mb-2">
               <MapPin className="w-6 h-6 text-primary" />
             </div>
-            <div className="text-lg font-bold text-white mb-0.5">Toată țara</div>
+            <div className="text-lg font-bold text-white mb-0.5">Servicii</div>
             <div className="text-xs text-white/80">Montaj &amp; igienizare</div>
           </div>
           <div className="text-center animate-in fade-in duration-700">
