@@ -53,7 +53,7 @@ const ProductCategories = () => {
             Categorii de Produse
           </h2>
           <p className="text-base md:text-lg text-muted-foreground max-w-2xl mx-auto">
-            Accesorii calitative și soluții de curățare pentru un sistem de climatizare fiabil și un aer sănătos în casă.
+            Accesorii și soluții de curățare pentru un sistem de climatizare fiabil și un aer sănătos acasă sau la birou.
           </p>
         </div>
 
