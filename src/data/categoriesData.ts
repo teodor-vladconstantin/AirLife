@@ -66,12 +66,12 @@ export const CATEGORIES_DATA: Record<string, CategoryInfo> = {
   "recuperatoare-caldura": {
     slug: "recuperatoare-caldura",
     name: "Recuperatoare de Căldură",
-    title: "Recuperatoare de Căldură Descentralizate | AirLife",
+    title: "Ventilație Descentralizată cu Recuperare de Căldură | AirLife",
     metaDescription:
-      "Recuperatoare de căldură descentralizate NovingAIR și SEVentilation pentru ventilație cu aer proaspăt, fără pierderi mari de căldură. Montaj în perete.",
-    h1: "Recuperatoare de Căldură Descentralizate",
+      "Sisteme de ventilație descentralizată cu recuperare de căldură NovingAIR și SEVentilation, plus panouri de control și accesorii. Pentru case, apartamente, mansarde, subsoluri și birouri.",
+    h1: "Ventilație Descentralizată cu Recuperare de Căldură",
     description:
-      "Aduc aer proaspăt în locuință și recuperează căldura din aerul evacuat, fără tubulaturi lungi. Potrivite pentru apartamente, case și renovări.",
+      "Ventilația descentralizată înseamnă unități montate direct în pereții exteriori ai fiecărei camere, fără tubulatură prin casă. Ele aduc aer proaspăt și recuperează o mare parte din căldura aerului evacuat, așa că aerisești fără să pierzi căldura iarna. Potrivite pentru case, apartamente, mansarde, subsoluri, birouri și renovări.",
     buyingGuide: {
       title: "Cum alegi un recuperator descentralizat?",
       tips: [
@@ -80,6 +80,14 @@ export const CATEGORIES_DATA: Record<string, CategoryInfo> = {
         "Verifică nivelul de zgomot și grosimea peretelui, pentru că de ea depinde lungimea tubulaturii.",
       ],
     },
+    faq: [
+      { q: "Ce este un sistem de ventilație descentralizată?", a: "Un sistem format din unități mici montate direct în pereții exteriori, câte una sau mai multe în fiecare cameră, fără tubulatură centrală. Unitățile lucrează de regulă în pereche: una introduce aer proaspăt, cealaltă evacuează aerul viciat, iar sensul se inversează periodic. Schimbătorul de căldură din fiecare unitate reține căldura aerului evacuat și o cedează aerului proaspăt." },
+      { q: "Ventilație descentralizată sau centralizată: ce aleg?", a: "Varianta descentralizată nu are nevoie de tubulatură prin tavan sau pereți, așa că se montează ușor în casele existente și la renovări, cameră cu cameră. Sistemul centralizat cu recuperator și tubulatură se potrivește mai bine la construcțiile noi, unde traseele se pot prevedea din proiect." },
+      { q: "Cât costă un sistem de ventilație descentralizată pentru o casă?", a: "Costul depinde de numărul de camere ventilate și de modelul unităților: de regulă se folosește o pereche de unități pentru una sau două camere, plus un panou de control. Trimite-ne suprafața și numărul de camere și îți facem o ofertă exactă." },
+      { q: "Se poate folosi în subsol, mansardă sau birouri?", a: "Da. În subsoluri ajută la eliminarea umezelii și a mirosului de închis, în mansarde reduce condensul de pe geamurile de acoperiș, iar în birouri menține aerul proaspăt fără să deschizi geamurile. Contează să existe un perete exterior în care să se poată monta unitățile." },
+      { q: "Cum se controlează unitățile?", a: "Prin panouri de control sau controlere care pornesc unitățile, reglează treptele de ventilație și sincronizează perechile. Unele modele au variante wireless, care evită cablurile între unități." },
+      { q: "Livrați și montați sistemul?", a: "Livrăm unitățile, panourile și accesoriile prin curier în toată țara. Montajul se face la cerere, doar în zonele acoperite de echipa noastră sau de parteneri; trimite-ne localitatea și îți confirmăm disponibilitatea." },
+    ],
   },
   "ventilatoare-baie": {
     slug: "ventilatoare-baie",

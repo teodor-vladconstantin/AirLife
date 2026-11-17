@@ -25,7 +25,7 @@ Operator: TETA ABC SRL, CUI 22404824. Contact: contact@airlife.ro, +40 722 15 35
 ## Categorii
 - Aer condiționat inverter cu Wi-Fi (split, 9000–21000 BTU): https://airlife.ro/aer-conditionat
 - Aer condiționat fără unitate exterioară (monobloc): https://airlife.ro/aer-conditionat-fara-unitate-exterioara
-- Recuperatoare de căldură descentralizate: https://airlife.ro/recuperatoare-caldura
+- Ventilație descentralizată cu recuperare de căldură (unități în perete, panouri de control, accesorii): https://airlife.ro/recuperatoare-caldura
 - Purificatoare de aer: https://airlife.ro/purificatoare-aer
 - Dezumidificatoare: https://airlife.ro/dezumidificatoare
 - Filtre purificatoare: https://airlife.ro/filtre-purificatoare
@@ -42,6 +42,9 @@ Orientativ: 9000 BTU pentru camere de până la 25 mp, 12000 BTU pentru 25–35 
 
 ### Cum funcționează un aer condiționat fără unitate exterioară?
 Este un aparat monobloc montat pe peretele interior, cu toate componentele într-o singură unitate. Schimbul de aer cu exteriorul se face prin două orificii în perete, iar pe fațadă rămân vizibile doar două grile. Este o soluție pentru clădirile unde nu se poate monta unitate exterioară. Față de un split este puțin mai zgomotos și are de regulă un randament ceva mai mic.
+
+### Ce este ventilația descentralizată?
+Unități montate direct în pereții exteriori ai fiecărei camere, fără tubulatură centrală. Lucrează de regulă în pereche și inversează periodic sensul aerului, iar schimbătorul de căldură recuperează o mare parte din căldura aerului evacuat. Este o soluție ușor de montat în case existente, mansarde, subsoluri și birouri.
 
 ### De ce este obligatorie vidarea la montaj?
 Vidarea îndepărtează aerul și umiditatea din țevile de cupru înainte de deschiderea freonului. Fără vidare, umiditatea poate acidifia uleiul din compresor și duce la defectarea prematură a acestuia.
