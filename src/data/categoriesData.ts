@@ -110,12 +110,12 @@ export const CATEGORIES_DATA: Record<string, CategoryInfo> = {
   "accesorii-aer-conditionat": {
     slug: "accesorii-aer-conditionat",
     name: "Accesorii Aer Condiționat",
-    title: "Accesorii Aer Condiționat: Console și Suporturi | AirLife",
+    title: "Suport Aer Condiționat: Console și Accesorii Montaj | AirLife",
     metaDescription:
       "Cumpără accesorii pentru montaj și fixare aer condiționat: console exterioare electrostatice, tampoane antivibrante din cauciuc tehnic, tubulatură și protecții.",
-    h1: "Accesorii pentru Aer Condiționat",
+    h1: "Suport Aer Condiționat și Accesorii de Montaj",
     description:
-      "Gama noastră de accesorii include elemente de fixare și amortizare de calitate industrială pentru unitățile externe și interne de climatizare.",
+      "Suportul de aer condiționat (consola) ține unitatea exterioară pe perete; alege-l după greutatea și capacitatea aparatului, de regulă 400 mm pentru 9000–12000 BTU și 450–500 mm pentru 18000–24000 BTU. Aici găsești console, tampoane antivibrante și alte accesorii de fixare pentru unitățile externe și interne.",
     buyingGuide: {
       title: "Cum alegi accesoriile potrivite pentru aparatul tău?",
       tips: [
@@ -124,6 +124,12 @@ export const CATEGORIES_DATA: Record<string, CategoryInfo> = {
         "Verifică dacă șuruburile și diblurile sunt compatibile cu tipul de zidărie (beton, cărămidă cu goluri sau BCA).",
       ],
     },
+    faq: [
+      { q: "Ce suport de aer condiționat îmi trebuie?", a: "Alege consola după greutatea unității exterioare și după capacitate: de regulă 400 mm pentru aparate de 9000–12000 BTU și 450–500 mm pentru 18000–24000 BTU. Sarcina maximă a consolei trebuie să fie clar peste greutatea unității." },
+      { q: "De ce sunt necesare tampoanele antivibrante?", a: "Compresorul unității exterioare vibrează în funcționare. Tampoanele din cauciuc dintre unitate și consolă opresc transmiterea vibrațiilor și a zgomotului prin perete în locuință." },
+      { q: "Cu ce se prinde suportul de perete?", a: "Cu dibluri și șuruburi potrivite zidăriei: ancore metalice pentru beton, dibluri lungi pentru cărămidă cu goluri și dibluri speciale pentru BCA. O prindere nepotrivită poate ceda în timp sub greutatea unității." },
+      { q: "Livrați accesoriile în toată țara?", a: "Da, accesoriile și consumabilele le livrăm prin curier în toată țara. Montajul aparatului îl facem la cerere, doar în zonele acoperite de echipa noastră sau de parteneri." },
+    ],
   },
   "consumabile-hvac": {
     slug: "consumabile-hvac",
