@@ -35,7 +35,7 @@ export const CATEGORIES_DATA: Record<string, CategoryInfo> = {
       { q: "Merită un aer condiționat inverter față de unul clasic?", a: "Da, pentru utilizare zilnică. Un inverter consumă de regulă mai puțin curent decât un aparat on/off, face mai puțin zgomot și menține temperatura mai constantă. Diferența de preț se recuperează în timp, mai ales dacă folosești aparatul și pentru încălzire." },
       { q: "Câți BTU îmi trebuie pentru camera mea?", a: "Orientativ: 9000 BTU pentru camere de până la 25 mp, 12000 BTU pentru 25–35 mp și 18000 BTU sau mai mult pentru spații mai mari. Camerele orientate spre sud, de la ultimul etaj sau cu geamuri mari au nevoie de o capacitate mai mare." },
       { q: "Poate un aer condiționat inverter să încălzească iarna?", a: "Da, aparatele split inverter funcționează și ca pompă de căldură. Randamentul scade la temperaturi exterioare foarte scăzute, așa că verifică în fișa tehnică temperatura minimă de funcționare la încălzire." },
-      { q: "Livrați și montați aparatul?", a: "Livrăm prin curier în toată țara. Montajul profesional îl facem la cerere, doar în zonele acoperite de echipa noastră; trimite-ne localitatea și îți confirmăm disponibilitatea." },
+      { q: "Livrați și montați aparatul?", a: "Livrăm prin curier în toată țara. Montajul profesional îl facem la cerere, doar în zonele acoperite de echipa noastră sau de parteneri; trimite-ne localitatea și îți confirmăm disponibilitatea." },
     ],
   },
   "aer-conditionat-fara-unitate-exterioara": {

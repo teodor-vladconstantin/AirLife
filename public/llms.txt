@@ -1,6 +1,6 @@
 # AirLife
 
-> AirLife (airlife.ro) este un magazin online românesc de aer condiționat, purificatoare, dezumidificatoare, recuperatoare de căldură, filtre, accesorii și consumabile HVAC, cu livrare în toată țara prin curier. Serviciile de montaj, igienizare și service aer condiționat NU sunt disponibile în toată țara: se fac la cerere, doar în zonele acoperite de echipă, cu disponibilitate confirmată înainte de programare.
+> AirLife (airlife.ro) este un magazin online românesc de aer condiționat, purificatoare, dezumidificatoare, recuperatoare de căldură, filtre, accesorii și consumabile HVAC, cu livrare în toată țara prin curier. Serviciile de montaj, igienizare și service aer condiționat NU sunt disponibile în toată țara: se fac la cerere, doar în zonele acoperite de echipa noastră sau de parteneri, cu disponibilitate confirmată înainte de programare.
 
 ## Magazin
 - [Aer condiționat](https://airlife.ro/aer-conditionat)

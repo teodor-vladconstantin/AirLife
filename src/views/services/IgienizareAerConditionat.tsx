@@ -35,7 +35,7 @@ const FAQS = [
   },
   {
     "q": "Faceți intervenții în localitatea mea?",
-    "a": "Montajul, igienizarea și service-ul nu sunt disponibile în toată țara: le facem la cerere, doar în zonele acoperite de echipa noastră. Trimite-ne localitatea prin formular sau telefonic și îți confirmăm disponibilitatea înainte de programare. Produsele și accesoriile le livrăm prin curier în toată țara."
+    "a": "Montajul, igienizarea și service-ul nu sunt disponibile în toată țara: le facem la cerere, doar în zonele acoperite de echipa noastră sau de parteneri. Trimite-ne localitatea prin formular sau telefonic și îți confirmăm disponibilitatea înainte de programare. Produsele și accesoriile le livrăm prin curier în toată țara."
   }
 ];
 
@@ -249,7 +249,7 @@ const IgienizareAerConditionat = () => {
                   Acoperire
                 </h2>
                 <p className="text-muted-foreground leading-relaxed">
-                  Intervenim în zonele acoperite de echipa noastră; îți confirmăm disponibilitatea la cerere. Intervenția durează între 45 și 75 de minute per aparat.
+                  Intervenim în zonele acoperite de echipa noastră sau de parteneri; îți confirmăm disponibilitatea la cerere. Intervenția durează între 45 și 75 de minute per aparat.
                 </p>
               </section>
 

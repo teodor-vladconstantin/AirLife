@@ -39,7 +39,7 @@ const FAQS = [
   },
   {
     "q": "Faceți intervenții în localitatea mea?",
-    "a": "Montajul, igienizarea și service-ul nu sunt disponibile în toată țara: le facem la cerere, doar în zonele acoperite de echipa noastră. Trimite-ne localitatea prin formular sau telefonic și îți confirmăm disponibilitatea înainte de programare. Produsele și accesoriile le livrăm prin curier în toată țara."
+    "a": "Montajul, igienizarea și service-ul nu sunt disponibile în toată țara: le facem la cerere, doar în zonele acoperite de echipa noastră sau de parteneri. Trimite-ne localitatea prin formular sau telefonic și îți confirmăm disponibilitatea înainte de programare. Produsele și accesoriile le livrăm prin curier în toată țara."
   }
 ];
 
@@ -263,7 +263,7 @@ const MontajAerConditionat = () => {
                   Arie de acoperire și garanția lucrării
                 </h2>
                 <p className="text-muted-foreground mb-3">
-                  Montajul se face în zonele acoperite de echipa Airlife. Trimite-ne localitatea și îți confirmăm disponibilitatea. Aparatele și accesoriile le livrăm în toată țara.
+                  Montajul se face în zonele acoperite de echipa noastră sau de parteneri. Trimite-ne localitatea și îți confirmăm disponibilitatea. Aparatele și accesoriile le livrăm în toată țara.
                 </p>
                 <p className="text-muted-foreground">
                   Lucrările de montaj beneficiază de garanție de execuție, iar aparatul tău își păstrează garanția legală de la producător mulțumită vidării corecte și respectării fișei tehnice.

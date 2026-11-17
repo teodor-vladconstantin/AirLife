@@ -43,7 +43,7 @@ const Services = () => {
     "@type": "HVACBusiness",
     "name": "AirLife Servicii Climatizare",
     "url": "https://airlife.ro/servicii",
-    "description": "Servicii complete de montaj, igienizare și service aer condiționat, la cerere, în zonele acoperite de echipă."
+    "description": "Servicii complete de montaj, igienizare și service aer condiționat, la cerere, în zonele acoperite de echipa noastră sau de parteneri."
   };
 
   return (

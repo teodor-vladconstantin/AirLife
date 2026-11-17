@@ -1,6 +1,6 @@
 # AirLife (airlife.ro): informații complete
 
-> AirLife este un magazin online românesc de aer condiționat, aparate fără unitate exterioară, recuperatoare de căldură, dezumidificatoare, purificatoare, ventilatoare, filtre, accesorii și consumabile HVAC. Produsele se livrează prin curier în toată România. Serviciile de montaj, igienizare și service aer condiționat NU sunt disponibile în toată țara: se fac la cerere, doar în zonele acoperite de echipă, cu disponibilitate confirmată înainte de programare.
+> AirLife este un magazin online românesc de aer condiționat, aparate fără unitate exterioară, recuperatoare de căldură, dezumidificatoare, purificatoare, ventilatoare, filtre, accesorii și consumabile HVAC. Produsele se livrează prin curier în toată România. Serviciile de montaj, igienizare și service aer condiționat NU sunt disponibile în toată țara: se fac la cerere, doar în zonele acoperite de echipa noastră sau de parteneri, cu disponibilitate confirmată înainte de programare.
 
 Operator: TETA ABC SRL, CUI 22404824. Contact: contact@airlife.ro, +40 722 15 35 25. Program: luni–vineri 09:00–18:00, sâmbătă 10:00–14:00.
 
@@ -47,7 +47,7 @@ Este un aparat monobloc montat pe peretele interior, cu toate componentele într
 Vidarea îndepărtează aerul și umiditatea din țevile de cupru înainte de deschiderea freonului. Fără vidare, umiditatea poate acidifia uleiul din compresor și duce la defectarea prematură a acestuia.
 
 ### AirLife face montaj în toată țara?
-Nu. Livrarea produselor se face în toată țara, dar montajul, igienizarea și service-ul se fac doar la cerere, în zonele acoperite de echipă, cu disponibilitate confirmată înainte de programare.
+Nu. Livrarea produselor se face în toată țara, dar montajul, igienizarea și service-ul se fac doar la cerere, în zonele acoperite de echipa noastră sau de parteneri, cu disponibilitate confirmată înainte de programare.
 
 ## Ghiduri
 - Cost montaj aer condiționat: https://airlife.ro/ghid/cost-montaj-aer-conditionat
