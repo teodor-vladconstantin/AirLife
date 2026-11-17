@@ -9,7 +9,7 @@ const services = [
     slug: "montaj-aer-conditionat",
     icon: Wrench,
     badge: "Instalare Autorizată",
-    desc: "Instalare curată cu pompă de vidare, scule speciale, kituri rezistente și probe funcționale complete.",
+    desc: "Instalare curată cu echipa proprie sau parteneri, scule speciale, kituri rezistente și probe funcționale complete.",
     features: ["Vidare obligatorie traseu", "Console cu protecție UV", "Garanție manoperă"],
   },
   {

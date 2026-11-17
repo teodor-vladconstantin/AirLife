@@ -4,7 +4,7 @@ const features = [
   {
     icon: Wrench,
     title: "Montaj & Service",
-    description: "Instalare curată cu pompă de vidare și asistență promptă.",
+    description: "Instalare curată cu echipa proprie sau parteneri și asistență promptă.",
   },
   {
     icon: Zap,
