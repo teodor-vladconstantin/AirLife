@@ -18,7 +18,7 @@ const Footer = () => {
               <span className="text-2xl font-bold tracking-tight text-white">AirLife</span>
             </Link>
             <p className="text-sm opacity-80 max-w-sm leading-relaxed">
-              Magazin online HVAC și servicii dedicate pentru sisteme de climatizare. Accesorii, consumabile și montaj profesional executat curat, cu pompă de vidare.
+              Magazin online HVAC și servicii dedicate pentru sisteme de climatizare. Accesorii, consumabile și montaj profesional cu echipa proprie sau parteneri.
             </p>
             <div className="space-y-2 text-xs opacity-75 pt-2">
               <div className="flex items-center gap-2">
