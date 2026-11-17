@@ -25,7 +25,7 @@ const services = [
     slug: "service-aer-conditionat",
     icon: Activity,
     badge: "Diagnosticare & Remediere",
-    desc: "Identificare pierderi freon R32/R410A, reparare scurgeri de apă, înlocuire condensatori și senzori defecți.",
+    desc: "Identificare pierderi freon, reparare scurgeri de apă, înlocuire condensatori și senzori defecți.",
     features: ["Diagnosticare precisă", "Încărcare freon cu vidare", "Piese originale"],
   },
 ];
