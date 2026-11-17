@@ -65,10 +65,6 @@ const AboutUs = () => {
             </CardHeader>
             <CardContent className="space-y-4 text-muted-foreground">
               <p>
-                Viziunea noastră este să devenim liderul pieței de soluții HVAC sustenabile în România,
-                recunoscut pentru inovație, calitate și angajamentul față de protecția mediului.
-              </p>
-              <p>
                 Credem într-un viitor în care fiecare casă și birou poate beneficia de aer curat și
                 confort termic optim, fără a compromite sănătatea planetei noastre. Ne propunem să
                 educăm și să inspirăm comunitatea să adopte soluții eco-friendly pentru un trai mai bun.
