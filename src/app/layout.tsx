@@ -7,7 +7,7 @@ import { AREA_SERVED } from "@/data/localSeo";
 export const metadata: Metadata = {
   metadataBase: new URL("https://airlife.ro"),
   authors: [{ name: "AirLife" }],
-  icons: { icon: [{ url: "/favicon.svg", type: "image/svg+xml" }, { url: "/favicon.ico", sizes: "48x48" }], apple: "/apple-touch-icon.png" },
+  icons: { icon: [{ url: "/favicon.ico", sizes: "48x48" }, { url: "/favicon-48.png", type: "image/png", sizes: "48x48" }, { url: "/icon-192.png", type: "image/png", sizes: "192x192" }], apple: "/apple-touch-icon.png" },
   other: { "geo.region": "RO-BZ", "geo.placename": "Buzău" },
 };
 export const viewport: Viewport = { themeColor: "#16a34a" };
@@ -16,7 +16,7 @@ const orgSchema = {
   "@context": "https://schema.org",
   "@graph": [
     {
-      "@type": "Organization", "@id": "https://airlife.ro/#organization", name: "AirLife", url: "https://airlife.ro/", logo: "https://airlife.ro/favicon.ico",
+      "@type": "Organization", "@id": "https://airlife.ro/#organization", name: "AirLife", url: "https://airlife.ro/", logo: "https://airlife.ro/logo.png",
       contactPoint: { "@type": "ContactPoint", contactType: "customer service", areaServed: "RO", availableLanguage: ["Romanian"] },
     },
     {

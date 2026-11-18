@@ -1,5 +1,5 @@
 "use client";
-import { Leaf, Mail } from "lucide-react";
+import { Mail } from "lucide-react";
 import heroImage from "@/assets/hero-image.jpg";
 
 const ComingSoon = () => (
@@ -9,8 +9,7 @@ const ComingSoon = () => (
 
     <div className="relative z-10 px-4 text-center max-w-2xl">
       <div className="inline-flex items-center gap-2 mb-10">
-        <Leaf className="w-7 h-7 text-primary" />
-        <span className="text-3xl font-bold text-white">AirLife</span>
+        <img src="/logo-white.png" alt="AirLife" width={161} height={36} className="h-9 w-auto" />
       </div>
 
       <h1 className="text-5xl md:text-7xl font-bold mb-6 text-white leading-tight">

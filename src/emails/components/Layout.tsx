@@ -21,20 +21,9 @@ export function Layout({
       <Body style={{ margin: 0, padding: "24px 12px", background: brand.bg, fontFamily: brand.font, color: brand.ink }}>
         <Container style={{ maxWidth: 600, margin: "0 auto" }}>
           <Section style={{ background: brand.green, borderRadius: "12px 12px 0 0", padding: "18px 28px" }}>
-            <table role="presentation" cellPadding={0} cellSpacing={0}>
-              <tbody>
-                <tr>
-                  <td style={{ paddingRight: 10 }}>
-                    <Img src={brand.logo} width={36} height={36} alt="" style={{ borderRadius: 8, display: "block" }} />
-                  </td>
-                  <td>
-                    <Link href={brand.site} style={{ color: "#fff", fontSize: 24, fontWeight: 700, textDecoration: "none" }}>
-                      AirLife
-                    </Link>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
+            <Link href={brand.site} style={{ textDecoration: "none" }}>
+              <Img src={brand.logo} width={134} height={30} alt="AirLife" style={{ display: "block" }} />
+            </Link>
           </Section>
 
           <Section style={{ background: "#fff", padding: "32px 28px", border: `1px solid ${brand.border}`, borderTop: 0 }}>

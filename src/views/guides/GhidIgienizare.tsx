@@ -44,7 +44,7 @@ const GhidIgienizare = () => {
       "name": "AirLife",
       "logo": {
         "@type": "ImageObject",
-        "url": "https://airlife.ro/placeholder.svg"
+        "url": "https://airlife.ro/logo.png"
       }
     },
     "datePublished": "2025-02-01",

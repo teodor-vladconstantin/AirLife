@@ -4,7 +4,6 @@ import { supabase } from "@/integrations/supabase/client";
 import type { User as SupabaseUser } from "@supabase/supabase-js";
 import { Button } from "@/components/ui/button";
 import {
-  Leaf,
   User,
   LogOut,
   ShieldCheck,
@@ -81,10 +80,7 @@ const Navbar = () => {
             className="flex items-center gap-2 text-primary hover:opacity-90 transition-opacity"
             aria-label="AirLife Acasă"
           >
-            <div className="p-1.5 rounded-lg bg-primary/10 text-primary">
-              <Leaf className="w-5 h-5" />
-            </div>
-            <span className="text-2xl font-bold tracking-tight text-foreground">AirLife</span>
+            <img src="/logo.png" alt="AirLife" width={161} height={36} className="h-9 w-auto" />
           </Link>
 
           {/* Desktop Navigation Links */}

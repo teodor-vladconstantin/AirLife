@@ -1,4 +1,4 @@
-import { Leaf, MapPin, Mail, Phone } from "lucide-react";
+import { MapPin, Mail, Phone } from "lucide-react";
 import { Link } from "@/lib/router";
 import SubscribeForm from "@/components/SubscribeForm";
 import { PHONE_DISPLAY, PHONE_TEL } from "@/data/localSeo";
@@ -13,10 +13,7 @@ const Footer = () => {
           {/* Brand info */}
           <div className="lg:col-span-2 space-y-4">
             <Link to="/" className="inline-flex items-center gap-2">
-              <div className="p-1.5 rounded-lg bg-primary text-primary-foreground">
-                <Leaf className="w-5 h-5" />
-              </div>
-              <span className="text-2xl font-bold tracking-tight text-white">AirLife</span>
+              <img src="/logo-white.png" alt="AirLife" width={161} height={36} className="h-9 w-auto" loading="lazy" />
             </Link>
             <p className="text-sm opacity-80 max-w-sm leading-relaxed">
               Magazin online HVAC și servicii dedicate pentru sisteme de climatizare. Accesorii, consumabile și montaj aer condiționat în Buzău și tot județul.

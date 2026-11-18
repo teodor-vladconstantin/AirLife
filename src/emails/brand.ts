@@ -1,7 +1,7 @@
 // Email-safe brand tokens, converted from the HSL variables in src/index.css (email clients have no CSS variables).
 export const brand = {
   site: "https://airlife.ro",
-  logo: "https://airlife.ro/apple-touch-icon.png", // PNG: SVG is not reliable in email clients
+  logo: "https://airlife.ro/logo-mono-white.png", // white logo for the green header bar; PNG: SVG is not reliable in email clients
   green: "#22b866", // favicon / primary
   greenDark: "#1c8749", // buttons: white text on #22b866 fails contrast, on this it passes
   ink: "#1f2e29",
