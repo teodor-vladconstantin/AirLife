@@ -1,3 +1,4 @@
+"use client";
 import { useState, useEffect } from "react";
 import CampaignBanner from "@/components/CampaignBanner";
 import { Link, useNavigate } from "@/lib/router";

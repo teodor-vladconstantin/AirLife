@@ -13,7 +13,7 @@ const ComingSoon = () => (
       </div>
 
       <h1 className="text-5xl md:text-7xl font-bold mb-6 text-white leading-tight">
-        În curând<span className="text-primary">.</span>
+        În curând<span className="text-brandlight">.</span>
       </h1>
 
       <p className="text-lg md:text-xl text-white/85 mb-12">
@@ -23,7 +23,7 @@ const ComingSoon = () => (
 
       <a
         href="mailto:contact@airlife.ro"
-        className="inline-flex items-center gap-2 text-white/90 hover:text-primary transition-colors"
+        className="inline-flex items-center gap-2 text-white/90 hover:text-brandlight transition-colors"
       >
         <Mail className="w-4 h-4" />
         contact@airlife.ro

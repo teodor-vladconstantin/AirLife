@@ -25,7 +25,7 @@ const Hero = () => {
 
       <div className="relative z-10 container mx-auto px-4 py-20 text-center">
         <div className="inline-flex items-center gap-2 px-4 py-1.5 bg-primary/20 border border-primary/40 rounded-full mb-6 animate-in fade-in duration-700 backdrop-blur-sm">
-          <MapPin className="w-4 h-4 text-primary" />
+          <MapPin className="w-4 h-4 text-brandlight" />
           <span className="text-sm font-medium text-white">
             Magazin HVAC Online &amp; Servicii în Buzău
           </span>
@@ -36,7 +36,7 @@ const Hero = () => {
           style={{ textShadow: "0 2px 16px rgba(0,0,0,0.4)" }}
         >
           Climatizare Eficientă,<br />
-          <span className="text-primary">Aer Curat în Fiecare Zi</span>
+          <span className="text-brandlight">Aer Curat în Fiecare Zi</span>
         </h1>
 
         <p
@@ -71,21 +71,21 @@ const Hero = () => {
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 max-w-3xl mx-auto mt-16 pt-10 border-t border-white/20">
           <div className="text-center animate-in fade-in duration-700">
             <div className="flex justify-center mb-2">
-              <MapPin className="w-6 h-6 text-primary" />
+              <MapPin className="w-6 h-6 text-brandlight" />
             </div>
             <div className="text-lg font-bold text-white mb-0.5">Buzău &amp; Județ</div>
             <div className="text-xs text-white/80">Montaj &amp; igienizare</div>
           </div>
           <div className="text-center animate-in fade-in duration-700">
             <div className="flex justify-center mb-2">
-              <Truck className="w-6 h-6 text-primary" />
+              <Truck className="w-6 h-6 text-brandlight" />
             </div>
             <div className="text-lg font-bold text-white mb-0.5">Livrare Rapidă</div>
             <div className="text-xs text-white/80">Gratuit peste 1000 RON</div>
           </div>
           <div className="text-center animate-in fade-in duration-700">
             <div className="flex justify-center mb-2">
-              <ShieldCheck className="w-6 h-6 text-primary" />
+              <ShieldCheck className="w-6 h-6 text-brandlight" />
             </div>
             <div className="text-lg font-bold text-white mb-0.5">Garanție Legală</div>
             <div className="text-xs text-white/80">24 luni persoane fizice</div>

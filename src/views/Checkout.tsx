@@ -20,6 +20,9 @@ import { Separator } from "@/components/ui/separator";
 import { Loader2 } from "lucide-react";
 
 // Validation schema
+// Online payments are off until NEXT_PUBLIC_PAYMENTS=on (needs the Stripe keys, see docs/stripe.md). Off = the old quote flow.
+const PAYMENTS_ON = process.env.NEXT_PUBLIC_PAYMENTS === "on";
+
 const checkoutSchema = z.object({
   customerName: z.string().min(3, "Numele trebuie să aibă cel puțin 3 caractere"),
   customerEmail: z.string().email("Email invalid"),
@@ -28,7 +31,7 @@ const checkoutSchema = z.object({
   city: z.string().min(2, "Orașul este obligatoriu"),
   address: z.string().min(5, "Adresa este obligatorie"),
   postalCode: z.string().min(5, "Cod poștal invalid"),
-  paymentMethod: z.enum(["cash_on_delivery", "bank_transfer"]),
+  paymentMethod: z.enum(["cash_on_delivery", "bank_transfer", "card_online"]),
   customerNotes: z.string().optional(),
   acceptTerms: z.boolean().refine((val) => val === true, "Trebuie să accep ți termenii și condițiile"),
   acceptGDPR: z.boolean().refine((val) => val === true, "Trebuie să accepți politica GDPR"),
@@ -52,7 +55,7 @@ const Checkout = () => {
   } = useForm<CheckoutFormData>({
     resolver: zodResolver(checkoutSchema),
     defaultValues: {
-      paymentMethod: "cash_on_delivery",
+      paymentMethod: PAYMENTS_ON ? "card_online" : "cash_on_delivery",
       acceptTerms: false,
       acceptGDPR: false,
     },
@@ -64,8 +67,8 @@ const Checkout = () => {
 
   useEffect(() => {
     checkUser();
-    // Redirect checkout route to request-quote (site is presentation-only)
-    navigate("/request-quote");
+    // Redirect checkout route to request-quote (site is presentation-only) until online payments are switched on
+    if (!PAYMENTS_ON) navigate("/request-quote");
   }, [items, navigate]);
 
   const checkUser = async () => {
@@ -79,7 +82,37 @@ const Checkout = () => {
   const shippingCost = total >= 1000 ? 0 : 20;
   const grandTotal = total + shippingCost;
 
+  // Payments on: the server reads prices from the database, creates the order and (for cards) the Stripe Checkout session.
+  const submitToServer = async (data: CheckoutFormData) => {
+    setIsSubmitting(true);
+    try {
+      const res = await fetch("/api/checkout", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          items: items.map((i) => ({ id: i.product_id, quantity: i.quantity })),
+          customer: { name: data.customerName, email: data.customerEmail, phone: data.customerPhone },
+          address: { county: data.county, city: data.city, address: data.address, postalCode: data.postalCode },
+          paymentMethod: data.paymentMethod,
+          notes: data.customerNotes,
+        }),
+      });
+      const out = await res.json().catch(() => ({}));
+      if (!res.ok) {
+        const msg = out.error === "out_of_stock" ? `${out.name} nu mai are stoc suficient.` : out.error === "product_unavailable" ? "Un produs din coș nu mai este disponibil." : "Nu am putut plasa comanda. Încearcă din nou sau sună-ne.";
+        toast({ title: "Eroare", description: msg, variant: "destructive" });
+        return;
+      }
+      if (out.url) { window.location.assign(out.url); return; }
+      await clearCart();
+      window.location.assign(out.redirect);
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
   const onSubmit = async (data: CheckoutFormData) => {
+    if (PAYMENTS_ON) return submitToServer(data);
     setIsSubmitting(true);
 
     try {
@@ -302,6 +335,15 @@ const Checkout = () => {
                   </CardHeader>
                   <CardContent>
                     <RadioGroup value={paymentMethod} onValueChange={(value: any) => setValue("paymentMethod", value)}>
+                      {PAYMENTS_ON && (
+                        <div className="flex items-center space-x-2 border rounded-lg p-4 mb-2">
+                          <RadioGroupItem value="card_online" id="card" />
+                          <Label htmlFor="card" className="flex-1 cursor-pointer">
+                            <div className="font-semibold">Card online</div>
+                            <p className="text-sm text-muted-foreground">Plată securizată prin Stripe. Nu stocăm datele cardului.</p>
+                          </Label>
+                        </div>
+                      )}
                       <div className="flex items-center space-x-2 border rounded-lg p-4">
                         <RadioGroupItem value="cash_on_delivery" id="cod" />
                         <Label htmlFor="cod" className="flex-1 cursor-pointer">

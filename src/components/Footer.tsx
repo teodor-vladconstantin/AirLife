@@ -1,3 +1,4 @@
+"use client";
 import { MapPin, Mail, Phone, Facebook, Instagram, Linkedin } from "lucide-react";
 import { Link } from "@/lib/router";
 import SubscribeForm from "@/components/SubscribeForm";
@@ -23,17 +24,17 @@ const Footer = () => {
             </p>
             <div className="space-y-2 text-xs opacity-75 pt-2">
               <div className="flex items-center gap-2">
-                <MapPin className="w-4 h-4 text-primary flex-shrink-0" />
+                <MapPin className="w-4 h-4 text-brandlight flex-shrink-0" />
                 <span>Buzău, România (servicii în municipiu și județ)</span>
               </div>
               <div className="flex items-center gap-2">
-                <Phone className="w-4 h-4 text-primary flex-shrink-0" />
+                <Phone className="w-4 h-4 text-brandlight flex-shrink-0" />
                 <a href={`tel:${PHONE_TEL}`} onClick={() => trackClickToCall("footer")} className="hover:underline">
                   {PHONE_DISPLAY}
                 </a>
               </div>
               <div className="flex items-center gap-2">
-                <Mail className="w-4 h-4 text-primary flex-shrink-0" />
+                <Mail className="w-4 h-4 text-brandlight flex-shrink-0" />
                 <a href="mailto:contact@airlife.ro" className="hover:underline">
                   contact@airlife.ro
                 </a>
@@ -64,7 +65,7 @@ const Footer = () => {
             <h3 className="font-semibold text-sm mb-4 text-white uppercase tracking-wider">Magazin HVAC</h3>
             <ul className="space-y-2 text-sm opacity-80">
               <li>
-                <Link to="/products" className="hover:text-primary transition-colors">
+                <Link to="/products" className="hover:text-brandlight transition-colors">
                   Toate Produsele
                 </Link>
               </li>
@@ -76,27 +77,27 @@ const Footer = () => {
             <h3 className="font-semibold text-sm mb-4 text-white uppercase tracking-wider">Servicii</h3>
             <ul className="space-y-2 text-sm opacity-80">
               <li>
-                <Link to="/aer-conditionat-buzau" className="hover:text-primary transition-colors">
+                <Link to="/aer-conditionat-buzau" className="hover:text-brandlight transition-colors">
                   Aer Condiționat Buzău
                 </Link>
               </li>
               <li>
-                <Link to="/servicii/montaj-aer-conditionat" className="hover:text-primary transition-colors">
+                <Link to="/servicii/montaj-aer-conditionat" className="hover:text-brandlight transition-colors">
                   Montaj Aer Condiționat
                 </Link>
               </li>
               <li>
-                <Link to="/servicii/igienizare-aer-conditionat" className="hover:text-primary transition-colors">
+                <Link to="/servicii/igienizare-aer-conditionat" className="hover:text-brandlight transition-colors">
                   Igienizare &amp; Dezinfectare
                 </Link>
               </li>
               <li>
-                <Link to="/servicii/service-aer-conditionat" className="hover:text-primary transition-colors">
+                <Link to="/servicii/service-aer-conditionat" className="hover:text-brandlight transition-colors">
                   Service &amp; Reparații
                 </Link>
               </li>
               <li>
-                <Link to="/ghid/cost-montaj-aer-conditionat" className="hover:text-primary transition-colors">
+                <Link to="/ghid/cost-montaj-aer-conditionat" className="hover:text-brandlight transition-colors">
                   Ghid Cost Montaj
                 </Link>
               </li>
@@ -108,42 +109,42 @@ const Footer = () => {
             <h3 className="font-semibold text-sm mb-4 text-white uppercase tracking-wider">Informații &amp; Legal</h3>
             <ul className="space-y-2 text-sm opacity-80">
               <li>
-                <Link to="/blog" className="hover:text-primary transition-colors">
+                <Link to="/blog" className="hover:text-brandlight transition-colors">
                   Blog
                 </Link>
               </li>
               <li>
-                <Link to="/despre-noi" className="hover:text-primary transition-colors">
+                <Link to="/despre-noi" className="hover:text-brandlight transition-colors">
                   Despre Noi
                 </Link>
               </li>
               <li>
-                <Link to="/contact" className="hover:text-primary transition-colors">
+                <Link to="/contact" className="hover:text-brandlight transition-colors">
                   Contact &amp; Suport
                 </Link>
               </li>
               <li>
-                <Link to="/livrare-si-retur" className="hover:text-primary transition-colors">
+                <Link to="/livrare-si-retur" className="hover:text-brandlight transition-colors">
                   Livrare și Retur
                 </Link>
               </li>
               <li>
-                <Link to="/garantie" className="hover:text-primary transition-colors">
+                <Link to="/garantie" className="hover:text-brandlight transition-colors">
                   Condiții de Garanție
                 </Link>
               </li>
               <li>
-                <Link to="/termeni-si-conditii" className="hover:text-primary transition-colors">
+                <Link to="/termeni-si-conditii" className="hover:text-brandlight transition-colors">
                   Termeni și Condiții
                 </Link>
               </li>
               <li>
-                <Link to="/politica-de-confidentialitate" className="hover:text-primary transition-colors">
+                <Link to="/politica-de-confidentialitate" className="hover:text-brandlight transition-colors">
                   Confidențialitate (GDPR)
                 </Link>
               </li>
               <li>
-                <Link to="/politica-de-cookies" className="hover:text-primary transition-colors">
+                <Link to="/politica-de-cookies" className="hover:text-brandlight transition-colors">
                   Politica de Cookies
                 </Link>
               </li>
