@@ -5,7 +5,7 @@ import { brand } from "../brand";
 
 type Props = { preview: string; unsubscribeUrl: string; children: ReactNode; reason?: string };
 
-// Shared shell: preheader, branded header, content card, legal footer with unsubscribe.
+// Shared shell: preheader, branded header, content card, footer with unsubscribe (no company legal data, user decision 2026-11-18).
 export function Layout({
   preview,
   unsubscribeUrl,
@@ -49,9 +49,6 @@ export function Layout({
               </Link>
             </Text>
             <Hr style={{ borderColor: brand.border, margin: "14px 0" }} />
-            <Text style={small}>
-              {company.legalName} | CUI {company.cui} | {company.regCom}
-            </Text>
             <Text style={small}>
               <Link href={`mailto:${company.email}`} style={link}>
                 {company.email}
