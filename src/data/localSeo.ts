@@ -16,5 +16,5 @@ export const AREA_SERVED = [
 ];
 export const COVERAGE_FAQ = {
   q: "În ce zone faceți montaj, igienizare și service?",
-  a: "Intervenim cu echipa proprie în municipiul Buzău (Micro 3, Micro 5, Micro 14, Dorobanți, Centru, Broșteni, Orizont) și în tot județul Buzău, inclusiv Râmnicu Sărat, Nehoiu, Pogoanele și comunele din jur. Produsele și accesoriile le livrăm prin curier în toată țara.",
+  a: "Intervenim cu echipa AirLife sau parteneri în municipiul Buzău (Micro 3, Micro 5, Micro 14, Dorobanți, Centru, Broșteni, Orizont) și în tot județul Buzău, inclusiv Râmnicu Sărat, Nehoiu, Pogoanele și comunele din jur. Produsele și accesoriile le livrăm prin curier în toată țara.",
 };

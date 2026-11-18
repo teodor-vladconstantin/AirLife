@@ -35,7 +35,7 @@ export const CATEGORIES_DATA: Record<string, CategoryInfo> = {
       { q: "Merită un aer condiționat inverter față de unul clasic?", a: "Da, pentru utilizare zilnică. Un inverter consumă de regulă mai puțin curent decât un aparat on/off, face mai puțin zgomot și menține temperatura mai constantă. Diferența de preț se recuperează în timp, mai ales dacă folosești aparatul și pentru încălzire." },
       { q: "Câți BTU îmi trebuie pentru camera mea?", a: "Orientativ: 9000 BTU pentru camere de până la 25 mp, 12000 BTU pentru 25–35 mp și 18000 BTU sau mai mult pentru spații mai mari. Camerele orientate spre sud, de la ultimul etaj sau cu geamuri mari au nevoie de o capacitate mai mare." },
       { q: "Poate un aer condiționat inverter să încălzească iarna?", a: "Da, aparatele split inverter funcționează și ca pompă de căldură. Randamentul scade la temperaturi exterioare foarte scăzute, așa că verifică în fișa tehnică temperatura minimă de funcționare la încălzire." },
-      { q: "Livrați și montați aparatul?", a: "Livrăm prin curier în toată țara. Montajul îl facem cu echipa proprie în Buzău și în tot județul Buzău." },
+      { q: "Livrați și montați aparatul?", a: "Livrăm prin curier în toată țara. Montajul îl facem cu echipa AirLife sau parteneri în Buzău și în tot județul Buzău." },
     ],
   },
   "aer-conditionat-fara-unitate-exterioara": {
@@ -68,7 +68,7 @@ export const CATEGORIES_DATA: Record<string, CategoryInfo> = {
     name: "Recuperatoare de Căldură",
     title: "Ventilație Descentralizată cu Recuperare de Căldură | AirLife",
     metaDescription:
-      "Sisteme de ventilație descentralizată cu recuperare de căldură NovingAIR și SEVentilation, plus panouri de control și accesorii. Pentru case, apartamente, mansarde, subsoluri și birouri.",
+      "Ventilație descentralizată cu recuperare de căldură NovingAIR și SEVentilation, panouri de control și accesorii, pentru case, apartamente și birouri.",
     h1: "Ventilație Descentralizată cu Recuperare de Căldură",
     description:
       "Ventilația descentralizată înseamnă unități montate direct în pereții exteriori ai fiecărei camere, fără tubulatură prin casă. Ele aduc aer proaspăt și recuperează o mare parte din căldura aerului evacuat, așa că aerisești fără să pierzi căldura iarna. Potrivite pentru case, apartamente, mansarde, subsoluri, birouri și renovări.",
@@ -86,7 +86,7 @@ export const CATEGORIES_DATA: Record<string, CategoryInfo> = {
       { q: "Cât costă un sistem de ventilație descentralizată pentru o casă?", a: "Costul depinde de numărul de camere ventilate și de modelul unităților: de regulă se folosește o pereche de unități pentru una sau două camere, plus un panou de control. Trimite-ne suprafața și numărul de camere și îți facem o ofertă exactă." },
       { q: "Se poate folosi în subsol, mansardă sau birouri?", a: "Da. În subsoluri ajută la eliminarea umezelii și a mirosului de închis, în mansarde reduce condensul de pe geamurile de acoperiș, iar în birouri menține aerul proaspăt fără să deschizi geamurile. Contează să existe un perete exterior în care să se poată monta unitățile." },
       { q: "Cum se controlează unitățile?", a: "Prin panouri de control sau controlere care pornesc unitățile, reglează treptele de ventilație și sincronizează perechile. Unele modele au variante wireless, care evită cablurile între unități." },
-      { q: "Livrați și montați sistemul?", a: "Livrăm unitățile, panourile și accesoriile prin curier în toată țara. Montajul îl facem cu echipa proprie în Buzău și în tot județul Buzău." },
+      { q: "Livrați și montați sistemul?", a: "Livrăm unitățile, panourile și accesoriile prin curier în toată țara. Montajul îl facem cu echipa AirLife sau parteneri în Buzău și în tot județul Buzău." },
     ],
   },
   "ventilatoare-baie": {

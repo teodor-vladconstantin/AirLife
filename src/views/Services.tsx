@@ -51,7 +51,7 @@ const Services = () => {
   return (
     <div className="min-h-screen flex flex-col">
       <SEO
-        title="Servicii Aer Condiționat Buzău: Montaj, Igienizare, Service | AirLife"
+        title="Servicii Aer Condiționat Buzău | Montaj, Igienizare, Service"
         description="Servicii de climatizare în Buzău și județ: montaj autorizat cu vidare, igienizare profesională a vaporizatorului și turbinei, depanare și reparații aer condiționat."
         canonical="https://airlife.ro/servicii"
         structuredData={structuredData}
@@ -70,7 +70,7 @@ const Services = () => {
             </h1>
             <p className="text-lg text-muted-foreground leading-relaxed">
               Echipa AirLife oferă servicii tehnice dedicate pentru sistemele de aer condiționat rezidențiale și comerciale.
-              Lucrăm curat, folosim scule profesionale și respectăm normele tehnice ale fiecărui producător.
+              Lucrăm curat, folosim scule profesionale și respectăm normele tehnice ale fiecărui producător. <Link to="/aer-conditionat-buzau" className="text-primary font-semibold hover:underline">Aer condiționat în Buzău</Link>.
             </p>
           </div>
 

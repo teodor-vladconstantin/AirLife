@@ -239,7 +239,7 @@ const ServiceAerConditionat = () => {
                   Timp de răspuns și arie de operare
                 </h2>
                 <p className="text-muted-foreground leading-relaxed">
-                  Intervenim în municipiul Buzău și în tot județul Buzău, cu echipa proprie. În perioadele caniculare, programările se fac în ordinea recepționării solicitărilor, acordând prioritate urgențelor medicale sau spațiilor comerciale sensibile.
+                  Intervenim în municipiul Buzău și în tot județul Buzău, cu echipa AirLife sau parteneri. În perioadele caniculare, programările se fac în ordinea recepționării solicitărilor, acordând prioritate urgențelor medicale sau spațiilor comerciale sensibile. <Link to="/aer-conditionat-buzau" className="text-primary font-semibold hover:underline">Vezi zona de acoperire în Buzău</Link>.
                 </p>
               </section>
 

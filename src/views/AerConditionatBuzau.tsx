@@ -15,7 +15,7 @@ const FAQS = [
   { q: "Cât durează montajul unui aer condiționat în Buzău?", a: "Un montaj standard durează între 2 și 3,5 ore, în funcție de grosimea peretelui și lungimea traseului frigorific. Vidăm obligatoriu fiecare instalație cu pompă de vid." },
   { q: "Cât durează o igienizare la domiciliu?", a: "Între 45 și 75 de minute per aparat. Curățăm vaporizatorul, turbina și tăvița de condens, cu husă de protecție ca să nu murdărim pereții." },
   { q: "Cât de des trebuie igienizat aerul condiționat?", a: "Cel puțin o dată pe an pentru locuințe, ideal primăvara înainte de sezonul cald. În birouri și spații comerciale, de două ori pe an." },
-  { q: "Pot cumpăra aparatul de la voi și să mi-l montați tot voi?", a: "Da. Comanzi aparatul de pe airlife.ro, iar montajul în Buzău sau în județ îl programăm cu echipa proprie. Livrarea prin curier este gratuită peste 1000 RON." },
+  { q: "Pot cumpăra aparatul de la voi și să mi-l montați tot voi?", a: "Da. Comanzi aparatul de pe airlife.ro, iar montajul în Buzău sau în județ îl programăm cu echipa AirLife sau parteneri. Livrarea prin curier este gratuită peste 1000 RON." },
   { q: "Care este programul?", a: `Luni-vineri 09:00-18:00, sâmbătă 10:00-14:00. Ne găsești la ${PHONE_DISPLAY} sau prin formularul de pe paginile de servicii.` },
 ];
 
@@ -70,7 +70,7 @@ const AerConditionatBuzau = () => {
             </div>
             <h1 className="text-4xl md:text-5xl font-bold tracking-tight mb-4 text-foreground">Aer Condiționat în Buzău</h1>
             <p className="text-lg text-muted-foreground leading-relaxed">
-              AirLife face montaj, igienizare și service aer condiționat în municipiul Buzău și în tot județul Buzău, cu echipa proprie.
+              AirLife face montaj, igienizare și service aer condiționat în municipiul Buzău și în tot județul Buzău, cu echipa AirLife sau parteneri.
               Aparatele, accesoriile și consumabilele le găsești în magazinul nostru online, iar montajul îl programăm tot noi.
             </p>
           </header>

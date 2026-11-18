@@ -1,6 +1,6 @@
 # AirLife
 
-> AirLife (airlife.ro) este un magazin online românesc de aer condiționat, purificatoare, dezumidificatoare, recuperatoare de căldură, filtre, accesorii și consumabile HVAC, cu livrare în toată țara prin curier. Serviciile de montaj, igienizare și service aer condiționat se fac cu echipa proprie în municipiul Buzău și în tot județul Buzău (inclusiv Râmnicu Sărat, Nehoiu, Pogoanele și comunele din jur).
+> AirLife (airlife.ro) este un magazin online românesc de aer condiționat, purificatoare, dezumidificatoare, recuperatoare de căldură, filtre, accesorii și consumabile HVAC, cu livrare în toată țara prin curier. Serviciile de montaj, igienizare și service aer condiționat se fac cu echipa AirLife sau parteneri în municipiul Buzău și în tot județul Buzău (inclusiv Râmnicu Sărat, Nehoiu, Pogoanele și comunele din jur).
 
 ## Magazin
 - [Aer condiționat](https://airlife.ro/aer-conditionat)

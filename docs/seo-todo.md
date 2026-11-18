@@ -31,3 +31,12 @@ Vezi `docs/seo-keywords.md`: cât costă igienizarea, cel mai bun purificator pe
 - `npm run build` (cu `VITE_COMING_SOON=false`) apoi `npm run seo:audit`
 - `npm run indexnow` după fiecare deploy cu conținut nou
 - Articole noi: migrație SQL în `supabase/migrations/` sau din /admin
+
+## Strategie Buzău (din 18 nov 2026)
+Servicii = municipiul Buzău + tot județul; produsele rămân naționale. Zona se schimbă într-un singur loc: `src/data/localSeo.ts`. Pagina hub: `/aer-conditionat-buzau`.
+- [x] On-page: title/H1/meta cu Buzău pe servicii, hub, homepage, schema `areaServed`, `llms.txt`, linkuri interne către hub, titluri și descrieri unice pe produse. `npm run seo:audit`: 0 erori.
+- [ ] **Google Business Profile: amânat.** Cere videoclip de verificare (echipament, locul de lucru). Profilul „AirLife” e creat pe duku.constantin@gmail.com, neverificat. Reia când există tehnician/echipament de filmat.
+- [ ] **Backlinkuri locale (manual, gratuite):** Facebook Page AirLife cu link și telefon, pagina LinkedIn (există), Pagini Aurii / paginiaurii.ro, Orange/Vodafone business directories, firme.info / listafirme.ro (profil firmă, CUI din footer), buzau.ro / ziare locale (Opinia Buzăului, Replica de Buzău) cu un articol sau comunicat despre igienizarea AC.
+- [ ] **Backlinkuri de la parteneri:** link de la producători/distribuitori (Heiko, NovingAIR) pe pagina lor de „unde cumperi”.
+- [ ] **Recenzii pe site** (cu schema Review) odată ce există clienți reali în Buzău. Nu inventăm recenzii.
+- [ ] Verifică în Search Console: interogări „aer condiționat buzău”, „montaj aer condiționat buzău”; cere indexarea pentru `/aer-conditionat-buzau`.

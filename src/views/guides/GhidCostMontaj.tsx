@@ -28,7 +28,7 @@ const FAQS = [
   },
   {
     "q": "Faceți montaj în localitatea mea?",
-    "a": "Montăm cu echipa proprie în municipiul Buzău și în tot județul Buzău. Aparatele și accesoriile le livrăm prin curier în toată țara."
+    "a": "Montăm cu echipa AirLife sau parteneri în municipiul Buzău și în tot județul Buzău. Aparatele și accesoriile le livrăm prin curier în toată țara."
   }
 ];
 
@@ -181,6 +181,7 @@ const GhidCostMontaj = () => {
             </Card>
 
             <FaqSection title="Întrebări frecvente" faq={FAQS} />
+            <p className="text-sm text-muted-foreground">Montăm în municipiul Buzău și în tot județul. <Link to="/aer-conditionat-buzau" className="text-primary font-semibold hover:underline">Vezi serviciile în Buzău</Link>.</p>
 
             {/* CTA Box */}
             <div className="bg-primary/5 border border-primary/20 rounded-2xl p-6 md:p-8 flex flex-col sm:flex-row items-center justify-between gap-6 my-10">

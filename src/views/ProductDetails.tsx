@@ -113,6 +113,10 @@ const ProductDetails = ({ initial }: { initial: Loaded }) => {
   };
 
   const productPath = product.slug ?? product.id;
+  // Description unique per variant (name + price + delivery), then the product copy.
+  const cut = (s: string, n: number) => (s.length <= n ? s : s.slice(0, n).replace(/\s+\S*$/, "").replace(/[,;:\s-]+$/, ""));
+  const seoTitle = product.name.length <= 50 ? `${product.name} | AirLife` : product.name; // never cut the name: BTU/model tell variants apart
+  const seoDescription = cut(`${product.name}: ${product.price.toFixed(0)} RON, livrare în toată țara. ${product.description.replace(/\s+/g, " ")}`, 158);
   const structuredData = {
     "@context": "https://schema.org",
     "@type": "Product",
@@ -167,8 +171,8 @@ const ProductDetails = ({ initial }: { initial: Loaded }) => {
   return (
     <div className="min-h-screen flex flex-col">
       <SEO
-        title={`${product.name} | AirLife Magazin HVAC`}
-        description={product.description.substring(0, 155)}
+        title={seoTitle}
+        description={seoDescription}
         canonical={`https://airlife.ro/products/${productPath}`}
         ogType="product"
         structuredData={[structuredData, breadcrumbsData]}
@@ -242,7 +246,7 @@ const ProductDetails = ({ initial }: { initial: Loaded }) => {
                       aria-label={`Poza ${i + 1}`}
                       className={`w-16 h-16 rounded-lg border bg-white p-1 ${i === idx ? "border-primary ring-1 ring-primary" : "border-border"}`}
                     >
-                      <img src={g} alt="" loading="lazy" className="w-full h-full object-contain" />
+                      <img src={g} alt={`${product.name} - miniatura ${i + 1}`} loading="lazy" className="w-full h-full object-contain" />
                     </button>
                   ))}
                 </div>

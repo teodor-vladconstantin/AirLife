@@ -172,6 +172,7 @@ const GhidIgienizare = () => {
             </Card>
 
             <FaqSection title="Întrebări frecvente" faq={FAQS} />
+            <p className="text-sm text-muted-foreground">Igienizăm la domiciliu în municipiul Buzău și în tot județul. <Link to="/aer-conditionat-buzau" className="text-primary font-semibold hover:underline">Vezi serviciile în Buzău</Link>.</p>
 
             {/* CTA Box */}
             <div className="bg-primary/5 border border-primary/20 rounded-2xl p-6 md:p-8 flex flex-col sm:flex-row items-center justify-between gap-6 my-10">

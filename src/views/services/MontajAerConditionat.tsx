@@ -263,7 +263,7 @@ const MontajAerConditionat = () => {
                   Arie de acoperire și garanția lucrării
                 </h2>
                 <p className="text-muted-foreground mb-3">
-                  Montăm cu echipa proprie în municipiul Buzău și în tot județul: Râmnicu Sărat, Nehoiu, Pogoanele, Mărăcineni, Vernești, Țintești, Săgeata și comunele din jur. Aparatele și accesoriile le livrăm în toată țara.
+                  Montăm cu echipa AirLife sau parteneri în municipiul Buzău și în tot județul: Râmnicu Sărat, Nehoiu, Pogoanele, Mărăcineni, Vernești, Țintești, Săgeata și comunele din jur. Aparatele și accesoriile le livrăm în toată țara. <Link to="/aer-conditionat-buzau" className="text-primary font-semibold hover:underline">Vezi zona de acoperire în Buzău</Link>.
                 </p>
                 <p className="text-muted-foreground">
                   Lucrările de montaj beneficiază de garanție de execuție, iar aparatul tău își păstrează garanția legală de la producător mulțumită vidării corecte și respectării fișei tehnice.

@@ -124,7 +124,7 @@ const IgienizareAerConditionat = () => {
   return (
     <div className="min-h-screen flex flex-col">
       <SEO
-        title="Igienizare Aer Condiționat Buzău | Curățare la Domiciliu | AirLife"
+        title="Igienizare Aer Condiționat Buzău | Curățare | AirLife"
         description="Igienizare aer condiționat în Buzău și județ. Curățare profundă a vaporizatorului, turbinei și tăviței de condens. Elimină mirosurile, bacteriile și mucegaiul."
         canonical="https://airlife.ro/servicii/igienizare-aer-conditionat"
         structuredData={[structuredData, breadcrumbsData, faqSchema(FAQS)]}
@@ -249,7 +249,7 @@ const IgienizareAerConditionat = () => {
                   Acoperire în Buzău și județ
                 </h2>
                 <p className="text-muted-foreground leading-relaxed">
-                  Venim la tine în tot orașul Buzău (Micro 3, Micro 5, Micro 14, Dorobanți, Centru, Broșteni, Orizont) și în tot județul, de la Râmnicu Sărat la Nehoiu. Intervenția durează între 45 și 75 de minute per aparat.
+                  Venim la tine în tot orașul Buzău (Micro 3, Micro 5, Micro 14, Dorobanți, Centru, Broșteni, Orizont) și în tot județul, de la Râmnicu Sărat la Nehoiu. Intervenția durează între 45 și 75 de minute per aparat. <Link to="/aer-conditionat-buzau" className="text-primary font-semibold hover:underline">Vezi zona de acoperire în Buzău</Link>.
                 </p>
               </section>
 
