@@ -156,7 +156,7 @@ const Footer = () => {
         {/* Newsletter (double opt-in) */}
         <div className="border-t border-background/20 py-8 grid md:grid-cols-2 gap-6 items-start">
           <div>
-            <h3 className="font-semibold text-white">Sfaturi și remindere de întreținere</h3>
+            <h3 className="font-semibold text-white">Sfaturi de întreținere și oferte sezoniere</h3>
             <p className="text-sm opacity-80 mt-1">Câteva emailuri pe an: ce verifici înainte de sezon și când e momentul pentru igienizare.</p>
           </div>
           <SubscribeForm source="footer" dark />

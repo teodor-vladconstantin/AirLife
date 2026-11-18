@@ -21,8 +21,8 @@ export default function Confirm({
       </Heading>
       <Text style={p}>Bună,</Text>
       <Text style={p}>
-        Apasă butonul de mai jos ca să confirmi că vrei emailuri de la AirLife: sfaturi de întreținere, oferte sezoniere
-        și remindere de service. Fără confirmare, nu îți trimitem nimic.
+        Apasă butonul de mai jos ca să confirmi că vrei emailuri de la AirLife: sfaturi de întreținere
+        și oferte sezoniere. Fără confirmare, nu îți trimitem nimic.
       </Text>
       <div style={{ margin: "24px 0", textAlign: "center" }}>
         <Button href={confirmUrl}>Confirmă abonarea</Button>
