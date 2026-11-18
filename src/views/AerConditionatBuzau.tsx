@@ -53,7 +53,7 @@ const AerConditionatBuzau = () => {
     <div className="min-h-screen flex flex-col">
       <SEO
         title="Aer Condiționat Buzău: Montaj, Igienizare, Service | AirLife"
-        description="Aer condiționat în Buzău: montaj cu vidare, igienizare și service la domiciliu, în municipiu și tot județul. Aparate și accesorii cu livrare rapidă."
+        description="Aer condiționat în Buzău: montaj cu vidare, igienizare și service la domiciliu, în municipiu și tot județul. Aparate cu livrare rapidă."
         canonical={URL}
         structuredData={schema}
       />
@@ -71,7 +71,7 @@ const AerConditionatBuzau = () => {
             <h1 className="text-4xl md:text-5xl font-bold tracking-tight mb-4 text-foreground">Aer Condiționat în Buzău</h1>
             <p className="text-lg text-muted-foreground leading-relaxed">
               AirLife face montaj, igienizare și service aer condiționat în municipiul Buzău și în tot județul Buzău, cu echipa AirLife sau parteneri.
-              Aparatele, accesoriile și consumabilele le găsești în magazinul nostru online, iar montajul îl programăm tot noi.
+              Aparatele le găsești în magazinul nostru online, iar montajul îl programăm tot noi.
             </p>
           </header>
 

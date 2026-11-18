@@ -361,12 +361,12 @@ const MontajAerConditionat = () => {
               {/* Cross-linking to Ecommerce */}
               <Card className="bg-secondary/30">
                 <CardContent className="p-5 text-sm space-y-3">
-                  <h4 className="font-semibold text-foreground">Ai nevoie de accesorii pentru montaj?</h4>
+                  <h4 className="font-semibold text-foreground">Cauți un aparat de montat?</h4>
                   <p className="text-muted-foreground text-xs leading-relaxed">
-                    Descoperă accesoriile din magazinul nostru: console rezistente, tampoane antivibrante pentru reducerea zgomotului și furtunuri condens.
+                    Alege-l din magazinul nostru. Îl livrăm prin curier, iar montajul îl programăm tot noi.
                   </p>
-                  <Link to="/accesorii-aer-conditionat" className="text-primary font-semibold text-xs inline-block hover:underline">
-                    Vezi Accesorii Aer Condiționat &rarr;
+                  <Link to="/aer-conditionat" className="text-primary font-semibold text-xs inline-block hover:underline">
+                    Vezi aparatele de aer condiționat &rarr;
                   </Link>
                 </CardContent>
               </Card>

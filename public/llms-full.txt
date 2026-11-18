@@ -1,6 +1,6 @@
 # AirLife (airlife.ro): informații complete
 
-> AirLife este un magazin online românesc de aer condiționat, aparate fără unitate exterioară, recuperatoare de căldură, dezumidificatoare, purificatoare, ventilatoare, filtre, accesorii și consumabile HVAC. Produsele se livrează prin curier în toată România. Serviciile de montaj, igienizare și service aer condiționat se fac cu echipa AirLife sau parteneri în municipiul Buzău și în tot județul Buzău (inclusiv Râmnicu Sărat, Nehoiu, Pogoanele și comunele din jur).
+> AirLife este un magazin online românesc de aer condiționat, aparate fără unitate exterioară, recuperatoare de căldură, dezumidificatoare și ventilatoare de baie. Produsele se livrează prin curier în toată România. Serviciile de montaj, igienizare și service aer condiționat se fac cu echipa AirLife sau parteneri în municipiul Buzău și în tot județul Buzău (inclusiv Râmnicu Sărat, Nehoiu, Pogoanele și comunele din jur).
 
 Operator: TETA ABC SRL, CUI 22404824. Contact: contact@airlife.ro, +40 722 15 35 25. Program: luni–vineri 09:00–18:00, sâmbătă 10:00–14:00.
 
@@ -26,11 +26,7 @@ Operator: TETA ABC SRL, CUI 22404824. Contact: contact@airlife.ro, +40 722 15 35
 - Aer condiționat inverter cu Wi-Fi (split, 9000–21000 BTU): https://airlife.ro/aer-conditionat
 - Aer condiționat fără unitate exterioară (monobloc): https://airlife.ro/aer-conditionat-fara-unitate-exterioara
 - Ventilație descentralizată cu recuperare de căldură (unități în perete, panouri de control, accesorii): https://airlife.ro/recuperatoare-caldura
-- Purificatoare de aer: https://airlife.ro/purificatoare-aer
 - Dezumidificatoare: https://airlife.ro/dezumidificatoare
-- Filtre purificatoare: https://airlife.ro/filtre-purificatoare
-- Accesorii aer condiționat: https://airlife.ro/accesorii-aer-conditionat
-- Consumabile HVAC: https://airlife.ro/consumabile-hvac
 
 ## Întrebări frecvente
 

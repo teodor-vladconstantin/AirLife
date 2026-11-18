@@ -43,7 +43,7 @@ const Hero = () => {
           className="text-lg md:text-xl text-white/90 mb-10 max-w-2xl mx-auto animate-in fade-in duration-700 leading-relaxed"
           style={{ textShadow: "0 2px 12px rgba(0,0,0,0.3)" }}
         >
-          Accesorii și consumabile HVAC cu livrare rapidă în toată țara, plus montaj, igienizare și service aer condiționat în Buzău și tot județul.
+          Aparate de aer condiționat și ventilație cu livrare rapidă în toată țara, plus montaj, igienizare și service aer condiționat în Buzău și tot județul.
         </p>
 
         <div className="flex flex-col sm:flex-row gap-4 justify-center items-center animate-in fade-in duration-700">

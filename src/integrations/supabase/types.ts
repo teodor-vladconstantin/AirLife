@@ -278,6 +278,48 @@ export type Database = {
         }
         Relationships: []
       }
+      campaigns: {
+        Row: {
+          active: boolean
+          body: string | null
+          created_at: string
+          cta_label: string | null
+          cta_url: string | null
+          ends_at: string | null
+          headline: string
+          id: string
+          name: string
+          starts_at: string
+          utm_campaign: string | null
+        }
+        Insert: {
+          active?: boolean
+          body?: string | null
+          created_at?: string
+          cta_label?: string | null
+          cta_url?: string | null
+          ends_at?: string | null
+          headline: string
+          id?: string
+          name: string
+          starts_at?: string
+          utm_campaign?: string | null
+        }
+        Update: {
+          active?: boolean
+          body?: string | null
+          created_at?: string
+          cta_label?: string | null
+          cta_url?: string | null
+          ends_at?: string | null
+          headline?: string
+          id?: string
+          name?: string
+          starts_at?: string
+          utm_campaign?: string | null
+        }
+        Relationships: []
+      }
       products: {
         Row: {
           brand: string | null
@@ -289,7 +331,10 @@ export type Database = {
           id: string
           image_url: string | null
           name: string
+          hidden: boolean
           price: number
+          sale_ends_at: string | null
+          sale_price: number | null
           sku: string | null
           slug: string | null
           specs: Json
@@ -306,7 +351,10 @@ export type Database = {
           id?: string
           image_url?: string | null
           name: string
+          hidden?: boolean
           price: number
+          sale_ends_at?: string | null
+          sale_price?: number | null
           sku?: string | null
           slug?: string | null
           specs?: Json
@@ -323,7 +371,10 @@ export type Database = {
           id?: string
           image_url?: string | null
           name?: string
+          hidden?: boolean
           price?: number
+          sale_ends_at?: string | null
+          sale_price?: number | null
           sku?: string | null
           slug?: string | null
           specs?: Json

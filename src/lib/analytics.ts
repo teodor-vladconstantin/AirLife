@@ -11,11 +11,16 @@ const GA4_ID = process.env.NEXT_PUBLIC_GTAG_ID as string | undefined;
 const PH_KEY = process.env.NEXT_PUBLIC_POSTHOG_KEY as string | undefined;
 const PH_HOST = (process.env.NEXT_PUBLIC_POSTHOG_HOST as string | undefined) || "https://eu.i.posthog.com";
 const SENTRY_DSN = process.env.NEXT_PUBLIC_SENTRY_DSN as string | undefined;
+// GTM-XXXX container, loaded alongside GA4. It reads the same Consent Mode state, so tags in it only fire after consent.
+const GTM_ID = process.env.NEXT_PUBLIC_GTM_ID as string | undefined;
+const META_PIXEL_ID = process.env.NEXT_PUBLIC_META_PIXEL_ID as string | undefined;
 
 declare global {
   interface Window {
     dataLayer?: Array<Record<string, unknown>>;
     gtag?: (...args: unknown[]) => void;
+    fbq?: ((...args: unknown[]) => void) & { callMethod?: (...args: unknown[]) => void; queue?: unknown[]; loaded?: boolean; version?: string; push?: unknown };
+    _fbq?: Window["fbq"];
   }
 }
 
@@ -48,6 +53,60 @@ const startSentry = () => {
   );
 };
 
+// Meta Pixel: loaded only after the visitor accepts cookies (marketing/analytics). No ID -> no-op.
+let pixelStarted = false;
+let pixelPath = "";
+const startMetaPixel = () => {
+  if (!META_PIXEL_ID || pixelStarted || typeof window === "undefined") return;
+  pixelStarted = true;
+  if (!window.fbq) {
+    const n = function (...args: unknown[]) {
+      if (n.callMethod) n.callMethod(...args);
+      else (n.queue as unknown[]).push(args);
+    } as NonNullable<Window["fbq"]>;
+    n.push = n; n.loaded = true; n.version = "2.0"; n.queue = [];
+    window.fbq = n;
+    window._fbq = n;
+    const el = document.createElement("script");
+    el.async = true;
+    el.src = "https://connect.facebook.net/en_US/fbevents.js";
+    document.head.appendChild(el);
+  }
+  window.fbq!("init", META_PIXEL_ID);
+  window.fbq!("track", "PageView");
+  pixelPath = window.location.pathname;
+};
+
+// SPA navigation: send PageView when the route changes (the first one is sent on init).
+export const trackPageView = (path: string) => {
+  if (!pixelStarted || !window.fbq || path === pixelPath) return;
+  pixelPath = path;
+  window.fbq("track", "PageView");
+};
+
+const META_EVENTS: Record<string, string> = {
+  view_item: "ViewContent",
+  add_to_cart: "AddToCart",
+  begin_checkout: "InitiateCheckout",
+  purchase: "Purchase",
+  generate_lead: "Lead",
+};
+
+const sendMetaEvent = (eventName: string, params: Record<string, unknown>) => {
+  const metaName = META_EVENTS[eventName];
+  if (!metaName || !pixelStarted || !window.fbq) return;
+  const items = (params.items as AnalyticsItem[] | undefined) ?? [];
+  const data: Record<string, unknown> = {};
+  if (params.value != null) { data.value = params.value; data.currency = params.currency ?? "RON"; }
+  if (items.length) {
+    data.content_type = "product";
+    data.content_ids = items.map((i) => i.item_id);
+    data.contents = items.map((i) => ({ id: i.item_id, quantity: i.quantity ?? 1, item_price: i.price }));
+    if (items.length === 1) data.content_name = items[0].item_name;
+  }
+  window.fbq("track", metaName, data);
+};
+
 const applyConsent = (accepted: boolean) => {
   if (typeof window.gtag === "function") {
     window.gtag("consent", "update", {
@@ -55,7 +114,7 @@ const applyConsent = (accepted: boolean) => {
       ad_storage: "denied", // no ads yet; flip when Google Ads is connected
     });
   }
-  if (accepted) startSentry();
+  if (accepted) { startSentry(); startMetaPixel(); }
   if (posthog) accepted ? posthog.opt_in_capturing() : posthog.opt_out_capturing();
 };
 
@@ -83,6 +142,22 @@ export const initAnalytics = () => {
     el.async = true;
     el.src = `https://www.googletagmanager.com/${isGtm ? "gtm" : "gtag/js"}${isGtm ? ".js" : ""}?id=${GA4_ID}`;
     document.head.appendChild(el);
+  }
+
+  if (GTM_ID && GTM_ID !== GA4_ID) {
+    if (!window.gtag) {
+      window.dataLayer = window.dataLayer || [];
+      window.gtag = function () {
+        // eslint-disable-next-line prefer-rest-params
+        (window.dataLayer as unknown[]).push(arguments);
+      } as Window["gtag"];
+      window.gtag("consent", "default", { analytics_storage: "denied", ad_storage: "denied", ad_user_data: "denied", ad_personalization: "denied", wait_for_update: 500 });
+    }
+    (window.dataLayer as unknown[]).push({ "gtm.start": Date.now(), event: "gtm.js" });
+    const g = document.createElement("script");
+    g.async = true;
+    g.src = `https://www.googletagmanager.com/gtm.js?id=${GTM_ID}`;
+    document.head.appendChild(g);
   }
 
   if (PH_KEY) {
@@ -114,6 +189,7 @@ const sendEvent = (eventName: string, params: Record<string, unknown> = {}) => {
   if (typeof window.gtag === "function") {
     window.gtag("event", eventName, params);
   }
+  sendMetaEvent(eventName, params);
   if (PH_KEY) (posthog ? posthog.capture(eventName, params) : phQueue.push([eventName, params]));
 };
 

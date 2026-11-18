@@ -23,7 +23,7 @@ const sections: LegalSection[] = [
         <li><strong>Cont de utilizator</strong> (e-mail, parolă stocată criptat, istoricul comenzilor): pentru autentificare și gestionarea comenzilor. Temei: contract (lit. b).</li>
         <li><strong>Mesaje prin formularul de contact, e-mail sau telefon</strong>: pentru a-ți răspunde. Temei: interes legitim de a răspunde solicitărilor (lit. f) sau pași precontractuali (lit. b).</li>
         <li><strong>Abonare la e-mailuri</strong> (adresa de e-mail, sursa abonării): trimitere de sfaturi și oferte. Temei: consimțământul tău (lit. a), retractabil oricând prin link-ul de dezabonare sau la <a href={`mailto:${c.email}`}>{c.email}</a>.</li>
-        <li><strong>Statistici de utilizare</strong> (pagini vizitate, evenimente de navigare și comerț electronic, identificatori online, informații despre dispozitiv și browser, înregistrări ale sesiunii și hărți de interacțiune) prin Google Analytics 4 și PostHog: doar după ce accepți cookie-urile de analiză. Temei: consimțământul (lit. a; art. 4 din Legea 506/2004).</li>
+        <li><strong>Statistici de utilizare</strong> (pagini vizitate, evenimente de navigare și comerț electronic, identificatori online, informații despre dispozitiv și browser, înregistrări ale sesiunii și hărți de interacțiune) prin Google Analytics 4 (Google Tag Manager), PostHog și Pixelul Meta (măsurarea reclamelor pe Facebook și Instagram): doar după ce accepți cookie-urile de analiză. Temei: consimțământul (lit. a; art. 4 din Legea 506/2004).</li>
         <li><strong>Monitorizarea erorilor tehnice</strong> (Sentry: tip de eroare, pagină, browser, adresă IP) : doar după consimțământul tău (lit. a).</li>
         <li><strong>Apărarea drepturilor noastre</strong> (reclamații, garanții, litigii): interes legitim (lit. f).</li>
       </ul>
@@ -41,7 +41,7 @@ const sections: LegalSection[] = [
         <ul>
           <li>firme de curierat, pentru livrarea coletelor;</li>
           <li>furnizori de infrastructură IT: găzduire (Vercel), bază de date și autentificare (Supabase), trimitere de e-mailuri;</li>
-          <li>instrumente de analiză și monitorizare, doar după consimțământ în cazul analizei: Google (Google Analytics 4), PostHog (serverele din UE), Sentry;</li>
+          <li>instrumente de analiză și monitorizare, doar după consimțământ în cazul analizei: Google (Google Analytics 4, Google Tag Manager), Meta Platforms Ireland (Pixel Meta), PostHog (serverele din UE), Sentry;</li>
           <li>contabil, bancă și consultanți juridici, pentru obligațiile legale și evidențe;</li>
           <li>autorități publice, când legea o cere.</li>
         </ul>

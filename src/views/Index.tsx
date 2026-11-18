@@ -8,8 +8,9 @@ import CTASection from "@/components/CTASection";
 import Footer from "@/components/Footer";
 import SEO from "@/components/SEO";
 import { AREA_SERVED } from "@/data/localSeo";
+import type { CategorySummary } from "@/lib/catalog";
 
-const Index = () => {
+const Index = ({ categories = [] }: { categories?: CategorySummary[] }) => {
   const homeStructuredData = {
     "@context": "https://schema.org",
     "@graph": [
@@ -51,7 +52,7 @@ const Index = () => {
       <main className="flex-1">
         <Hero />
         <HomeServicesSection />
-        <ProductCategories />
+        <ProductCategories categories={categories} />
         <Features />
         <CTASection />
       </main>

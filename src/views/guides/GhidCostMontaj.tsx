@@ -28,7 +28,7 @@ const FAQS = [
   },
   {
     "q": "Faceți montaj în localitatea mea?",
-    "a": "Montăm cu echipa AirLife sau parteneri în municipiul Buzău și în tot județul Buzău. Aparatele și accesoriile le livrăm prin curier în toată țara."
+    "a": "Montăm cu echipa AirLife sau parteneri în municipiul Buzău și în tot județul Buzău. Aparatele le livrăm prin curier în toată țara."
   }
 ];
 
@@ -199,9 +199,9 @@ const GhidCostMontaj = () => {
                     <Wrench className="w-4 h-4" /> Programează Montaj
                   </Button>
                 </Link>
-                <Link to="/accesorii-aer-conditionat" className="w-full sm:w-auto">
+                <Link to="/aer-conditionat" className="w-full sm:w-auto">
                   <Button variant="outline" className="w-full flex items-center gap-2">
-                    Accesorii Montaj <ArrowRight className="w-4 h-4" />
+                    Vezi aparatele <ArrowRight className="w-4 h-4" />
                   </Button>
                 </Link>
               </div>

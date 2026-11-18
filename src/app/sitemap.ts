@@ -1,6 +1,5 @@
 import type { MetadataRoute } from "next";
-import { CATEGORIES_DATA } from "@/data/categoriesData";
-import { db } from "@/lib/catalog";
+import { db, loadCategorySummaries } from "@/lib/catalog";
 
 export const revalidate = 3600;
 
@@ -13,7 +12,7 @@ const STATIC = [
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   if (process.env.NEXT_PUBLIC_COMING_SOON === "true") return [];
-  const entries: MetadataRoute.Sitemap = [...STATIC, ...Object.keys(CATEGORIES_DATA).map((s) => `/${s}`)].map((p) => ({
+  const entries: MetadataRoute.Sitemap = [...STATIC, ...(await loadCategorySummaries().catch(() => [])).map((c) => `/${c.slug}`)].map((p) => ({
     url: SITE + p,
     priority: p === "/" ? 1 : p.split("/").length > 2 ? 0.6 : 0.8,
   }));

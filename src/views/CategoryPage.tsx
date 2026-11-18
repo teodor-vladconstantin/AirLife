@@ -127,6 +127,7 @@ const CategoryPage = ({ forcedSlug, products }: CategoryPageProps) => {
         title={categoryInfo.title}
         description={categoryInfo.metaDescription}
         canonical={`https://airlife.ro/${categoryInfo.slug}`}
+        noindex={products.length === 0}
         structuredData={categoryInfo.faq ? [structuredData, breadcrumbsData, faqSchema(categoryInfo.faq)] : [structuredData, breadcrumbsData]}
       />
 
@@ -247,6 +248,7 @@ const CategoryPage = ({ forcedSlug, products }: CategoryPageProps) => {
                         <div>
                           <span className="text-2xl font-bold text-primary">
                             {product.price.toFixed(2)} RON
+                            {product.compare_at ? <span className="ml-2 text-sm font-normal text-muted-foreground line-through">{product.compare_at.toFixed(2)} RON</span> : null}
                           </span>
                           <span className="block text-[11px] text-muted-foreground">Preț fără TVA (neplătitor TVA)</span>
                         </div>

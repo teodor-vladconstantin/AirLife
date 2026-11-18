@@ -344,12 +344,12 @@ const IgienizareAerConditionat = () => {
               {/* Cross-linking to Ecommerce Consumables */}
               <Card className="bg-secondary/30">
                 <CardContent className="p-5 text-sm space-y-3">
-                  <h4 className="font-semibold text-foreground">Preferi să întreții singur filtrele?</h4>
+                  <h4 className="font-semibold text-foreground">Vrei să-ți speli singur filtrele?</h4>
                   <p className="text-muted-foreground text-xs leading-relaxed">
-                    În magazinul nostru găsești spray-uri de curățare, spume active și pastile antibacteriene pentru tăvița de condens.
+                    Filtrele se spală la 3-4 săptămâni în sezon. Ghidul nostru explică pas cu pas ce faci singur și când chemi un tehnician.
                   </p>
-                  <Link to="/curatare-si-intretinere" className="text-primary font-semibold text-xs inline-block hover:underline">
-                    Vezi Produse de Curățare &rarr;
+                  <Link to="/ghid/igienizare-aer-conditionat" className="text-primary font-semibold text-xs inline-block hover:underline">
+                    Citește ghidul &rarr;
                   </Link>
                 </CardContent>
               </Card>

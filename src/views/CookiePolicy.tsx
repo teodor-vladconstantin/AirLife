@@ -111,7 +111,7 @@ const CookiePolicy = () => {
                       Aceste cookie-uri (de exemplu Google Analytics 4) colectează informații agregate și anonimizate despre modul în care vizitatorii utilizează site-ul: paginile cele mai vizitate, timpul petrecut pe pagină și eventualele erori tehnice întâmpinate. Ele sunt activate doar cu acordul dumneavoastră explicit.
                     </p>
                     <span className="text-[11px] text-muted-foreground italic">
-                      Exemple: Google Analytics 4 (_ga, _ga_*) și PostHog, servere în UE (identificator de vizitator, evenimente de navigare, înregistrări ale sesiunii și hărți de interacțiune). Se activează numai după ce apeși „Accept toate”. Furnizori: Google Ireland Ltd. și PostHog Inc.
+                      Exemple: Google Analytics 4 (_ga, _ga_*) prin Google Tag Manager, PostHog (servere în UE) și Pixelul Meta (_fbp), care măsoară vizitele și acțiunile de pe site (pagini vizitate, produse vizualizate, cereri de ofertă) pentru statistici și reclame relevante pe Facebook și Instagram. Se activează numai după ce apeși „Accept toate”. Furnizori: Google Ireland Ltd., PostHog Inc. și Meta Platforms Ireland Ltd.
                     </span>
                   </div>
                   <div className="p-4 rounded-xl bg-secondary/50 border border-border/50">

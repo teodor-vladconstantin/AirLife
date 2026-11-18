@@ -19,7 +19,7 @@ const CTASection = () => {
             className="text-base md:text-lg mb-8 opacity-90 max-w-2xl mx-auto leading-relaxed"
             style={{ textShadow: "0 2px 8px rgba(0,0,0,0.2)" }}
           >
-            Fie că ai nevoie de produse și accesorii HVAC livrate rapid sau de montaj și igienizare profesională, echipa AirLife îți stă la dispoziție.
+            Fie că ai nevoie de aparate de aer condiționat și ventilație livrate rapid sau de montaj și igienizare profesională, echipa AirLife îți stă la dispoziție.
           </p>
 
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-10">

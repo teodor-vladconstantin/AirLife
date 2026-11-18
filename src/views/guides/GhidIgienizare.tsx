@@ -190,9 +190,9 @@ const GhidIgienizare = () => {
                     <Sparkles className="w-4 h-4" /> Serviciu Igienizare
                   </Button>
                 </Link>
-                <Link to="/curatare-si-intretinere" className="w-full sm:w-auto">
+                <Link to="/aer-conditionat-buzau" className="w-full sm:w-auto">
                   <Button variant="outline" className="w-full flex items-center gap-2">
-                    Produse de Curățare <ArrowRight className="w-4 h-4" />
+                    Serviciile în Buzău <ArrowRight className="w-4 h-4" />
                   </Button>
                 </Link>
               </div>

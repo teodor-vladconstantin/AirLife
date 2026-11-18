@@ -1,6 +1,7 @@
 "use client";
 import { useEffect } from "react";
 import { useLocation } from "@/lib/router";
+import { trackPageView } from "@/lib/analytics";
 
 export interface SEOProps {
   title: string;
@@ -31,6 +32,7 @@ export const SEO = ({
   useEffect(() => {
     const win = window as unknown as { dataLayer?: Array<Record<string, unknown>> };
     win.dataLayer?.push?.({ event: "page_view", page_title: title, page_location: window.location.href, page_path: pathname });
+    trackPageView(pathname);
   }, [title, pathname]);
 
   return (

@@ -1,9 +1,12 @@
-import { MapPin, Mail, Phone } from "lucide-react";
+import { MapPin, Mail, Phone, Facebook, Instagram, Linkedin } from "lucide-react";
 import { Link } from "@/lib/router";
 import SubscribeForm from "@/components/SubscribeForm";
 import { PHONE_DISPLAY, PHONE_TEL } from "@/data/localSeo";
 import { trackClickToCall } from "@/lib/analytics";
 import { company, SAL_URL, ANPC_URL } from "@/data/company";
+import { SOCIAL } from "@/data/social";
+
+const SOCIAL_ICONS = { facebook: Facebook, instagram: Instagram, linkedin: Linkedin };
 
 const Footer = () => {
   return (
@@ -16,7 +19,7 @@ const Footer = () => {
               <img src="/logo-white.png" alt="AirLife" width={161} height={36} className="h-9 w-auto" loading="lazy" />
             </Link>
             <p className="text-sm opacity-80 max-w-sm leading-relaxed">
-              Magazin online HVAC și servicii dedicate pentru sisteme de climatizare. Accesorii, consumabile și montaj aer condiționat în Buzău și tot județul.
+              Magazin online HVAC și servicii dedicate pentru sisteme de climatizare. Aparate de aer condiționat, ventilație și montaj în Buzău și tot județul.
             </p>
             <div className="space-y-2 text-xs opacity-75 pt-2">
               <div className="flex items-center gap-2">
@@ -36,6 +39,24 @@ const Footer = () => {
                 </a>
               </div>
             </div>
+            <ul className="flex items-center gap-3 pt-2">
+              {SOCIAL.map((s) => {
+                const Icon = SOCIAL_ICONS[s.key];
+                return (
+                  <li key={s.key}>
+                    <a
+                      href={s.url}
+                      target="_blank"
+                      rel="noopener noreferrer me"
+                      aria-label={`AirLife pe ${s.label}`}
+                      className="flex h-9 w-9 items-center justify-center rounded-full bg-white/10 text-white hover:bg-primary transition-colors"
+                    >
+                      <Icon className="w-4 h-4" />
+                    </a>
+                  </li>
+                );
+              })}
+            </ul>
           </div>
 
           {/* Categorii Magazin */}
@@ -45,26 +66,6 @@ const Footer = () => {
               <li>
                 <Link to="/products" className="hover:text-primary transition-colors">
                   Toate Produsele
-                </Link>
-              </li>
-              <li>
-                <Link to="/curatare-si-intretinere" className="hover:text-primary transition-colors">
-                  Curățare &amp; Igienizare
-                </Link>
-              </li>
-              <li>
-                <Link to="/accesorii-aer-conditionat" className="hover:text-primary transition-colors">
-                  Accesorii Aer Condiționat
-                </Link>
-              </li>
-              <li>
-                <Link to="/consumabile-hvac" className="hover:text-primary transition-colors">
-                  Consumabile HVAC
-                </Link>
-              </li>
-              <li>
-                <Link to="/filtre-purificatoare" className="hover:text-primary transition-colors">
-                  Filtre Purificatoare
                 </Link>
               </li>
             </ul>

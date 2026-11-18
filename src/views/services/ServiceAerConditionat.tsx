@@ -334,12 +334,12 @@ const ServiceAerConditionat = () => {
               {/* Cross-link to accessories and consumables */}
               <Card className="bg-secondary/30">
                 <CardContent className="p-5 text-sm space-y-3">
-                  <h4 className="font-semibold text-foreground">Ai nevoie de piese de schimb sau consumabile?</h4>
+                  <h4 className="font-semibold text-foreground">Aparatul e prea vechi pentru reparat?</h4>
                   <p className="text-muted-foreground text-xs leading-relaxed">
-                    Găsești în stoc consumabile uzuale: furtunuri flexibile condens, benzi matisare și conectori frigorifici.
+                    Uneori un aparat nou costă mai puțin decât repararea. Compară în magazin, iar noi îl montăm.
                   </p>
-                  <Link to="/consumabile-hvac" className="text-primary font-semibold text-xs inline-block hover:underline">
-                    Vezi Consumabile HVAC &rarr;
+                  <Link to="/aer-conditionat" className="text-primary font-semibold text-xs inline-block hover:underline">
+                    Vezi aparatele de aer condiționat &rarr;
                   </Link>
                 </CardContent>
               </Card>

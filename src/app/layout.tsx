@@ -3,6 +3,7 @@ import type { ReactNode } from "react";
 import Providers from "./providers";
 import "../index.css";
 import { AREA_SERVED } from "@/data/localSeo";
+import { SOCIAL } from "@/data/social";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://airlife.ro"),
@@ -16,7 +17,7 @@ const orgSchema = {
   "@context": "https://schema.org",
   "@graph": [
     {
-      "@type": "Organization", "@id": "https://airlife.ro/#organization", name: "AirLife", url: "https://airlife.ro/", logo: "https://airlife.ro/logo.png",
+      "@type": "Organization", "@id": "https://airlife.ro/#organization", name: "AirLife", url: "https://airlife.ro/", logo: "https://airlife.ro/logo.png", sameAs: SOCIAL.map((s) => s.url),
       contactPoint: { "@type": "ContactPoint", contactType: "customer service", areaServed: "RO", availableLanguage: ["Romanian"] },
     },
     {

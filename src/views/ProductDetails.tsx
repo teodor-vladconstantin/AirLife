@@ -324,6 +324,7 @@ const ProductDetails = ({ initial }: { initial: Loaded }) => {
                 <div className="flex items-baseline gap-3">
                   <span className="text-3xl sm:text-4xl font-bold text-primary">
                     {product.price.toFixed(2)} RON
+                    {product.compare_at ? <span className="ml-3 text-xl font-normal text-muted-foreground line-through">{product.compare_at.toFixed(2)} RON</span> : null}
                   </span>
                   <span className="text-xs text-muted-foreground">Preț fără TVA (neplătitor TVA)</span>
                 </div>

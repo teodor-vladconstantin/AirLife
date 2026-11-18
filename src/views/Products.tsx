@@ -118,6 +118,7 @@ const Products = ({ products }: { products: Product[] }) => {
 
                     <div className="flex items-center justify-between mt-4">
                       <span className="text-2xl font-bold text-primary">{product.price} RON</span>
+                      {(product as { compare_at?: number }).compare_at ? <span className="ml-2 text-sm text-muted-foreground line-through">{(product as { compare_at?: number }).compare_at} RON</span> : null}
                       <span className="text-sm text-muted-foreground">
                         Stoc: {product.stock > 0 ? product.stock : "Indisponibil"}
                       </span>
