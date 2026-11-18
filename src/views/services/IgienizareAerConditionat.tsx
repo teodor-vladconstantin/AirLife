@@ -271,8 +271,8 @@ const IgienizareAerConditionat = () => {
             </div>
 
             {/* Sidebar / Form */}
-            <div className="space-y-6">
-              <Card className="sticky top-24 border-primary/30 shadow-lg">
+            <div className="space-y-6 lg:sticky lg:top-24 lg:self-start">
+              <Card className="border-primary/30 shadow-lg">
                 <CardContent className="p-6">
                   <h3 className="text-xl font-bold mb-2 text-foreground flex items-center gap-2">
                     <Calendar className="w-5 h-5 text-primary" />
