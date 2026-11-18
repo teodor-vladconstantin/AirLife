@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Checkbox } from "@/components/ui/checkbox";
 import { CONSENT_TEXT } from "@/lib/email/consent";
+import { useTurnstile } from "@/components/Turnstile";
 
 // Double opt-in: this only asks for the email. The subscriber becomes "active" after clicking the link we send.
 export default function SubscribeForm({ source, dark = false }: { source: string; dark?: boolean }) {
@@ -12,18 +13,21 @@ export default function SubscribeForm({ source, dark = false }: { source: string
   const [consent, setConsent] = useState(false);
   const [website, setWebsite] = useState(""); // honeypot
   const [state, setState] = useState<"idle" | "loading" | "done" | "error">("idle");
+  const [tsToken, tsWidget, tsReset, tsOn] = useTurnstile();
   const muted = dark ? "text-background/70" : "text-muted-foreground";
 
   const submit = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (tsOn && !tsToken) return setState("error");
     setState("loading");
     try {
       const res = await fetch("/api/subscribe", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email, consent, website, source }),
+        body: JSON.stringify({ email, consent, website, source, captcha: tsToken }),
       });
       setState(res.ok ? "done" : "error");
+      if (!res.ok) tsReset();
     } catch {
       setState("error");
     }
@@ -54,6 +58,7 @@ export default function SubscribeForm({ source, dark = false }: { source: string
           {state === "loading" ? "Se trimite..." : "Abonează-mă"}
         </Button>
       </div>
+      {tsWidget}
       <label className={`flex items-start gap-2 text-xs ${muted}`}>
         <Checkbox checked={consent} onCheckedChange={(v) => setConsent(v === true)} className="mt-0.5" />
         <span>

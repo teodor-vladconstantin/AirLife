@@ -2,6 +2,7 @@
 import { useState } from "react";
 import { faqSchema } from "@/lib/blogSchema";
 import { submitRequest } from "@/lib/requests";
+import { useTurnstile } from "@/components/Turnstile";
 import { Link } from "@/lib/router";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -52,6 +53,7 @@ const MontajAerConditionat = () => {
   const [location, setLocation] = useState("");
   const [details, setDetails] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [tsToken, tsWidget, tsReset, tsOn] = useTurnstile();
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -64,8 +66,12 @@ const MontajAerConditionat = () => {
       return;
     }
 
+    if (tsOn && !tsToken) {
+      toast({ title: "Confirmă că ești om", description: "Așteaptă verificarea de sub formular și încearcă din nou.", variant: "destructive" });
+      return;
+    }
     setIsSubmitting(true);
-    submitRequest("Montaj Aer Condiționat", { name, phone, details: `Localitate: ${location || "-"}. ${details}` })
+    submitRequest("Montaj Aer Condiționat", { name, phone, details: `Localitate: ${location || "-"}. ${details}` }, tsToken)
       .then(() => {
         trackServiceQuoteRequest("Montaj Aer Condiționat");
         toast({
@@ -78,7 +84,7 @@ const MontajAerConditionat = () => {
         setDetails("");
       })
       .catch(() => toast({ title: "Eroare", description: "Cererea nu a putut fi trimisă. Sună-ne la +40 722 15 35 25.", variant: "destructive" }))
-      .finally(() => setIsSubmitting(false));
+      .finally(() => { setIsSubmitting(false); tsReset(); });
   };
 
   const structuredData = {
@@ -339,6 +345,8 @@ const MontajAerConditionat = () => {
                         onChange={(e) => setDetails(e.target.value)}
                       />
                     </div>
+
+                    {tsWidget}
 
                     <Button type="submit" disabled={isSubmitting} className="w-full mt-2">
                       {isSubmitting ? "Se trimite..." : "Solicită Programare"}

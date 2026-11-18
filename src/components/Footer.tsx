@@ -7,7 +7,14 @@ import { trackClickToCall } from "@/lib/analytics";
 import { company, SAL_URL, ANPC_URL } from "@/data/company";
 import { SOCIAL } from "@/data/social";
 
-const SOCIAL_ICONS = { facebook: Facebook, instagram: Instagram, linkedin: Linkedin };
+// lucide has no TikTok glyph
+const TikTok = ({ className }: { className?: string }) => (
+  <svg viewBox="0 0 24 24" fill="currentColor" className={className} aria-hidden="true">
+    <path d="M19.6 6.7a4.8 4.8 0 0 1-3.8-4.2V2h-3.5v13.4a2.9 2.9 0 1 1-2-2.8V9.1a6.4 6.4 0 1 0 5.5 6.3V8.9a8.2 8.2 0 0 0 4.8 1.5V6.9c-.4 0-.7 0-1-.2z" />
+  </svg>
+);
+
+const SOCIAL_ICONS = { facebook: Facebook, instagram: Instagram, linkedin: Linkedin, tiktok: TikTok };
 
 const Footer = () => {
   return (

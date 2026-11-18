@@ -2,6 +2,7 @@
 import { useState } from "react";
 import { faqSchema } from "@/lib/blogSchema";
 import { submitRequest } from "@/lib/requests";
+import { useTurnstile } from "@/components/Turnstile";
 import { Link } from "@/lib/router";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -48,6 +49,7 @@ const ServiceAerConditionat = () => {
   const [location, setLocation] = useState("");
   const [details, setDetails] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [tsToken, tsWidget, tsReset, tsOn] = useTurnstile();
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -60,8 +62,12 @@ const ServiceAerConditionat = () => {
       return;
     }
 
+    if (tsOn && !tsToken) {
+      toast({ title: "Confirmă că ești om", description: "Așteaptă verificarea de sub formular și încearcă din nou.", variant: "destructive" });
+      return;
+    }
     setIsSubmitting(true);
-    submitRequest("Service Aer Conditionat", { name, phone, details: `Localitate: ${location || "-"}. ${details}` })
+    submitRequest("Service Aer Conditionat", { name, phone, details: `Localitate: ${location || "-"}. ${details}` }, tsToken)
       .then(() => {
         trackServiceQuoteRequest("Service Aer Conditionat");
         toast({
@@ -74,7 +80,7 @@ const ServiceAerConditionat = () => {
         setDetails("");
       })
       .catch(() => toast({ title: "Eroare", description: "Cererea nu a putut fi trimisă. Sună-ne la +40 722 15 35 25.", variant: "destructive" }))
-      .finally(() => setIsSubmitting(false));
+      .finally(() => { setIsSubmitting(false); tsReset(); });
   };
 
   const structuredData = {
@@ -312,6 +318,8 @@ const ServiceAerConditionat = () => {
                         onChange={(e) => setDetails(e.target.value)}
                       />
                     </div>
+
+                    {tsWidget}
 
                     <Button type="submit" disabled={isSubmitting} className="w-full mt-2">
                       {isSubmitting ? "Se trimite..." : "Cere Intervenție Service"}

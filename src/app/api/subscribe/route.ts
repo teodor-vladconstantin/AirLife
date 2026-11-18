@@ -6,11 +6,13 @@ import { adminDb, siteUrl } from "@/lib/email/db";
 import { CONSENT_TEXT } from "@/lib/email/consent";
 import { unsubscribeHeaders } from "@/lib/email/headers";
 import Confirm from "@/emails/Confirm";
+import { verifyTurnstile } from "@/lib/turnstile";
 
 const schema = z.object({
   email: z.string().trim().toLowerCase().email().max(254),
   consent: z.literal(true), // explicit checkbox, not pre-ticked
   website: z.string().optional(), // honeypot
+  captcha: z.string().optional(), // Turnstile
   source: z.string().max(50).default("site"),
 });
 
@@ -31,11 +33,12 @@ const ok = () => NextResponse.json({ ok: true });
 export async function POST(req: Request) {
   const parsed = schema.safeParse(await req.json().catch(() => null));
   if (!parsed.success) return NextResponse.json({ error: "invalid" }, { status: 400 });
-  const { email, website, source } = parsed.data;
+  const { email, website, source, captcha } = parsed.data;
   if (website) return ok(); // bot: pretend success
 
   const ip = req.headers.get("x-forwarded-for")?.split(",")[0]?.trim() ?? "unknown";
   if (limited(`ip:${ip}`, 5, 10 * 60_000)) return NextResponse.json({ error: "rate_limited" }, { status: 429 });
+  if (!(await verifyTurnstile(captcha, ip))) return NextResponse.json({ error: "captcha" }, { status: 403 });
   // One confirmation mail per address per 5 minutes, so the form can't be used to spam someone's inbox.
   if (limited(`email:${email}`, 1, 5 * 60_000)) return ok();
 

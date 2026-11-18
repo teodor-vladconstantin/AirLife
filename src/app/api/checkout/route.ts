@@ -3,6 +3,7 @@ import { createClient } from "@supabase/supabase-js";
 import { z } from "zod";
 import { stripe, paymentsEnabled } from "@/lib/stripe";
 import { isShopVisible, salePricing } from "@/lib/pricing";
+import { verifyTurnstile } from "@/lib/turnstile";
 
 export const runtime = "nodejs";
 
@@ -16,6 +17,7 @@ const body = z.object({
   address: z.object({ county: z.string().min(2).max(80), city: z.string().min(2).max(80), address: z.string().min(3).max(200), postalCode: z.string().max(12).optional() }),
   paymentMethod: z.enum(["card_online", "cash_on_delivery", "bank_transfer"]),
   notes: z.string().max(500).optional(),
+  token: z.string().optional(), // Turnstile
 });
 
 const db = () => createClient(process.env.SUPABASE_URL || process.env.NEXT_PUBLIC_SUPABASE_URL!, process.env.SUPABASE_SERVICE_ROLE_KEY!, { auth: { persistSession: false } });
@@ -26,7 +28,9 @@ const bani = (n: number) => Math.round(n * 100);
 export async function POST(req: Request) {
   const parsed = body.safeParse(await req.json().catch(() => null));
   if (!parsed.success) return NextResponse.json({ error: "invalid_request" }, { status: 400 });
-  const { items, customer, address, paymentMethod, notes } = parsed.data;
+  const { items, customer, address, paymentMethod, notes, token } = parsed.data;
+  const ip = req.headers.get("x-forwarded-for")?.split(",")[0]?.trim();
+  if (!(await verifyTurnstile(token, ip))) return NextResponse.json({ error: "captcha" }, { status: 403 });
   if (paymentMethod === "card_online" && !paymentsEnabled()) return NextResponse.json({ error: "card_payments_disabled" }, { status: 503 });
 
   const sb = db();

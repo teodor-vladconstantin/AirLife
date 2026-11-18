@@ -1,6 +1,7 @@
 "use client";
 import { useState } from "react";
 import { submitRequest } from "@/lib/requests";
+import { useTurnstile } from "@/components/Turnstile";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import SEO from "@/components/SEO";
@@ -21,6 +22,7 @@ const Contact = () => {
   const [subject, setSubject] = useState("");
   const [message, setMessage] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [tsToken, tsWidget, tsReset, tsOn] = useTurnstile();
   const [submitted, setSubmitted] = useState(false);
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -34,8 +36,12 @@ const Contact = () => {
       return;
     }
 
+    if (tsOn && !tsToken) {
+      toast({ title: "Confirmă că ești om", description: "Așteaptă verificarea de sub formular și încearcă din nou.", variant: "destructive" });
+      return;
+    }
     setIsSubmitting(true);
-    submitRequest("Contact", { name, email, phone, details: `${subject || "Mesaj general"}: ${message}` })
+    submitRequest("Contact", { name, email, phone, details: `${subject || "Mesaj general"}: ${message}` }, tsToken)
       .then(() => {
         trackContactSubmit(subject || "Mesaj general de contact");
         setSubmitted(true);
@@ -50,7 +56,7 @@ const Contact = () => {
         setMessage("");
       })
       .catch(() => toast({ title: "Eroare", description: "Cererea nu a putut fi trimisă. Sună-ne la +40 722 15 35 25.", variant: "destructive" }))
-      .finally(() => setIsSubmitting(false));
+      .finally(() => { setIsSubmitting(false); tsReset(); });
   };
 
   const contactStructuredData = {
@@ -256,6 +262,8 @@ const Contact = () => {
                         </a>
                         .
                       </p>
+
+                      {tsWidget}
 
                       <Button type="submit" disabled={isSubmitting} className="w-full sm:w-auto">
                         <Send className="w-4 h-4 mr-2" />

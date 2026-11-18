@@ -18,6 +18,7 @@ import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Separator } from "@/components/ui/separator";
 import { Loader2 } from "lucide-react";
+import { useTurnstile } from "@/components/Turnstile";
 
 // Validation schema
 // Online payments are off until NEXT_PUBLIC_PAYMENTS=on (needs the Stripe keys, see docs/stripe.md). Off = the old quote flow.
@@ -45,6 +46,7 @@ const Checkout = () => {
   const { toast } = useToast();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [user, setUser] = useState<any>(null);
+  const [tsToken, tsWidget, tsReset, tsOn] = useTurnstile();
 
   const {
     register,
@@ -84,6 +86,7 @@ const Checkout = () => {
 
   // Payments on: the server reads prices from the database, creates the order and (for cards) the Stripe Checkout session.
   const submitToServer = async (data: CheckoutFormData) => {
+    if (tsOn && !tsToken) { toast({ title: "Confirmă că ești om", description: "Așteaptă verificarea și încearcă din nou.", variant: "destructive" }); return; }
     setIsSubmitting(true);
     try {
       const res = await fetch("/api/checkout", {
@@ -95,6 +98,7 @@ const Checkout = () => {
           address: { county: data.county, city: data.city, address: data.address, postalCode: data.postalCode },
           paymentMethod: data.paymentMethod,
           notes: data.customerNotes,
+          token: tsToken,
         }),
       });
       const out = await res.json().catch(() => ({}));
@@ -108,6 +112,7 @@ const Checkout = () => {
       window.location.assign(out.redirect);
     } finally {
       setIsSubmitting(false);
+      tsReset();
     }
   };
 
@@ -467,6 +472,7 @@ const Checkout = () => {
                       <span className="font-bold text-lg text-primary">{grandTotal.toFixed(2)} RON</span>
                     </div>
 
+                    {tsWidget}
                     <Button type="submit" className="w-full" size="lg" disabled={isSubmitting}>
                       {isSubmitting ? (
                         <>
