@@ -8,7 +8,7 @@ import { SOCIAL } from "@/data/social";
 export const metadata: Metadata = {
   metadataBase: new URL("https://airlife.ro"),
   authors: [{ name: "AirLife" }],
-  icons: { icon: [{ url: "/favicon.ico", sizes: "48x48" }, { url: "/favicon-48.png", type: "image/png", sizes: "48x48" }, { url: "/icon-192.png", type: "image/png", sizes: "192x192" }], apple: "/apple-touch-icon.png" },
+  icons: { icon: [{ url: "/airlife-icon.png", type: "image/png", sizes: "192x192" }, { url: "/favicon.ico", sizes: "48x48" }], apple: "/apple-touch-icon.png" },
   other: { "geo.region": "RO-BZ", "geo.placename": "Buzău" },
 };
 export const viewport: Viewport = { themeColor: "#16a34a" };
