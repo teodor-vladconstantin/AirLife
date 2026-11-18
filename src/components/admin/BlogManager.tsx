@@ -5,6 +5,9 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { FilePick } from "@/components/admin/FilePick";
+import { useConfirm } from "@/components/admin/confirm";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { useToast } from "@/hooks/use-toast";
 import { Plus, Trash2, Pencil, ExternalLink } from "lucide-react";
@@ -30,6 +33,7 @@ const EMPTY: Draft = {
 
 export const BlogManager = () => {
   const { toast } = useToast();
+  const [confirm, confirmDialog] = useConfirm();
   const [posts, setPosts] = useState<Post[]>([]);
   const [editingId, setEditingId] = useState<string | null>(null); // post id, or "new"
   const [draft, setDraft] = useState<Draft>(EMPTY);
@@ -84,7 +88,7 @@ export const BlogManager = () => {
   };
 
   const remove = async (p: Post) => {
-    if (!window.confirm(`Ștergi definitiv „${p.title}”?`)) return;
+    if (!(await confirm({ title: `Ștergi definitiv „${p.title}”?`, description: "Articolul dispare de pe site. Nu se poate anula.", confirmLabel: "Șterge articolul", destructive: true }))) return;
     const { error } = await supabase.from("blog_posts").delete().eq("id", p.id);
     if (error) return toast({ title: "Eroare", description: error.message, variant: "destructive" });
     load();
@@ -118,15 +122,13 @@ export const BlogManager = () => {
               </div>
               <div>
                 <Label htmlFor="b_status">Stare</Label>
-                <select
-                  id="b_status"
-                  className="h-10 w-full rounded-md border bg-background px-3 text-sm"
-                  value={draft.status}
-                  onChange={(e) => set("status", e.target.value)}
-                >
-                  <option value="draft">Ciornă (nepublic)</option>
-                  <option value="published">Publicat</option>
-                </select>
+                <Select value={draft.status} onValueChange={(v) => set("status", v)}>
+                  <SelectTrigger id="b_status"><SelectValue /></SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="draft">Ciornă (nepublic)</SelectItem>
+                    <SelectItem value="published">Publicat</SelectItem>
+                  </SelectContent>
+                </Select>
               </div>
             </div>
 
@@ -137,7 +139,7 @@ export const BlogManager = () => {
 
             <div>
               <Label htmlFor="b_cover">Imagine copertă</Label>
-              <Input id="b_cover" type="file" accept="image/*" onChange={uploadCover} disabled={uploading} />
+              <div><FilePick label="Alege imaginea" onChange={uploadCover} disabled={uploading} /></div>
               {draft.cover_image && <img src={draft.cover_image} alt="Copertă" className="mt-2 max-h-32 rounded" />}
             </div>
 
@@ -228,6 +230,7 @@ export const BlogManager = () => {
           ))}
         </CardContent>
       </Card>
+      {confirmDialog}
     </div>
   );
 };

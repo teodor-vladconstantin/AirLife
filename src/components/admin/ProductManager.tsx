@@ -7,6 +7,9 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { Switch } from "@/components/ui/switch";
+import { DateTimePicker } from "@/components/ui/datetime-picker";
+import { FilePick } from "@/components/admin/FilePick";
+import { useConfirm } from "@/components/admin/confirm";
 import { Card, CardContent } from "@/components/ui/card";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
@@ -45,6 +48,7 @@ const parseSpecs = (t: string) =>
 
 export const ProductManager = () => {
   const { toast } = useToast();
+  const [confirm, confirmDialog] = useConfirm();
   const [products, setProducts] = useState<Product[]>([]);
   const [q, setQ] = useState("");
   const [cat, setCat] = useState("all");
@@ -114,7 +118,7 @@ export const ProductManager = () => {
   };
 
   const remove = async (p: Product) => {
-    if (!window.confirm(`Ștergi definitiv „${p.name}”? Nu se poate anula. (Poți doar să-l ascunzi din magazin.)`)) return;
+    if (!(await confirm({ title: `Ștergi definitiv „${p.name}”?`, description: "Nu se poate anula. Dacă vrei doar să nu se mai vadă în magazin, ascunde-l.", confirmLabel: "Șterge produsul", destructive: true }))) return;
     const { error } = await supabase.from("products").delete().eq("id", p.id);
     if (error) return toast({ title: "Eroare", description: error.message, variant: "destructive" });
     toast({ title: "Produs șters" }); load();
@@ -195,7 +199,7 @@ export const ProductManager = () => {
             <div className="grid sm:grid-cols-3 gap-4">
               <div className="space-y-2"><Label>Preț (RON)</Label><Input type="number" step="0.01" value={form.price} onChange={(e) => set("price", e.target.value)} required /></div>
               <div className="space-y-2"><Label>Preț redus (RON)</Label><Input type="number" step="0.01" value={form.sale_price} onChange={(e) => set("sale_price", e.target.value)} placeholder="gol = fără ofertă" /></div>
-              <div className="space-y-2"><Label>Oferta se termină</Label><Input type="datetime-local" value={form.sale_ends_at} onChange={(e) => set("sale_ends_at", e.target.value)} /></div>
+              <div className="space-y-2"><Label>Oferta se termină</Label><DateTimePicker value={form.sale_ends_at} onChange={(v) => set("sale_ends_at", v)} placeholder="Fără dată de sfârșit" /></div>
             </div>
             <div className="grid sm:grid-cols-2 gap-4">
               <div className="space-y-2"><Label>Stoc</Label><Input type="number" value={form.stock} onChange={(e) => set("stock", e.target.value)} required /></div>
@@ -203,7 +207,7 @@ export const ProductManager = () => {
             </div>
             <div className="space-y-2">
               <Label>Imagine principală</Label>
-              <Input type="file" accept="image/*" onChange={onMain} disabled={uploading} />
+              <div><FilePick label="Alege imaginea" onChange={onMain} disabled={uploading} /></div>
               {form.image_url && (
                 <div className="flex items-center gap-3">
                   <img src={form.image_url} alt="Imagine principală" className="h-24 rounded border bg-white p-1" />
@@ -213,7 +217,7 @@ export const ProductManager = () => {
             </div>
             <div className="space-y-2">
               <Label>Galerie (poți alege mai multe)</Label>
-              <Input type="file" accept="image/*" multiple onChange={onGallery} disabled={uploading} />
+              <div><FilePick label="Adaugă poze în galerie" multiple onChange={onGallery} disabled={uploading} /></div>
               <div className="flex flex-wrap gap-2">
                 {form.gallery.map((g, i) => (
                   <div key={g} className="relative">
@@ -230,6 +234,7 @@ export const ProductManager = () => {
           </form>
         </DialogContent>
       </Dialog>
+      {confirmDialog}
     </div>
   );
 };

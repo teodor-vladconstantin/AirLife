@@ -3,7 +3,6 @@ import { Link } from "@/lib/router";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import SEO from "@/components/SEO";
-import LeadMagnetForm from "@/components/LeadMagnetForm";
 import { Button } from "@/components/ui/button";
 import type { Tables } from "@/integrations/supabase/types";
 import { renderMarkdown } from "@/lib/markdown";
@@ -59,13 +58,6 @@ const BlogPost = ({ post, related }: { post: Tables<"blog_posts">; related: { sl
               <Button asChild variant="outline"><Link to="/request-quote">Cere ofertă online</Link></Button>
             </div>
           </div>
-
-          <LeadMagnetForm
-            magnet="checklist-intretinere-ac"
-            title="Checklist gratuit de întreținere pentru aer condiționat"
-            description="Ce verifici înainte de sezon și când chemi un specialist. PDF trimis pe email."
-            source={`blog:${post.slug}`}
-          />
         </article>
       </main>
       <Footer />

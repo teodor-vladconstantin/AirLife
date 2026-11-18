@@ -6,6 +6,8 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Switch } from "@/components/ui/switch";
+import { DateTimePicker } from "@/components/ui/datetime-picker";
+import { useConfirm } from "@/components/admin/confirm";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { useToast } from "@/hooks/use-toast";
@@ -42,6 +44,7 @@ async function applySale(category: string, percent: number | null, endsAt: strin
 
 export const CampaignManager = () => {
   const { toast } = useToast();
+  const [confirm, confirmDialog] = useConfirm();
   const [list, setList] = useState<Campaign[]>([]);
   const [f, setF] = useState({ name: "", headline: "", cta_label: "Vezi ofertele", cta_url: "/products", starts_at: inputDate(new Date()), ends_at: "", active: true, discount: "", category: "all" });
   const [saleCat, setSaleCat] = useState("all");
@@ -78,14 +81,14 @@ export const CampaignManager = () => {
 
   const toggle = async (c: Campaign) => { const { error } = await supabase.from("campaigns").update({ active: !c.active }).eq("id", c.id); if (error) return fail(error); load(); };
   const remove = async (c: Campaign) => {
-    if (!window.confirm(`Ștergi campania „${c.name}”?`)) return;
+    if (!(await confirm({ title: `Ștergi campania „${c.name}”?`, description: "Bannerul dispare de pe site.", confirmLabel: "Șterge", destructive: true }))) return;
     const { error } = await supabase.from("campaigns").delete().eq("id", c.id); if (error) return fail(error); load();
   };
 
   const sale = async (clear: boolean) => {
     const pct = parseFloat(salePct);
     if (!clear && !(pct > 0 && pct < 100)) return toast({ title: "Introdu un procent între 1 și 99", variant: "destructive" });
-    if (!window.confirm(clear ? "Scoți toate ofertele din categoria aleasă?" : `Aplici -${pct}% pe ${saleCat === "all" ? "toate produsele" : saleCat}?`)) return;
+    if (!(await confirm({ title: clear ? "Scoți ofertele din categoria aleasă?" : `Aplici -${pct}% pe ${saleCat === "all" ? "toate produsele" : saleCat}?`, description: clear ? "Prețurile revin la valoarea normală." : "Prețul normal rămâne păstrat și apare tăiat pe site.", confirmLabel: clear ? "Scoate ofertele" : "Aplică reducerea" }))) return;
     setBusy(true);
     try {
       const n = await applySale(saleCat, clear ? null : pct, !clear && saleEnd ? new Date(saleEnd).toISOString() : null);
@@ -110,8 +113,8 @@ export const CampaignManager = () => {
                     <SelectContent>{PAGES.map((p) => <SelectItem key={p.v} value={p.v}>{p.l}</SelectItem>)}</SelectContent>
                   </Select>
                 </div>
-                <div className="space-y-1"><Label>Începe</Label><Input type="datetime-local" value={f.starts_at} onChange={(e) => setF({ ...f, starts_at: e.target.value })} required /></div>
-                <div className="space-y-1"><Label>Se termină (gol = fără sfârșit)</Label><Input type="datetime-local" value={f.ends_at} onChange={(e) => setF({ ...f, ends_at: e.target.value })} /></div>
+                <div className="space-y-1"><Label>Începe</Label><DateTimePicker value={f.starts_at} onChange={(v) => setF({ ...f, starts_at: v })} clearable={false} /></div>
+                <div className="space-y-1"><Label>Se termină (gol = fără sfârșit)</Label><DateTimePicker value={f.ends_at} onChange={(v) => setF({ ...f, ends_at: v })} placeholder="Fără sfârșit" /></div>
               </div>
               <div className="rounded-md border p-3 space-y-2 bg-secondary/30">
                 <p className="text-sm font-medium flex items-center gap-2"><Percent className="w-4 h-4" />Reducere automată (opțional)</p>
@@ -140,7 +143,7 @@ export const CampaignManager = () => {
             </Select>
             <div className="grid sm:grid-cols-2 gap-3">
               <div className="space-y-1"><Label>Reducere (%)</Label><Input type="number" min="1" max="99" value={salePct} onChange={(e) => setSalePct(e.target.value)} /></div>
-              <div className="space-y-1"><Label>Până la</Label><Input type="datetime-local" value={saleEnd} onChange={(e) => setSaleEnd(e.target.value)} /></div>
+              <div className="space-y-1"><Label>Până la</Label><DateTimePicker value={saleEnd} onChange={setSaleEnd} placeholder="Fără dată de sfârșit" /></div>
             </div>
             <div className="flex gap-3">
               <Button onClick={() => sale(false)} disabled={busy} className="flex-1">Aplică reducerea</Button>
@@ -168,6 +171,7 @@ export const CampaignManager = () => {
       </div>
 
       <UtmBuilder />
+      {confirmDialog}
     </div>
   );
 };

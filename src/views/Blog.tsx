@@ -3,7 +3,6 @@ import { Link } from "@/lib/router";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import SEO from "@/components/SEO";
-import LeadMagnetForm from "@/components/LeadMagnetForm";
 import { Card, CardContent } from "@/components/ui/card";
 import type { Tables } from "@/integrations/supabase/types";
 import { inCluster, orderedClusters } from "@/data/blogClusters";
@@ -47,13 +46,6 @@ const Blog = ({ posts }: { posts: Post[] }) => {
           </div>
             </section>
           ))}
-
-          <LeadMagnetForm
-            magnet="checklist-intretinere-ac"
-            title="Checklist gratuit de întreținere pentru aer condiționat"
-            description="Ce verifici înainte de sezon și când chemi un specialist. PDF trimis pe email."
-            source="blog-index"
-          />
         </div>
       </main>
       <Footer />
