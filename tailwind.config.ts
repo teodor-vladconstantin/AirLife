@@ -24,6 +24,8 @@ export default {
         ring: "hsl(var(--ring))",
         background: "hsl(var(--background))",
         foreground: "hsl(var(--foreground))",
+        // light green for text/icons on dark backgrounds (hero, footer); --primary is darker for contrast on white
+        brandlight: "hsl(145 65% 55%)",
         primary: {
           DEFAULT: "hsl(var(--primary))",
           foreground: "hsl(var(--primary-foreground))",
