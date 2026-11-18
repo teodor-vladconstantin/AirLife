@@ -19,12 +19,12 @@ const Footer = () => {
               <span className="text-2xl font-bold tracking-tight text-white">AirLife</span>
             </Link>
             <p className="text-sm opacity-80 max-w-sm leading-relaxed">
-              Magazin online HVAC și servicii dedicate pentru sisteme de climatizare. Accesorii, consumabile și montaj profesional cu echipa proprie sau parteneri.
+              Magazin online HVAC și servicii dedicate pentru sisteme de climatizare. Accesorii, consumabile și montaj aer condiționat în Buzău și tot județul.
             </p>
             <div className="space-y-2 text-xs opacity-75 pt-2">
               <div className="flex items-center gap-2">
                 <MapPin className="w-4 h-4 text-primary flex-shrink-0" />
-                <span>România</span>
+                <span>Buzău, România (servicii în municipiu și județ)</span>
               </div>
               <div className="flex items-center gap-2">
                 <Phone className="w-4 h-4 text-primary flex-shrink-0" />
@@ -78,8 +78,8 @@ const Footer = () => {
             <h3 className="font-semibold text-sm mb-4 text-white uppercase tracking-wider">Servicii</h3>
             <ul className="space-y-2 text-sm opacity-80">
               <li>
-                <Link to="/servicii" className="hover:text-primary transition-colors">
-                  Toate Serviciile
+                <Link to="/aer-conditionat-buzau" className="hover:text-primary transition-colors">
+                  Aer Condiționat Buzău
                 </Link>
               </li>
               <li>
@@ -176,7 +176,7 @@ const Footer = () => {
             </p>
           </div>
           <div className="flex items-center gap-4">
-            <span className="text-[11px]">România</span>
+            <span className="text-[11px]">Buzău, România</span>
             <span>•</span>
             <Link to="/politica-de-cookies" className="hover:underline">
               Setări Cookies

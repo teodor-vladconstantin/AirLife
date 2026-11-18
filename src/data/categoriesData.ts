@@ -21,7 +21,7 @@ export const CATEGORIES_DATA: Record<string, CategoryInfo> = {
       "Aparate de aer condiționat inverter cu Wi-Fi, în mai multe capacități (9000–21000 BTU). Livrare în toată țara, montaj profesional la cerere.",
     h1: "Aer Condiționat Inverter cu Wi-Fi",
     description:
-      "Un aer condiționat inverter își reglează continuu turația compresorului în loc să pornească și să se oprească, așa că menține temperatura constantă și consumă mai puțin decât un aparat clasic. Aici găsești aparate split inverter pentru apartamente, case și birouri, în mai multe capacități. Livrare în toată țara; montajul se face la cerere, în funcție de zonă.",
+      "Un aer condiționat inverter își reglează continuu turația compresorului în loc să pornească și să se oprească, așa că menține temperatura constantă și consumă mai puțin decât un aparat clasic. Aici găsești aparate split inverter pentru apartamente, case și birouri, în mai multe capacități. Livrare în toată țara; montajul îl facem în Buzău și în tot județul.",
     buyingGuide: {
       title: "Cum alegi capacitatea potrivită?",
       tips: [
@@ -35,7 +35,7 @@ export const CATEGORIES_DATA: Record<string, CategoryInfo> = {
       { q: "Merită un aer condiționat inverter față de unul clasic?", a: "Da, pentru utilizare zilnică. Un inverter consumă de regulă mai puțin curent decât un aparat on/off, face mai puțin zgomot și menține temperatura mai constantă. Diferența de preț se recuperează în timp, mai ales dacă folosești aparatul și pentru încălzire." },
       { q: "Câți BTU îmi trebuie pentru camera mea?", a: "Orientativ: 9000 BTU pentru camere de până la 25 mp, 12000 BTU pentru 25–35 mp și 18000 BTU sau mai mult pentru spații mai mari. Camerele orientate spre sud, de la ultimul etaj sau cu geamuri mari au nevoie de o capacitate mai mare." },
       { q: "Poate un aer condiționat inverter să încălzească iarna?", a: "Da, aparatele split inverter funcționează și ca pompă de căldură. Randamentul scade la temperaturi exterioare foarte scăzute, așa că verifică în fișa tehnică temperatura minimă de funcționare la încălzire." },
-      { q: "Livrați și montați aparatul?", a: "Livrăm prin curier în toată țara. Montajul profesional îl facem la cerere, doar în zonele acoperite de echipa noastră sau de parteneri; trimite-ne localitatea și îți confirmăm disponibilitatea." },
+      { q: "Livrați și montați aparatul?", a: "Livrăm prin curier în toată țara. Montajul îl facem cu echipa proprie în Buzău și în tot județul Buzău." },
     ],
   },
   "aer-conditionat-fara-unitate-exterioara": {
@@ -86,7 +86,7 @@ export const CATEGORIES_DATA: Record<string, CategoryInfo> = {
       { q: "Cât costă un sistem de ventilație descentralizată pentru o casă?", a: "Costul depinde de numărul de camere ventilate și de modelul unităților: de regulă se folosește o pereche de unități pentru una sau două camere, plus un panou de control. Trimite-ne suprafața și numărul de camere și îți facem o ofertă exactă." },
       { q: "Se poate folosi în subsol, mansardă sau birouri?", a: "Da. În subsoluri ajută la eliminarea umezelii și a mirosului de închis, în mansarde reduce condensul de pe geamurile de acoperiș, iar în birouri menține aerul proaspăt fără să deschizi geamurile. Contează să existe un perete exterior în care să se poată monta unitățile." },
       { q: "Cum se controlează unitățile?", a: "Prin panouri de control sau controlere care pornesc unitățile, reglează treptele de ventilație și sincronizează perechile. Unele modele au variante wireless, care evită cablurile între unități." },
-      { q: "Livrați și montați sistemul?", a: "Livrăm unitățile, panourile și accesoriile prin curier în toată țara. Montajul se face la cerere, doar în zonele acoperite de echipa noastră sau de parteneri; trimite-ne localitatea și îți confirmăm disponibilitatea." },
+      { q: "Livrați și montați sistemul?", a: "Livrăm unitățile, panourile și accesoriile prin curier în toată țara. Montajul îl facem cu echipa proprie în Buzău și în tot județul Buzău." },
     ],
   },
   "ventilatoare-baie": {
@@ -128,7 +128,7 @@ export const CATEGORIES_DATA: Record<string, CategoryInfo> = {
       { q: "Ce suport de aer condiționat îmi trebuie?", a: "Alege consola după greutatea unității exterioare și după capacitate: de regulă 400 mm pentru aparate de 9000–12000 BTU și 450–500 mm pentru 18000–24000 BTU. Sarcina maximă a consolei trebuie să fie clar peste greutatea unității." },
       { q: "De ce sunt necesare tampoanele antivibrante?", a: "Compresorul unității exterioare vibrează în funcționare. Tampoanele din cauciuc dintre unitate și consolă opresc transmiterea vibrațiilor și a zgomotului prin perete în locuință." },
       { q: "Cu ce se prinde suportul de perete?", a: "Cu dibluri și șuruburi potrivite zidăriei: ancore metalice pentru beton, dibluri lungi pentru cărămidă cu goluri și dibluri speciale pentru BCA. O prindere nepotrivită poate ceda în timp sub greutatea unității." },
-      { q: "Livrați accesoriile în toată țara?", a: "Da, accesoriile și consumabilele le livrăm prin curier în toată țara. Montajul aparatului îl facem la cerere, doar în zonele acoperite de echipa noastră sau de parteneri." },
+      { q: "Livrați accesoriile în toată țara?", a: "Da, accesoriile și consumabilele le livrăm prin curier în toată țara. Montajul aparatului îl facem în Buzău și în tot județul Buzău." },
     ],
   },
   "consumabile-hvac": {

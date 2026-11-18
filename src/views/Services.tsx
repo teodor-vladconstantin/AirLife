@@ -3,6 +3,7 @@ import { Link } from "@/lib/router";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import SEO from "@/components/SEO";
+import { AREA_SERVED } from "@/data/localSeo";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Wrench, Sparkles, Activity, MapPin, ArrowRight, ShieldCheck, CheckCircle2 } from "lucide-react";
@@ -43,14 +44,15 @@ const Services = () => {
     "@type": "HVACBusiness",
     "name": "AirLife Servicii Climatizare",
     "url": "https://airlife.ro/servicii",
-    "description": "Servicii complete de montaj, igienizare și service aer condiționat, la cerere, în zonele acoperite de echipa noastră sau de parteneri."
+    "areaServed": AREA_SERVED,
+    "description": "Servicii complete de montaj, igienizare și service aer condiționat în Buzău și tot județul Buzău."
   };
 
   return (
     <div className="min-h-screen flex flex-col">
       <SEO
-        title="Servicii Aer Condiționat: Montaj, Igienizare, Service | AirLife"
-        description="Servicii complete de climatizare: montaj autorizat cu vidare, igienizare profesională a vaporizatorului și turbinei, depanare și reparații aer condiționat."
+        title="Servicii Aer Condiționat Buzău: Montaj, Igienizare, Service | AirLife"
+        description="Servicii de climatizare în Buzău și județ: montaj autorizat cu vidare, igienizare profesională a vaporizatorului și turbinei, depanare și reparații aer condiționat."
         canonical="https://airlife.ro/servicii"
         structuredData={structuredData}
       />
@@ -61,10 +63,10 @@ const Services = () => {
         <div className="container mx-auto px-4 max-w-5xl">
           <div className="text-center max-w-3xl mx-auto mb-16">
             <div className="inline-flex items-center gap-2 px-3 py-1 bg-primary/10 text-primary rounded-full text-sm font-medium mb-4">
-              <MapPin className="w-4 h-4" /> Disponibilitate confirmată la cerere
+              <MapPin className="w-4 h-4" /> Buzău și tot județul
             </div>
             <h1 className="text-4xl md:text-5xl font-bold tracking-tight mb-4 text-foreground">
-              Servicii Climatizare &amp; HVAC
+              Servicii Aer Condiționat în Buzău
             </h1>
             <p className="text-lg text-muted-foreground leading-relaxed">
               Echipa AirLife oferă servicii tehnice dedicate pentru sistemele de aer condiționat rezidențiale și comerciale.
@@ -123,10 +125,10 @@ const Services = () => {
               </div>
               <div>
                 <h3 className="text-2xl font-bold text-foreground mb-2">
-                  De ce să alegi serviciile AirLife?
+                  De ce să alegi AirLife în Buzău?
                 </h3>
                 <p className="text-muted-foreground text-sm leading-relaxed mb-4">
-                  Ne asigurăm că fiecare client primește o estimare corectă înainte de începerea lucrării, folosim numai materiale de calitate (țevi de cupru calibrate, console tratate anticoroziv) și vidăm obligatoriu fiecare instalație nouă.
+                  Suntem o echipă din județul Buzău și intervenim în municipiu și în tot județul. Ne asigurăm că fiecare client primește o estimare corectă înainte de începerea lucrării, folosim numai materiale de calitate (țevi de cupru calibrate, console tratate anticoroziv) și vidăm obligatoriu fiecare instalație nouă.
                 </p>
                 <div className="flex flex-wrap gap-4 text-xs text-muted-foreground">
                   <span className="flex items-center gap-1.5 font-medium">

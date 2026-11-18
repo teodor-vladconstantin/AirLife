@@ -64,7 +64,7 @@ const CTASection = () => {
             </div>
             <div>
               <div className="font-bold text-sm mb-0.5">Servicii Montaj</div>
-              <div>Contactează echipa AirLife</div>
+              <div>Buzău și tot județul</div>
             </div>
           </div>
         </div>

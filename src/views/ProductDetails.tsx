@@ -21,6 +21,9 @@ import {
   ShieldCheck,
   CheckCircle2,
   ShoppingCart,
+  ChevronLeft,
+  ChevronRight,
+  X,
 } from "lucide-react";
 import { Input } from "@/components/ui/input";
 
@@ -29,16 +32,37 @@ type Loaded = NonNullable<Awaited<ReturnType<typeof loadProduct>>>;
 const ProductDetails = ({ initial }: { initial: Loaded }) => {
   const { product, related: relatedProducts } = initial;
   const [quantity, setQuantity] = useState(1);
-  const [activeImg, setActiveImg] = useState<string | null>(null);
+  const [idx, setIdx] = useState(0);
+  const [zoom, setZoom] = useState(false);
+  const [touchX, setTouchX] = useState<number | null>(null);
   const { toast } = useToast();
   const { addToQuote } = useQuote();
   const { addToCart } = useCart();
 
   useEffect(() => {
     window.scrollTo(0, 0);
-    setActiveImg(null);
+    setIdx(0);
     trackViewItem({ item_id: product.id, item_name: product.name, price: product.price, item_category: product.category });
   }, [product.id]);
+
+  const images = product.gallery.length ? product.gallery : [product.image_url || "/placeholder.svg"];
+  const go = (d: number) => setIdx((i) => (i + d + images.length) % images.length);
+
+  useEffect(() => {
+    if (!zoom) return;
+    const n = images.length;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setZoom(false);
+      if (e.key === "ArrowLeft") setIdx((i) => (i - 1 + n) % n);
+      if (e.key === "ArrowRight") setIdx((i) => (i + 1) % n);
+    };
+    document.body.style.overflow = "hidden";
+    window.addEventListener("keydown", onKey);
+    return () => {
+      document.body.style.overflow = "";
+      window.removeEventListener("keydown", onKey);
+    };
+  }, [zoom, images.length]);
 
   const handleAddToCart = async () => {
     if (!product || product.stock === 0) return;
@@ -173,25 +197,94 @@ const ProductDetails = ({ initial }: { initial: Loaded }) => {
           <div className="grid md:grid-cols-2 gap-8 mb-12 animate-in fade-in duration-500">
             {/* Product Image */}
             <div className="space-y-4">
-              <div className="aspect-square bg-white rounded-2xl border border-border/60 p-8 flex items-center justify-center overflow-hidden shadow-sm">
+              <div
+                className="relative aspect-square bg-white rounded-2xl border border-border/60 p-8 flex items-center justify-center overflow-hidden shadow-sm select-none"
+                tabIndex={0}
+                onKeyDown={(e) => {
+                  if (e.key === "ArrowLeft") go(-1);
+                  if (e.key === "ArrowRight") go(1);
+                }}
+                onTouchStart={(e) => setTouchX(e.touches[0].clientX)}
+                onTouchEnd={(e) => {
+                  if (touchX === null) return;
+                  const dx = e.changedTouches[0].clientX - touchX;
+                  if (Math.abs(dx) > 40) go(dx < 0 ? 1 : -1);
+                  setTouchX(null);
+                }}
+              >
                 <img
-                  src={activeImg || product.image_url || "/placeholder.svg"}
-                  alt={product.name}
-                  className="max-h-full max-w-full object-contain"
+                  src={images[idx]}
+                  alt={`${product.name} - poza ${idx + 1}`}
+                  className="max-h-full max-w-full object-contain cursor-zoom-in"
+                  onClick={() => setZoom(true)}
                 />
+                {images.length > 1 && (
+                  <>
+                    <button type="button" onClick={() => go(-1)} aria-label="Poza anterioară" className="absolute left-3 top-1/2 -translate-y-1/2 h-10 w-10 rounded-full bg-background/90 border border-border shadow flex items-center justify-center hover:bg-background">
+                      <ChevronLeft className="w-5 h-5" />
+                    </button>
+                    <button type="button" onClick={() => go(1)} aria-label="Poza următoare" className="absolute right-3 top-1/2 -translate-y-1/2 h-10 w-10 rounded-full bg-background/90 border border-border shadow flex items-center justify-center hover:bg-background">
+                      <ChevronRight className="w-5 h-5" />
+                    </button>
+                    <span className="absolute bottom-3 right-3 text-xs px-2 py-1 rounded-full bg-foreground/70 text-background">
+                      {idx + 1} / {images.length}
+                    </span>
+                  </>
+                )}
               </div>
-              {product.gallery.length > 1 && (
+              {images.length > 1 && (
                 <div className="flex gap-2">
-                  {product.gallery.map((g) => (
+                  {images.map((g, i) => (
                     <button
                       key={g}
                       type="button"
-                      onClick={() => setActiveImg(g)}
-                      className={`w-16 h-16 rounded-lg border bg-white p-1 ${(activeImg || product.image_url) === g ? "border-primary" : "border-border"}`}
+                      onClick={() => setIdx(i)}
+                      aria-label={`Poza ${i + 1}`}
+                      className={`w-16 h-16 rounded-lg border bg-white p-1 ${i === idx ? "border-primary ring-1 ring-primary" : "border-border"}`}
                     >
                       <img src={g} alt="" loading="lazy" className="w-full h-full object-contain" />
                     </button>
                   ))}
+                </div>
+              )}
+
+              {zoom && (
+                <div
+                  className="fixed inset-0 z-[100] bg-black/90 flex items-center justify-center p-4"
+                  onClick={() => setZoom(false)}
+                  onTouchStart={(e) => setTouchX(e.touches[0].clientX)}
+                  onTouchEnd={(e) => {
+                    if (touchX === null) return;
+                    const dx = e.changedTouches[0].clientX - touchX;
+                    if (Math.abs(dx) > 40) go(dx < 0 ? 1 : -1);
+                    setTouchX(null);
+                  }}
+                  role="dialog"
+                  aria-modal="true"
+                  aria-label="Galerie poze"
+                >
+                  <img
+                    src={images[idx]}
+                    alt={`${product.name} - poza ${idx + 1}`}
+                    className="max-h-full max-w-full object-contain bg-white rounded-lg"
+                    onClick={(e) => e.stopPropagation()}
+                  />
+                  <button type="button" onClick={() => setZoom(false)} aria-label="Închide" className="absolute top-4 right-4 h-10 w-10 rounded-full bg-white/90 flex items-center justify-center">
+                    <X className="w-5 h-5" />
+                  </button>
+                  {images.length > 1 && (
+                    <>
+                      <button type="button" onClick={(e) => { e.stopPropagation(); go(-1); }} aria-label="Poza anterioară" className="absolute left-4 top-1/2 -translate-y-1/2 h-12 w-12 rounded-full bg-white/90 flex items-center justify-center">
+                        <ChevronLeft className="w-6 h-6" />
+                      </button>
+                      <button type="button" onClick={(e) => { e.stopPropagation(); go(1); }} aria-label="Poza următoare" className="absolute right-4 top-1/2 -translate-y-1/2 h-12 w-12 rounded-full bg-white/90 flex items-center justify-center">
+                        <ChevronRight className="w-6 h-6" />
+                      </button>
+                      <span className="absolute bottom-4 left-1/2 -translate-x-1/2 text-sm px-3 py-1 rounded-full bg-white/90">
+                        {idx + 1} / {images.length}
+                      </span>
+                    </>
+                  )}
                 </div>
               )}
 

@@ -11,7 +11,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Mail, Phone, Clock, Send, CheckCircle2 } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { trackContactSubmit, trackClickToCall } from "@/lib/analytics";
-import { PHONE_DISPLAY, PHONE_TEL } from "@/data/localSeo";
+import { AREA_SERVED, PHONE_DISPLAY, PHONE_TEL } from "@/data/localSeo";
 
 const Contact = () => {
   const { toast } = useToast();
@@ -63,10 +63,8 @@ const Contact = () => {
       "name": "AirLife",
       "email": "contact@airlife.ro",
       "telephone": PHONE_TEL,
-      "areaServed": {
-        "@type": "Country",
-        "name": "România"
-      },
+      "@id": "https://airlife.ro/#localbusiness",
+      "areaServed": AREA_SERVED,
       "address": {
         "@type": "PostalAddress",
         "streetAddress": "Str. Centrală nr. 169",
@@ -81,7 +79,7 @@ const Contact = () => {
   return (
     <div className="min-h-screen flex flex-col">
       <SEO
-        title="Contact & Suport | AirLife"
+        title="Contact AirLife Buzău | Programări Montaj și Igienizare AC"
         description="Contactează echipa AirLife. Informații despre comenzi, livrare accesorii HVAC și programări pentru montaj sau igienizare aer condiționat."
         canonical="https://airlife.ro/contact"
         structuredData={contactStructuredData}

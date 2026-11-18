@@ -180,7 +180,7 @@ const GhidIgienizare = () => {
                   Vrei o igienizare profesională?
                 </h3>
                 <p className="text-sm text-muted-foreground max-w-xl">
-                  Echipa AirLife realizează igienizarea profesională completă cu husă impermeabilă, degresare vaporizator și tratament biocid, la cerere, în zonele acoperite de echipa noastră sau de parteneri.
+                  Echipa AirLife realizează igienizarea profesională completă cu husă impermeabilă, degresare vaporizator și tratament biocid, în Buzău și în tot județul.
                 </p>
               </div>
               <div className="flex flex-col sm:flex-row gap-3 flex-shrink-0 w-full sm:w-auto">

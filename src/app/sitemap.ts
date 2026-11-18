@@ -6,7 +6,7 @@ export const revalidate = 3600;
 
 const SITE = "https://airlife.ro";
 const STATIC = [
-  "/", "/products", "/servicii", "/servicii/montaj-aer-conditionat", "/servicii/igienizare-aer-conditionat", "/servicii/service-aer-conditionat",
+  "/", "/aer-conditionat-buzau", "/products", "/servicii", "/servicii/montaj-aer-conditionat", "/servicii/igienizare-aer-conditionat", "/servicii/service-aer-conditionat",
   "/ghid/igienizare-aer-conditionat", "/ghid/cost-montaj-aer-conditionat", "/blog", "/despre-noi", "/contact", "/livrare-si-retur", "/garantie",
   "/termeni-si-conditii", "/politica-de-confidentialitate", "/politica-de-cookies",
 ];

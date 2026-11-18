@@ -28,7 +28,7 @@ const FAQS = [
   },
   {
     "q": "Faceți montaj în localitatea mea?",
-    "a": "Montajul se face la cerere, doar în zonele acoperite de echipa noastră sau de parteneri. Trimite-ne localitatea și îți confirmăm disponibilitatea; aparatele și accesoriile le livrăm prin curier în toată țara."
+    "a": "Montăm cu echipa proprie în municipiul Buzău și în tot județul Buzău. Aparatele și accesoriile le livrăm prin curier în toată țara."
   }
 ];
 
