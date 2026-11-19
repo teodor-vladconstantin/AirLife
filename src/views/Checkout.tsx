@@ -237,7 +237,7 @@ const Checkout = () => {
 
       <main className="flex-1 bg-gradient-to-b from-background to-secondary/30 py-12">
         <div className="container mx-auto px-4 max-w-7xl">
-          <h1 className="text-4xl font-bold mb-8 text-center">Trimite Cerere de Ofertă</h1>
+          <h1 className="text-4xl font-bold mb-8 text-center">Finalizează comanda</h1>
 
           <form onSubmit={handleSubmit(onSubmit)}>
             <div className="grid lg:grid-cols-3 gap-8">
@@ -383,7 +383,7 @@ const Checkout = () => {
                 {/* Notes */}
                 <Card>
                     <CardHeader>
-                      <CardTitle>Notițe Cerere (Opțional)</CardTitle>
+                      <CardTitle>Notițe comandă (opțional)</CardTitle>
                     </CardHeader>
                   <CardContent>
                       <Textarea
@@ -440,7 +440,7 @@ const Checkout = () => {
               <div className="lg:col-span-1">
                 <Card className="sticky top-24">
                   <CardHeader>
-                    <CardTitle>Sumar Cerere</CardTitle>
+                    <CardTitle>Sumar comandă</CardTitle>
                   </CardHeader>
                   <CardContent className="space-y-4">
                     {/* Products */}
