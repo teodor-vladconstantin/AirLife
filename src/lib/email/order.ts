@@ -23,10 +23,11 @@ export async function sendOrderEmail(orderId: string, kind: OrderEmailKind): Pro
     const o = await load(orderId);
     if (!o || !o.customer_email || !o.items.length) return; // service/contact requests share the orders table: no items = no order email
     const el = OrderEmail({ kind, o });
-    await resend.emails.send(
+    const sent = await resend.emails.send(
       { from: ORDERS_FROM, to: o.customer_email, replyTo: REPLY_TO, subject: orderSubject(kind, o.order_number), html: await render(el), text: await render(el, { plainText: true }) },
       { idempotencyKey: `order-${kind}-${orderId}` },
     );
+    if (sent.error) console.error("order email error:", sent.error.message); // Resend returns errors instead of throwing
     if (kind === "placed" || kind === "paid") {
       const ad = OrderAdminEmail({ kind, o });
       await resend.emails.send(
