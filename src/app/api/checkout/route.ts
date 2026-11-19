@@ -95,7 +95,8 @@ export async function POST(req: Request) {
       cancel_url: `${SITE}/checkout`,
     });
     return NextResponse.json({ url: session.url });
-  } catch {
+  } catch (e) {
+    console.error("stripe checkout failed:", (e as Error)?.message);
     // Could not reach Stripe: give the stock back and drop the unpaid order.
     await giveBack(lines);
     await sb.from("orders").delete().eq("id", order.id);
