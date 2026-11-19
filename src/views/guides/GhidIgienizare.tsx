@@ -12,7 +12,7 @@ import { CheckCircle2, AlertTriangle, Sparkles, Clock, BookOpen, ArrowRight } fr
 const FAQS = [
   {
     "q": "Cât de des trebuie curățat aerul condiționat?",
-    "a": "Filtrele le poți spăla singur la 3–4 săptămâni în sezonul de utilizare. Igienizarea profesională a vaporizatorului și a turbinei se face cel puțin o dată pe an, ideal înainte de sezonul cald, și mai des dacă folosești aparatul și pentru încălzire."
+    "a": "Filtrele le poți spăla singur la 3–4 săptămâni în sezonul de utilizare. Igienizarea profesională a vaporizatorului și a turbinei se face măcar o dată pe an, ideal înainte de sezonul cald, și mai des dacă folosești aparatul și pentru încălzire."
   },
   {
     "q": "Pot curăța singur aparatul de aer condiționat?",
@@ -140,7 +140,7 @@ const GhidIgienizare = () => {
                     <li>Ridică masca frontală rabatabilă a unității până când se blochează în poziție deschisă.</li>
                     <li>Extrage cu grijă cele două filtre de plasă trăgând ușor în sus și apoi spre tine.</li>
                     <li>Spală-le sub jet de apă călduță (nu fierbinte), folosind un săpun neutru sau detergent delicat.</li>
-                    <li>Lasă filtrele să se usuce complet la umbră (nu pe calorifer sau la soare direct) înainte de a le reinstala.</li>
+                    <li>Lasă filtrele să se usuce de tot la umbră (nu pe calorifer sau la soare direct) înainte de a le reinstala.</li>
                   </ol>
                 </div>
               </CardContent>

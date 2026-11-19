@@ -60,7 +60,7 @@ const CookiePolicy = () => {
             Politica de Cookies
           </h1>
           <p className="text-muted-foreground text-center max-w-2xl mx-auto mb-12">
-            Această politică explică ce sunt modulele cookie, cum le utilizăm pe platforma AirLife.ro și cum puteți controla preferințele dumneavoastră.
+            Această politică descrie ce sunt modulele cookie, cum le utilizăm pe platforma AirLife.ro și cum puteți controla preferințele dumneavoastră.
           </p>
 
           <div className="space-y-8">
@@ -73,7 +73,7 @@ const CookiePolicy = () => {
                 </div>
                 <div className="space-y-3 text-sm text-muted-foreground leading-relaxed">
                   <p>
-                    Un modul cookie este un fișier text de mici dimensiuni stocat pe dispozitivul dumneavoastră (computer, tabletă, telefon mobil) atunci când vizitați un site web. Cookie-urile permit site-ului să vă recunoască dispozitivul și să rețină anumite informații despre sesiunea dumneavoastră de navigare (de exemplu: produsele adăugate în coșul de cumpărături, limba preferată sau autentificarea în cont).
+                    Un modul cookie este un fișier text de mici dimensiuni stocat pe dispozitivul dumneavoastră (computer, tabletă, telefon mobil) în momentul în care vizitați un site web. Cookie-urile permit site-ului să vă recunoască dispozitivul și să rețină anumite informații despre sesiunea dumneavoastră de navigare (de exemplu: produsele adăugate în coșul de cumpărături, limba preferată sau autentificarea în cont).
                   </p>
                   <p>
                     Pe lângă cookie-uri, putem utiliza tehnologii similare precum <strong>Web Storage (localStorage)</strong> pentru a asigura sincronizarea coșului de cumpărături fără a trimite date inutile la fiecare interogare de rețea.

@@ -67,13 +67,13 @@ const ShippingAndReturns = () => {
                       <strong className="block text-foreground mb-1">Costul de Transport:</strong>
                       <ul className="space-y-1 text-xs">
                         <li>• <strong>20,00 RON</strong> tarif fix pentru comenzi cu valoare sub 1000 RON.</li>
-                        <li>• <strong>GRATUIT</strong> pentru orice comandă ce depășește valoarea de <strong>1000 RON</strong>.</li>
+                        <li>• <strong>GRATUIT</strong> pentru comenzile care depășesc valoarea de <strong>1000 RON</strong>.</li>
                       </ul>
                     </div>
                     <div className="p-4 rounded-xl bg-secondary/50 border border-border/50">
                       <strong className="block text-foreground mb-1">Termen de Livrare:</strong>
                       <p className="text-xs">
-                        Produsele aflate în stoc se livrează în mod uzual în termen de <strong>24 – 48 de ore lucrătoare</strong> de la confirmarea comenzii. În perioadele aglomerate sau cu condiții meteo deosebite, termenul poate fi prelungit punctual.
+                        Produsele aflate în stoc se livrează în mod uzual în termen de <strong>24 – 48 de ore lucrătoare</strong> de la confirmarea comenzii. În perioadele aglomerate sau în condiții meteo deosebite, termenul poate fi prelungit punctual.
                       </p>
                     </div>
                   </div>

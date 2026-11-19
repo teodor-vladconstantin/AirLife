@@ -14,7 +14,7 @@ export default function Confirm({
     <Layout
       preview="Un click și ești abonat. Dacă nu ai cerut tu, ignoră mesajul."
       unsubscribeUrl={unsubscribeUrl}
-      reason="Primești acest email pentru că cineva a introdus această adresă pe airlife.ro."
+      reason="Primești acest email întrucât cineva a introdus această adresă pe airlife.ro."
     >
       <Heading as="h1" style={{ margin: "0 0 16px", fontSize: 24, lineHeight: "32px", color: brand.ink }}>
         Confirmă abonarea

@@ -31,7 +31,7 @@ export const CATEGORIES_DATA: Record<string, CategoryInfo> = {
       ],
     },
     faq: [
-      { q: "Ce înseamnă aer condiționat inverter?", a: "Inverter înseamnă că turația compresorului se reglează continuu în funcție de cât de departe este camera de temperatura setată. Aparatul nu mai pornește și oprește compresorul la putere maximă, ci lucrează mai lin, cu consum mai mic și temperatură mai stabilă." },
+      { q: "Ce înseamnă aer condiționat inverter?", a: "Inverter înseamnă că turația compresorului se reglează continuu în funcție de cât de departe este camera de temperatura setată. Aparatul nu mai pornește și oprește compresorul la putere maximă, ci lucrează mai lin, consumă mai puțin și menține temperatura mai stabilă." },
       { q: "Merită un aer condiționat inverter față de unul clasic?", a: "Da, pentru utilizare zilnică. Un inverter consumă de regulă mai puțin curent decât un aparat on/off, face mai puțin zgomot și menține temperatura mai constantă. Diferența de preț se recuperează în timp, mai ales dacă folosești aparatul și pentru încălzire." },
       { q: "Câți BTU îmi trebuie pentru camera mea?", a: "Orientativ: 9000 BTU pentru camere de până la 25 mp, 12000 BTU pentru 25–35 mp și 18000 BTU sau mai mult pentru spații mai mari. Camerele orientate spre sud, de la ultimul etaj sau cu geamuri mari au nevoie de o capacitate mai mare." },
       { q: "Poate un aer condiționat inverter să încălzească iarna?", a: "Da, aparatele split inverter funcționează și ca pompă de căldură. Randamentul scade la temperaturi exterioare foarte scăzute, așa că verifică în fișa tehnică temperatura minimă de funcționare la încălzire." },
@@ -82,9 +82,9 @@ export const CATEGORIES_DATA: Record<string, CategoryInfo> = {
     },
     faq: [
       { q: "Ce este un sistem de ventilație descentralizată?", a: "Un sistem format din unități mici montate direct în pereții exteriori, câte una sau mai multe în fiecare cameră, fără tubulatură centrală. Unitățile lucrează de regulă în pereche: una introduce aer proaspăt, cealaltă evacuează aerul viciat, iar sensul se inversează periodic. Schimbătorul de căldură din fiecare unitate reține căldura aerului evacuat și o cedează aerului proaspăt." },
-      { q: "Ventilație descentralizată sau centralizată: ce aleg?", a: "Varianta descentralizată nu are nevoie de tubulatură prin tavan sau pereți, așa că se montează ușor în casele existente și la renovări, cameră cu cameră. Sistemul centralizat cu recuperator și tubulatură se potrivește mai bine la construcțiile noi, unde traseele se pot prevedea din proiect." },
+      { q: "Ventilație descentralizată sau centralizată: ce aleg?", a: "Varianta descentralizată nu are nevoie de tubulatură prin tavan sau pereți, așa că se montează ușor în casele existente și la renovări, pe rând, în fiecare cameră. Sistemul centralizat cu recuperator și tubulatură se potrivește mai bine la construcțiile noi, unde traseele se pot prevedea din proiect." },
       { q: "Cât costă un sistem de ventilație descentralizată pentru o casă?", a: "Costul depinde de numărul de camere ventilate și de modelul unităților: de regulă se folosește o pereche de unități pentru una sau două camere, plus un panou de control. Trimite-ne suprafața și numărul de camere și îți facem o ofertă exactă." },
-      { q: "Se poate folosi în subsol, mansardă sau birouri?", a: "Da. În subsoluri ajută la eliminarea umezelii și a mirosului de închis, în mansarde reduce condensul de pe geamurile de acoperiș, iar în birouri menține aerul proaspăt fără să deschizi geamurile. Contează să existe un perete exterior în care să se poată monta unitățile." },
+      { q: "Se poate folosi în subsol, mansardă sau birouri?", a: "Da. În subsoluri ajută la eliminarea umezelii și a mirosului de închis, în mansarde limitează condensul de pe geamurile de acoperiș, iar în birouri menține aerul proaspăt fără să deschizi geamurile. Contează să existe un perete exterior în care să se poată monta unitățile." },
       { q: "Cum se controlează unitățile?", a: "Prin panouri de control sau controlere care pornesc unitățile, reglează treptele de ventilație și sincronizează perechile. Unele modele au variante wireless, care evită cablurile între unități." },
       { q: "Livrați și montați sistemul?", a: "Livrăm unitățile, panourile și accesoriile prin curier în toată țara. Montajul îl facem cu echipa AirLife sau parteneri în Buzău și în tot județul Buzău." },
     ],
@@ -127,7 +127,7 @@ export const CATEGORIES_DATA: Record<string, CategoryInfo> = {
     faq: [
       { q: "Ce suport de aer condiționat îmi trebuie?", a: "Alege consola după greutatea unității exterioare și după capacitate: de regulă 400 mm pentru aparate de 9000–12000 BTU și 450–500 mm pentru 18000–24000 BTU. Sarcina maximă a consolei trebuie să fie clar peste greutatea unității." },
       { q: "De ce sunt necesare tampoanele antivibrante?", a: "Compresorul unității exterioare vibrează în funcționare. Tampoanele din cauciuc dintre unitate și consolă opresc transmiterea vibrațiilor și a zgomotului prin perete în locuință." },
-      { q: "Cu ce se prinde suportul de perete?", a: "Cu dibluri și șuruburi potrivite zidăriei: ancore metalice pentru beton, dibluri lungi pentru cărămidă cu goluri și dibluri speciale pentru BCA. O prindere nepotrivită poate ceda în timp sub greutatea unității." },
+      { q: "Cum se prinde suportul de perete?", a: "Cu dibluri și șuruburi potrivite zidăriei: ancore metalice pentru beton, dibluri lungi pentru cărămidă cu goluri și dibluri speciale pentru BCA. O prindere nepotrivită poate ceda în timp sub greutatea unității." },
       { q: "Livrați accesoriile în toată țara?", a: "Da, accesoriile și consumabilele le livrăm prin curier în toată țara. Montajul aparatului îl facem în Buzău și în tot județul Buzău." },
     ],
   },
@@ -181,7 +181,7 @@ export const CATEGORIES_DATA: Record<string, CategoryInfo> = {
       title: "Când și cum se înlocuiesc filtrele?",
       tips: [
         "Filtrele HEPA se schimbă de regulă la fiecare 6–12 luni, în funcție de nivelul de poluare din încăpere.",
-        "Filtrele cu carbon activ neutralizează compușii organici volatili (COV), fumul de țigară și mirosurile de gătit.",
+        "Filtrele din carbon activ neutralizează compușii organici volatili (COV), fumul de țigară și mirosurile de gătit.",
         "Nu spălați niciodată filtrele clasice HEPA cu apă, cu excepția cazului în care producătorul specifică explicit că sunt lavabile.",
       ],
     },

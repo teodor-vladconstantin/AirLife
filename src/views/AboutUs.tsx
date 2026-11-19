@@ -44,11 +44,11 @@ const AboutUs = () => {
             <CardContent className="space-y-4 text-muted-foreground">
               <p>
                 La AirLife, misiunea noastră este să oferim soluții HVAC de înaltă calitate care să
-                îmbunătățească calitatea aerului și confortul termic, menținând în același timp un
+                îmbunătățească aerul din locuință și confortul termic, menținând în același timp un
                 impact redus asupra mediului înconjurător.
               </p>
               <p>
-                Îți propunem produse eco-friendly care combină eficiența energetică cu tehnologia de
+                Îți propunem produse eco-friendly care combină eficiența energetică și tehnologia de
                 ultimă generație, pentru a crea spații de locuit și de lucru mai sănătoase pentru
                 toți clienții noștri.
               </p>

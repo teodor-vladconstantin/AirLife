@@ -23,7 +23,7 @@ const sections: LegalSection[] = [
     title: "Acceptarea termenilor",
     body: (
       <>
-        <p>Prin folosirea site-ului, trimiterea unei cereri de ofertă sau plasarea unei comenzi, declari că ai citit și ești de acord cu acești termeni, cu <Link to="/politica-de-confidentialitate">Politica de Confidențialitate</Link>, cu <Link to="/politica-de-cookies">Politica de Cookies</Link>, cu <Link to="/livrare-si-retur">Livrare și Retur</Link> și cu <Link to="/garantie">Condițiile de Garanție</Link>. Dacă nu ești de acord, te rugăm să nu folosești site-ul.</p>
+        <p>Prin folosirea site-ului, trimiterea unei cereri de ofertă sau plasarea unei comenzi, declari că ai citit și ești de acord cu acești termeni, cu <Link to="/politica-de-confidentialitate">Politica de Confidențialitate</Link>, cu <Link to="/politica-de-cookies">Politica de Cookies</Link>, cu <Link to="/livrare-si-retur">Livrare și Retur</Link> și <Link to="/garantie">Condițiile de Garanție</Link>. Dacă nu ești de acord, te rugăm să nu folosești site-ul.</p>
         <p>Pentru comenzi te asiguri că ai cel puțin 18 ani sau că ai acordul reprezentantului legal.</p>
         <p>Putem modifica acești termeni. Versiunea aplicabilă unei comenzi este cea în vigoare la data plasării acesteia.</p>
       </>
@@ -79,7 +79,7 @@ const sections: LegalSection[] = [
           <li>serviciilor prestate integral, dacă prestarea a început cu acordul tău expres și ai recunoscut că pierzi dreptul de retragere după executarea completă;</li>
           <li>lucrărilor urgente de reparație sau întreținere solicitate expres de tine.</li>
         </ul>
-        <p>Dacă ai cerut începerea unui serviciu în perioada de retragere și te retragi, plătești proporțional cu ce s-a prestat până la comunicarea retragerii.</p>
+        <p>Dacă ai cerut începerea unui serviciu în perioada de retragere și te retragi, plătești proporțional cu serviciul prestat până la comunicarea retragerii.</p>
         <p className="rounded-md border border-border bg-secondary/40 p-3 text-sm">
           <strong>Formular-tip de retragere</strong> (completează și trimite doar dacă dorești să te retragi):<br />
           Către {c.legalName}, {c.address}, {c.email}: Vă informez prin prezenta că renunț la contractul de vânzare a următoarelor produse / prestare a următorului serviciu: ____ . Comandat la data de ____ / primit la data de ____ . Numele consumatorului: ____ . Adresa consumatorului: ____ . Cont IBAN pentru restituire: ____ . Data: ____ . Semnătura (doar dacă formularul se trimite pe hârtie): ____ .
@@ -91,7 +91,7 @@ const sections: LegalSection[] = [
     title: "Garanția și conformitatea produselor",
     body: (
       <>
-        <p>Produsele livrate consumatorilor trebuie să fie conforme cu contractul. Beneficiezi de garanția legală de conformitate de 2 ani (Legea nr. 449/2003 și OUG nr. 140/2021), plus garanția comercială a producătorului, dacă există. Dacă produsul nu este conform, ai dreptul, în ordine, la repararea sau înlocuirea lui, apoi la reducerea prețului sau la încetarea contractului, în condițiile legii.</p>
+        <p>Produsele livrate consumatorilor trebuie să fie conforme contractului. Beneficiezi de garanția legală de conformitate de 2 ani (Legea nr. 449/2003 și OUG nr. 140/2021), plus garanția comercială a producătorului, dacă există. Dacă produsul nu este conform, ai dreptul, în ordine, la repararea sau înlocuirea lui, apoi la reducerea prețului sau la încetarea contractului, în condițiile legii.</p>
         <p>Pentru lucrările de montaj și service, garanția acoperă manopera conform devizului/ofertei acceptate. Detalii, excluderi și procedura de reclamație sunt în pagina <Link to="/garantie">Condiții de Garanție</Link>. Drepturile tale legale de consumator nu pot fi limitate prin aceste condiții.</p>
       </>
     ),
@@ -141,7 +141,7 @@ const sections: LegalSection[] = [
     body: (
       <>
         <p>Pentru orice nemulțumire ne poți scrie la <a href={`mailto:${c.email}`}>{c.email}</a>; încercăm să răspundem în cel mult 30 de zile.</p>
-        <p>Ca consumator poți apela și la soluționarea alternativă a litigiilor (SAL) prin <a href={SAL_URL} target="_blank" rel="noopener noreferrer">reclamatiisal.anpc.ro</a>, precum și la Autoritatea Națională pentru Protecția Consumatorilor (<a href={ANPC_URL} target="_blank" rel="noopener noreferrer">anpc.ro</a>). Te poți adresa oricând și instanțelor judecătorești competente.</p>
+        <p>În calitate de consumator poți apela și la soluționarea alternativă a litigiilor (SAL) prin <a href={SAL_URL} target="_blank" rel="noopener noreferrer">reclamatiisal.anpc.ro</a>, precum și la Autoritatea Națională pentru Protecția Consumatorilor (<a href={ANPC_URL} target="_blank" rel="noopener noreferrer">anpc.ro</a>). Te poți adresa oricând și instanțelor judecătorești competente.</p>
       </>
     ),
   },

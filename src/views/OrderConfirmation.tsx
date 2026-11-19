@@ -83,7 +83,7 @@ const OrderConfirmation = () => {
       case "bank_transfer":
         return "Transfer Bancar";
       case "card_online":
-        return "Plată Online cu Card";
+        return "Plată online prin card";
       default:
         return method;
     }

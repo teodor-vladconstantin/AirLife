@@ -24,7 +24,7 @@ const FAQS = [
   },
   {
     "q": "Cum calculez consumul unui aer condiționat?",
-    "a": "Înmulțește puterea electrică absorbită (în kW, din fișa tehnică) cu numărul de ore de funcționare. Un aparat inverter lucrează mare parte din timp sub puterea nominală, așa că consumul real este de obicei mai mic decât rezultatul acestui calcul."
+    "a": "Înmulțește puterea electrică absorbită (în kW, din fișa tehnică) cu numărul de ore de funcționare. Un aparat inverter lucrează mare parte din timp sub puterea nominală, prin urmare consumul real este de obicei mai mic decât rezultatul acestui calcul."
   },
   {
     "q": "Faceți montaj în localitatea mea?",
@@ -60,7 +60,7 @@ const GhidCostMontaj = () => {
     <div className="min-h-screen flex flex-col">
       <SEO
         title="Cât Costă Montajul unui Aer Condiționat | Ghid AirLife"
-        description="Ghid de prețuri pentru montaj aer condiționat: ce conține un montaj standard, ce factori cresc prețul (traseu, înălțime, carotare) și cum eviți un montaj neconform."
+        description="Ghid de prețuri pentru montaj aer condiționat: ce include un montaj standard, ce factori cresc prețul (traseu, înălțime, carotare) și cum eviți un montaj neconform."
         canonical="https://airlife.ro/ghid/cost-montaj-aer-conditionat"
         structuredData={[structuredData, faqSchema(FAQS)]}
       />
@@ -154,7 +154,7 @@ const GhidCostMontaj = () => {
                   </p>
                   <ul className="space-y-2">
                     <li>• <strong>Metri suplimentari de traseu frigorific:</strong> dacă distanța dintre unități depășește 3 metri (costă materialul suplimentar: țevi de cupru, izolație, cablu de semnal și matisaj).</li>
-                    <li>• <strong>Mascare cu canal de cablu PVC:</strong> dacă traseul frigorific trece pe interior prin cameră și nu dorești țevi la vedere.</li>
+                    <li>• <strong>Mascare în canal de cablu PVC:</strong> dacă traseul frigorific trece pe interior prin cameră și nu dorești țevi la vedere.</li>
                     <li>• <strong>Străpungeri adiționale:</strong> în cazul trecerii prin grinzi, diafragme de beton armat gros sau pereți intermediari.</li>
                     <li>• <strong>Montaj la înălțime mare sau schelă:</strong> dacă unitatea exterioară nu poate fi accesată de la geam sau balcon.</li>
                   </ul>

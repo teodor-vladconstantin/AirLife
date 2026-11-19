@@ -68,7 +68,7 @@ const sections: LegalSection[] = [
       <>
         <p>Conform GDPR ai dreptul de: acces (art. 15), rectificare (16), ștergere (17), restricționare (18), portabilitate (20), opoziție (21, inclusiv oricând față de prelucrările bazate pe interes legitim) și de a nu fi supus unei decizii bazate exclusiv pe prelucrare automată (22; nu luăm astfel de decizii). Îți poți retrage oricând consimțământul, fără a afecta legalitatea prelucrării anterioare. Preferințele pentru cookie-uri le modifici din <Link to="/politica-de-cookies">Politica de Cookies</Link>.</p>
         <p>Pentru a-ți exercita drepturile, scrie-ne la <a href={`mailto:${c.email}`}>{c.email}</a>. Răspundem în cel mult o lună (prelungibilă cu până la două luni pentru cereri complexe). Putem cere dovada identității, dacă avem dubii. Exercitarea drepturilor este gratuită, în afara cererilor vădit nefondate sau excesive.</p>
-        <p>Dacă consideri că ți-am încălcat drepturile, poți depune plângere la Autoritatea Națională de Supraveghere a Prelucrării Datelor cu Caracter Personal (ANSPDCP), B-dul G-ral Gheorghe Magheru nr. 28-30, sector 1, București, <a href={ANSPDCP_URL} target="_blank" rel="noopener noreferrer">dataprotection.ro</a>, <a href="mailto:anspdcp@dataprotection.ro">anspdcp@dataprotection.ro</a>, sau la instanța competentă.</p>
+        <p>Dacă crezi că ți-am încălcat drepturile, poți depune plângere la Autoritatea Națională de Supraveghere a Prelucrării Datelor cu Caracter Personal (ANSPDCP), B-dul G-ral Gheorghe Magheru nr. 28-30, sector 1, București, <a href={ANSPDCP_URL} target="_blank" rel="noopener noreferrer">dataprotection.ro</a>, <a href="mailto:anspdcp@dataprotection.ro">anspdcp@dataprotection.ro</a>, sau la instanța competentă.</p>
       </>
     ),
   },
