@@ -34,7 +34,7 @@ const sections: LegalSection[] = [
     body: (
       <>
         <p>Vindem produse (aparate de aer condiționat, ventilatoare, recuperatoare de căldură, dezumidificatoare și altele) și prestăm servicii (montaj, igienizare, service). Descrierile, imaginile și specificațiile sunt orientative; pot exista diferențe minore de culoare sau ambalaj față de produsul livrat.</p>
-        <p>Prețurile sunt exprimate în lei (RON). Vânzătorul nu este înregistrat ca plătitor de TVA, deci prețurile nu conțin TVA și nu se adaugă taxe suplimentare la plată (în afara costului de livrare, dacă există). Costul de livrare, dacă există, este afișat înainte de trimiterea comenzii. Prețul final al serviciilor la locația clientului se stabilește în ofertă, după clarificarea detaliilor lucrării.</p>
+        <p>Prețurile sunt exprimate în lei (RON). Prețurile afișate sunt prețuri finale, cu TVA inclus, și nu se adaugă taxe suplimentare la plată (în afara costului de livrare, dacă există). Costul de livrare, dacă există, este afișat înainte de trimiterea comenzii. Prețul final al serviciilor la locația clientului se stabilește în ofertă, după clarificarea detaliilor lucrării.</p>
         <p>Ne rezervăm dreptul de a corecta o eroare evidentă de afișare a prețului sau a stocului. În acest caz te anunțăm înainte de executarea comenzii și poți confirma la prețul corect sau poți renunța, fără costuri.</p>
       </>
     ),

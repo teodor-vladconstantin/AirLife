@@ -250,7 +250,7 @@ const CategoryPage = ({ forcedSlug, products }: CategoryPageProps) => {
                             {product.price.toFixed(2)} RON
                             {product.compare_at ? <span className="ml-2 text-sm font-normal text-muted-foreground line-through">{product.compare_at.toFixed(2)} RON</span> : null}
                           </span>
-                          <span className="block text-[11px] text-muted-foreground">Preț fără TVA (neplătitor TVA)</span>
+                          <span className="block text-[11px] text-muted-foreground">Preț final, TVA inclus</span>
                         </div>
                         <div className="text-right text-[11px] text-muted-foreground flex items-center gap-1">
                           <Package className="w-3.5 h-3.5" />

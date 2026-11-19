@@ -326,7 +326,7 @@ const ProductDetails = ({ initial }: { initial: Loaded }) => {
                     {product.price.toFixed(2)} RON
                     {product.compare_at ? <span className="ml-3 text-xl font-normal text-muted-foreground line-through">{product.compare_at.toFixed(2)} RON</span> : null}
                   </span>
-                  <span className="text-xs text-muted-foreground">Preț fără TVA (neplătitor TVA)</span>
+                  <span className="text-xs text-muted-foreground">Preț final, TVA inclus</span>
                 </div>
               </div>
 
