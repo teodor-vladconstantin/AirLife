@@ -15,6 +15,7 @@ export const CartButton = () => {
         variant="ghost"
         size="icon"
         className="relative"
+        aria-label="Coș de cerere ofertă"
         onClick={() => setIsOpen(true)}
       >
         <ShoppingCart className="h-5 w-5" />
