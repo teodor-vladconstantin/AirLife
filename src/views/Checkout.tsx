@@ -34,7 +34,7 @@ const checkoutSchema = z.object({
   city: z.string().min(2, "Orașul este obligatoriu"),
   address: z.string().min(5, "Adresa este obligatorie"),
   postalCode: z.string().min(5, "Cod poștal invalid"),
-  paymentMethod: z.enum(["cash_on_delivery", "bank_transfer", "card_online"]),
+  paymentMethod: z.enum(["cash_on_delivery", "card_online"]), // bank transfer is off until payment details are added to the order email
   customerNotes: z.string().optional(),
   acceptTerms: z.boolean().refine((val) => val === true, "Trebuie să accep ți termenii și condițiile"),
   acceptGDPR: z.boolean().refine((val) => val === true, "Trebuie să accepți politica GDPR"),
@@ -368,13 +368,6 @@ const Checkout = () => {
                         </Label>
                       </div>
 
-                      <div className="flex items-center space-x-2 border rounded-lg p-4 mt-2">
-                        <RadioGroupItem value="bank_transfer" id="transfer" />
-                        <Label htmlFor="transfer" className="flex-1 cursor-pointer">
-                          <div className="font-semibold">Transfer Bancar</div>
-                          <p className="text-sm text-muted-foreground">Vei primi datele de plată prin email</p>
-                        </Label>
-                      </div>
                     </RadioGroup>
                     {errors.paymentMethod && (
                       <p className="text-sm text-destructive mt-2">{errors.paymentMethod.message}</p>

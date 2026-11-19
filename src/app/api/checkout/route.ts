@@ -16,7 +16,7 @@ const body = z.object({
   items: z.array(z.object({ id: z.string().uuid(), quantity: z.number().int().min(1).max(20) })).min(1).max(50),
   customer: z.object({ name: z.string().min(2).max(120), email: z.string().email().max(200), phone: z.string().min(6).max(30) }),
   address: z.object({ county: z.string().min(2).max(80), city: z.string().min(2).max(80), address: z.string().min(3).max(200), postalCode: z.string().max(12).optional() }),
-  paymentMethod: z.enum(["card_online", "cash_on_delivery", "bank_transfer"]),
+  paymentMethod: z.enum(["card_online", "cash_on_delivery"]), // bank_transfer disabled for now
   notes: z.string().max(500).optional(),
   token: z.string().optional(), // Turnstile
 });
