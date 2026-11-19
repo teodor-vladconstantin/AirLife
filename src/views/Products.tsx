@@ -3,7 +3,7 @@ import { useState } from "react";
 import { Link } from "@/lib/router";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { useQuote } from "@/contexts/QuoteContext";
+import { useCart } from "@/contexts/CartContext";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { CATEGORIES_DATA } from "@/data/categoriesData";
@@ -22,7 +22,7 @@ interface Product {
 
 const Products = ({ products }: { products: Product[] }) => {
   const [selectedCategory, setSelectedCategory] = useState<string>("all");
-  const { addToQuote } = useQuote();
+  const { addToCart } = useCart();
 
   const truncateText = (text: string, maxLength: number = 100) => {
     if (!text || text.length <= maxLength) return text;
@@ -31,7 +31,7 @@ const Products = ({ products }: { products: Product[] }) => {
 
   const handleAddToCart = async (product: Product) => {
     if (product.stock === 0) return;
-    await addToQuote(product, 1);
+    await addToCart(product, 1);
   };
 
   const categories = [

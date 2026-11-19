@@ -154,6 +154,18 @@ export const OrderDetailsDialog = ({
 
       if (error) throw error;
 
+      // Email the customer when the status moves to a customer-facing step (the server checks the caller is an admin).
+      if (order && status !== order.status && ["processing", "shipped", "delivered", "cancelled"].includes(status)) {
+        const { data: { session } } = await supabase.auth.getSession();
+        if (session?.access_token) {
+          await fetch("/api/admin/order-email", {
+            method: "POST",
+            headers: { "Content-Type": "application/json", Authorization: `Bearer ${session.access_token}` },
+            body: JSON.stringify({ orderId, kind: status }),
+          }).catch(() => undefined);
+        }
+      }
+
       toast({
         title: "Succes",
         description: "Comanda a fost actualizată",

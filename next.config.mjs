@@ -13,6 +13,7 @@ export default {
   async redirects() {
     const r = (source, destination) => ({ source, destination, permanent: true });
     return [
+      r("/request-quote", "/products"),
       r("/servicii/montaj-aer-conditionat-buzau", "/servicii/montaj-aer-conditionat"),
       r("/servicii/igienizare-aer-conditionat-buzau", "/servicii/igienizare-aer-conditionat"),
       r("/servicii/service-aer-conditionat-buzau", "/servicii/service-aer-conditionat"),

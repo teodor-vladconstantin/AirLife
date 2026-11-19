@@ -9,6 +9,7 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import { Loader2, Package, ChevronDown, ChevronUp } from "lucide-react";
+import { OrderTimeline } from "@/components/OrderTimeline";
 import { format } from "date-fns";
 import { ro } from "date-fns/locale";
 
@@ -16,9 +17,14 @@ interface Order {
   id: string;
   order_number: string;
   status: string;
+  payment_status?: string;
   payment_method: string;
   total_amount: number;
   created_at: string;
+  confirmed_at?: string | null;
+  shipped_at?: string | null;
+  delivered_at?: string | null;
+  courier?: string | null;
   tracking_number: string | null;
 }
 
@@ -179,8 +185,8 @@ const MyOrders = () => {
             <Card>
               <CardContent className="flex flex-col items-center justify-center py-12">
                 <Package className="h-16 w-16 text-muted-foreground mb-4" />
-                <h3 className="text-xl font-semibold mb-2">Nu ai solicitări încă</h3>
-                <p className="text-muted-foreground mb-6">Adaugă produse în listă și trimite o cerere de ofertă.</p>
+                <h3 className="text-xl font-semibold mb-2">Nu ai comenzi încă</h3>
+                <p className="text-muted-foreground mb-6">Adaugă produse în coș și plasează prima comandă.</p>
                 <Button onClick={() => navigate("/products")}>Vezi Produsele</Button>
               </CardContent>
             </Card>
@@ -251,8 +257,12 @@ const MyOrders = () => {
                       {isExpanded && (
                         <>
                           <Separator className="my-4" />
+                          <div className="mb-6">
+                            <h4 className="font-semibold mb-3">Status comandă</h4>
+                            <OrderTimeline o={order} />
+                          </div>
                           <div className="space-y-3">
-                            <h4 className="font-semibold">Produse solicitate:</h4>
+                            <h4 className="font-semibold">Produse comandate:</h4>
                             {items.map((item) => (
                               <div key={item.id} className="flex justify-between items-start">
                                 <div>

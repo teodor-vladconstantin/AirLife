@@ -2,12 +2,12 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { ShoppingCart } from "lucide-react";
-import { useQuote } from "@/contexts/QuoteContext";
+import { useCart } from "@/contexts/CartContext";
 import { CartDrawer } from "./CartDrawer";
 
 export const CartButton = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const { itemCount } = useQuote();
+  const { itemCount } = useCart();
 
   return (
     <>
@@ -15,7 +15,7 @@ export const CartButton = () => {
         variant="ghost"
         size="icon"
         className="relative"
-        aria-label="Coș de cerere ofertă"
+        aria-label="Coșul de cumpărături"
         onClick={() => setIsOpen(true)}
       >
         <ShoppingCart className="h-5 w-5" />

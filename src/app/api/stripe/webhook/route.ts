@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import { createClient } from "@supabase/supabase-js";
 import type Stripe from "stripe";
 import { stripe } from "@/lib/stripe";
+import { sendOrderEmail } from "@/lib/email/order";
 
 export const runtime = "nodejs";
 
@@ -28,7 +29,8 @@ export async function POST(req: Request) {
 
   if (event.type === "checkout.session.completed" || event.type === "checkout.session.async_payment_succeeded") {
     if (session.payment_status === "paid") {
-      await sb.from("orders").update({ payment_status: "paid", status: "confirmed", confirmed_at: new Date().toISOString() }).eq("id", orderId).eq("payment_status", "unpaid");
+      const { data: paid } = await sb.from("orders").update({ payment_status: "paid", status: "confirmed", confirmed_at: new Date().toISOString() }).eq("id", orderId).eq("payment_status", "unpaid").select("id");
+      if (paid?.length) await sendOrderEmail(orderId, "paid");
     }
   } else if (event.type === "checkout.session.expired") {
     // Unpaid and abandoned: cancel and give the reserved stock back.

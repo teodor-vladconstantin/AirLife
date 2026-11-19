@@ -4,6 +4,7 @@ import { z } from "zod";
 import { stripe, paymentsEnabled } from "@/lib/stripe";
 import { isShopVisible, salePricing } from "@/lib/pricing";
 import { verifyTurnstile } from "@/lib/turnstile";
+import { sendOrderEmail } from "@/lib/email/order";
 
 export const runtime = "nodejs";
 
@@ -34,6 +35,9 @@ export async function POST(req: Request) {
   if (paymentMethod === "card_online" && !paymentsEnabled()) return NextResponse.json({ error: "card_payments_disabled" }, { status: 503 });
 
   const sb = db();
+  // Logged-in customers: link the order to the account so it shows up in "Comenzile mele" (guests order with userId null).
+  const bearer = req.headers.get("authorization")?.replace(/^Bearer\s+/i, "");
+  const userId = bearer ? (await sb.auth.getUser(bearer)).data.user?.id ?? null : null;
   const { data: products, error: pErr } = await sb.from("products").select("*").in("id", items.map((i) => i.id));
   if (pErr || !products) return NextResponse.json({ error: "products_unavailable" }, { status: 500 });
 
@@ -50,7 +54,7 @@ export async function POST(req: Request) {
 
   const { data: orderNumber } = await sb.rpc("generate_order_number");
   const { data: order, error: oErr } = await sb.from("orders").insert({
-    order_number: orderNumber, customer_name: customer.name, customer_email: customer.email, customer_phone: customer.phone,
+    order_number: orderNumber, user_id: userId, customer_name: customer.name, customer_email: customer.email, customer_phone: customer.phone,
     shipping_address: address, payment_method: paymentMethod, subtotal, shipping_cost: shipping, total_amount: total,
     customer_notes: notes || null, status: "pending",
   }).select().single();
@@ -76,7 +80,10 @@ export async function POST(req: Request) {
     taken.push(l);
   }
 
-  if (paymentMethod !== "card_online") return NextResponse.json({ redirect: `/comanda-confirmata?o=${encodeURIComponent(order.order_number)}` });
+  if (paymentMethod !== "card_online") {
+    await sendOrderEmail(order.id, "placed"); // card orders are emailed by the Stripe webhook once paid
+    return NextResponse.json({ redirect: `/comanda-confirmata?o=${encodeURIComponent(order.order_number)}` });
+  }
 
   try {
     const session = await stripe().checkout.sessions.create({

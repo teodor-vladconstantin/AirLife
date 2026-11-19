@@ -131,6 +131,11 @@ const Footer = () => {
                 </Link>
               </li>
               <li>
+                <Link to="/urmarire-comanda" className="hover:text-brandlight transition-colors">
+                  Urmărește comanda
+                </Link>
+              </li>
+              <li>
                 <Link to="/livrare-si-retur" className="hover:text-brandlight transition-colors">
                   Livrare și Retur
                 </Link>

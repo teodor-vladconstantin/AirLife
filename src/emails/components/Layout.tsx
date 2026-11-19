@@ -3,7 +3,7 @@ import type { ReactNode } from "react";
 import { company, ANPC_URL, SAL_URL } from "../../data/company";
 import { brand } from "../brand";
 
-type Props = { preview: string; unsubscribeUrl: string; children: ReactNode; reason?: string };
+type Props = { preview: string; unsubscribeUrl?: string; children: ReactNode; reason?: string };
 
 // Shared shell: preheader, branded header, content card, footer with unsubscribe (no company legal data, user decision 2026-11-18).
 export function Layout({
@@ -32,10 +32,15 @@ export function Layout({
 
           <Section style={{ padding: "20px 28px 0" }}>
             <Text style={small}>
-              {reason}{" "}
-              <Link href={unsubscribeUrl} style={link}>
-                Dezabonare cu un click
-              </Link>
+              {reason}
+              {unsubscribeUrl && (
+                <>
+                  {" "}
+                  <Link href={unsubscribeUrl} style={link}>
+                    Dezabonare cu un click
+                  </Link>
+                </>
+              )}
             </Text>
             <Hr style={{ borderColor: brand.border, margin: "14px 0" }} />
             <Text style={small}>

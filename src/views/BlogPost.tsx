@@ -55,7 +55,7 @@ const BlogPost = ({ post, related }: { post: Tables<"blog_posts">; related: { sl
             <p className="font-semibold">Ai nevoie de montaj, igienizare sau service?</p>
             <div className="flex flex-wrap gap-3">
               <Button asChild><a href={`tel:${PHONE_TEL}`}>{PHONE_DISPLAY}</a></Button>
-              <Button asChild variant="outline"><Link to="/request-quote">Cere ofertă online</Link></Button>
+              <Button asChild variant="outline"><Link to="/servicii">Vezi serviciile</Link></Button>
             </div>
           </div>
         </article>

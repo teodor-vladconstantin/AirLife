@@ -23,7 +23,8 @@ import { trackBeginCheckout, trackError } from "@/lib/analytics";
 
 // Validation schema
 // Online payments are off until NEXT_PUBLIC_PAYMENTS=on (needs the Stripe keys, see docs/stripe.md). Off = the old quote flow.
-const PAYMENTS_ON = process.env.NEXT_PUBLIC_PAYMENTS === "on";
+// Online store is on by default. Set NEXT_PUBLIC_PAYMENTS=off to switch it off (checkout then sends visitors to /contact).
+const PAYMENTS_ON = process.env.NEXT_PUBLIC_PAYMENTS !== "off";
 
 const checkoutSchema = z.object({
   customerName: z.string().min(3, "Numele trebuie să aibă cel puțin 3 caractere"),
@@ -76,8 +77,8 @@ const Checkout = () => {
 
   useEffect(() => {
     checkUser();
-    // Redirect checkout route to request-quote (site is presentation-only) until online payments are switched on
-    if (!PAYMENTS_ON) navigate("/request-quote");
+    // Kill switch: NEXT_PUBLIC_PAYMENTS=off sends visitors away from checkout
+    if (!PAYMENTS_ON) navigate("/contact");
   }, [items, navigate]);
 
   const checkUser = async () => {
@@ -96,9 +97,10 @@ const Checkout = () => {
     if (tsOn && !tsToken) { trackError("turnstile_missing"); toast({ title: "Confirmă că ești om", description: "Așteaptă verificarea și încearcă din nou.", variant: "destructive" }); return; }
     setIsSubmitting(true);
     try {
+      const { data: { session } } = await supabase.auth.getSession();
       const res = await fetch("/api/checkout", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: { "Content-Type": "application/json", ...(session?.access_token ? { Authorization: `Bearer ${session.access_token}` } : {}) },
         body: JSON.stringify({
           items: items.map((i) => ({ id: i.product_id, quantity: i.quantity })),
           customer: { name: data.customerName, email: data.customerEmail, phone: data.customerPhone },

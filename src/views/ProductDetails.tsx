@@ -5,7 +5,6 @@ import type { loadProduct, Product } from "@/lib/catalog";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { useToast } from "@/hooks/use-toast";
-import { useQuote } from "@/contexts/QuoteContext";
 import { useCart } from "@/contexts/CartContext";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -36,7 +35,6 @@ const ProductDetails = ({ initial }: { initial: Loaded }) => {
   const [zoom, setZoom] = useState(false);
   const [touchX, setTouchX] = useState<number | null>(null);
   const { toast } = useToast();
-  const { addToQuote } = useQuote();
   const { addToCart } = useCart();
 
   useEffect(() => {
@@ -77,7 +75,6 @@ const ProductDetails = ({ initial }: { initial: Loaded }) => {
     }
 
     try {
-      await addToQuote(product, quantity);
       await addToCart(product, quantity);
 
       trackAddToCartAnalytics({
