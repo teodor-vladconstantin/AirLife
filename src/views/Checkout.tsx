@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useNavigate } from "@/lib/router";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -19,6 +19,7 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { Separator } from "@/components/ui/separator";
 import { Loader2 } from "lucide-react";
 import { useTurnstile } from "@/components/Turnstile";
+import { trackBeginCheckout, trackError } from "@/lib/analytics";
 
 // Validation schema
 // Online payments are off until NEXT_PUBLIC_PAYMENTS=on (needs the Stripe keys, see docs/stripe.md). Off = the old quote flow.
@@ -47,6 +48,12 @@ const Checkout = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [user, setUser] = useState<any>(null);
   const [tsToken, tsWidget, tsReset, tsOn] = useTurnstile();
+  const beganRef = useRef(false);
+  useEffect(() => {
+    if (!PAYMENTS_ON || beganRef.current || items.length === 0) return;
+    beganRef.current = true;
+    trackBeginCheckout(items.map((i) => ({ item_id: i.product_id, item_name: i.name, price: i.price, quantity: i.quantity, item_category: i.category })), total);
+  }, [items, total]);
 
   const {
     register,
@@ -86,7 +93,7 @@ const Checkout = () => {
 
   // Payments on: the server reads prices from the database, creates the order and (for cards) the Stripe Checkout session.
   const submitToServer = async (data: CheckoutFormData) => {
-    if (tsOn && !tsToken) { toast({ title: "Confirmă că ești om", description: "Așteaptă verificarea și încearcă din nou.", variant: "destructive" }); return; }
+    if (tsOn && !tsToken) { trackError("turnstile_missing"); toast({ title: "Confirmă că ești om", description: "Așteaptă verificarea și încearcă din nou.", variant: "destructive" }); return; }
     setIsSubmitting(true);
     try {
       const res = await fetch("/api/checkout", {
@@ -104,9 +111,11 @@ const Checkout = () => {
       const out = await res.json().catch(() => ({}));
       if (!res.ok) {
         const msg = out.error === "out_of_stock" ? `${out.name} nu mai are stoc suficient.` : out.error === "product_unavailable" ? "Un produs din coș nu mai este disponibil." : "Nu am putut plasa comanda. Încearcă din nou sau sună-ne.";
+        trackError(String(out.error || `http_${res.status}`));
         toast({ title: "Eroare", description: msg, variant: "destructive" });
         return;
       }
+      try { sessionStorage.setItem("airlife_purchase", JSON.stringify({ items: items.map((i) => ({ item_id: i.product_id, item_name: i.name, price: i.price, quantity: i.quantity, item_category: i.category })), value: grandTotal, shipping: shippingCost })); } catch { /* storage blocked */ }
       if (out.url) { window.location.assign(out.url); return; }
       await clearCart();
       window.location.assign(out.redirect);

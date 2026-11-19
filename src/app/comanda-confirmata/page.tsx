@@ -1,6 +1,7 @@
 import Link from "next/link";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import PurchaseTracker from "@/components/PurchaseTracker";
 
 export const metadata = { title: "Comanda a fost înregistrată | AirLife", robots: { index: false, follow: false } };
 
@@ -9,6 +10,7 @@ export default async function Page({ searchParams }: { searchParams: Promise<{ o
   return (
     <div className="min-h-screen flex flex-col">
       <Navbar />
+      <PurchaseTracker orderNumber={o} />
       <main className="flex-1 bg-gradient-to-b from-background to-secondary/30 flex items-center">
         <div className="container mx-auto px-4 py-20 max-w-xl text-center">
           <h1 className="text-4xl font-bold tracking-tight mb-4">Mulțumim. Comanda e înregistrată.</h1>

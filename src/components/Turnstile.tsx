@@ -1,4 +1,5 @@
 "use client";
+import { trackError } from "@/lib/analytics";
 import { useCallback, useEffect, useRef, useState, type ReactNode } from "react";
 
 const SITE_KEY = process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY;
@@ -38,7 +39,7 @@ export function useTurnstile(): [string, ReactNode, () => void, boolean] {
         language: "ro",
         callback: (t: string) => setToken(t),
         "expired-callback": () => setToken(""),
-        "error-callback": () => setToken(""),
+        "error-callback": (code?: string) => { setToken(""); trackError("turnstile_error", String(code ?? "")); },
       });
     }).catch(() => undefined);
     return () => { dead = true; if (id.current && window.turnstile) { window.turnstile.remove(id.current); id.current = undefined; } };

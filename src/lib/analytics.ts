@@ -281,6 +281,12 @@ export const trackServiceQuoteRequest = (serviceName: string) => {
 };
 
 // Product quote request (the checkout path): GA4 key event generate_lead with cart value.
+// Checkout / payment / captcha problems: a GA4 + PostHog event, plus a Sentry message when the visitor accepted cookies.
+export const trackError = (kind: string, detail?: string) => {
+  sendEvent("checkout_error", { error_type: kind, ...(detail ? { detail: detail.slice(0, 100) } : {}) });
+  if (sentryStarted) import("@sentry/react").then((S) => S.captureMessage(`checkout_error: ${kind}`, { level: "warning", tags: { kind }, extra: { detail } }));
+};
+
 export const trackQuoteRequest = (value: number) => {
   sendEvent("generate_lead", { currency: "RON", value, lead_magnet: "product_quote", lead_source: "request-quote" });
 };
