@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Link } from "@/lib/router";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -9,7 +9,10 @@ import { faqSchema, authorSchema } from "@/lib/blogSchema";
 import { bylineName } from "@/data/author";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { BookOpen, Calculator, ArrowRight } from "lucide-react";
+import { BookOpen, Calculator, ArrowRight, Send } from "lucide-react";
+import { useTurnstile } from "@/components/Turnstile";
+import { trackCalculatorBtu, trackLead, trackError } from "@/lib/analytics";
+import { pickRecommended, type BtuProduct } from "@/lib/btu";
 
 const SIZES = [9000, 12000, 18000, 24000, 36000];
 
@@ -39,7 +42,7 @@ const TABLE = [
   ["peste 170 mc", "36.000 BTU sau mai multe unități", "recomandăm o ofertă personalizată"],
 ];
 
-const GhidBtu = () => {
+const GhidBtu = ({ products = [] }: { products?: BtuProduct[] }) => {
   const [area, setArea] = useState(25);
   const [sun, setSun] = useState(1);
   const [height, setHeight] = useState(2.5);
@@ -48,6 +51,42 @@ const GhidBtu = () => {
   const r = estimate(area, sun, height, people, appliances);
   const num = (set: (n: number) => void) => (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => set(Number(e.target.value));
   const field = "w-full rounded-md border border-border bg-background px-3 py-2 text-sm";
+  const recommended = pickRecommended(products, r.btu);
+
+  // calculator_btu_used: after the visitor stops changing inputs for 1.5 s (skips the initial render, max 5 per page view).
+  const mounted = useRef(false);
+  const fired = useRef(0);
+  useEffect(() => {
+    if (!mounted.current) { mounted.current = true; return; }
+    if (fired.current >= 5) return;
+    const t = setTimeout(() => { fired.current += 1; trackCalculatorBtu({ volume_m3: r.volume, area_m2: area, btu_needed: r.btu, btu_recommended: r.size }); }, 1500);
+    return () => clearTimeout(t);
+  }, [area, sun, height, people, appliances]); // eslint-disable-line react-hooks/exhaustive-deps
+
+  const [phone, setPhone] = useState("");
+  const [email, setEmail] = useState("");
+  const [honey, setHoney] = useState("");
+  const [status, setStatus] = useState<"idle" | "sending" | "done" | "error">("idle");
+  const [tsToken, tsWidget, tsReset, tsOn] = useTurnstile();
+  const submitOffer = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (phone.trim().length < 6 && !email.includes("@")) { setStatus("error"); return; }
+    if (tsOn && !tsToken) { setStatus("error"); return; }
+    setStatus("sending");
+    try {
+      const res = await fetch("/api/btu-offer", {
+        method: "POST", headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ phone: phone.trim(), email: email.trim(), areaM2: area, volumeM3: r.volume, btuNeeded: r.btu, btuRecommended: r.size, website: honey, token: tsToken }),
+      });
+      if (!res.ok) throw new Error(String(res.status));
+      trackLead("btu_offer", "calculator-btu");
+      setStatus("done");
+    } catch (err) {
+      trackError("btu_offer", (err as Error).message);
+      setStatus("error");
+      tsReset();
+    }
+  };
 
   const structuredData = {
     "@context": "https://schema.org", "@type": "Article",
@@ -105,6 +144,39 @@ const GhidBtu = () => {
                 <p className="text-sm text-muted-foreground">Volum: <strong>{r.volume.toLocaleString("ro-RO", { maximumFractionDigits: 1 })} mc</strong> • Necesar estimat: <strong>{r.btu.toLocaleString("ro-RO")} BTU</strong></p>
                 <p className="text-xl font-bold text-foreground">Recomandare: aparat de {r.size.toLocaleString("ro-RO")} BTU</p>
               </div>
+              {recommended.length > 0 && (
+                <div className="mt-6">
+                  <h3 className="text-base font-bold text-foreground mb-3">Aparate potrivite din stoc</h3>
+                  <div className="grid sm:grid-cols-3 gap-3">
+                    {recommended.map((p) => (
+                      <Link key={p.path} to={`/products/${p.path}`} className="rounded-xl border border-border p-3 hover:border-primary transition-colors text-center">
+                        <img src={p.image} alt={p.name} loading="lazy" className="h-28 w-full object-contain mb-2" />
+                        <span className="block text-sm font-semibold text-foreground leading-snug">{p.name}</span>
+                        <span className="block text-primary font-bold mt-1">{p.price.toFixed(0)} RON</span>
+                      </Link>
+                    ))}
+                  </div>
+                </div>
+              )}
+              <form onSubmit={submitOffer} className="mt-6 rounded-xl border border-border p-4 space-y-3">
+                <h3 className="text-base font-bold text-foreground">Primește oferta</h3>
+                {status === "done" ? (
+                  <p className="text-sm text-emerald-700 font-medium" role="status">Mulțumim! Te contactăm în cel mai scurt timp{email ? " și ți-am trimis și un email cu recomandarea" : ""}.</p>
+                ) : (
+                  <>
+                    <p className="text-sm text-muted-foreground">Lasă telefonul sau emailul și îți trimitem oferta pentru un aparat de {r.size.toLocaleString("ro-RO")} BTU, cu montaj.</p>
+                    <div className="grid sm:grid-cols-2 gap-3">
+                      <input className={field} type="tel" autoComplete="tel" placeholder="Telefon" aria-label="Telefon" value={phone} onChange={(e) => setPhone(e.target.value)} />
+                      <input className={field} type="email" autoComplete="email" placeholder="Email" aria-label="Email" value={email} onChange={(e) => setEmail(e.target.value)} />
+                    </div>
+                    <input type="text" tabIndex={-1} autoComplete="off" aria-hidden className="hidden" value={honey} onChange={(e) => setHoney(e.target.value)} />
+                    {tsWidget}
+                    {status === "error" && <p className="text-sm text-destructive" role="alert">Completează telefonul sau emailul (și verificarea anti-spam), apoi încearcă din nou.</p>}
+                    <Button type="submit" disabled={status === "sending"} className="flex items-center gap-2"><Send className="w-4 h-4" /> {status === "sending" ? "Se trimite..." : "Primește oferta"}</Button>
+                    <p className="text-xs text-muted-foreground">Folosim datele doar ca să îți trimitem oferta. Detalii în <Link to="/politica-de-confidentialitate" className="underline">Politica de confidențialitate</Link>.</p>
+                  </>
+                )}
+              </form>
               <p className="text-xs text-muted-foreground mt-3">Estimare orientativă. Pentru spații cu izolație slabă sau cu mai multe încăperi, cere o ofertă personalizată.</p>
               <div className="mt-4 flex flex-wrap gap-3">
                 <Link to="/aer-conditionat"><Button className="flex items-center gap-2">Vezi aparatele <ArrowRight className="w-4 h-4" /></Button></Link>
