@@ -242,6 +242,8 @@ const ProductDetails = ({ initial }: { initial: Loaded }) => {
                 <img
                   src={images[idx]}
                   alt={`${product.name} - poza ${idx + 1}`}
+                  fetchPriority="high"
+                  decoding="async"
                   className="max-h-full max-w-full object-contain cursor-zoom-in"
                   onClick={() => setZoom(true)}
                 />
@@ -499,7 +501,7 @@ const ProductDetails = ({ initial }: { initial: Loaded }) => {
                   <Card key={rel.id} className="border-border hover:border-primary/40 transition-all p-4 bg-card flex flex-col justify-between">
                     <div>
                       <div className="aspect-video bg-white rounded-lg flex items-center justify-center p-2 mb-3">
-                        <img src={rel.image_url} alt={rel.name} className="max-h-full max-w-full object-contain" />
+                        <img src={rel.image_url} alt={rel.name} loading="lazy" decoding="async" className="max-h-full max-w-full object-contain" />
                       </div>
                       <span className="text-[11px] text-primary font-semibold block mb-1">{rel.category}</span>
                       <h3 className="font-bold text-sm text-foreground mb-2 line-clamp-2">
