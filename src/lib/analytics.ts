@@ -1,11 +1,10 @@
-// GA4 + PostHog + Sentry for AirLife. Everything is env-gated: no key, no-op.
-// GA4 follows Ecommerce Schema & Consent Mode v2; PostHog is opt-in after consent.
+// GA4 + Google Ads + Meta Pixel + PostHog + Sentry for AirLife. Everything is env-gated: no key, no-op.
+// Nothing loads and nothing is sent before the visitor accepts cookies (GDPR). Events fired before the choice
+// are buffered in memory and flushed on accept (dropped on decline). Consent Mode v2 defaults to denied.
 import type { PostHog } from "posthog-js";
 
-// PostHog and Sentry are loaded on demand so they stay out of the entry bundle.
 let posthog: PostHog | null = null;
 let analyticsStarted = false;
-const phQueue: Array<[string, Record<string, unknown>]> = [];
 const phExceptionQueue: unknown[] = [];
 
 // G-XXXX (gtag.js) or GTM-XXXX (container)
@@ -13,9 +12,12 @@ const GA4_ID = process.env.NEXT_PUBLIC_GTAG_ID as string | undefined;
 const PH_KEY = process.env.NEXT_PUBLIC_POSTHOG_KEY as string | undefined;
 const PH_HOST = (process.env.NEXT_PUBLIC_POSTHOG_HOST as string | undefined) || "https://eu.i.posthog.com";
 const SENTRY_DSN = process.env.NEXT_PUBLIC_SENTRY_DSN as string | undefined;
-// GTM-XXXX container, loaded alongside GA4. It reads the same Consent Mode state, so tags in it only fire after consent.
+// GTM-XXXX container, loaded alongside GA4. It reads the same Consent Mode state.
 const GTM_ID = process.env.NEXT_PUBLIC_GTM_ID as string | undefined;
 const META_PIXEL_ID = process.env.NEXT_PUBLIC_META_PIXEL_ID as string | undefined;
+// Google Ads: AW-XXXXXXXXX and the purchase conversion label (Ads > Goals > Conversions > Tag setup).
+const ADS_ID = process.env.NEXT_PUBLIC_GOOGLE_ADS_ID as string | undefined;
+const ADS_PURCHASE_LABEL = process.env.NEXT_PUBLIC_GOOGLE_ADS_PURCHASE_LABEL as string | undefined;
 
 declare global {
   interface Window {
@@ -34,19 +36,20 @@ export interface AnalyticsItem {
   item_category?: string;
 }
 
-export const getCookieConsent = (): boolean => {
-  if (typeof window === "undefined") return false;
-  return localStorage.getItem("airlife_cookie_consent") === "accepted";
+const CONSENT_KEY = "airlife_cookie_consent";
+const readConsent = (): string | null => {
+  try { return localStorage.getItem(CONSENT_KEY); } catch { return null; }
 };
+
+export const getCookieConsent = (): boolean => typeof window !== "undefined" && readConsent() === "accepted";
 
 export const setCookieConsent = (accepted: boolean) => {
   if (typeof window === "undefined") return;
-  localStorage.setItem("airlife_cookie_consent", accepted ? "accepted" : "declined");
+  try { localStorage.setItem(CONSENT_KEY, accepted ? "accepted" : "declined"); } catch { /* storage blocked */ }
   applyConsent(accepted);
 };
 
 let sentryStarted = false;
-// Error monitoring starts only after cookie consent (it sends IP/browser data to a processor).
 const startSentry = () => {
   if (!SENTRY_DSN || sentryStarted) return;
   sentryStarted = true;
@@ -55,7 +58,34 @@ const startSentry = () => {
   );
 };
 
-// Meta Pixel: loaded only after the visitor accepts cookies (marketing/analytics). No ID -> no-op.
+// Google tag (GA4 + Ads) and/or GTM container: scripts are added only after accept.
+let googleStarted = false;
+const startGoogle = () => {
+  if (googleStarted || typeof window === "undefined") return;
+  const isGtm = !!GA4_ID?.startsWith("GTM-");
+  const gtagId = GA4_ID && !isGtm ? GA4_ID : ADS_ID;
+  const containerId = isGtm ? GA4_ID : GTM_ID;
+  if (!gtagId && !containerId) return;
+  googleStarted = true;
+  if (gtagId) {
+    window.gtag?.("js", new Date());
+    if (GA4_ID && !isGtm) window.gtag?.("config", GA4_ID);
+    if (ADS_ID) window.gtag?.("config", ADS_ID);
+    const el = document.createElement("script");
+    el.async = true;
+    el.src = `https://www.googletagmanager.com/gtag/js?id=${gtagId}`;
+    document.head.appendChild(el);
+  }
+  if (containerId) {
+    (window.dataLayer as unknown[]).push({ "gtm.start": Date.now(), event: "gtm.js" });
+    const g = document.createElement("script");
+    g.async = true;
+    g.src = `https://www.googletagmanager.com/gtm.js?id=${containerId}`;
+    document.head.appendChild(g);
+  }
+};
+
+// Meta Pixel: loaded only after accept. No ID -> no-op.
 let pixelStarted = false;
 let pixelPath = "";
 const startMetaPixel = () => {
@@ -109,99 +139,73 @@ const sendMetaEvent = (eventName: string, params: Record<string, unknown>) => {
   window.fbq("track", metaName, data);
 };
 
+// PostHog: imported and initialised only after accept.
+let phLoading: Promise<PostHog> | null = null;
+const loadPostHog = (): Promise<PostHog> | null => {
+  if (!PH_KEY || typeof window === "undefined") return null;
+  phLoading ??= import("posthog-js").then(({ default: ph }) => {
+    ph.init(PH_KEY, { api_host: PH_HOST, capture_pageview: "history_change", capture_exceptions: true, person_profiles: "identified_only" });
+    posthog = ph;
+    phExceptionQueue.splice(0).forEach((error) => ph.captureException(error));
+    return ph;
+  });
+  return phLoading;
+};
+
+// Events fired before the visitor chose: kept in memory, flushed on accept.
+const pending: Array<[string, Record<string, unknown>]> = [];
+
+const dispatch = (eventName: string, params: Record<string, unknown>) => {
+  window.dataLayer = window.dataLayer || [];
+  window.dataLayer.push({ event: eventName, ...params });
+  window.gtag?.("event", eventName, params);
+  sendMetaEvent(eventName, params);
+  loadPostHog()?.then((ph) => ph.capture(eventName, params));
+};
+
 const applyConsent = (accepted: boolean) => {
-  if (typeof window.gtag === "function") {
-    window.gtag("consent", "update", {
-      analytics_storage: accepted ? "granted" : "denied",
-      ad_storage: "denied", // no ads yet; flip when Google Ads is connected
-    });
+  if (typeof window === "undefined") return;
+  const state = accepted ? "granted" : "denied";
+  window.gtag?.("consent", "update", { analytics_storage: state, ad_storage: state, ad_user_data: state, ad_personalization: state });
+  if (accepted) {
+    startGoogle(); startSentry(); startMetaPixel();
+    posthog?.opt_in_capturing();
+    pending.splice(0).forEach(([n, p]) => dispatch(n, p));
+    loadPostHog();
+  } else {
+    pending.length = 0;
+    posthog?.opt_out_capturing();
   }
-  if (accepted) { startSentry(); startMetaPixel(); }
-  if (posthog) accepted ? posthog.opt_in_capturing() : posthog.opt_out_capturing();
 };
 
 export const initAnalytics = () => {
   if (typeof window === "undefined" || analyticsStarted) return;
   analyticsStarted = true;
-
-  if (GA4_ID) {
-    window.dataLayer = window.dataLayer || [];
-    window.gtag = function () {
-      // gtag requires the real `arguments` object, not a rest array
-      // eslint-disable-next-line prefer-rest-params
-      (window.dataLayer as unknown[]).push(arguments);
-    } as Window["gtag"];
-    window.gtag("consent", "default", {
-      analytics_storage: "denied",
-      ad_storage: "denied",
-      ad_user_data: "denied",
-      ad_personalization: "denied",
-      wait_for_update: 500,
-    });
-    window.gtag("js", new Date());
-    const isGtm = GA4_ID.startsWith("GTM-");
-    if (!isGtm) window.gtag("config", GA4_ID);
-    const el = document.createElement("script");
-    el.async = true;
-    el.src = `https://www.googletagmanager.com/${isGtm ? "gtm" : "gtag/js"}${isGtm ? ".js" : ""}?id=${GA4_ID}`;
-    document.head.appendChild(el);
+  // Consent Mode v2 defaults. This only queues commands in memory; no third-party script loads until accept.
+  window.dataLayer = window.dataLayer || [];
+  window.gtag = function () {
+    // gtag requires the real `arguments` object, not a rest array
+    // eslint-disable-next-line prefer-rest-params
+    (window.dataLayer as unknown[]).push(arguments);
+  } as Window["gtag"];
+  window.gtag("consent", "default", { analytics_storage: "denied", ad_storage: "denied", ad_user_data: "denied", ad_personalization: "denied" });
+  if (getCookieConsent()) {
+    window.gtag("consent", "update", { analytics_storage: "granted", ad_storage: "granted", ad_user_data: "granted", ad_personalization: "granted" });
+    applyConsent(true);
   }
-
-  if (GTM_ID && GTM_ID !== GA4_ID) {
-    if (!window.gtag) {
-      window.dataLayer = window.dataLayer || [];
-      window.gtag = function () {
-        // eslint-disable-next-line prefer-rest-params
-        (window.dataLayer as unknown[]).push(arguments);
-      } as Window["gtag"];
-      window.gtag("consent", "default", { analytics_storage: "denied", ad_storage: "denied", ad_user_data: "denied", ad_personalization: "denied", wait_for_update: 500 });
-    }
-    (window.dataLayer as unknown[]).push({ "gtm.start": Date.now(), event: "gtm.js" });
-    const g = document.createElement("script");
-    g.async = true;
-    g.src = `https://www.googletagmanager.com/gtm.js?id=${GTM_ID}`;
-    document.head.appendChild(g);
-  }
-
-  if (PH_KEY) {
-    import("posthog-js").then(({ default: ph }) => {
-      ph.init(PH_KEY, {
-        api_host: PH_HOST,
-        opt_out_capturing_by_default: true,
-        capture_pageview: "history_change",
-        capture_exceptions: true,
-        person_profiles: "identified_only",
-      });
-      posthog = ph;
-      applyConsent(getCookieConsent());
-      phQueue.splice(0).forEach(([name, params]) => ph.capture(name, params));
-      phExceptionQueue.splice(0).forEach((error) => ph.captureException(error));
-    });
-  }
-
-  applyConsent(getCookieConsent());
 };
 
 export const capturePostHogException = (error: unknown) => {
-  if (!PH_KEY) return;
+  if (!PH_KEY || !getCookieConsent()) return;
   if (posthog) posthog.captureException(error);
   else phExceptionQueue.push(error);
 };
 
 const sendEvent = (eventName: string, params: Record<string, unknown> = {}) => {
   if (typeof window === "undefined") return;
-  
-  window.dataLayer = window.dataLayer || [];
-  window.dataLayer.push({
-    event: eventName,
-    ...params,
-  });
-
-  if (typeof window.gtag === "function") {
-    window.gtag("event", eventName, params);
-  }
-  sendMetaEvent(eventName, params);
-  if (PH_KEY) (posthog ? posthog.capture(eventName, params) : phQueue.push([eventName, params]));
+  const c = readConsent();
+  if (c === "accepted") return dispatch(eventName, params);
+  if (c === null && pending.length < 30) pending.push([eventName, params]);
 };
 
 export const trackViewItem = (item: AnalyticsItem) => {
@@ -269,12 +273,22 @@ export const trackPurchase = (
       quantity: item.quantity || 1,
     })),
   });
+  if (ADS_ID && ADS_PURCHASE_LABEL) {
+    sendEvent("conversion", { send_to: `${ADS_ID}/${ADS_PURCHASE_LABEL}`, value: totalAmount, currency: "RON", transaction_id: orderNumber });
+  }
 };
 
 export const trackClickToCall = (location: string) => {
-  sendEvent("click_to_call", {
-    cta_location: location,
-  });
+  sendEvent("click_phone", { cta_location: location });
+};
+
+export const trackClickWhatsApp = (location: string) => {
+  sendEvent("click_whatsapp", { cta_location: location });
+};
+
+// Calculator BTU: room volume (m3), area (m2) when known, needed BTU and the recommended unit size.
+export const trackCalculatorBtu = (data: { volume_m3: number; area_m2?: number; btu_needed: number; btu_recommended: number }) => {
+  sendEvent("calculator_btu_used", data);
 };
 
 export const trackContactSubmit = (subject: string) => {
@@ -304,4 +318,5 @@ export const trackQuoteRequest = (value: number) => {
 
 export const trackLead = (magnet: string, source: string) => {
   sendEvent("generate_lead", { lead_magnet: magnet, lead_source: source });
+  sendEvent("lead_submitted", { lead_magnet: magnet, lead_source: source });
 };
