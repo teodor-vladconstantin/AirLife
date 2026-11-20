@@ -4,7 +4,9 @@ import type { PostHog } from "posthog-js";
 
 // PostHog and Sentry are loaded on demand so they stay out of the entry bundle.
 let posthog: PostHog | null = null;
+let analyticsStarted = false;
 const phQueue: Array<[string, Record<string, unknown>]> = [];
+const phExceptionQueue: unknown[] = [];
 
 // G-XXXX (gtag.js) or GTM-XXXX (container)
 const GA4_ID = process.env.NEXT_PUBLIC_GTAG_ID as string | undefined;
@@ -119,7 +121,8 @@ const applyConsent = (accepted: boolean) => {
 };
 
 export const initAnalytics = () => {
-  if (typeof window === "undefined") return;
+  if (typeof window === "undefined" || analyticsStarted) return;
+  analyticsStarted = true;
 
   if (GA4_ID) {
     window.dataLayer = window.dataLayer || [];
@@ -166,15 +169,23 @@ export const initAnalytics = () => {
         api_host: PH_HOST,
         opt_out_capturing_by_default: true,
         capture_pageview: "history_change",
+        capture_exceptions: true,
         person_profiles: "identified_only",
       });
       posthog = ph;
       applyConsent(getCookieConsent());
       phQueue.splice(0).forEach(([name, params]) => ph.capture(name, params));
+      phExceptionQueue.splice(0).forEach((error) => ph.captureException(error));
     });
   }
 
   applyConsent(getCookieConsent());
+};
+
+export const capturePostHogException = (error: unknown) => {
+  if (!PH_KEY) return;
+  if (posthog) posthog.captureException(error);
+  else phExceptionQueue.push(error);
 };
 
 const sendEvent = (eventName: string, params: Record<string, unknown> = {}) => {

@@ -38,3 +38,4 @@ supabase/.temp/
 .next
 next-env.d.ts
 gbp-photos/
+.env.local

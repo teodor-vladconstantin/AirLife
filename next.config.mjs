@@ -1,5 +1,14 @@
+import { withPostHogConfig } from "@posthog/nextjs-config";
+
+const vercelRelease = process.env.VERCEL_GIT_REPO_SLUG && process.env.VERCEL_GIT_COMMIT_SHA
+  ? {
+      releaseName: process.env.VERCEL_GIT_REPO_SLUG,
+      releaseVersion: process.env.VERCEL_GIT_COMMIT_SHA,
+    }
+  : {};
+
 /** @type {import('next').NextConfig} */
-export default {
+const nextConfig = {
   // Keep the existing VITE_* variables in .env / Vercel working: they are exposed to the browser under NEXT_PUBLIC_*.
   env: {
     NEXT_PUBLIC_SUPABASE_URL: process.env.NEXT_PUBLIC_SUPABASE_URL ?? process.env.VITE_SUPABASE_URL,
@@ -37,3 +46,14 @@ export default {
     ];
   },
 };
+
+export default withPostHogConfig(nextConfig, {
+  personalApiKey: process.env.POSTHOG_API_KEY ?? "",
+  projectId: process.env.POSTHOG_PROJECT_ID,
+  host: process.env.POSTHOG_HOST,
+  sourcemaps: {
+    enabled: Boolean(process.env.POSTHOG_API_KEY && process.env.POSTHOG_PROJECT_ID),
+    deleteAfterUpload: true,
+    ...vercelRelease,
+  },
+});
