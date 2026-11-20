@@ -121,10 +121,10 @@ const ShippingAndReturns = () => {
                     Procedura de exercitare a returului:
                   </h3>
                   <ol className="list-decimal list-inside space-y-1.5 text-xs">
-                    <li>Trimiteți o notificare scrisă de retur pe adresa de e-mail <strong>contact@airlife.ro</strong>, menționând numărul comenzii și contul IBAN pentru restituire.</li>
+                    <li>Trimiteți o notificare scrisă de retur pe adresa de e-mail <strong>contact@airlife.ro</strong>, menționând numărul comenzii (formularul-tip este pe pagina <Link to="/formular-retragere" className="text-primary underline">Formular de retragere</Link>). Contul IBAN îl indici doar dacă ai plătit ramburs; plățile cu cardul se rambursează pe același card.</li>
                     <li>Ambalați produsul corespunzător pentru a fi protejat pe durata transportului.</li>
                     <li>Expediați coletul prin orice firmă de curierat rapid (fără ramburs) la adresa {company.legalName}, {company.address} (confirmăm adresa exactă de retur în răspunsul la notificare). Costul de transport al returului îl suportă consumatorul, dacă nu s-a convenit altfel înainte de comandă. Conform legii, cheltuielile directe legate de returnarea produselor sunt suportate de către consumator.</li>
-                    <li>După recepționarea și verificarea stării produsului, contravaloarea acestuia va fi restituită în termen de maximum <strong>14 zile</strong> în contul bancar indicat.</li>
+                    <li>După recepționarea și verificarea stării produsului, contravaloarea acestuia (inclusiv costul livrării standard) va fi restituită în termen de maximum <strong>14 zile</strong>, prin aceeași metodă de plată folosită la comandă.</li>
                   </ol>
                 </div>
               </CardContent>

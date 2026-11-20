@@ -54,8 +54,11 @@ const sections: LegalSection[] = [
     title: "Plata și facturarea",
     body: (
       <>
-        <p>Metode de plată disponibile: ramburs (numerar la livrare) și transfer bancar. La transferul bancar, comanda se procesează după confirmarea încasării.</p>
-        <p>Factura fiscală se emite pentru fiecare comandă sau serviciu. Pentru factură pe persoană juridică te rugăm să ne transmiți datele firmei înainte de emitere.</p>
+        <p>Metode de plată disponibile pentru produse: <strong>card bancar online</strong> (Visa, Mastercard și alte metode afișate la plată), procesat securizat de Stripe, și <strong>ramburs</strong> (numerar sau card la curier, la livrare). Pentru servicii, plata se face conform ofertei acceptate.</p>
+        <p>La plata cu cardul ești redirecționat către pagina securizată Stripe; datele cardului sunt introduse direct acolo și <strong>nu sunt văzute sau stocate de AirLife</strong>. Comanda plătită cu cardul se onorează după confirmarea plății. Sesiunea de plată expiră după 30 de minute; dacă nu o finalizezi în acest interval, comanda neplătită se anulează automat, iar stocul se eliberează. Plata cu cardul este un serviciu al Stripe Payments Europe, Ltd., care își aplică propriii termeni.</p>
+        <p>Prețul comenzii este datorat integral la plasarea comenzii (card) sau la livrare (ramburs). Pentru comenzile cu plata la livrare, refuzul nejustificat repetat de a ridica coletul ne poate determina să nu mai acceptăm comenzi ulterioare cu ramburs de la același client.</p>
+        <p>Factura fiscală se emite pentru fiecare comandă sau serviciu și ți se transmite electronic, la adresa de e-mail indicată. Pentru factură pe persoană juridică te rugăm să ne transmiți datele firmei înainte de plasarea comenzii sau cel târziu la confirmare.</p>
+        <p>Poți urmări o comandă din contul tău sau, ca vizitator, din pagina <Link to="/urmarire-comanda">Urmărire comandă</Link>, cu numărul comenzii și adresa de e-mail folosită.</p>
       </>
     ),
   },
@@ -70,8 +73,8 @@ const sections: LegalSection[] = [
     body: (
       <>
         <p>Dacă ești consumator, conform OUG nr. 34/2014 poți renunța la contractul la distanță în 14 zile calendaristice, fără să justifici decizia și fără penalități. Termenul curge de la data la care tu sau o persoană desemnată de tine (alta decât curierul) primești produsele; pentru mai multe produse livrate separat, de la primirea ultimului.</p>
-        <p>Pentru a te retrage, ne transmiți o declarație clară (de exemplu pe <a href={`mailto:${c.email}`}>{c.email}</a>) cu numărul comenzii, datele tale și contul IBAN pentru restituire. Poți folosi și formularul-tip de mai jos. Trimite produsele înapoi în cel mult 14 zile de la comunicarea retragerii. Costul direct al returnării îl suporți tu, dacă nu ți-am comunicat altfel înainte de comandă.</p>
-        <p>Îți rambursăm sumele primite, inclusiv costul livrării standard, în cel mult 14 zile de la comunicarea retragerii. Putem amâna rambursarea până primim produsele sau până dovedești expedierea lor. Răspunzi pentru diminuarea valorii produselor rezultată din manipularea lor în alt mod decât cel necesar verificării naturii, caracteristicilor și funcționării.</p>
+        <p>Pentru a te retrage, ne transmiți o declarație clară (de exemplu pe <a href={`mailto:${c.email}`}>{c.email}</a>) cu numărul comenzii și datele tale. Poți folosi și formularul-tip de mai jos, disponibil și pe pagina <Link to="/formular-retragere">Formular de retragere</Link>. Trimite produsele înapoi în cel mult 14 zile de la comunicarea retragerii. Costul direct al returnării îl suporți tu, dacă nu ți-am comunicat altfel înainte de comandă.</p>
+        <p>Îți rambursăm sumele primite, inclusiv costul livrării standard, în cel mult 14 zile de la comunicarea retragerii, folosind aceeași metodă de plată ca la comandă (pentru plățile cu cardul, rambursarea se face pe același card, fără costuri pentru tine; pentru comenzile cu ramburs, prin transfer bancar în contul IBAN indicat de tine). Putem amâna rambursarea până primim produsele sau până dovedești expedierea lor. Răspunzi pentru diminuarea valorii produselor rezultată din manipularea lor în alt mod decât cel necesar verificării naturii, caracteristicilor și funcționării.</p>
         <p>Dreptul de retragere nu se aplică, printre altele (art. 16 OUG 34/2014):</p>
         <ul>
           <li>produselor sigilate care nu pot fi returnate din motive de protecție a sănătății sau de igienă, dacă au fost desigilate după livrare (de exemplu soluții de curățare și dezinfectare, filtre desigilate);</li>
@@ -82,7 +85,7 @@ const sections: LegalSection[] = [
         <p>Dacă ai cerut începerea unui serviciu în perioada de retragere și te retragi, plătești proporțional cu serviciul prestat până la comunicarea retragerii.</p>
         <p className="rounded-md border border-border bg-secondary/40 p-3 text-sm">
           <strong>Formular-tip de retragere</strong> (completează și trimite doar dacă dorești să te retragi):<br />
-          Către {c.legalName}, {c.address}, {c.email}: Vă informez prin prezenta că renunț la contractul de vânzare a următoarelor produse / prestare a următorului serviciu: ____ . Comandat la data de ____ / primit la data de ____ . Numele consumatorului: ____ . Adresa consumatorului: ____ . Cont IBAN pentru restituire: ____ . Data: ____ . Semnătura (doar dacă formularul se trimite pe hârtie): ____ .
+          Către {c.legalName}, {c.address}, {c.email}: Vă informez prin prezenta că renunț la contractul de vânzare a următoarelor produse / prestare a următorului serviciu: ____ . Comandat la data de ____ / primit la data de ____ . Numele consumatorului: ____ . Adresa consumatorului: ____ . Cont IBAN pentru restituire (doar la comenzile cu ramburs): ____ . Data: ____ . Semnătura (doar dacă formularul se trimite pe hârtie): ____ .
         </p>
       </>
     ),
@@ -91,7 +94,7 @@ const sections: LegalSection[] = [
     title: "Garanția și conformitatea produselor",
     body: (
       <>
-        <p>Produsele livrate consumatorilor trebuie să fie conforme contractului. Beneficiezi de garanția legală de conformitate de 2 ani (Legea nr. 449/2003 și OUG nr. 140/2021), plus garanția comercială a producătorului, dacă există. Dacă produsul nu este conform, ai dreptul, în ordine, la repararea sau înlocuirea lui, apoi la reducerea prețului sau la încetarea contractului, în condițiile legii.</p>
+        <p>Produsele livrate consumatorilor trebuie să fie conforme contractului. Beneficiezi de garanția legală de conformitate de 2 ani (OUG nr. 140/2021), plus garanția comercială a producătorului, dacă există. Dacă produsul nu este conform, ai dreptul, în ordine, la repararea sau înlocuirea lui, apoi la reducerea prețului sau la încetarea contractului, în condițiile legii.</p>
         <p>Pentru lucrările de montaj și service, garanția acoperă manopera conform devizului/ofertei acceptate. Detalii, excluderi și procedura de reclamație sunt în pagina <Link to="/garantie">Condiții de Garanție</Link>. Drepturile tale legale de consumator nu pot fi limitate prin aceste condiții.</p>
       </>
     ),

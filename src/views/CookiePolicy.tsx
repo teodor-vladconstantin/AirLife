@@ -117,8 +117,33 @@ const CookiePolicy = () => {
                   <div className="p-4 rounded-xl bg-secondary/50 border border-border/50">
                     <strong className="block text-foreground text-base mb-1">C. Monitorizare tehnică</strong>
                     <p className="text-xs mb-2">
-                      Folosim Sentry pentru a detecta erorile site-ului (tip de eroare, pagină, browser). Nu folosim cookie-uri de publicitate sau de urmărire între site-uri. Pornește numai după ce apeși „Accept toate”.
+                      Folosim Sentry pentru a detecta erorile site-ului (tip de eroare, pagină, browser). Pornește numai după ce apeși „Accept toate”.
                     </p>
+                  </div>
+                  <div className="p-4 rounded-xl bg-secondary/50 border border-border/50">
+                    <strong className="block text-foreground text-base mb-1">D. Securitate și plată (esențiale, fără consimțământ)</strong>
+                    <p className="text-xs mb-2">
+                      Verificarea anti-bot Cloudflare Turnstile (la comandă și formulare) și pagina de plată Stripe folosesc tehnologii proprii necesare prevenirii fraudei și abuzurilor și procesării plății. Acestea sunt strict necesare serviciului cerut de tine (art. 4 alin. 5 din Legea 506/2004), deci nu necesită acord. Pagina de plată aparține Stripe, care își aplică propria politică de cookies.
+                    </p>
+                  </div>
+                  <div className="p-4 rounded-xl bg-secondary/50 border border-border/50">
+                    <strong className="block text-foreground text-base mb-1">Tabel sintetic</strong>
+                    <div className="overflow-x-auto">
+                      <table className="w-full text-[11px] text-left">
+                        <thead><tr className="text-foreground"><th className="py-1 pr-3">Nume / tehnologie</th><th className="pr-3">Furnizor</th><th className="pr-3">Scop</th><th className="pr-3">Durată</th><th>Consimțământ</th></tr></thead>
+                        <tbody className="[&_td]:py-1 [&_td]:pr-3 align-top">
+                          <tr><td>airlife_cookie_consent (localStorage)</td><td>AirLife</td><td>Reține alegerea ta privind cookie-urile</td><td>Până la ștergere</td><td>Nu</td></tr>
+                          <tr><td>Coș, sesiune cont (localStorage / token)</td><td>AirLife, Supabase</td><td>Coș de cumpărături, autentificare</td><td>Sesiune / până la ieșire</td><td>Nu</td></tr>
+                          <tr><td>Turnstile (cf_*)</td><td>Cloudflare</td><td>Verificare anti-bot</td><td>Sesiune</td><td>Nu</td></tr>
+                          <tr><td>Stripe (__stripe_*)</td><td>Stripe</td><td>Plată și prevenirea fraudei, pe pagina Stripe</td><td>Până la 1 an</td><td>Nu</td></tr>
+                          <tr><td>_ga, _ga_*</td><td>Google Ireland</td><td>Statistici (GA4/GTM)</td><td>Până la 2 ani</td><td>Da</td></tr>
+                          <tr><td>ph_* (PostHog)</td><td>PostHog (UE)</td><td>Analiză comportament, înregistrări sesiune</td><td>Până la 1 an</td><td>Da</td></tr>
+                          <tr><td>_fbp</td><td>Meta Platforms Ireland</td><td>Măsurarea reclamelor</td><td>Până la 3 luni</td><td>Da</td></tr>
+                          <tr><td>Sentry (sesiune)</td><td>Functional Software, Inc.</td><td>Monitorizarea erorilor</td><td>Sesiune</td><td>Da</td></tr>
+                        </tbody>
+                      </table>
+                    </div>
+                    <p className="text-[11px] mt-2">Lista furnizorilor, cu locația și garanțiile de transfer: <Link to="/subprocesatori" className="text-primary underline">Subprocesatori și destinatari</Link>.</p>
                   </div>
                 </div>
               </CardContent>

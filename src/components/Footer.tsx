@@ -108,6 +108,11 @@ const Footer = () => {
                   Ghid Cost Montaj
                 </Link>
               </li>
+              <li>
+                <Link to="/ghid/ce-btu-aer-conditionat" className="hover:text-brandlight transition-colors">
+                  Calculator BTU
+                </Link>
+              </li>
             </ul>
           </div>
 
@@ -158,6 +163,16 @@ const Footer = () => {
               <li>
                 <Link to="/politica-de-cookies" className="hover:text-brandlight transition-colors">
                   Politica de Cookies
+                </Link>
+              </li>
+              <li>
+                <Link to="/subprocesatori" className="hover:text-brandlight transition-colors">
+                  Subprocesatori
+                </Link>
+              </li>
+              <li>
+                <Link to="/formular-retragere" className="hover:text-brandlight transition-colors">
+                  Formular de retragere
                 </Link>
               </li>
             </ul>

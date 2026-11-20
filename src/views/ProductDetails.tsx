@@ -121,6 +121,7 @@ const ProductDetails = ({ initial }: { initial: Loaded }) => {
     "description": product.description,
     "image": product.gallery.length ? product.gallery : product.image_url ? (product.image_url.startsWith("http") ? product.image_url : `https://airlife.ro${product.image_url}`) : "https://airlife.ro/placeholder.svg",
     "sku": product.sku ?? product.id.substring(0, 12),
+    ...(product.sku ? { "mpn": product.sku } : {}),
     "brand": {
       "@type": "Brand",
       "name": product.brand ?? "AirLife"
@@ -136,6 +137,26 @@ const ProductDetails = ({ initial }: { initial: Loaded }) => {
       "seller": {
         "@type": "Organization",
         "name": "AirLife"
+      },
+      // Mirrors /livrare-si-retur and the checkout rule: 20 RON under 1000 RON, free above; 14-day return, buyer pays return shipping.
+      "shippingDetails": {
+        "@type": "OfferShippingDetails",
+        "shippingRate": { "@type": "MonetaryAmount", "value": product.price >= 1000 ? "0" : "20", "currency": "RON" },
+        "shippingDestination": { "@type": "DefinedRegion", "addressCountry": "RO" },
+        "deliveryTime": {
+          "@type": "ShippingDeliveryTime",
+          "handlingTime": { "@type": "QuantitativeValue", "minValue": 0, "maxValue": 1, "unitCode": "DAY" },
+          "transitTime": { "@type": "QuantitativeValue", "minValue": 1, "maxValue": 2, "unitCode": "DAY" }
+        }
+      },
+      "hasMerchantReturnPolicy": {
+        "@type": "MerchantReturnPolicy",
+        "applicableCountry": "RO",
+        "returnPolicyCategory": "https://schema.org/MerchantReturnFiniteReturnWindow",
+        "merchantReturnDays": 14,
+        "returnMethod": "https://schema.org/ReturnByMail",
+        "returnFees": "https://schema.org/ReturnShippingFees",
+        "merchantReturnLink": "https://airlife.ro/livrare-si-retur"
       }
     }
   };

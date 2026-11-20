@@ -25,7 +25,7 @@ export const CATEGORIES_DATA: Record<string, CategoryInfo> = {
     buyingGuide: {
       title: "Cum alegi capacitatea potrivită?",
       tips: [
-        "Pentru o cameră de până la 25 mp se alege de obicei 9000 BTU, pentru 25–35 mp 12000 BTU, iar pentru spații mai mari 18000 BTU sau mai mult.",
+        "BTU se calculează după volumul camerei (metri cubi): până la 65 mc se alege de obicei 9000 BTU, pentru 65–85 mc 12000 BTU, iar pentru spații mai mari 18000 BTU sau mai mult.",
         "Orientarea spre sud, etajele superioare și geamurile mari cer o capacitate mai mare decât indică suprafața.",
         "Clasa energetică A++ și compresorul inverter reduc consumul, iar funcția Wi-Fi permite pornirea aparatului înainte să ajungi acasă.",
       ],
@@ -33,7 +33,7 @@ export const CATEGORIES_DATA: Record<string, CategoryInfo> = {
     faq: [
       { q: "Ce înseamnă aer condiționat inverter?", a: "Inverter înseamnă că turația compresorului se reglează continuu în funcție de cât de departe este camera de temperatura setată. Aparatul nu mai pornește și oprește compresorul la putere maximă, ci lucrează mai lin, consumă mai puțin și menține temperatura mai stabilă." },
       { q: "Merită un aer condiționat inverter față de unul clasic?", a: "Da, pentru utilizare zilnică. Un inverter consumă de regulă mai puțin curent decât un aparat on/off, face mai puțin zgomot și menține temperatura mai constantă. Diferența de preț se recuperează în timp, mai ales dacă folosești aparatul și pentru încălzire." },
-      { q: "Câți BTU îmi trebuie pentru camera mea?", a: "Orientativ: 9000 BTU pentru camere de până la 25 mp, 12000 BTU pentru 25–35 mp și 18000 BTU sau mai mult pentru spații mai mari. Camerele orientate spre sud, de la ultimul etaj sau cu geamuri mari au nevoie de o capacitate mai mare." },
+      { q: "Câți BTU îmi trebuie pentru camera mea?", a: "BTU se calculează după volumul camerei, în metri cubi (lungime × lățime × înălțime), cu aproximativ 140 BTU pe metru cub. Orientativ: 9000 BTU pentru camere de până la 65 mc, 12000 BTU pentru 65–85 mc și 18000 BTU sau mai mult pentru spații mai mari. Camerele orientate spre sud, de la ultimul etaj sau cu geamuri mari au nevoie de o capacitate mai mare." },
       { q: "Poate un aer condiționat inverter să încălzească iarna?", a: "Da, aparatele split inverter funcționează și ca pompă de căldură. Randamentul scade la temperaturi exterioare foarte scăzute, așa că verifică în fișa tehnică temperatura minimă de funcționare la încălzire." },
       { q: "Livrați și montați aparatul?", a: "Livrăm prin curier în toată țara. Montajul îl facem cu echipa AirLife sau parteneri în Buzău și în tot județul Buzău." },
     ],

@@ -100,11 +100,12 @@ const AerConditionatBuzau = () => {
           <section className="bg-card p-6 md:p-8 rounded-xl border border-border shadow-sm">
             <h2 className="text-2xl font-bold mb-3 text-foreground flex items-center gap-2"><ShoppingCart className="w-6 h-6 text-primary" /> Aparate de aer condiționat pentru Buzău</h2>
             <p className="text-muted-foreground mb-4">
-              Alegi aparatul din magazin (inverter cu Wi-Fi, 9000-21000 BTU), iar noi îl montăm. Pentru o cameră de până la 25 mp ajunge de regulă un aparat de 9000 BTU; pentru 25-35 mp, 12000 BTU.
+              Alegi aparatul din magazin (inverter cu Wi-Fi, 9000-21000 BTU), iar noi îl montăm. BTU se alege după volumul camerei (metri cubi): până la 65 mc ajunge de regulă un aparat de 9000 BTU; pentru 65-85 mc, 12000 BTU.
             </p>
             <div className="flex flex-wrap gap-4 text-sm font-semibold">
               <Link to="/aer-conditionat" className="text-primary hover:underline">Vezi aparatele de aer condiționat &rarr;</Link>
               <Link to="/ghid/cost-montaj-aer-conditionat" className="text-primary hover:underline">Cât costă montajul &rarr;</Link>
+              <Link to="/ghid/ce-btu-aer-conditionat" className="text-primary hover:underline">Ce BTU ai nevoie (calculator) &rarr;</Link>
             </div>
           </section>
 

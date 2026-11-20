@@ -19,6 +19,9 @@ const sections: LegalSection[] = [
     body: (
       <ul>
         <li><strong>Comenzi și cereri de ofertă</strong> (nume, e-mail, telefon, adresă de livrare sau de intervenție, produsele/serviciul solicitat, metoda de plată, IBAN pentru restituiri): pentru a primi, livra, factura și deservi comanda sau oferta. Temei: executarea contractului sau demersuri precontractuale (art. 6 alin. 1 lit. b GDPR).</li>
+        <li><strong>Plata cu cardul</strong>: datele cardului sunt introduse direct pe pagina Stripe și nu ajung la noi; primim doar confirmarea plății, suma și un identificator al tranzacției. Stripe prelucrează datele ca persoană împuternicită pentru procesarea plății și, pentru prevenirea fraudei și obligațiile legale proprii, ca operator independent (vezi <a href="https://stripe.com/ro/privacy" target="_blank" rel="noopener noreferrer">politica Stripe</a>). Temei: executarea contractului (lit. b).</li>
+        <li><strong>Securitatea formularelor</strong> (Cloudflare Turnstile, verificare anti-bot la comandă și formulare: adresă IP și semnale tehnice ale browserului): prevenirea abuzurilor și a comenzilor automate. Temei: interes legitim (lit. f).</li>
+        <li><strong>Mesaje tranzacționale</strong> (confirmarea comenzii, schimbări de stare, livrare): trimise prin Resend, strict pentru executarea comenzii (lit. b).</li>
         <li><strong>Facturare și evidențe contabile</strong>: obligații legale fiscale și contabile (art. 6 alin. 1 lit. c).</li>
         <li><strong>Cont de utilizator</strong> (e-mail, parolă stocată criptat, istoricul comenzilor): pentru autentificare și gestionarea comenzilor. Temei: contract (lit. b).</li>
         <li><strong>Mesaje prin formularul de contact, e-mail sau telefon</strong>: pentru a-ți răspunde. Temei: interes legitim de a răspunde solicitărilor (lit. f) sau pași precontractuali (lit. b).</li>
@@ -37,15 +40,16 @@ const sections: LegalSection[] = [
     title: "Cui dezvăluim datele",
     body: (
       <>
-        <p>Nu vindem datele tale. Le transmitem doar celor care ne ajută să furnizăm serviciul, în baza unor contracte care îi obligă să le protejeze:</p>
+        <p>Nu vindem datele tale. Le transmitem doar celor care ne ajută să furnizăm serviciul, în baza termenilor și a acordurilor standard de prelucrare a datelor ale acestor furnizori, care îi obligă să le protejeze:</p>
         <ul>
-          <li>firme de curierat, pentru livrarea coletelor;</li>
-          <li>furnizori de infrastructură IT: găzduire (Vercel), bază de date și autentificare (Supabase), trimitere de e-mailuri;</li>
+          <li>firme de curierat (de exemplu FAN Courier, DPD, Sameday), pentru livrarea coletelor; primesc numele, telefonul, adresa de livrare și, la ramburs, suma de încasat;</li>
+          <li>furnizori de infrastructură IT: găzduire (Vercel), bază de date și autentificare (Supabase), trimitere de e-mailuri (Resend), protecție anti-bot (Cloudflare Turnstile);</li>
+          <li>procesatorul de plăți Stripe Payments Europe, Ltd. (Irlanda), pentru plățile cu cardul;</li>
           <li>instrumente de analiză și monitorizare, doar după consimțământ în cazul analizei: Google (Google Analytics 4, Google Tag Manager), Meta Platforms Ireland (Pixel Meta), PostHog (serverele din UE), Sentry;</li>
           <li>contabil, bancă și consultanți juridici, pentru obligațiile legale și evidențe;</li>
           <li>autorități publice, când legea o cere.</li>
         </ul>
-        <p>Unii furnizori (de exemplu Google, Vercel, Supabase, Sentry) pot prelucra date și în afara Spațiului Economic European. În aceste cazuri ne bazăm pe garanții prevăzute de GDPR (decizia de adecvare a Comisiei Europene, inclusiv Cadrul de Confidențialitate UE-SUA pentru entitățile certificate, sau clauze contractuale standard). Poți cere detalii la <a href={`mailto:${c.email}`}>{c.email}</a>.</p>
+        <p>Unii furnizori (de exemplu Google, Vercel, Supabase, Sentry) pot prelucra date și în afara Spațiului Economic European. În aceste cazuri ne bazăm pe garanții prevăzute de GDPR (decizia de adecvare a Comisiei Europene, inclusiv Cadrul de Confidențialitate UE-SUA pentru entitățile certificate, sau clauze contractuale standard). Lista completă a furnizorilor, cu rolul, datele și garanțiile de transfer, este pe pagina <Link to="/subprocesatori">Subprocesatori și destinatari</Link>. Poți cere detalii la <a href={`mailto:${c.email}`}>{c.email}</a>.</p>
       </>
     ),
   },
@@ -54,6 +58,7 @@ const sections: LegalSection[] = [
     body: (
       <ul>
         <li>Documente fiscale și contabile (facturi, comenzi): 5 ani, conform legii contabilității, sau mai mult dacă legea impune.</li>
+        <li>Date de plată: nu stocăm datele cardului; păstrăm doar identificatorul tranzacției și suma, ca parte din evidența contabilă (5 ani).</li>
         <li>Date privind garanția, reclamațiile și posibile litigii: până la 3 ani de la încheierea contractului (termenul general de prescripție), apoi ștergere.</li>
         <li>Cont de utilizator: cât timp este activ; îl poți șterge oricând, cu păstrarea datelor pe care legea ne obligă să le arhivăm.</li>
         <li>Mesaje de contact fără comandă: până la 12 luni de la ultimul mesaj.</li>

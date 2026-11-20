@@ -1,4 +1,4 @@
-import type { MetadataRoute } from "next";
+﻿import type { MetadataRoute } from "next";
 import { db, loadCategorySummaries } from "@/lib/catalog";
 
 export const revalidate = 3600;
@@ -6,8 +6,8 @@ export const revalidate = 3600;
 const SITE = "https://airlife.ro";
 const STATIC = [
   "/", "/aer-conditionat-buzau", "/products", "/servicii", "/servicii/montaj-aer-conditionat", "/servicii/igienizare-aer-conditionat", "/servicii/service-aer-conditionat",
-  "/ghid/igienizare-aer-conditionat", "/ghid/cost-montaj-aer-conditionat", "/blog", "/despre-noi", "/contact", "/livrare-si-retur", "/garantie",
-  "/termeni-si-conditii", "/politica-de-confidentialitate", "/politica-de-cookies",
+  "/ghid/igienizare-aer-conditionat", "/ghid/cost-montaj-aer-conditionat", "/ghid/ce-btu-aer-conditionat", "/blog", "/despre-noi", "/contact", "/livrare-si-retur", "/garantie",
+  "/termeni-si-conditii", "/politica-de-confidentialitate", "/politica-de-cookies", "/subprocesatori", "/formular-retragere",
 ];
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
@@ -29,3 +29,4 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   }
   return entries;
 }
+

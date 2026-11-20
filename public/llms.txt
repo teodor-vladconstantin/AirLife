@@ -14,6 +14,7 @@
 - [Igienizare aer condiționat](https://airlife.ro/servicii/igienizare-aer-conditionat)
 - [Service aer condiționat](https://airlife.ro/servicii/service-aer-conditionat)
 - [Ghid: cost montaj aer condiționat](https://airlife.ro/ghid/cost-montaj-aer-conditionat)
+- [Ghid: ce BTU ai nevoie (calculator pe volum, metri cubi)](https://airlife.ro/ghid/ce-btu-aer-conditionat)
 - [Ghid: igienizare aer condiționat](https://airlife.ro/ghid/igienizare-aer-conditionat)
 - [Blog](https://airlife.ro/blog)
 
