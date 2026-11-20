@@ -19,6 +19,9 @@ const nextConfig = {
     NEXT_PUBLIC_POSTHOG_HOST: process.env.NEXT_PUBLIC_POSTHOG_HOST ?? process.env.VITE_POSTHOG_HOST ?? "",
     NEXT_PUBLIC_SENTRY_DSN: process.env.NEXT_PUBLIC_SENTRY_DSN ?? process.env.VITE_SENTRY_DSN ?? "",
   },
+  async rewrites() {
+    return [{ source: "/feed/google.xml", destination: "/merchant-feed.xml" }];
+  },
   async redirects() {
     const r = (source, destination) => ({ source, destination, permanent: true });
     return [

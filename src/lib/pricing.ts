@@ -16,3 +16,9 @@ export function salePricing(r: PriceFields): { price: number; compare_at?: numbe
 // Visible in the shop: not hidden by an admin and has a real photo (no placeholders).
 export const isShopVisible = (r: { hidden?: boolean | null; image_url?: string | null }) =>
   !r.hidden && !!r.image_url && !r.image_url.includes("placeholder");
+
+// GTIN/EAN, when known, lives in products.specs.gtin (8, 12, 13 or 14 digits).
+export const gtinOf = (specs: unknown): string | null => {
+  const v = (specs as Record<string, unknown> | null)?.gtin;
+  return typeof v === "string" && /^(\d{8}|\d{12,14})$/.test(v.trim()) ? v.trim() : null;
+};

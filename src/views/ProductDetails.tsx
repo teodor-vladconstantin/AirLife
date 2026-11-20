@@ -9,6 +9,7 @@ import { useCart } from "@/contexts/CartContext";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import SEO from "@/components/SEO";
+import { gtinOf } from "@/lib/pricing";
 import { trackViewItem, trackAddToCart as trackAddToCartAnalytics } from "@/lib/analytics";
 import {
   Loader2,
@@ -122,6 +123,7 @@ const ProductDetails = ({ initial }: { initial: Loaded }) => {
     "image": product.gallery.length ? product.gallery : product.image_url ? (product.image_url.startsWith("http") ? product.image_url : `https://airlife.ro${product.image_url}`) : "https://airlife.ro/placeholder.svg",
     "sku": product.sku ?? product.id.substring(0, 12),
     ...(product.sku ? { "mpn": product.sku } : {}),
+    ...(gtinOf(product.specs) ? { "gtin": gtinOf(product.specs) } : {}),
     "brand": {
       "@type": "Brand",
       "name": product.brand ?? "AirLife"
