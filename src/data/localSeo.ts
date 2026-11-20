@@ -18,3 +18,7 @@ export const COVERAGE_FAQ = {
   q: "În ce zone faceți montaj, igienizare și service?",
   a: "Intervenim cu echipa AirLife sau parteneri în municipiul Buzău (Micro 3, Micro 5, Micro 14, Dorobanți, Centru, Broșteni, Orizont) și în tot județul Buzău, inclusiv Râmnicu Sărat, Nehoiu, Pogoanele și comunele din jur. Produsele și accesoriile le livrăm prin curier în toată țara.",
 };
+
+// WhatsApp uses the same mobile number as the phone line. wa.me wants digits only, with country code.
+export const WHATSAPP_NUMBER = PHONE_TEL.replace(/\D/g, "");
+export const whatsappLink = (text: string) => `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(text)}`;

@@ -10,7 +10,8 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import SEO from "@/components/SEO";
 import { gtinOf } from "@/lib/pricing";
-import { trackViewItem, trackAddToCart as trackAddToCartAnalytics } from "@/lib/analytics";
+import { trackViewItem, trackAddToCart as trackAddToCartAnalytics, trackClickToCall, trackClickWhatsApp } from "@/lib/analytics";
+import { PHONE_DISPLAY, PHONE_TEL, whatsappLink } from "@/data/localSeo";
 import {
   Loader2,
   Minus,
@@ -21,6 +22,8 @@ import {
   ShieldCheck,
   CheckCircle2,
   ShoppingCart,
+  PhoneCall,
+  MessageCircle,
   ChevronLeft,
   ChevronRight,
   X,
@@ -455,9 +458,15 @@ const ProductDetails = ({ initial }: { initial: Loaded }) => {
                   </Button>
                 </div>
 
-                <p className="text-[11px] text-muted-foreground">
-                  Livrare <strong>GRATUITĂ</strong> pentru comenzi peste 1000 RON.
-                </p>
+<ul className="grid sm:grid-cols-2 gap-2 text-sm text-muted-foreground">
+                  <li className="flex items-center gap-2"><Truck className="w-4 h-4 text-primary shrink-0" /> Livrare <strong className="text-foreground">gratuită</strong> peste 1000 RON</li>
+                  <li className="flex items-center gap-2"><ShieldCheck className="w-4 h-4 text-primary shrink-0" /> Garanție <strong className="text-foreground">24 luni</strong></li>
+                  <li className="flex items-center gap-2"><RotateCcw className="w-4 h-4 text-primary shrink-0" /> Retur în <strong className="text-foreground">14 zile</strong></li>
+                  <li className="flex items-center gap-2"><PhoneCall className="w-4 h-4 text-primary shrink-0" /> <a href={`tel:${PHONE_TEL}`} onClick={() => trackClickToCall("product-page")} className="font-semibold text-foreground hover:text-primary">{PHONE_DISPLAY}</a></li>
+                </ul>
+                <a href={whatsappLink(`Bună! Mă interesează ${product.name}`)} target="_blank" rel="noopener noreferrer" onClick={() => trackClickWhatsApp("product-page")} className="inline-flex items-center gap-2 text-sm font-semibold text-[#128C7E] hover:underline">
+                  <MessageCircle className="w-4 h-4" /> Întreabă pe WhatsApp despre acest produs
+                </a>
               </div>
             </div>
           </div>
