@@ -35,18 +35,10 @@ const GhidIgienizare = () => {
     "headline": "Când și Cum se Curăță un Aer Condiționat: Ghid Pas cu Pas",
     "description":
       "Ghid detaliat despre curățarea și dezinfectarea aparatului de aer condiționat. De la spălarea filtrelor la curățarea vaporizatorului și a tăviței de condens.",
-    "author": {
-      "@type": "Organization",
-      "name": "AirLife"
-    },
-    "publisher": {
-      "@type": "Organization",
-      "name": "AirLife",
-      "logo": {
-        "@type": "ImageObject",
-        "url": "https://airlife.ro/logo.png"
-      }
-    },
+    "author": { "@id": "https://airlife.ro/#organization" },
+    "publisher": { "@id": "https://airlife.ro/#organization" },
+    "image": "https://airlife.ro/og-image.jpg",
+    "inLanguage": "ro-RO",
     "datePublished": "2025-02-01",
     "dateModified": "2026-10-27",
     "mainEntityOfPage": "https://airlife.ro/ghid/igienizare-aer-conditionat-buzau"

@@ -6,7 +6,7 @@ import SEO from "@/components/SEO";
 import { Button } from "@/components/ui/button";
 import type { Tables } from "@/integrations/supabase/types";
 import { renderMarkdown } from "@/lib/markdown";
-import { BLOG_CANONICAL, PHONE_DISPLAY, PHONE_TEL } from "@/data/localSeo";
+import { BLOG_CANONICAL, GUIDE_LABEL, PHONE_DISPLAY, PHONE_TEL } from "@/data/localSeo";
 import { bylineName } from "@/data/author";
 import { postSchemas, roDate } from "@/lib/blogSchema";
 
@@ -35,7 +35,7 @@ const BlogPost = ({ post, related }: { post: Tables<"blog_posts">; related: { sl
           <h1 className="text-3xl md:text-5xl font-bold tracking-tight">{post.title}</h1>
           {mainGuide && (
             <p className="rounded-xl border bg-card p-4 text-sm">
-              Varianta completă și actualizată, cu calculator pe volum și tabel BTU: <Link to={mainGuide.replace("https://airlife.ro", "")} className="text-primary font-semibold hover:underline">ghidul despre BTU pentru Buzău</Link>.
+              Varianta completă și actualizată: <Link to={mainGuide.replace("https://airlife.ro", "")} className="text-primary font-semibold hover:underline">{GUIDE_LABEL[mainGuide] ?? "ghidul AirLife"}</Link>.
             </p>
           )}
           <p className="text-sm text-muted-foreground">

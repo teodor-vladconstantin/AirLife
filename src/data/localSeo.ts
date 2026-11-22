@@ -45,4 +45,9 @@ export const FGAS_TEXT = "AirLife deține atestat F-gaz pentru manipularea gazel
 // Blog posts that cover the same query as a local guide: the guide is the main page, so the post points its canonical there.
 export const BLOG_CANONICAL: Record<string, string> = {
   "ce-btu-sa-alegi-pentru-aer-conditionat": "https://airlife.ro/ghid/ce-btu-aer-conditionat-buzau",
+  "ce-influenteaza-pretul-montajului-aerului-conditionat": "https://airlife.ro/ghid/cost-montaj-aer-conditionat-buzau",
+};
+export const GUIDE_LABEL: Record<string, string> = {
+  "https://airlife.ro/ghid/ce-btu-aer-conditionat-buzau": "ghidul despre BTU pentru Buzău (calculator pe volum și tabel BTU)",
+  "https://airlife.ro/ghid/cost-montaj-aer-conditionat-buzau": "ghidul despre costul montajului în Buzău",
 };
