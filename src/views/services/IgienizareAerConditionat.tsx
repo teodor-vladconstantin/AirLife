@@ -86,6 +86,8 @@ const IgienizareAerConditionat = () => {
   const structuredData = {
     "@context": "https://schema.org",
     "@type": "Service",
+    "@id": "https://airlife.ro/servicii/igienizare-aer-conditionat-buzau#service",
+    "url": "https://airlife.ro/servicii/igienizare-aer-conditionat-buzau",
     "name": "Igienizare Aer Condiționat",
     "serviceType": "Curățare și Dezinfectare Climatizare",
     "provider": { "@id": "https://airlife.ro/#localbusiness" },

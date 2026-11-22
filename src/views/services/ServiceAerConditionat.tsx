@@ -86,6 +86,8 @@ const ServiceAerConditionat = () => {
   const structuredData = {
     "@context": "https://schema.org",
     "@type": "Service",
+    "@id": "https://airlife.ro/servicii/service-aer-conditionat-buzau#service",
+    "url": "https://airlife.ro/servicii/service-aer-conditionat-buzau",
     "name": "Service Aer Condiționat",
     "serviceType": "Reparații și Mentenanță Climatizare",
     "provider": { "@id": "https://airlife.ro/#localbusiness" },
