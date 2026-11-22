@@ -8,7 +8,7 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { BtuTable } from "@/components/BtuTable";
 import SEO from "@/components/SEO";
-import { AREA_SERVED, COVERAGE_FAQ } from "@/data/localSeo";
+import { AREA_SERVED, SERVICE_COVERAGE } from "@/data/localSeo";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
@@ -42,8 +42,8 @@ const FAQS = [
     "a": "Da, prin magazinul nostru online punem la dispoziție console, suporturi cu amortizoare, trasee frigorifice și soluții de drenaj condens."
   },
   {
-    "q": COVERAGE_FAQ.q,
-    "a": COVERAGE_FAQ.a
+    "q": SERVICE_COVERAGE.montaj.q,
+    "a": SERVICE_COVERAGE.montaj.a
   }
 ];
 
@@ -127,7 +127,7 @@ const MontajAerConditionat = () => {
     <div className="min-h-screen flex flex-col">
       <SEO
         title="Montaj Aer Condiționat Buzău | Instalare cu Vidare | AirLife"
-        description="Montaj aer condiționat în Buzău și tot județul. Instalare curată, vidare traseu frigorific cu pompă de vid, materiale de calitate și probă completă de funcționare."
+        description="Montaj aer condiționat în Buzău și tot județul: instalare curată, vidare cu pompă de vid, materiale de calitate și probă completă de funcționare."
         canonical="https://airlife.ro/servicii/montaj-aer-conditionat-buzau"
         structuredData={[structuredData, breadcrumbsData, faqSchema(FAQS)]}
       />
@@ -201,20 +201,6 @@ const MontajAerConditionat = () => {
               <section className="bg-card p-6 md:p-8 rounded-xl border border-border shadow-sm space-y-4">
                 <h2 className="text-2xl font-bold text-foreground">Ce BTU alegi pentru montaj în Buzău</h2>
                 <BtuTable />
-                <h2 className="text-2xl font-bold text-foreground pt-2">De ce depinde prețul montajului</h2>
-                <div className="overflow-x-auto rounded-xl border border-border">
-                  <table className="w-full text-sm">
-                    <caption className="sr-only">Factorii care influențează prețul montajului de aer condiționat</caption>
-                    <thead className="bg-secondary/50 text-left"><tr><th scope="col" className="p-3">Factor</th><th scope="col" className="p-3">Cum influențează prețul final</th></tr></thead>
-                    <tbody>
-                      <tr className="border-t border-border"><th scope="row" className="p-3 text-left font-normal">Capacitatea aparatului (BTU)</th><td className="p-3">Unitățile mai mari cer țevi, console și manoperă mai consistente.</td></tr>
-                      <tr className="border-t border-border"><th scope="row" className="p-3 text-left font-normal">Lungimea traseului frigorific</th><td className="p-3">Metrii în plus față de kitul standard se taxează separat.</td></tr>
-                      <tr className="border-t border-border"><th scope="row" className="p-3 text-left font-normal">Tipul peretelui și etajul</th><td className="p-3">Betonul și lucrul la înălțime cer scule și timp suplimentar.</td></tr>
-                      <tr className="border-t border-border"><th scope="row" className="p-3 text-left font-normal">Poziția unității exterioare</th><td className="p-3">Accesul dificil sau consolele speciale pot adăuga manoperă.</td></tr>
-                    </tbody>
-                  </table>
-                </div>
-                <p className="text-sm text-muted-foreground">Primești prețul exact după ce stabilim detaliile prin telefon sau formularul de mai jos.</p>
               </section>
 
               {/* Cum funcționează procesul */}

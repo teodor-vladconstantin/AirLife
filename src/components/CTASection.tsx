@@ -57,6 +57,7 @@ const CTASection = () => {
             <div>
               <div className="font-bold text-sm mb-0.5">Program Asistență</div>
               <div>Luni – Vineri: 09:00 – 18:00</div>
+              <div>Sâmbătă: 10:00 – 14:00</div>
             </div>
             <div>
               <div className="font-bold text-sm mb-0.5">Livrare Curier</div>

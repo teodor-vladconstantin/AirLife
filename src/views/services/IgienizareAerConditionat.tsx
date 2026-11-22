@@ -7,7 +7,7 @@ import { Link } from "@/lib/router";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import SEO from "@/components/SEO";
-import { AREA_SERVED, COVERAGE_FAQ } from "@/data/localSeo";
+import { AREA_SERVED, SERVICE_COVERAGE } from "@/data/localSeo";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
@@ -37,8 +37,8 @@ const FAQS = [
     "a": "Folosim soluții profesionale biodegradabile avizate pentru climatizare. După clătire și uscare, aparatul este gata de utilizare în deplină siguranță."
   },
   {
-    "q": COVERAGE_FAQ.q,
-    "a": COVERAGE_FAQ.a
+    "q": SERVICE_COVERAGE.igienizare.q,
+    "a": SERVICE_COVERAGE.igienizare.a
   }
 ];
 
@@ -122,7 +122,7 @@ const IgienizareAerConditionat = () => {
     <div className="min-h-screen flex flex-col">
       <SEO
         title="Igienizare Aer Condiționat Buzău | Curățare | AirLife"
-        description="Igienizare aer condiționat în Buzău și județ. Curățare profundă a vaporizatorului, turbinei și tăviței de condens. Elimină mirosurile, bacteriile și mucegaiul."
+        description="Igienizare aer condiționat în Buzău și județ: curățare a vaporizatorului, turbinei și tăviței de condens. Elimină mirosurile și mucegaiul."
         canonical="https://airlife.ro/servicii/igienizare-aer-conditionat-buzau"
         structuredData={[structuredData, breadcrumbsData, faqSchema(FAQS)]}
       />
@@ -165,7 +165,7 @@ const IgienizareAerConditionat = () => {
                   De ce este esențială curățarea periodică a aparatului
                 </h2>
                 <p className="text-muted-foreground leading-relaxed mb-4">
-                  În timpul funcționării pe modul de răcire, vaporizatorul unității interne acumulează condens continuu. Umiditatea combinată cu particulele fine de praf creează mediul optim pentru dezvoltarea coloniilor de mucegai și bacterii (inclusiv specia Legionella), care sunt recirculate în încăpere de fiecare dată când pornești aparatul.
+                  În timpul funcționării pe modul de răcire, vaporizatorul unității interne acumulează condens continuu. Umiditatea combinată cu particulele fine de praf creează mediul optim pentru dezvoltarea coloniilor de mucegai și bacterii, care sunt recirculate în încăpere de fiecare dată când pornești aparatul.
                 </p>
                 <div className="grid sm:grid-cols-2 gap-4 mt-4">
                   <div className="p-4 rounded-lg bg-secondary/50 border border-border/50 text-sm">

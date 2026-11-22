@@ -94,7 +94,7 @@ const GhidBtu = ({ products = [] }: { products?: BtuProduct[] }) => {
     <div className="min-h-screen flex flex-col">
       <SEO
         title="Ce BTU ai nevoie? Calculator pe volum (mc) | AirLife"
-        description="Calculator BTU pentru aer condiționat, pe volum: 9.000 BTU pentru până la 65 mc, 12.000 pentru 65–85 mc, 18.000 pentru 85–130 mc. Ține cont de soare și locuitori."
+        description="Calculator BTU pentru aer condiționat, pe volum: 9.000 BTU până la 65 mc, 12.000 la 65–85 mc, 18.000 la 85–130 mc. Ține cont de soare și persoane."
         canonical="https://airlife.ro/ghid/ce-btu-aer-conditionat-buzau"
         ogType="article"
         structuredData={[structuredData, faqSchema(FAQS)]}
