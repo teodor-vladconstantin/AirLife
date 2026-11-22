@@ -36,7 +36,7 @@ const GhidCostMontaj = () => {
   const structuredData = {
     "@context": "https://schema.org",
     "@type": "Article",
-    "headline": "Cât Costă Montajul unui Aer Condiționat: Ghid Complet de Prețuri și Greșeli de Evitat",
+    "headline": "Cât costă montajul unui aer condiționat: ce influențează prețul și ce greșeli eviți",
     "description":
       "Află ce include o instalare standard de aer condiționat, care sunt costurile suplimentare justificate și de ce vidarea cu pompă este obligatorie.",
     "author": {
@@ -59,7 +59,7 @@ const GhidCostMontaj = () => {
   return (
     <div className="min-h-screen flex flex-col">
       <SEO
-        title="Cât Costă Montajul unui Aer Condiționat | Ghid AirLife"
+        title="Cât costă montajul unui aer condiționat | Ghid AirLife"
         description="Ghid pentru montaj aer condiționat: ce include un montaj standard, ce factori cresc prețul (traseu, înălțime, carotare) și cum eviți greșelile."
         canonical="https://airlife.ro/ghid/cost-montaj-aer-conditionat-buzau"
         structuredData={[structuredData, faqSchema(FAQS)]}
@@ -92,7 +92,7 @@ const GhidCostMontaj = () => {
               <BookOpen className="w-3.5 h-3.5" /> Ghid
             </div>
             <h1 className="text-3xl md:text-5xl font-bold tracking-tight mb-4 text-foreground">
-              Cât Costă Montajul unui Aer Condiționat? Ghid Transparent de Prețuri
+              Cât costă montajul unui aer condiționat? Ce influențează prețul
             </h1>
             <div className="flex items-center gap-4 text-xs text-muted-foreground">
               <span>Echipa Tehnică AirLife</span>

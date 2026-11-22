@@ -21,6 +21,8 @@ Operator: TETA ABC SRL, CUI 22404824. Contact: contact@airlife.ro, +40 722 15 35
 - Igienizare aer condiționat: curățare vaporizator, turbină, tăviță de condens, tratament biocid. Durează 45–75 de minute per aparat. https://airlife.ro/servicii/igienizare-aer-conditionat-buzau
 - Service aer condiționat: diagnoză, pierderi de freon, completare agent frigorific, înlocuire condensatori, scurgeri de apă, erori electronice. https://airlife.ro/servicii/service-aer-conditionat-buzau
 - Zona de intervenție: municipiul Buzău (toate cartierele) și tot județul Buzău. Pagina locală: https://airlife.ro/aer-conditionat-buzau
+- Toate serviciile: https://airlife.ro/servicii
+- Despre AirLife (date firmă TETA ABC SRL, CUI 22404824, zonă de servicii): https://airlife.ro/despre-noi
 
 ## Categorii
 - Aer condiționat inverter cu Wi-Fi (split, 9000–21000 BTU): https://airlife.ro/aer-conditionat

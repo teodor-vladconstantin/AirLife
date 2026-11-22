@@ -31,7 +31,7 @@ const AboutUs = () => {
         <div className="container mx-auto px-4 max-w-4xl">
           <h1 className="text-4xl font-bold mb-8 text-center animate-in fade-in duration-700">Despre AirLife</h1>
           <p className="text-xl text-center text-muted-foreground mb-12 max-w-2xl mx-auto animate-in fade-in duration-700">
-            Soluții HVAC eco-friendly pentru un viitor mai curat și mai sănătos.
+            AirLife, operat de TETA ABC SRL, este un magazin online de produse HVAC cu livrare în toată țara și oferă montaj, igienizare și service de aer condiționat în Buzău și în județ.
           </p>
 
           {/* Mission Card */}
@@ -39,7 +39,7 @@ const AboutUs = () => {
             <CardHeader>
               <CardTitle className="flex items-center gap-2">
                 <Target className="h-5 w-5 text-primary" />
-                Misiunea Noastră
+                Misiunea noastră
               </CardTitle>
             </CardHeader>
             <CardContent className="space-y-4 text-muted-foreground">
@@ -61,7 +61,7 @@ const AboutUs = () => {
             <CardHeader>
               <CardTitle className="flex items-center gap-2">
                 <Eye className="h-5 w-5 text-primary" />
-                Viziunea Noastră
+                Viziunea noastră
               </CardTitle>
             </CardHeader>
             <CardContent className="space-y-4 text-muted-foreground">
@@ -110,7 +110,7 @@ const AboutUs = () => {
               <CardHeader>
                 <CardTitle className="flex items-center gap-2 text-lg">
                   <Users className="h-5 w-5 text-primary" />
-                  Servicii Pentru Clienți
+                  Servicii pentru clienți
                 </CardTitle>
               </CardHeader>
               <CardContent className="text-muted-foreground">
@@ -142,7 +142,7 @@ const AboutUs = () => {
             <CardHeader>
               <CardTitle className="flex items-center gap-2">
                 <HeartHandshake className="h-5 w-5 text-primary" />
-                De Ce AirLife?
+                De ce AirLife?
               </CardTitle>
             </CardHeader>
             <CardContent className="space-y-4 text-muted-foreground">

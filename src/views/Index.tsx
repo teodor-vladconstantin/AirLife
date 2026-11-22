@@ -33,7 +33,7 @@ const Index = ({ categories = [] }: { categories?: CategorySummary[] }) => {
     <div className="min-h-screen flex flex-col">
       <SEO
         title="AirLife Buzău | Magazin HVAC și Servicii Aer Condiționat"
-        description="Montaj, igienizare și service aer condiționat în Buzău și tot județul, cu echipa AirLife sau parteneri. Magazin online HVAC cu livrare în toată țara."
+        description="Magazin online HVAC cu livrare în toată țara: aer condiționat, dezumidificatoare, ventilatoare și accesorii. Montaj, igienizare și service în Buzău."
         canonical="https://airlife.ro/"
         structuredData={homeStructuredData}
       />
