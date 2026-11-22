@@ -169,30 +169,30 @@ const MontajAerConditionat = () => {
                   <Wrench className="w-6 h-6 text-primary" />
                   Ce include serviciul standard de montaj
                 </h2>
-                <div className="space-y-3 text-muted-foreground">
-                  <div className="flex items-start gap-3">
-                    <CheckCircle2 className="w-5 h-5 text-primary flex-shrink-0 mt-0.5" />
-                    <span><strong>Amplasare și fixare unitate internă</strong> pe perete conform cerințelor de circulație a aerului.</span>
+                <div className="space-y-4 text-muted-foreground">
+                  <div>
+                    <h3 className="text-base font-semibold text-foreground mb-1">Cum se montează unitatea interioară?</h3>
+                    <p>Amplasăm și fixăm unitatea interioară pe perete, conform cerințelor de circulație a aerului.</p>
                   </div>
-                  <div className="flex items-start gap-3">
-                    <CheckCircle2 className="w-5 h-5 text-primary flex-shrink-0 mt-0.5" />
-                    <span><strong>O perforare în perete exterior</strong> (cărămidă, BCA sau beton uzual) pentru trecerea traseului frigorific.</span>
+                  <div>
+                    <h3 className="text-base font-semibold text-foreground mb-1">Ce perforări se fac în perete?</h3>
+                    <p>O perforare în peretele exterior (cărămidă, BCA sau beton uzual) pentru trecerea traseului frigorific.</p>
                   </div>
-                  <div className="flex items-start gap-3">
-                    <CheckCircle2 className="w-5 h-5 text-primary flex-shrink-0 mt-0.5" />
-                    <span><strong>Instalare consolă suport unitate externă</strong> și prindere rigidă pe peretele exterior în loc accesibil.</span>
+                  <div>
+                    <h3 className="text-base font-semibold text-foreground mb-1">Cum se fixează unitatea exterioară?</h3>
+                    <p>Instalăm consola suport și prindem rigid unitatea pe peretele exterior, într-un loc accesibil.</p>
                   </div>
-                  <div className="flex items-start gap-3">
-                    <CheckCircle2 className="w-5 h-5 text-primary flex-shrink-0 mt-0.5" />
-                    <span><strong>Conectare traseu frigorific și drenaj condens</strong> izolate termic corespunzător.</span>
+                  <div>
+                    <h3 className="text-base font-semibold text-foreground mb-1">Cum se conectează traseul frigorific și drenajul?</h3>
+                    <p>Conectăm traseul frigorific și drenajul de condens, izolate termic corespunzător.</p>
                   </div>
-                  <div className="flex items-start gap-3">
-                    <CheckCircle2 className="w-5 h-5 text-primary flex-shrink-0 mt-0.5" />
-                    <span><strong>Vidarea obligatorie a instalației</strong> cu pompă de vid pentru eliminarea umidității și a aerului rezidual.</span>
+                  <div>
+                    <h3 className="text-base font-semibold text-foreground mb-1">De ce se face vidarea instalației?</h3>
+                    <p>Vidarea cu pompă de vid este obligatorie: elimină umiditatea și aerul rezidual din instalație.</p>
                   </div>
-                  <div className="flex items-start gap-3">
-                    <CheckCircle2 className="w-5 h-5 text-primary flex-shrink-0 mt-0.5" />
-                    <span><strong>Probe complete de funcționare</strong> (răcire / încălzire), verificare etanșeitate și instruire client pentru utilizare.</span>
+                  <div>
+                    <h3 className="text-base font-semibold text-foreground mb-1">Ce probe se fac la final?</h3>
+                    <p>Probe complete de funcționare (răcire și încălzire), verificarea etanșeității și instruirea clientului pentru utilizare.</p>
                   </div>
                 </div>
               </section>

@@ -164,26 +164,26 @@ const ServiceAerConditionat = () => {
                   <AlertOctagon className="w-6 h-6 text-primary" />
                   Defecțiuni frecvente pe care le remediem
                 </h2>
-                <div className="space-y-3 text-muted-foreground">
-                  <div className="flex items-start gap-3">
-                    <CheckCircle2 className="w-5 h-5 text-primary flex-shrink-0 mt-0.5" />
-                    <span><strong>Aparatul suflă aer, dar nu răcește:</strong> indică de regulă pierdere de freon, condensator de pornire defect sau blocaj compresor.</span>
+                <div className="space-y-4 text-muted-foreground">
+                  <div>
+                    <h3 className="text-base font-semibold text-foreground mb-1">De ce aparatul suflă aer, dar nu răcește?</h3>
+                    <p>De regulă din cauza unei pierderi de freon, a unui condensator de pornire defect sau a unui compresor blocat.</p>
                   </div>
-                  <div className="flex items-start gap-3">
-                    <CheckCircle2 className="w-5 h-5 text-primary flex-shrink-0 mt-0.5" />
-                    <span><strong>Picură sau curge apă din unitatea interioară:</strong> cauzată de obstrucția furtunului de evacuare condens, tăviță fisurată sau montaj fără pantă adecvată.</span>
+                  <div>
+                    <h3 className="text-base font-semibold text-foreground mb-1">De ce picură sau curge apă din unitatea interioară?</h3>
+                    <p>Cauzele frecvente sunt furtunul de evacuare a condensului înfundat, tăvița fisurată sau un montaj fără pantă adecvată.</p>
                   </div>
-                  <div className="flex items-start gap-3">
-                    <CheckCircle2 className="w-5 h-5 text-primary flex-shrink-0 mt-0.5" />
-                    <span><strong>Coduri de eroare pe afișaj (ex. E1, E4, EC, F0):</strong> citim și interpretăm codurile de eroare specifice fiecărui producător pentru depanarea plăcii electronice sau senzorilor.</span>
+                  <div>
+                    <h3 className="text-base font-semibold text-foreground mb-1">Ce înseamnă codurile de eroare de pe afișaj (E1, E4, EC, F0)?</h3>
+                    <p>Codurile diferă de la un producător la altul. Le citim și le interpretăm pentru depanarea plăcii electronice sau a senzorilor.</p>
                   </div>
-                  <div className="flex items-start gap-3">
-                    <CheckCircle2 className="w-5 h-5 text-primary flex-shrink-0 mt-0.5" />
-                    <span><strong>Vibrații sau zgomote puternice la exterior:</strong> elice deformată, rulmenți uzați sau lipsa amortizoarelor de vibrații între unitate și console.</span>
+                  <div>
+                    <h3 className="text-base font-semibold text-foreground mb-1">De ce face unitatea exterioară vibrații sau zgomote puternice?</h3>
+                    <p>Din cauza unei elice deformate, a unor rulmenți uzați sau a lipsei amortizoarelor de vibrații dintre unitate și console.</p>
                   </div>
-                  <div className="flex items-start gap-3">
-                    <CheckCircle2 className="w-5 h-5 text-primary flex-shrink-0 mt-0.5" />
-                    <span><strong>Gheață formată pe conductele exterioare sau pe vaporizator:</strong> semn clar de scădere a presiunii agentului frigorific sau debit de aer strangulat.</span>
+                  <div>
+                    <h3 className="text-base font-semibold text-foreground mb-1">Ce înseamnă gheața de pe conducte sau de pe vaporizator?</h3>
+                    <p>E un semn clar de scădere a presiunii agentului frigorific sau de debit de aer strangulat.</p>
                   </div>
                 </div>
               </section>
