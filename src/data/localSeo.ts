@@ -30,7 +30,7 @@ export const SERVICE_COVERAGE = {
     a: "Da. Igienizarea se face la domiciliu sau la birou, în municipiul Buzău și în județ. Un aparat durează între 45 și 75 de minute, iar unitatea interioară este protejată cu husă ca să nu se murdărească pereții.",
   },
   service: {
-    q: "Intervenți și în afara municipiului Buzău?",
+    q: "Interveniți și în afara municipiului Buzău?",
     a: "Da, intervenim în tot județul Buzău, inclusiv Râmnicu Sărat, Nehoiu și Pogoanele. Descrie defecțiunea prin telefon sau formular, iar noi stabilim dacă e nevoie de o deplasare pentru constatare.",
   },
 };

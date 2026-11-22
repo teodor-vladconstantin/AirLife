@@ -128,7 +128,7 @@ const Warranty = () => {
             {/* Procedura în caz de defecțiune */}
             <Card className="border-border">
               <CardContent className="p-6 md:p-8 space-y-4">
-                <h2 className="text-2xl font-bold text-foreground">4. Cum Soliciți Intervenția în Garanție</h2>
+                <h2 className="text-2xl font-bold text-foreground">4. Cum soliciți intervenția în garanție</h2>
                 <div className="space-y-3 text-sm text-muted-foreground leading-relaxed">
                   <p>În cazul apariției unei disfuncționalități în perioada de garanție:</p>
                   <ol className="list-decimal list-inside space-y-2 text-xs">

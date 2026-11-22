@@ -6,7 +6,6 @@ import { useTurnstile } from "@/components/Turnstile";
 import { Link } from "@/lib/router";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import { BtuTable } from "@/components/BtuTable";
 import SEO from "@/components/SEO";
 import { AREA_SERVED, SERVICE_COVERAGE } from "@/data/localSeo";
 import { Button } from "@/components/ui/button";
@@ -189,8 +188,8 @@ const MontajAerConditionat = () => {
                     <p>Conectăm traseul frigorific și drenajul de condens, izolate termic corespunzător.</p>
                   </div>
                   <div>
-                    <h3 className="text-base font-semibold text-foreground mb-1">De ce se face vidarea instalației?</h3>
-                    <p>Vidarea cu pompă de vid este obligatorie: elimină umiditatea și aerul rezidual din instalație.</p>
+                    <h3 className="text-base font-semibold text-foreground mb-1">Ce se face înainte de punerea în funcțiune?</h3>
+                    <p>Vidăm instalația cu pompă de vid, ca să eliminăm umiditatea și aerul rezidual din traseu. Motivele sunt explicate în întrebările frecvente.</p>
                   </div>
                   <div>
                     <h3 className="text-base font-semibold text-foreground mb-1">Ce probe se fac la final?</h3>
@@ -202,7 +201,10 @@ const MontajAerConditionat = () => {
               {/* Tabele pentru motoare de răspuns (AEO/GEO) */}
               <section className="bg-card p-6 md:p-8 rounded-xl border border-border shadow-sm space-y-4">
                 <h2 className="text-2xl font-bold text-foreground">Ce BTU alegi pentru montaj în Buzău</h2>
-                <BtuTable />
+                <p className="text-muted-foreground">
+                  Capacitatea se alege după volumul camerei, în metri cubi: până la 65 mc ajung 9.000 BTU, între 65 și 85 mc 12.000 BTU, între 85 și 130 mc 18.000 BTU.
+                  Vezi tabelul complet și calculatorul în <Link to="/ghid/ce-btu-aer-conditionat-buzau" className="text-primary font-semibold hover:underline">ghidul despre BTU</Link>.
+                </p>
               </section>
 
               {/* Cum funcționează procesul */}
@@ -237,7 +239,7 @@ const MontajAerConditionat = () => {
                   Ce factori influențează costul montajului
                 </h2>
                 <p className="text-muted-foreground mb-4">
-                  Suntem 100% transparenți cu privire la costuri. O instalare standard acoperă majoritatea apartamentelor de bloc, însă costul poate varia în funcție de:
+                  Prețul final depinde de aparat și de instalare. O instalare standard acoperă majoritatea apartamentelor de bloc, însă costul poate varia în funcție de:
                 </p>
                 <ul className="list-disc list-inside space-y-2 text-muted-foreground">
                   <li><strong>Capacitatea aparatului:</strong> 9.000 – 12.000 BTU vs. 18.000 – 24.000 BTU (care necesită traseu frigorific cu diametru mai mare).</li>
