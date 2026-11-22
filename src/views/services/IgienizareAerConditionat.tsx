@@ -34,7 +34,7 @@ const FAQS = [
   },
   {
     "q": "Soluțiile folosite sunt toxice pentru animale sau copii?",
-    "a": "Folosim soluții profesionale biodegradabile avizate pentru climatizare. După clătire și uscare, aparatul este gata de utilizare în deplină siguranță."
+    "a": "Folosim soluții profesionale, biodegradabile, destinate curățării aparatelor de climatizare. După clătire și uscare, aparatul este gata de utilizare în deplină siguranță."
   },
   {
     "q": SERVICE_COVERAGE.igienizare.q,
@@ -189,7 +189,7 @@ const IgienizareAerConditionat = () => {
                       <li>Aer sănătos și curat pentru întreaga familie</li>
                       <li>Eficiență termică restabilită</li>
                       <li>Reducerea zgomotului produs de turbină</li>
-                      <li>Durată de viață prelungită a compresorului</li>
+                      <li>Efort mai mic pentru compresor</li>
                     </ul>
                   </div>
                 </div>

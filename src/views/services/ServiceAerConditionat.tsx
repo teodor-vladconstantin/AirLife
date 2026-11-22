@@ -229,7 +229,7 @@ const ServiceAerConditionat = () => {
                   Sistemul frigorific al unui aer condiționat este un circuit închis ermetic. Freonul nu „se consumă” și nu „expiră”. Dacă aparatul tău nu mai are agent frigorific, înseamnă că există o neetanșeitate sau o pierdere.
                 </p>
                 <p className="text-muted-foreground leading-relaxed">
-                  Completarea cu freon fără remedierea pierderii duce inevitabil la o nouă descărcare în câteva săptămâni. De aceea, la AirLife identificăm și reetanșăm întotdeauna traseul înainte de vidare și recântărirea agentului frigorific conform specificațiilor de pe eticheta aparatului.
+                  Completarea cu freon fără remedierea pierderii duce, de regulă, la o nouă descărcare. De aceea, la AirLife identificăm și reetanșăm întotdeauna traseul înainte de vidare și recântărirea agentului frigorific conform specificațiilor de pe eticheta aparatului.
                 </p>
               </section>
 

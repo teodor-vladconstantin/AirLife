@@ -1,4 +1,5 @@
 // Server-side data loaders for the App Router pages (no browser APIs, no persisted session).
+import { BLOG_CANONICAL } from "@/data/localSeo";
 import { createClient } from "@supabase/supabase-js";
 import type { Database, Tables } from "@/integrations/supabase/types";
 import { INITIAL_PRODUCTS, StaticProduct } from "@/data/initialProducts";
@@ -93,7 +94,7 @@ export async function loadAllProducts() {
 
 export async function loadPosts() {
   const { data } = await db().from("blog_posts").select("id,slug,title,excerpt,cover_image,category,published_at").eq("status", "published").order("published_at", { ascending: false }).then((r) => r, () => ({ data: null }));
-  return data ?? [];
+  return (data ?? []).filter((p) => !BLOG_CANONICAL[p.slug]);
 }
 
 export async function loadPost(slug: string) {
@@ -103,7 +104,7 @@ export async function loadPost(slug: string) {
   const { data: related } = post.category
     ? await client.from("blog_posts").select("slug,title").eq("status", "published").eq("category", post.category).neq("slug", slug).limit(3)
     : { data: [] };
-  return { post, related: related ?? [] };
+  return { post, related: (related ?? []).filter((r) => !BLOG_CANONICAL[r.slug]) };
 }
 
 // Home grid + sitemap: only categories that really have products to show.
