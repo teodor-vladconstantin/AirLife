@@ -38,3 +38,11 @@ export const SERVICE_COVERAGE = {
 // WhatsApp uses the same mobile number as the phone line. wa.me wants digits only, with country code.
 export const WHATSAPP_NUMBER = PHONE_TEL.replace(/\D/g, "");
 export const whatsappLink = (text: string) => `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(text)}`;
+
+// AirLife holds an F-gas certificate (handling of fluorinated refrigerants). The certificate number is not published here.
+export const FGAS_TEXT = "AirLife deține atestat F-gaz pentru manipularea gazelor fluorurate (agenți frigorifici).";
+
+// Blog posts that cover the same query as a local guide: the guide is the main page, so the post points its canonical there.
+export const BLOG_CANONICAL: Record<string, string> = {
+  "ce-btu-sa-alegi-pentru-aer-conditionat": "https://airlife.ro/ghid/ce-btu-aer-conditionat-buzau",
+};
