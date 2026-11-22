@@ -106,6 +106,7 @@ const AerConditionatBuzau = () => {
           <section className="bg-card p-6 md:p-8 rounded-xl border border-border shadow-sm">
             <h2 className="text-2xl font-bold mb-3 text-foreground">Unde intervenim în județul Buzău</h2>
             <p className="text-muted-foreground mb-4">
+              AirLife este din Mărăcineni, județul Buzău, și deservește municipiul Buzău și tot județul. 
               În oraș venim în toate cartierele: Micro 3, Micro 5, Micro 14, Dorobanți, Centru, Broșteni, Orizont. În județ ajungem în orașele și comunele de mai jos și în localitățile din jurul lor.
             </p>
             <ul className="flex flex-wrap gap-2">

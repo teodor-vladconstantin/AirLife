@@ -39,20 +39,12 @@ const GhidCostMontaj = () => {
     "headline": "Cât costă montajul unui aer condiționat: ce influențează prețul și ce greșeli eviți",
     "description":
       "Află ce include o instalare standard de aer condiționat, care sunt costurile suplimentare justificate și de ce vidarea cu pompă este obligatorie.",
-    "author": {
-      "@type": "Organization",
-      "name": "AirLife"
-    },
-    "publisher": {
-      "@type": "Organization",
-      "name": "AirLife",
-      "logo": {
-        "@type": "ImageObject",
-        "url": "https://airlife.ro/logo.png"
-      }
-    },
+    "author": { "@id": "https://airlife.ro/#organization" },
+    "publisher": { "@id": "https://airlife.ro/#organization" },
+    "image": "https://airlife.ro/og-image.jpg",
+    "inLanguage": "ro-RO",
     "datePublished": "2025-02-05",
-    "dateModified": "2026-10-27",
+    "dateModified": "2026-11-22",
     "mainEntityOfPage": "https://airlife.ro/ghid/cost-montaj-aer-conditionat-buzau"
   };
 
@@ -95,7 +87,9 @@ const GhidCostMontaj = () => {
               Cât costă montajul unui aer condiționat? Ce influențează prețul
             </h1>
             <div className="flex items-center gap-4 text-xs text-muted-foreground">
-              <span>Echipa Tehnică AirLife</span>
+              <span>Echipa AirLife</span>
+              <span>•</span>
+              <span>Actualizat <time dateTime="2026-11-22">22 noiembrie 2026</time></span>
               <span>•</span>
               <span className="flex items-center gap-1">
                 <Clock className="w-3 h-3" /> Timp de citire: 7 minute
@@ -105,8 +99,7 @@ const GhidCostMontaj = () => {
 
           <div className="space-y-8 text-foreground/90 leading-relaxed text-base">
             <p className="text-lg text-muted-foreground font-normal">
-              Alegerea unui aparat de aer condiționat eficient este doar prima jumătate a ecuației de confort. A doua jumătate — la fel de importantă — o reprezintă calitatea montajului. Un montaj executat neglijent poate scurta viața compresorului cu ani buni și poate anula garanția producătorului.
-            </p>
+              Prețul montajului depinde de capacitatea aparatului, de lungimea traseului frigorific, de tipul peretelui și de locul unității exterioare. Un montaj standard include fixarea unităților, un traseu scurt, vidarea cu pompă de vid și proba de funcționare, și durează de obicei între 2 și 3,5 ore. Un montaj neglijent poate scurta viața compresorului și poate anula garanția producătorului.</p>
 
             <Card className="border-border">
               <CardContent className="p-6 md:p-8 space-y-4">
@@ -173,7 +166,7 @@ const GhidCostMontaj = () => {
                       <AlertOctagon className="w-4 h-4" /> Refuză montajul dacă instalatorul nu folosește pompa de vid!
                     </strong>
                     <p className="text-xs text-muted-foreground">
-                      Unii „meșteri” grăbiți aleg metoda greșită a „purjării” freonului (deschid parțial robinetul pentru a împinge aerul cu gaz). Această practică este interzisă de legislația de mediu și distruge aparatul: umiditatea rămasă reacționează cu uleiul sintetic POE din compresor, producând acid clorhidric/fluorhidric care arde bobinajul motorului în 1-2 ani.
+                      Unii „meșteri” grăbiți aleg metoda greșită a „purjării” freonului (deschid parțial robinetul pentru a împinge aerul cu gaz). Această practică lasă aer și umiditate în circuit și eliberează agent frigorific în atmosferă. Umiditatea rămasă poate reacționa cu uleiul sintetic POE din compresor și forma compuși acizi, care îi pot scurta durata de viață.
                     </p>
                   </div>
                 </div>
@@ -181,7 +174,7 @@ const GhidCostMontaj = () => {
             </Card>
 
             <FaqSection title="Întrebări frecvente" faq={FAQS} />
-            <p className="text-sm text-muted-foreground">Montăm în municipiul Buzău și în tot județul. <Link to="/aer-conditionat-buzau" className="text-primary font-semibold hover:underline">Vezi serviciile în Buzău</Link>.</p>
+            <p className="text-sm text-muted-foreground"><Link to="/aer-conditionat-buzau" className="text-primary font-semibold hover:underline">Vezi serviciile AirLife în Buzău</Link>.</p>
 
             {/* CTA Box */}
             <div className="bg-primary/5 border border-primary/20 rounded-2xl p-6 md:p-8 flex flex-col sm:flex-row items-center justify-between gap-6 my-10">

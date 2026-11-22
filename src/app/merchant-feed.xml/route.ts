@@ -8,6 +8,13 @@ export const revalidate = 3600;
 
 const SITE = "https://airlife.ro";
 const esc = (s: string) => s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
+// Google product taxonomy, only for categories where the path is certain; the others are left out rather than guessed.
+const GOOGLE_CATEGORY: Record<string, string> = {
+  "Aer Condiționat": "Home & Garden > Household Appliances > Climate Control Appliances > Air Conditioners",
+  "Aer Condiționat fără Unitate Exterioară": "Home & Garden > Household Appliances > Climate Control Appliances > Air Conditioners",
+  "Dezumidificatoare": "Home & Garden > Household Appliances > Climate Control Appliances > Dehumidifiers",
+  "Purificatoare Aer": "Home & Garden > Household Appliances > Air Purifiers",
+};
 const abs = (u: string) => (u.startsWith("http") ? u : SITE + u);
 
 export async function GET() {
@@ -22,7 +29,7 @@ export async function GET() {
 <link>${SITE}/products/${p.slug}</link><g:image_link>${esc(abs(p.image_url!))}</g:image_link>${extra.map((g) => `<g:additional_image_link>${esc(abs(g))}</g:additional_image_link>`).join("")}
 <g:availability>${(p.stock ?? 0) > 0 ? "in_stock" : "out_of_stock"}</g:availability><g:price>${list.toFixed(2)} RON</g:price>${compare_at ? `<g:sale_price>${price.toFixed(2)} RON</g:sale_price>` : ""}
 <g:condition>new</g:condition>${p.brand ? `<g:brand>${esc(p.brand)}</g:brand>` : ""}${gtin ? `<g:gtin>${gtin}</g:gtin>` : ""}${p.sku ? `<g:mpn>${esc(p.sku)}</g:mpn>` : ""}<g:identifier_exists>${p.brand && (gtin || p.sku) ? "yes" : "no"}</g:identifier_exists>
-<g:product_type>${esc(p.category)}</g:product_type>
+<g:product_type>${esc(p.category)}</g:product_type>${GOOGLE_CATEGORY[p.category] ? `<g:google_product_category>${esc(GOOGLE_CATEGORY[p.category])}</g:google_product_category>` : ""}
 </item>`;
   });
   const xml = `<?xml version="1.0" encoding="UTF-8"?>

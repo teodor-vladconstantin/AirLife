@@ -39,7 +39,7 @@ export const HomeServicesSection = () => {
             <MapPin className="w-3.5 h-3.5" /> Servicii în Buzău și tot județul
           </div>
           <h2 className="text-3xl md:text-5xl font-bold mb-4 text-foreground">
-            Montaj &amp; Mentenanță Climatizare
+            Montaj și mentenanță climatizare
           </h2>
           <p className="text-base md:text-lg text-muted-foreground max-w-2xl mx-auto">
             Ai nevoie de montaj, igienizare profesională sau reparație pentru aparatul tău de aer condiționat? Echipa AirLife intervine în municipiul Buzău și în tot județul.

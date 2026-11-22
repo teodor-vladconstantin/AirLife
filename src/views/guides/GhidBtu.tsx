@@ -86,7 +86,7 @@ const GhidBtu = ({ products = [] }: { products?: BtuProduct[] }) => {
     headline: "Ce BTU ai nevoie pentru aerul condiționat: calculator pe volum (metri cubi)",
     description: "Calculator BTU pe volum (metri cubi): află ce putere de aer condiționat îți trebuie pentru camera ta (9.000, 12.000, 18.000 sau 24.000 BTU).",
     author: authorSchema(), inLanguage: "ro-RO",
-    publisher: { "@type": "Organization", name: "AirLife", logo: { "@type": "ImageObject", url: "https://airlife.ro/logo.png" } },
+    publisher: { "@id": "https://airlife.ro/#organization" }, image: "https://airlife.ro/og-image.jpg",
     datePublished: "2026-11-20", dateModified: "2026-11-20", mainEntityOfPage: "https://airlife.ro/ghid/ce-btu-aer-conditionat-buzau",
   };
 
@@ -136,6 +136,11 @@ const GhidBtu = ({ products = [] }: { products?: BtuProduct[] }) => {
               <div className="mt-6 rounded-xl bg-primary/5 border border-primary/20 p-4" aria-live="polite">
                 <p className="text-sm text-muted-foreground">Volum: <strong>{r.volume.toLocaleString("ro-RO", { maximumFractionDigits: 1 })} mc</strong> • Necesar estimat: <strong>{r.btu.toLocaleString("ro-RO")} BTU</strong></p>
                 <p className="text-xl font-bold text-foreground">Recomandare: aparat de {r.size.toLocaleString("ro-RO")} BTU</p>
+                {r.size < r.btu && (
+                  <p className="text-sm text-muted-foreground mt-1">
+                    Treapta de {r.size.toLocaleString("ro-RO")} BTU acoperă necesarul cu o toleranță de 5%. Dacă ai ferestre mari spre sud sau vest, ultimul etaj sau mansardă, alege treapta următoare{SIZES[SIZES.indexOf(r.size) + 1] ? ` (${SIZES[SIZES.indexOf(r.size) + 1].toLocaleString("ro-RO")} BTU)` : ""}: un aparat inverter lucrează bine ușor supradimensionat.
+                  </p>
+                )}
               </div>
               {recommended.length > 0 && (
                 <div className="mt-6">

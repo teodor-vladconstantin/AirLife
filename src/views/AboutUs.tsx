@@ -35,6 +35,8 @@ const AboutUs = () => {
             AirLife, operat de TETA ABC SRL, este un magazin online de produse HVAC cu livrare în toată țara și oferă montaj, igienizare și service de aer condiționat în Buzău și în județ.
           </p>
 
+          <h2 className="sr-only">Misiune și viziune</h2>
+
           {/* Mission Card */}
           <Card className="mb-6 animate-in fade-in duration-700">
             <CardHeader>
@@ -75,7 +77,7 @@ const AboutUs = () => {
           </Card>
 
           {/* Values Section */}
-          <h2 className="text-3xl font-bold mb-6 text-center animate-in fade-in duration-700">Valorile Noastre</h2>
+          <h2 className="text-3xl font-bold mb-6 text-center animate-in fade-in duration-700">Valorile noastre</h2>
           <div className="grid md:grid-cols-2 gap-6 mb-8">
             <Card className="animate-in fade-in duration-700 transition-opacity will-change-opacity hover:opacity-90">
               <CardHeader>
@@ -186,6 +188,7 @@ const AboutUs = () => {
                     <tr><th scope="row" className="p-3 text-left font-medium w-1/3">Denumire</th><td className="p-3 text-muted-foreground">{company.legalName} (brand {company.brand})</td></tr>
                     <tr className="border-t border-border"><th scope="row" className="p-3 text-left font-medium">CUI</th><td className="p-3 text-muted-foreground">{company.cui}</td></tr>
                     <tr className="border-t border-border"><th scope="row" className="p-3 text-left font-medium">Nr. Reg. Com.</th><td className="p-3 text-muted-foreground">{company.regCom}</td></tr>
+                    <tr className="border-t border-border"><th scope="row" className="p-3 text-left font-medium">Localitate</th><td className="p-3 text-muted-foreground">Mărăcineni, județul Buzău</td></tr>
                     <tr className="border-t border-border"><th scope="row" className="p-3 text-left font-medium">Atestări</th><td className="p-3 text-muted-foreground">{FGAS_TEXT}</td></tr>
                     <tr className="border-t border-border"><th scope="row" className="p-3 text-left font-medium">Zonă de servicii</th><td className="p-3 text-muted-foreground">Municipiul Buzău și județul Buzău; produse cu livrare în toată țara</td></tr>
                   </tbody>
@@ -196,7 +199,7 @@ const AboutUs = () => {
 
           {/* Call to Action */}
           <div className="text-center bg-gradient-to-r from-primary/10 to-secondary/30 rounded-lg p-8 animate-in fade-in duration-700">
-            <h3 className="text-2xl font-bold mb-4">Gata să Începem?</h3>
+            <h3 className="text-2xl font-bold mb-4">Gata să începem?</h3>
             <p className="text-muted-foreground mb-6 max-w-2xl mx-auto">
               Descoperă gama completă de produse HVAC eco-friendly și alege soluția perfectă pentru
               căminul sau biroul tău.

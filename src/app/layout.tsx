@@ -19,7 +19,7 @@ const orgSchema = {
   "@graph": [
     {
       "@type": "Organization", "@id": "https://airlife.ro/#organization", name: "AirLife", legalName: company.legalName, taxID: company.cui, url: "https://airlife.ro/", logo: "https://airlife.ro/logo.png", sameAs: SOCIAL.map((s) => s.url),
-      contactPoint: { "@type": "ContactPoint", contactType: "customer service", areaServed: "RO", availableLanguage: ["Romanian"] },
+      contactPoint: { "@type": "ContactPoint", contactType: "customer service", telephone: "+40722153525", email: "contact@airlife.ro", url: "https://airlife.ro/contact", areaServed: "RO", availableLanguage: ["Romanian"] },
     },
     {
       "@type": "HVACBusiness", "@id": "https://airlife.ro/#localbusiness", name: "AirLife", logo: "https://airlife.ro/logo.png", parentOrganization: { "@id": "https://airlife.ro/#organization" },
