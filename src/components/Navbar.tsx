@@ -211,7 +211,7 @@ const Navbar = () => {
                 </DropdownMenuContent>
               </DropdownMenu>
             ) : (
-              <Link to="/auth" className="hidden sm:inline-block">
+              <Link to="/auth" rel="nofollow" className="hidden sm:inline-block">
                 <Button size="sm">Conectare</Button>
               </Link>
             )}
@@ -286,7 +286,7 @@ const Navbar = () => {
             </Link>
             {!user && (
               <div className="pt-2">
-                <Link to="/auth" onClick={() => setMobileMenuOpen(false)} className="w-full block">
+                <Link to="/auth" rel="nofollow" onClick={() => setMobileMenuOpen(false)} className="w-full block">
                   <Button size="sm" className="w-full">
                     Conectare / Cont Nou
                   </Button>

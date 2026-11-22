@@ -27,7 +27,7 @@ const orgSchema = {
         { "@type": "OpeningHoursSpecification", dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"], opens: "09:00", closes: "18:00" },
         { "@type": "OpeningHoursSpecification", dayOfWeek: "Saturday", opens: "10:00", closes: "14:00" },
       ],
-      image: "https://airlife.ro/og-image.jpg", areaServed: AREA_SERVED, priceRange: "$$",
+      image: "https://airlife.ro/og-image.jpg", areaServed: AREA_SERVED,
       description: "Montaj, igienizare și service aer condiționat în Buzău și tot județul Buzău, cu echipa AirLife sau parteneri. Magazin online HVAC cu livrare în toată țara.",
     },
   ],

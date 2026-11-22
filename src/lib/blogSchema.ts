@@ -36,7 +36,7 @@ export const postSchemas = (p: PostLike) => {
       description: p.meta_description || p.excerpt || undefined, image: p.cover_image || `${SITE}/og-image.jpg`,
       datePublished: p.published_at, dateModified: p.updated_at || p.published_at, inLanguage: "ro-RO",
       mainEntityOfPage: url, author: authorSchema(),
-      publisher: { "@type": "Organization", name: "AirLife", url: `${SITE}/`, logo: { "@type": "ImageObject", url: `${SITE}/logo.png` } },
+      publisher: { "@type": "Organization", "@id": `${SITE}/#organization`, name: "AirLife", url: `${SITE}/`, logo: { "@type": "ImageObject", url: `${SITE}/logo.png` } },
     },
     {
       "@context": "https://schema.org", "@type": "BreadcrumbList",

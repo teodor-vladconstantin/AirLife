@@ -88,18 +88,9 @@ const IgienizareAerConditionat = () => {
     "@type": "Service",
     "name": "Igienizare Aer Condiționat",
     "serviceType": "Curățare și Dezinfectare Climatizare",
-    "provider": { "@id": "https://airlife.ro/#localbusiness", "@type": "HVACBusiness", "name": "AirLife", "url": "https://airlife.ro" },
+    "provider": { "@id": "https://airlife.ro/#localbusiness" },
     "areaServed": AREA_SERVED,
-    "description": "Serviciu profesional de igienizare și dezinfectare a aparatelor de aer condiționat. Curățare vaporizator, turbină de ventilație, tăviță condens și tratament biocid autorizat.",
-    "offers": {
-      "@type": "Offer",
-      "priceCurrency": "RON",
-      "priceSpecification": {
-        "@type": "UnitPriceSpecification",
-        "priceType": "https://schema.org/StartingAtPrice",
-        "description": "Prețul depinde de numărul de aparate și starea de contaminare a unității."
-      }
-    }
+    "description": "Serviciu profesional de igienizare și dezinfectare a aparatelor de aer condiționat. Curățare vaporizator, turbină de ventilație, tăviță condens și tratament biocid autorizat."
   };
 
   const breadcrumbsData = {

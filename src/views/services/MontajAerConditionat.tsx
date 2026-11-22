@@ -93,18 +93,9 @@ const MontajAerConditionat = () => {
     "@type": "Service",
     "name": "Montaj Aer Condiționat",
     "serviceType": "Instalare Sisteme de Climatizare",
-    "provider": { "@id": "https://airlife.ro/#localbusiness", "@type": "HVACBusiness", "name": "AirLife", "url": "https://airlife.ro" },
+    "provider": { "@id": "https://airlife.ro/#localbusiness" },
     "areaServed": AREA_SERVED,
-    "description": "Serviciu autorizat de instalare aer condiționat. Include fixare console, perforare perete, vidare traseu frigorific și probe funcționale.",
-    "offers": {
-      "@type": "Offer",
-      "priceCurrency": "RON",
-      "priceSpecification": {
-        "@type": "UnitPriceSpecification",
-        "priceType": "https://schema.org/StartingAtPrice",
-        "description": "Prețul final depinde de capacitatea aparatului (BTU), lungimea traseului frigorific și complexitatea montajului."
-      }
-    }
+    "description": "Serviciu autorizat de instalare aer condiționat. Include fixare console, perforare perete, vidare traseu frigorific și probe funcționale."
   };
 
   const breadcrumbsData = {

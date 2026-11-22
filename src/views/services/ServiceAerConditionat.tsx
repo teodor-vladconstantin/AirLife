@@ -88,18 +88,9 @@ const ServiceAerConditionat = () => {
     "@type": "Service",
     "name": "Service Aer Condiționat",
     "serviceType": "Reparații și Mentenanță Climatizare",
-    "provider": { "@id": "https://airlife.ro/#localbusiness", "@type": "HVACBusiness", "name": "AirLife", "url": "https://airlife.ro" },
+    "provider": { "@id": "https://airlife.ro/#localbusiness" },
     "areaServed": AREA_SERVED,
-    "description": "Diagnosticare și reparații sisteme de aer condiționat: remediere pierderi freon, completare agent frigorific, înlocuire condensatori, remediere scurgeri de apă și erori electronice.",
-    "offers": {
-      "@type": "Offer",
-      "priceCurrency": "RON",
-      "priceSpecification": {
-        "@type": "UnitPriceSpecification",
-        "priceType": "https://schema.org/StartingAtPrice",
-        "description": "Costul include constatarea inițială, urmând ca reparația efectivă și piesele să fie cotate transparent înainte de începerea lucrării."
-      }
-    }
+    "description": "Diagnosticare și reparații sisteme de aer condiționat: remediere pierderi freon, completare agent frigorific, înlocuire condensatori, remediere scurgeri de apă și erori electronice."
   };
 
   const breadcrumbsData = {
