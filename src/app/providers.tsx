@@ -7,7 +7,6 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { CartProvider } from "@/contexts/CartContext";
 import ScrollToTop from "@/components/ScrollToTop";
 import CookieBanner from "@/components/CookieBanner";
-import StickyContact from "@/components/StickyContact";
 import { initAnalytics } from "@/lib/analytics";
 import { supabase } from "@/integrations/supabase/client";
 
@@ -32,7 +31,6 @@ export default function Providers({ children }: { children: ReactNode }) {
             <ScrollToTop />
             <CookieBanner />
             {children}
-            <StickyContact />
         </CartProvider>
       </TooltipProvider>
     </QueryClientProvider>
