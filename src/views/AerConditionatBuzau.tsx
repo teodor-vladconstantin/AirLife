@@ -35,16 +35,11 @@ const AerConditionatBuzau = () => {
       name: "Aer condiționat Buzău: montaj, igienizare, service",
       isPartOf: { "@id": "https://airlife.ro/#website" },
       about: { "@id": "https://airlife.ro/#localbusiness" },
+      mainEntity: {
+        "@type": "ItemList",
+        itemListElement: SERVICES.map((s, i) => ({ "@type": "ListItem", position: i + 1, item: { "@id": `https://airlife.ro${s.to}#service` } })),
+      },
     },
-    ...SERVICES.map((s) => ({
-      "@context": "https://schema.org",
-      "@type": "Service",
-      name: s.title,
-      url: `https://airlife.ro${s.to}`,
-      description: s.desc,
-      provider: { "@id": "https://airlife.ro/#localbusiness" },
-      areaServed: AREA_SERVED,
-    })),
     {
       "@context": "https://schema.org",
       "@type": "BreadcrumbList",

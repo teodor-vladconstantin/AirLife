@@ -25,7 +25,7 @@ export const faqFromMarkdown = (md: string) => {
 export const authorSchema = () =>
   AUTHOR.name
     ? { "@type": "Person", name: AUTHOR.name, jobTitle: AUTHOR.jobTitle || undefined, url: AUTHOR.url || undefined, worksFor: { "@type": "Organization", name: "AirLife" } }
-    : { "@type": "Organization", name: "AirLife", url: `${SITE}/` };
+    : { "@id": `${SITE}/#organization` };
 
 export const postSchemas = (p: PostLike) => {
   const url = `${SITE}/blog/${p.slug}`;
@@ -36,7 +36,7 @@ export const postSchemas = (p: PostLike) => {
       description: p.meta_description || p.excerpt || undefined, image: p.cover_image || `${SITE}/og-image.jpg`,
       datePublished: p.published_at, dateModified: p.updated_at || p.published_at, inLanguage: "ro-RO",
       mainEntityOfPage: url, author: authorSchema(),
-      publisher: { "@type": "Organization", "@id": `${SITE}/#organization`, name: "AirLife", url: `${SITE}/`, logo: { "@type": "ImageObject", url: `${SITE}/logo.png` } },
+      publisher: { "@id": `${SITE}/#organization` },
     },
     {
       "@context": "https://schema.org", "@type": "BreadcrumbList",

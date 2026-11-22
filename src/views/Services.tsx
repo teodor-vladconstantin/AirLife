@@ -38,14 +38,28 @@ const servicesList = [
 ];
 
 const Services = () => {
-  const structuredData = {
-    "@context": "https://schema.org",
-    "@type": "CollectionPage",
-    "name": "Servicii Aer Condiționat Buzău",
-    "url": "https://airlife.ro/servicii",
-    "about": { "@id": "https://airlife.ro/#localbusiness" },
-    "description": "Servicii complete de montaj, igienizare și service aer condiționat în Buzău și tot județul Buzău."
-  };
+  const structuredData = [
+    {
+      "@context": "https://schema.org",
+      "@type": "CollectionPage",
+      "name": "Servicii Aer Condiționat Buzău",
+      "url": "https://airlife.ro/servicii",
+      "about": { "@id": "https://airlife.ro/#localbusiness" },
+      "description": "Servicii complete de montaj, igienizare și service aer condiționat în Buzău și tot județul Buzău.",
+      "mainEntity": {
+        "@type": "ItemList",
+        "itemListElement": ["montaj", "igienizare", "service"].map((s, i) => ({ "@type": "ListItem", "position": i + 1, "item": { "@id": `https://airlife.ro/servicii/${s}-aer-conditionat-buzau#service` } })),
+      },
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Acasă", "item": "https://airlife.ro/" },
+        { "@type": "ListItem", "position": 2, "name": "Servicii", "item": "https://airlife.ro/servicii" },
+      ],
+    },
+  ];
 
   return (
     <div className="min-h-screen flex flex-col">
