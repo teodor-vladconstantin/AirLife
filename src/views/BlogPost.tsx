@@ -6,12 +6,13 @@ import SEO from "@/components/SEO";
 import { Button } from "@/components/ui/button";
 import type { Tables } from "@/integrations/supabase/types";
 import { renderMarkdown } from "@/lib/markdown";
-import { PHONE_DISPLAY, PHONE_TEL } from "@/data/localSeo";
+import { BLOG_CANONICAL, PHONE_DISPLAY, PHONE_TEL } from "@/data/localSeo";
 import { bylineName } from "@/data/author";
 import { postSchemas, roDate } from "@/lib/blogSchema";
 
 const BlogPost = ({ post, related }: { post: Tables<"blog_posts">; related: { slug: string; title: string }[] }) => {
   const url = `https://airlife.ro/blog/${post.slug}`;
+  const mainGuide = BLOG_CANONICAL[post.slug];
   const structuredData = postSchemas(post);
 
   return (
@@ -19,7 +20,7 @@ const BlogPost = ({ post, related }: { post: Tables<"blog_posts">; related: { sl
       <SEO
         title={post.meta_title || `${post.title} | AirLife`}
         description={post.meta_description || post.excerpt || post.title}
-        canonical={url}
+        canonical={mainGuide ?? url}
         ogType="article"
         ogImage={post.cover_image || undefined}
         structuredData={structuredData}
@@ -32,6 +33,11 @@ const BlogPost = ({ post, related }: { post: Tables<"blog_posts">; related: { sl
             {post.category && <> · {post.category}</>}
           </nav>
           <h1 className="text-3xl md:text-5xl font-bold tracking-tight">{post.title}</h1>
+          {mainGuide && (
+            <p className="rounded-xl border bg-card p-4 text-sm">
+              Varianta completă și actualizată, cu calculator pe volum și tabel BTU: <Link to={mainGuide.replace("https://airlife.ro", "")} className="text-primary font-semibold hover:underline">ghidul despre BTU pentru Buzău</Link>.
+            </p>
+          )}
           <p className="text-sm text-muted-foreground">
             De <strong>{bylineName()}</strong>
             {post.published_at && <> · Publicat <time dateTime={post.published_at}>{roDate(post.published_at)}</time></>}

@@ -7,7 +7,7 @@ import { Link } from "@/lib/router";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import SEO from "@/components/SEO";
-import { AREA_SERVED, SERVICE_COVERAGE } from "@/data/localSeo";
+import { AREA_SERVED, FGAS_TEXT, SERVICE_COVERAGE } from "@/data/localSeo";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
@@ -158,6 +158,9 @@ const MontajAerConditionat = () => {
             </h1>
             <p className="lead text-lg text-muted-foreground leading-relaxed">
               Montajul de aer condiționat în Buzău include fixarea unităților, traseul frigorific, vidarea cu pompă de vid și proba completă de funcționare. Lucrăm cu echipa proprie sau parteneri, în municipiul Buzău și în tot județul, cu respectarea normelor producătorului pentru păstrarea garanției.
+            </p>
+            <p className="mt-4 inline-flex items-center gap-2 text-sm font-medium text-primary">
+              <ShieldCheck className="w-4 h-4" /> {FGAS_TEXT}
             </p>
           </div>
 
