@@ -138,7 +138,7 @@ const GhidBtu = ({ products = [] }: { products?: BtuProduct[] }) => {
                 <p className="text-xl font-bold text-foreground">Recomandare: aparat de {r.size.toLocaleString("ro-RO")} BTU</p>
                 {r.size < r.btu && (
                   <p className="text-sm text-muted-foreground mt-1">
-                    Treapta de {r.size.toLocaleString("ro-RO")} BTU acoperă necesarul cu o toleranță de 5%. Dacă ai ferestre mari spre sud sau vest, ultimul etaj sau mansardă, alege treapta următoare{SIZES[SIZES.indexOf(r.size) + 1] ? ` (${SIZES[SIZES.indexOf(r.size) + 1].toLocaleString("ro-RO")} BTU)` : ""}: un aparat inverter lucrează bine ușor supradimensionat.
+                    Treapta de {r.size.toLocaleString("ro-RO")} BTU acoperă necesarul cu o toleranță de aproximativ 5%. Dacă ai ferestre mari spre sud sau vest, ultimul etaj sau mansardă, alege treapta următoare{SIZES[SIZES.indexOf(r.size) + 1] ? ` (${SIZES[SIZES.indexOf(r.size) + 1].toLocaleString("ro-RO")} BTU)` : ""}: un aparat inverter lucrează bine ușor supradimensionat.
                   </p>
                 )}
               </div>
@@ -191,8 +191,8 @@ const GhidBtu = ({ products = [] }: { products?: BtuProduct[] }) => {
           <section className="space-y-3 mb-8 text-sm text-muted-foreground">
             <h2 className="text-2xl font-bold text-foreground">Ce mărește necesarul de BTU</h2>
             <ul className="space-y-2">
-              <li>• <strong>Ferestre mari spre sud sau vest:</strong> aportul solar poate adăuga 10–15% la necesar.</li>
-              <li>• <strong>Ultimul etaj sau mansardă:</strong> acoperișul încălzit adaugă până la 30%.</li>
+              <li>• <strong>Ferestre mari spre sud sau vest:</strong> aportul solar poate adăuga, orientativ, 10–15% la necesar.</li>
+              <li>• <strong>Ultimul etaj sau mansardă:</strong> acoperișul încălzit poate adăuga, orientativ, până la 30%.</li>
               <li>• <strong>Tavan peste 2,5 m:</strong> volumul de aer de răcit crește proporțional, deci la aceeași suprafață necesarul de BTU crește.</li>
               <li>• <strong>Mai mult de două persoane și aparate electrice:</strong> adaugă aproximativ 500 BTU pentru fiecare persoană în plus față de două și circa 700 BTU pentru fiecare aparat care degajă căldură.</li>
             </ul>

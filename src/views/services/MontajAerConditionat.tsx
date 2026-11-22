@@ -261,7 +261,7 @@ const MontajAerConditionat = () => {
                 <p className="text-muted-foreground mb-3">Pentru ca montajul să se desfășoare eficient:</p>
                 <ul className="list-disc list-inside space-y-2 text-muted-foreground">
                   <li>Eliberează zona de sub locul unde va fi instalată unitatea internă (mutați sau acoperiți mobilierul textil sensibil).</li>
-                  <li>Asigură acces la o priză funcțională de 220V în apropiere pentru sculele de lucru și alimentarea aparatului.</li>
+                  <li>Asigură acces la o priză funcțională de 230V în apropiere pentru sculele de lucru și alimentarea aparatului.</li>
                   <li>Verifică permisiunea de acces pe balcon sau fațadă (acord asociație de proprietari dacă este cazul).</li>
                 </ul>
               </section>
@@ -276,7 +276,7 @@ const MontajAerConditionat = () => {
                   Montăm cu echipa AirLife sau parteneri în municipiul Buzău și în tot județul: Râmnicu Sărat, Nehoiu, Pogoanele, Mărăcineni, Vernești, Țintești, Săgeata și comunele din jur. Aparatele și accesoriile le livrăm în toată țara. <Link to="/aer-conditionat-buzau" className="text-primary font-semibold hover:underline">Vezi zona de acoperire în Buzău</Link>.
                 </p>
                 <p className="text-muted-foreground">
-                  Lucrările de montaj beneficiază de garanție de execuție, iar aparatul tău își păstrează garanția legală de la producător mulțumită vidării corecte și respectării fișei tehnice.
+                  Lucrările de montaj beneficiază de garanție de execuție, iar o instalare făcută corect, cu vidare și respectarea fișei tehnice, ajută la păstrarea garanției comerciale oferite de producător.
                 </p>
               </section>
 
