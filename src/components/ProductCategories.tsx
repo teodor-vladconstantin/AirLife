@@ -23,7 +23,7 @@ const ProductCategories = ({ categories }: { categories: CategorySummary[] }) =>
             <Card key={c.slug} className="group flex flex-col justify-between overflow-hidden border-border/60 hover:border-primary/40 transition-all duration-300 hover:shadow-lg bg-card">
               <div>
                 <div className="relative h-48 bg-white flex items-center justify-center p-4 border-b border-border/40">
-                  <img src={c.image} alt={c.name} className="max-h-full max-w-full object-contain group-hover:scale-105 transition-transform duration-500" loading="lazy" />
+                  <img src={c.image} alt={`${c.name} - AirLife Buzău`} className="max-h-full max-w-full object-contain group-hover:scale-105 transition-transform duration-500" loading="lazy" />
                 </div>
                 <div className="p-5">
                   <h3 className="text-lg font-bold mb-2 text-foreground group-hover:text-primary transition-colors">{c.title}</h3>

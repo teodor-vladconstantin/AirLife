@@ -3,6 +3,7 @@ import { useEffect, useRef, useState } from "react";
 import { Link } from "@/lib/router";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import { BtuTable } from "@/components/BtuTable";
 import SEO from "@/components/SEO";
 import { FaqSection } from "@/components/FaqSection";
 import { faqSchema, authorSchema } from "@/lib/blogSchema";
@@ -32,14 +33,6 @@ const FAQS = [
   { q: "Ce se întâmplă dacă aparatul are prea mulți BTU?", a: "Un aparat prea mare pornește și se oprește des, nu dezumidifică bine și consumă mai mult. Un aparat inverter atenuează problema, dar supradimensionarea tot costă mai mult la achiziție și la montaj." },
   { q: "Ce se întâmplă dacă aparatul are prea puțini BTU?", a: "Aparatul lucrează aproape tot timpul la putere maximă în zilele caniculare, nu atinge temperatura setată și se uzează mai repede." },
   { q: "Cum se transformă BTU în kW?", a: "1 kW înseamnă aproximativ 3.412 BTU/h. Un aparat de 12.000 BTU are deci o putere de răcire de circa 3,5 kW." },
-];
-
-const TABLE = [
-  ["până la 65 mc (≈ 26 mp la 2,5 m)", "9.000 BTU", "dormitor, birou mic"],
-  ["65 – 85 mc (≈ 26 – 34 mp)", "12.000 BTU", "living mediu, dormitor mare"],
-  ["85 – 130 mc (≈ 34 – 52 mp)", "18.000 BTU", "living open-space, cameră mansardată"],
-  ["130 – 170 mc (≈ 52 – 68 mp)", "24.000 BTU", "spațiu comercial mic, living mare"],
-  ["peste 170 mc", "36.000 BTU sau mai multe unități", "recomandăm o ofertă personalizată"],
 ];
 
 const GhidBtu = ({ products = [] }: { products?: BtuProduct[] }) => {
@@ -94,7 +87,7 @@ const GhidBtu = ({ products = [] }: { products?: BtuProduct[] }) => {
     description: "Calculator BTU pe volum (metri cubi): află ce putere de aer condiționat îți trebuie pentru camera ta (9.000, 12.000, 18.000 sau 24.000 BTU).",
     author: authorSchema(), inLanguage: "ro-RO",
     publisher: { "@type": "Organization", name: "AirLife", logo: { "@type": "ImageObject", url: "https://airlife.ro/logo.png" } },
-    datePublished: "2026-11-20", dateModified: "2026-11-20", mainEntityOfPage: "https://airlife.ro/ghid/ce-btu-aer-conditionat",
+    datePublished: "2026-11-20", dateModified: "2026-11-20", mainEntityOfPage: "https://airlife.ro/ghid/ce-btu-aer-conditionat-buzau",
   };
 
   return (
@@ -102,7 +95,7 @@ const GhidBtu = ({ products = [] }: { products?: BtuProduct[] }) => {
       <SEO
         title="Ce BTU ai nevoie? Calculator pe volum (mc) | AirLife"
         description="Calculator BTU pentru aer condiționat, pe volum: 9.000 BTU pentru până la 65 mc, 12.000 pentru 65–85 mc, 18.000 pentru 85–130 mc. Ține cont de soare și locuitori."
-        canonical="https://airlife.ro/ghid/ce-btu-aer-conditionat"
+        canonical="https://airlife.ro/ghid/ce-btu-aer-conditionat-buzau"
         ogType="article"
         structuredData={[structuredData, faqSchema(FAQS)]}
       />
@@ -187,12 +180,7 @@ const GhidBtu = ({ products = [] }: { products?: BtuProduct[] }) => {
 
           <section className="mb-8">
             <h2 className="text-2xl font-bold text-foreground mb-4">Tabel BTU pe volum</h2>
-            <div className="overflow-x-auto rounded-xl border border-border">
-              <table className="w-full text-sm">
-                <thead className="bg-secondary/50 text-left"><tr><th className="p-3">Volum cameră</th><th className="p-3">Putere recomandată</th><th className="p-3">Exemple</th></tr></thead>
-                <tbody>{TABLE.map((row) => (<tr key={row[0]} className="border-t border-border">{row.map((c) => <td key={c} className="p-3">{c}</td>)}</tr>))}</tbody>
-              </table>
-            </div>
+            <BtuTable />
           </section>
 
           <section className="space-y-3 mb-8 text-sm text-muted-foreground">
@@ -203,7 +191,7 @@ const GhidBtu = ({ products = [] }: { products?: BtuProduct[] }) => {
               <li>• <strong>Tavan peste 2,5 m:</strong> volumul de aer de răcit crește proporțional, deci la aceeași suprafață necesarul de BTU crește.</li>
               <li>• <strong>Mai mult de două persoane și aparate electrice:</strong> adaugă aproximativ 500 BTU pentru fiecare persoană în plus față de două și circa 700 BTU pentru fiecare aparat care degajă căldură.</li>
             </ul>
-            <p>Un aparat inverter se potrivește mai bine cu putere ușor mare decât cu putere mică, pentru că își reglează singur turația. Vezi și <Link to="/ghid/cost-montaj-aer-conditionat" className="text-primary font-semibold hover:underline">cât costă montajul</Link> și <Link to="/aer-conditionat-buzau" className="text-primary font-semibold hover:underline">serviciile din Buzău</Link>.</p>
+            <p>Un aparat inverter se potrivește mai bine cu putere ușor mare decât cu putere mică, pentru că își reglează singur turația. Vezi și <Link to="/ghid/cost-montaj-aer-conditionat-buzau" className="text-primary font-semibold hover:underline">cât costă montajul</Link> și <Link to="/aer-conditionat-buzau" className="text-primary font-semibold hover:underline">serviciile din Buzău</Link>.</p>
           </section>
 
           <FaqSection title="Întrebări frecvente" faq={FAQS} />

@@ -241,7 +241,7 @@ const ProductDetails = ({ initial }: { initial: Loaded }) => {
               >
                 <img
                   src={images[idx]}
-                  alt={`${product.name} - poza ${idx + 1}`}
+                  alt={`${product.name} Buzău - poza ${idx + 1}`}
                   fetchPriority="high"
                   decoding="async"
                   className="max-h-full max-w-full object-contain cursor-zoom-in"
@@ -271,7 +271,7 @@ const ProductDetails = ({ initial }: { initial: Loaded }) => {
                       aria-label={`Poza ${i + 1}`}
                       className={`w-16 h-16 rounded-lg border bg-white p-1 ${i === idx ? "border-primary ring-1 ring-primary" : "border-border"}`}
                     >
-                      <img src={g} alt={`${product.name} - miniatura ${i + 1}`} loading="lazy" className="w-full h-full object-contain" />
+                      <img src={g} alt={`${product.name} Buzău - miniatura ${i + 1}`} loading="lazy" className="w-full h-full object-contain" />
                     </button>
                   ))}
                 </div>
@@ -294,7 +294,7 @@ const ProductDetails = ({ initial }: { initial: Loaded }) => {
                 >
                   <img
                     src={images[idx]}
-                    alt={`${product.name} - poza ${idx + 1}`}
+                    alt={`${product.name} Buzău - poza ${idx + 1}`}
                     className="max-h-full max-w-full object-contain bg-white rounded-lg"
                     onClick={(e) => e.stopPropagation()}
                   />
@@ -501,7 +501,7 @@ const ProductDetails = ({ initial }: { initial: Loaded }) => {
                   <Card key={rel.id} className="border-border hover:border-primary/40 transition-all p-4 bg-card flex flex-col justify-between">
                     <div>
                       <div className="aspect-video bg-white rounded-lg flex items-center justify-center p-2 mb-3">
-                        <img src={rel.image_url} alt={rel.name} loading="lazy" decoding="async" className="max-h-full max-w-full object-contain" />
+                        <img src={rel.image_url} alt={`${rel.name} - AirLife Buzău`} loading="lazy" decoding="async" className="max-h-full max-w-full object-contain" />
                       </div>
                       <span className="text-[11px] text-primary font-semibold block mb-1">{rel.category}</span>
                       <h3 className="font-bold text-sm text-foreground mb-2 line-clamp-2">

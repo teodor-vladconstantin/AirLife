@@ -6,6 +6,7 @@ import { useTurnstile } from "@/components/Turnstile";
 import { Link } from "@/lib/router";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import { BtuTable } from "@/components/BtuTable";
 import SEO from "@/components/SEO";
 import { AREA_SERVED, COVERAGE_FAQ } from "@/data/localSeo";
 import { Button } from "@/components/ui/button";
@@ -126,7 +127,7 @@ const MontajAerConditionat = () => {
         "@type": "ListItem",
         "position": 3,
         "name": "Montaj Aer Condiționat",
-        "item": "https://airlife.ro/servicii/montaj-aer-conditionat"
+        "item": "https://airlife.ro/servicii/montaj-aer-conditionat-buzau"
       }
     ]
   };
@@ -136,7 +137,7 @@ const MontajAerConditionat = () => {
       <SEO
         title="Montaj Aer Condiționat Buzău | Instalare cu Vidare | AirLife"
         description="Montaj aer condiționat în Buzău și tot județul. Instalare curată, vidare traseu frigorific cu pompă de vid, materiale de calitate și probă completă de funcționare."
-        canonical="https://airlife.ro/servicii/montaj-aer-conditionat"
+        canonical="https://airlife.ro/servicii/montaj-aer-conditionat-buzau"
         structuredData={[structuredData, breadcrumbsData, faqSchema(FAQS)]}
       />
 
@@ -161,11 +162,10 @@ const MontajAerConditionat = () => {
               <MapPin className="w-4 h-4" /> Buzău și tot județul
             </div>
             <h1 className="text-4xl md:text-5xl font-bold tracking-tight mb-4 text-foreground">
-              Montaj Aer Condiționat în Buzău
+              Montaj Aer Condiționat Buzău
             </h1>
-            <p className="text-lg text-muted-foreground leading-relaxed">
-              Instalare meticuloasă cu scule profesionale, pompă de vidare, materiale calitative și respectarea tuturor
-              normativelor producătorului pentru menținerea garanției aparatului tău.
+            <p className="lead text-lg text-muted-foreground leading-relaxed">
+              Montajul de aer condiționat în Buzău include fixarea unităților, traseul frigorific, vidarea cu pompă de vid și proba completă de funcționare. Lucrăm cu echipa proprie sau parteneri, în municipiul Buzău și în tot județul, cu respectarea normelor producătorului pentru păstrarea garanției.
             </p>
           </div>
 
@@ -204,6 +204,26 @@ const MontajAerConditionat = () => {
                     <span><strong>Probe complete de funcționare</strong> (răcire / încălzire), verificare etanșeitate și instruire client pentru utilizare.</span>
                   </div>
                 </div>
+              </section>
+
+              {/* Tabele pentru motoare de răspuns (AEO/GEO) */}
+              <section className="bg-card p-6 md:p-8 rounded-xl border border-border shadow-sm space-y-4">
+                <h2 className="text-2xl font-bold text-foreground">Ce BTU alegi pentru montaj în Buzău</h2>
+                <BtuTable />
+                <h2 className="text-2xl font-bold text-foreground pt-2">De ce depinde prețul montajului</h2>
+                <div className="overflow-x-auto rounded-xl border border-border">
+                  <table className="w-full text-sm">
+                    <caption className="sr-only">Factorii care influențează prețul montajului de aer condiționat</caption>
+                    <thead className="bg-secondary/50 text-left"><tr><th scope="col" className="p-3">Factor</th><th scope="col" className="p-3">Cum influențează prețul final</th></tr></thead>
+                    <tbody>
+                      <tr className="border-t border-border"><th scope="row" className="p-3 text-left font-normal">Capacitatea aparatului (BTU)</th><td className="p-3">Unitățile mai mari cer țevi, console și manoperă mai consistente.</td></tr>
+                      <tr className="border-t border-border"><th scope="row" className="p-3 text-left font-normal">Lungimea traseului frigorific</th><td className="p-3">Metrii în plus față de kitul standard se taxează separat.</td></tr>
+                      <tr className="border-t border-border"><th scope="row" className="p-3 text-left font-normal">Tipul peretelui și etajul</th><td className="p-3">Betonul și lucrul la înălțime cer scule și timp suplimentar.</td></tr>
+                      <tr className="border-t border-border"><th scope="row" className="p-3 text-left font-normal">Poziția unității exterioare</th><td className="p-3">Accesul dificil sau consolele speciale pot adăuga manoperă.</td></tr>
+                    </tbody>
+                  </table>
+                </div>
+                <p className="text-sm text-muted-foreground">Primești prețul exact după ce stabilim detaliile prin telefon sau formularul de mai jos.</p>
               </section>
 
               {/* Cum funcționează procesul */}

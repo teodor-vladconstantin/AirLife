@@ -26,13 +26,16 @@ const nextConfig = {
     const r = (source, destination) => ({ source, destination, permanent: true });
     return [
       r("/request-quote", "/products"),
-      r("/servicii/montaj-aer-conditionat-buzau", "/servicii/montaj-aer-conditionat"),
-      r("/servicii/igienizare-aer-conditionat-buzau", "/servicii/igienizare-aer-conditionat"),
-      r("/servicii/service-aer-conditionat-buzau", "/servicii/service-aer-conditionat"),
-      r("/ghid/cost-montaj-aer-conditionat-buzau", "/ghid/cost-montaj-aer-conditionat"),
-      r("/servicii/montaj-aer-conditionat/:locality", "/servicii/montaj-aer-conditionat"),
-      r("/servicii/igienizare-aer-conditionat/:locality", "/servicii/igienizare-aer-conditionat"),
-      r("/servicii/service-aer-conditionat/:locality", "/servicii/service-aer-conditionat"),
+      // Local slugs (-buzau) are canonical; the old slugs 301 to them.
+      r("/servicii/montaj-aer-conditionat", "/servicii/montaj-aer-conditionat-buzau"),
+      r("/servicii/igienizare-aer-conditionat", "/servicii/igienizare-aer-conditionat-buzau"),
+      r("/servicii/service-aer-conditionat", "/servicii/service-aer-conditionat-buzau"),
+      r("/servicii/montaj-aer-conditionat/:locality", "/servicii/montaj-aer-conditionat-buzau"),
+      r("/servicii/igienizare-aer-conditionat/:locality", "/servicii/igienizare-aer-conditionat-buzau"),
+      r("/servicii/service-aer-conditionat/:locality", "/servicii/service-aer-conditionat-buzau"),
+      r("/ghid/ce-btu-aer-conditionat", "/ghid/ce-btu-aer-conditionat-buzau"),
+      r("/ghid/cost-montaj-aer-conditionat", "/ghid/cost-montaj-aer-conditionat-buzau"),
+      r("/ghid/igienizare-aer-conditionat", "/ghid/igienizare-aer-conditionat-buzau"),
     ];
   },
   async headers() {

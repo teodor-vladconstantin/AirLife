@@ -12,7 +12,7 @@ Actualizat: 12 noiembrie 2026. Tot ce ține de cod, schema, prerender, conținut
 ## Verificări de făcut peste câteva zile
 - [ ] **Search Console:** paginile cerute la indexare (pilon blog, montaj, igienizare, service, /aer-conditionat, /blog) apar indexate? Homepage-ul a fost doar re-cerut (neconfirmat).
 - [ ] **Merchant Center:** 2 produse respinse cu „Image not processed" (ventilator A80i-FS-K, ventilator baie A100 FS NL). Imaginile răspund corect (200, webp), deci probabil se rezolvă singure; re-verifică. Politica de retur în review (până la 10 zile).
-- [x] **Viteza (Lighthouse mobil, 12 nov):** homepage performanță 72, SEO 100, best-practices 100, accesibilitate 91, CLS 0, FCP 1,8 s, TBT 160 ms; /servicii/montaj-aer-conditionat performanță 74, LCP 5,3 s. LCP rămâne slab pe homepage (8,3 s simulat).
+- [x] **Viteza (Lighthouse mobil, 12 nov):** homepage performanță 72, SEO 100, best-practices 100, accesibilitate 91, CLS 0, FCP 1,8 s, TBT 160 ms; /servicii/montaj-aer-conditionat-buzau performanță 74, LCP 5,3 s. LCP rămâne slab pe homepage (8,3 s simulat).
 - [ ] **PostHog:** după ce apar vizite cu consimțământ, verifică dacă apar replay și heatmaps (proiect AirLife, EU, phc_kKD7vU…). Opțional: oprește „Capture console logs" din Settings → Session replay.
 
 ## Performanță: următorul pas (risc mediu, de făcut cu test)
@@ -40,3 +40,8 @@ Servicii = municipiul Buzău + tot județul; produsele rămân naționale. Zona 
 - [ ] **Backlinkuri de la parteneri:** link de la producători/distribuitori (Heiko, NovingAIR) pe pagina lor de „unde cumperi”.
 - [ ] **Recenzii pe site** (cu schema Review) odată ce există clienți reali în Buzău. Nu inventăm recenzii.
 - [ ] Verifică în Search Console: interogări „aer condiționat buzău”, „montaj aer condiționat buzău”; cere indexarea pentru `/aer-conditionat-buzau`.
+
+## URL-uri locale (din 22 nov 2026)
+Serviciile și ghidurile folosesc acum slug-uri cu `-buzau` (`/servicii/*-aer-conditionat-buzau`, `/ghid/*-aer-conditionat-buzau`). Vechile adrese fără `-buzau` dau redirect permanent (308) în `next.config.mjs`. Componente noi: `JsonLd`, `BtuTable`. Articole-schelet (draft) în `supabase/migrations/20251213000000_blog_buzau_placeholders.sql`: rulează migrația, scrie conținutul și publică din /admin.
+- [ ] Search Console: cere indexarea noilor URL-uri și retrimite sitemap-ul; `npm run indexnow` după deploy.
+- [ ] Categoriile și produsele își păstrează slug-urile (vin din baza de date și din feed-ul Merchant); au doar titluri și alt-uri cu Buzău.

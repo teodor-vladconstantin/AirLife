@@ -41,7 +41,7 @@ const CTASection = () => {
                 Trimite un Mesaj
               </Button>
             </Link>
-            <Link to="/servicii/montaj-aer-conditionat">
+            <Link to="/servicii/montaj-aer-conditionat-buzau">
               <Button
                 size="lg"
                 variant="outline"

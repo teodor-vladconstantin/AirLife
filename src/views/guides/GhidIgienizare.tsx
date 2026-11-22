@@ -49,7 +49,7 @@ const GhidIgienizare = () => {
     },
     "datePublished": "2025-02-01",
     "dateModified": "2026-10-27",
-    "mainEntityOfPage": "https://airlife.ro/ghid/igienizare-aer-conditionat"
+    "mainEntityOfPage": "https://airlife.ro/ghid/igienizare-aer-conditionat-buzau"
   };
 
   return (
@@ -57,7 +57,7 @@ const GhidIgienizare = () => {
       <SEO
         title="Când și Cum se Curăță un Aer Condiționat | Ghid AirLife"
         description="Ghid pentru igienizarea aerului condiționat: cum se curăță filtrele, vaporizatorul și turbina și când ai nevoie de tehnician."
-        canonical="https://airlife.ro/ghid/igienizare-aer-conditionat"
+        canonical="https://airlife.ro/ghid/igienizare-aer-conditionat-buzau"
         structuredData={[structuredData, faqSchema(FAQS)]}
       />
 
@@ -185,7 +185,7 @@ const GhidIgienizare = () => {
                 </p>
               </div>
               <div className="flex flex-col sm:flex-row gap-3 flex-shrink-0 w-full sm:w-auto">
-                <Link to="/servicii/igienizare-aer-conditionat" className="w-full sm:w-auto">
+                <Link to="/servicii/igienizare-aer-conditionat-buzau" className="w-full sm:w-auto">
                   <Button className="w-full flex items-center gap-2">
                     <Sparkles className="w-4 h-4" /> Serviciu Igienizare
                   </Button>

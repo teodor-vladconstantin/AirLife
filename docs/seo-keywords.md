@@ -9,7 +9,7 @@ Categoria articolului = clusterul. Fiecare cluster are un articol-pilon și sate
 | Cluster | Pilon | Sateliți |
 |---|---|---|
 | **Alegere aer condiționat** | `/blog/cum-alegi-aerul-conditionat-ghid-complet` | ce BTU, inverter sau fără inverter, consum inverter, iarna/încălzire, kit de montaj, prețul montajului, fără unitate exterioară |
-| **Întreținere și probleme** | `/ghid/igienizare-aer-conditionat` (+ serviciul de igienizare) | cât de des igienizezi, cum cureți filtrele, miros urât, de ce pică apă |
+| **Întreținere și probleme** | `/ghid/igienizare-aer-conditionat-buzau` (+ serviciul de igienizare) | cât de des igienizezi, cum cureți filtrele, miros urât, de ce pică apă |
 | **Aer curat** | `/purificatoare-aer` | purificator pentru alergii (HEPA, CADR), filtru HEPA (H13, schimbare) |
 | **Umiditate și ventilație** | `/dezumidificatoare` | umiditate ideală, cât consumă un dezumidificator, ventilator de baie, mucegai în baie, recuperator de căldură |
 

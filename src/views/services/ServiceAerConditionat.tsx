@@ -122,7 +122,7 @@ const ServiceAerConditionat = () => {
         "@type": "ListItem",
         "position": 3,
         "name": "Service Aer Condiționat",
-        "item": "https://airlife.ro/servicii/service-aer-conditionat"
+        "item": "https://airlife.ro/servicii/service-aer-conditionat-buzau"
       }
     ]
   };
@@ -132,7 +132,7 @@ const ServiceAerConditionat = () => {
       <SEO
         title="Service Aer Condiționat Buzău | Reparații și Freon | AirLife"
         description="Service și reparații aer condiționat în Buzău și județ. Diagnosticare rapidă, verificare freon R32/R410A, remediere scurgeri de apă și înlocuire componente defecte."
-        canonical="https://airlife.ro/servicii/service-aer-conditionat"
+        canonical="https://airlife.ro/servicii/service-aer-conditionat-buzau"
         structuredData={[structuredData, breadcrumbsData, faqSchema(FAQS)]}
       />
 
@@ -157,11 +157,10 @@ const ServiceAerConditionat = () => {
               <MapPin className="w-4 h-4" /> Buzău și tot județul
             </div>
             <h1 className="text-4xl md:text-5xl font-bold tracking-tight mb-4 text-foreground">
-              Service Aer Condiționat în Buzău
+              Service Aer Condiționat Buzău
             </h1>
-            <p className="text-lg text-muted-foreground leading-relaxed">
-              Aparatul nu mai răcește corespunzător, curge apă din unitatea internă sau afișează un cod de eroare?
-              Identificăm cauza exactă a defecțiunii și reparăm instalația transparent, fără costuri ascunse.
+            <p className="lead text-lg text-muted-foreground leading-relaxed">
+              Service de aer condiționat în Buzău: diagnosticare, identificare pierderi de freon, remedierea scurgerilor de apă, înlocuire de condensatori și senzori, interpretare coduri de eroare. Intervenim cu echipa proprie sau parteneri în municipiul Buzău și în tot județul.
             </p>
           </div>
 

@@ -89,7 +89,7 @@ const Products = ({ products }: { products: Product[] }) => {
                     <div className="relative flex items-center justify-center bg-white" style={{minHeight: '180px'}}>
                       <img
                         src={product.image_url}
-                        alt={product.name}
+                        alt={`${product.name} - AirLife Buzău`}
                         className="max-h-64 w-auto max-w-full object-contain transition-opacity duration-400 will-change-opacity group-hover:opacity-90"
                         style={{display: 'block', margin: '0 auto'}}
                       />

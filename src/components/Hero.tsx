@@ -14,7 +14,7 @@ const Hero = () => {
           sizes="100vw"
           width={1920}
           height={1080}
-          alt="Soluții climatizare și HVAC AirLife"
+          alt="Soluții climatizare și HVAC în Buzău - AirLife"
           className="w-full h-full object-cover"
           loading="eager"
           // React 18 has no fetchPriority prop; the lowercase attribute is passed to the DOM as is
