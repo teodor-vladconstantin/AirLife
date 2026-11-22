@@ -358,7 +358,7 @@ const ProductDetails = ({ initial }: { initial: Loaded }) => {
               {/* Stock status */}
               <div className="flex items-center gap-2 text-sm">
                 <Package className="w-4 h-4 text-muted-foreground" />
-                <span className={product.stock > 0 ? "text-emerald-600 font-semibold" : "text-amber-600 font-semibold"}>
+                <span className={product.stock > 0 ? "text-primary font-semibold" : "text-amber-600 font-semibold"}>
                   {product.stock > 0 ? `În Stoc (${product.stock} bucăți disponibile)` : "Indisponibil momentan"}
                 </span>
               </div>

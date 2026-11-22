@@ -89,13 +89,13 @@ export const OrdersTable = () => {
       case "pending":
         return "bg-yellow-50/60 dark:bg-yellow-900/20";
       case "confirmed":
-        return "bg-green-50/60 dark:bg-green-900/20";
+        return "bg-accent/60 dark:bg-primary/10";
       case "processing":
         return "bg-sky-50/60 dark:bg-sky-900/20";
       case "shipped":
         return "bg-indigo-50/60 dark:bg-indigo-900/20";
       case "delivered":
-        return "bg-green-100/60 dark:bg-green-900/30";
+        return "bg-accent dark:bg-primary/20";
       case "cancelled":
         return "bg-rose-50/60 dark:bg-rose-900/20";
       default:

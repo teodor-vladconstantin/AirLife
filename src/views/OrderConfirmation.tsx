@@ -113,8 +113,8 @@ const OrderConfirmation = () => {
         <div className="container mx-auto px-4 max-w-4xl">
           {/* Success Icon */}
           <div className="text-center mb-8">
-            <div className="inline-flex items-center justify-center w-20 h-20 bg-green-100 dark:bg-green-900/30 rounded-full mb-4">
-              <CheckCircle className="w-12 h-12 text-green-600 dark:text-green-400" />
+            <div className="inline-flex items-center justify-center w-20 h-20 bg-accent dark:bg-primary/20 rounded-full mb-4">
+              <CheckCircle className="w-12 h-12 text-primary dark:text-brandlight" />
             </div>
             <h1 className="text-4xl font-bold mb-2">Cererea ta a fost primită!</h1>
             <p className="text-xl text-muted-foreground">

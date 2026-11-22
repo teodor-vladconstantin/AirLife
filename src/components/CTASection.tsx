@@ -6,7 +6,7 @@ import { PHONE_DISPLAY, PHONE_TEL } from "@/data/localSeo";
 
 const CTASection = () => {
   return (
-    <section className="py-20 bg-gradient-to-br from-primary via-primary to-emerald-700 relative overflow-hidden text-primary-foreground">
+    <section className="py-20 bg-gradient-to-br from-primary via-primary to-[#0F2A1D] relative overflow-hidden text-primary-foreground">
       <div className="container mx-auto px-4 relative z-10">
         <div className="max-w-3xl mx-auto text-center animate-in fade-in duration-700">
           <h2
