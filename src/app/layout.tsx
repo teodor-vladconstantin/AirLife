@@ -22,6 +22,11 @@ const orgSchema = {
       contactPoint: { "@type": "ContactPoint", contactType: "customer service", telephone: "+40722153525", email: "contact@airlife.ro", url: "https://airlife.ro/contact", areaServed: "RO", availableLanguage: ["Romanian"] },
     },
     {
+      "@type": "WebSite", "@id": "https://airlife.ro/#website", url: "https://airlife.ro/", name: "AirLife", inLanguage: "ro-RO", publisher: { "@id": "https://airlife.ro/#organization" },
+      description: "Magazin online HVAC și servicii de climatizare în Buzău",
+      potentialAction: { "@type": "SearchAction", target: "https://airlife.ro/products?q={search_term_string}", "query-input": "required name=search_term_string" },
+    },
+    {
       "@type": "HVACBusiness", "@id": "https://airlife.ro/#localbusiness", name: "AirLife", logo: "https://airlife.ro/logo.png", parentOrganization: { "@id": "https://airlife.ro/#organization" },
       hasCredential: { "@type": "EducationalOccupationalCredential", credentialCategory: "certificate", name: "Atestat F-gaz (manipularea gazelor fluorurate)" }, telephone: "+40722153525", email: "contact@airlife.ro", url: "https://airlife.ro/",
       address: { "@type": "PostalAddress", addressLocality: "Mărăcineni", addressRegion: "Buzău", addressCountry: "RO" },

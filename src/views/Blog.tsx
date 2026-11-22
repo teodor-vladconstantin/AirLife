@@ -16,6 +16,13 @@ const Blog = ({ posts }: { posts: Post[] }) => {
         title="Blog | Sfaturi aer condiționat | AirLife"
         description="Ghiduri practice despre alegerea, montajul, igienizarea și service-ul aerului condiționat. Sfaturi de la specialiștii AirLife."
         canonical="https://airlife.ro/blog"
+        structuredData={[
+          { "@context": "https://schema.org", "@type": "CollectionPage", name: "Blog AirLife", url: "https://airlife.ro/blog", isPartOf: { "@id": "https://airlife.ro/#website" },
+            mainEntity: { "@type": "ItemList", itemListElement: posts.map((p, i) => ({ "@type": "ListItem", position: i + 1, url: `https://airlife.ro/blog/${p.slug}`, name: p.title })) } },
+          { "@context": "https://schema.org", "@type": "BreadcrumbList", itemListElement: [
+            { "@type": "ListItem", position: 1, name: "Acasă", item: "https://airlife.ro/" },
+            { "@type": "ListItem", position: 2, name: "Blog", item: "https://airlife.ro/blog" } ] },
+        ]}
       />
       <Navbar />
       <main className="flex-1 bg-gradient-to-b from-background to-secondary/30 py-12">

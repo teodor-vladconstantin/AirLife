@@ -88,7 +88,7 @@ const ServiceAerConditionat = () => {
     "@type": "Service",
     "@id": "https://airlife.ro/servicii/service-aer-conditionat-buzau#service",
     "url": "https://airlife.ro/servicii/service-aer-conditionat-buzau",
-    "name": "Service Aer Condiționat",
+    "name": "Service aer condiționat",
     "serviceType": "Reparații și Mentenanță Climatizare",
     "provider": { "@id": "https://airlife.ro/#localbusiness" },
     "areaServed": AREA_SERVED,
@@ -114,7 +114,7 @@ const ServiceAerConditionat = () => {
       {
         "@type": "ListItem",
         "position": 3,
-        "name": "Service Aer Condiționat",
+        "name": "Service aer condiționat",
         "item": "https://airlife.ro/servicii/service-aer-conditionat-buzau"
       }
     ]
@@ -123,7 +123,7 @@ const ServiceAerConditionat = () => {
   return (
     <div className="min-h-screen flex flex-col">
       <SEO
-        title="Service Aer Condiționat Buzău | Reparații și Freon | AirLife"
+        title="Service aer condiționat Buzău | Reparații și freon | AirLife"
         description="Service aer condiționat în Buzău și județ: diagnosticare, verificare freon, remediere scurgeri de apă și înlocuire componente defecte."
         canonical="https://airlife.ro/servicii/service-aer-conditionat-buzau"
         structuredData={[structuredData, breadcrumbsData, faqSchema(FAQS)]}
@@ -140,7 +140,7 @@ const ServiceAerConditionat = () => {
                 <Link to="/" className="hover:text-primary transition-colors">Acasă</Link>
               </li>
               <li>/</li>
-              <li className="text-foreground font-medium">Service Aer Condiționat</li>
+              <li className="text-foreground font-medium">Service aer condiționat</li>
             </ol>
           </nav>
 
@@ -150,7 +150,7 @@ const ServiceAerConditionat = () => {
               <MapPin className="w-4 h-4" /> Buzău și tot județul
             </div>
             <h1 className="text-4xl md:text-5xl font-bold tracking-tight mb-4 text-foreground">
-              Service Aer Condiționat Buzău
+              Service aer condiționat Buzău
             </h1>
             <p className="lead text-lg text-muted-foreground leading-relaxed">
               Service de aer condiționat în Buzău: diagnosticare, identificare pierderi de freon, remedierea scurgerilor de apă, înlocuire de condensatori și senzori, interpretare coduri de eroare. Intervenim cu echipa proprie sau parteneri în municipiul Buzău și în tot județul.

@@ -71,9 +71,9 @@ const MontajAerConditionat = () => {
       return;
     }
     setIsSubmitting(true);
-    submitRequest("Montaj Aer Condiționat", { name, phone, details: `Localitate: ${location || "-"}. ${details}` }, tsToken)
+    submitRequest("Montaj aer condiționat", { name, phone, details: `Localitate: ${location || "-"}. ${details}` }, tsToken)
       .then(() => {
-        trackServiceQuoteRequest("Montaj Aer Condiționat");
+        trackServiceQuoteRequest("Montaj aer condiționat");
         toast({
           title: "Cerere trimisă cu succes!",
           description: "Vă vom contacta în cel mai scurt timp pentru confirmarea detaliilor și a programării.",
@@ -92,7 +92,7 @@ const MontajAerConditionat = () => {
     "@type": "Service",
     "@id": "https://airlife.ro/servicii/montaj-aer-conditionat-buzau#service",
     "url": "https://airlife.ro/servicii/montaj-aer-conditionat-buzau",
-    "name": "Montaj Aer Condiționat",
+    "name": "Montaj aer condiționat",
     "serviceType": "Instalare Sisteme de Climatizare",
     "provider": { "@id": "https://airlife.ro/#localbusiness" },
     "areaServed": AREA_SERVED,
@@ -118,7 +118,7 @@ const MontajAerConditionat = () => {
       {
         "@type": "ListItem",
         "position": 3,
-        "name": "Montaj Aer Condiționat",
+        "name": "Montaj aer condiționat",
         "item": "https://airlife.ro/servicii/montaj-aer-conditionat-buzau"
       }
     ]
@@ -127,7 +127,7 @@ const MontajAerConditionat = () => {
   return (
     <div className="min-h-screen flex flex-col">
       <SEO
-        title="Montaj Aer Condiționat Buzău | Instalare cu Vidare | AirLife"
+        title="Montaj aer condiționat Buzău | Instalare cu vidare | AirLife"
         description="Montaj aer condiționat în Buzău și tot județul: instalare curată, vidare cu pompă de vid, materiale de calitate și probă completă de funcționare."
         canonical="https://airlife.ro/servicii/montaj-aer-conditionat-buzau"
         structuredData={[structuredData, breadcrumbsData, faqSchema(FAQS)]}
@@ -144,7 +144,7 @@ const MontajAerConditionat = () => {
                 <Link to="/" className="hover:text-primary transition-colors">Acasă</Link>
               </li>
               <li>/</li>
-              <li className="text-foreground font-medium">Montaj Aer Condiționat</li>
+              <li className="text-foreground font-medium">Montaj aer condiționat</li>
             </ol>
           </nav>
 
@@ -154,7 +154,7 @@ const MontajAerConditionat = () => {
               <MapPin className="w-4 h-4" /> Buzău și tot județul
             </div>
             <h1 className="text-4xl md:text-5xl font-bold tracking-tight mb-4 text-foreground">
-              Montaj Aer Condiționat Buzău
+              Montaj aer condiționat Buzău
             </h1>
             <p className="lead text-lg text-muted-foreground leading-relaxed">
               Montajul de aer condiționat în Buzău include fixarea unităților, traseul frigorific, vidarea cu pompă de vid și proba completă de funcționare. Lucrăm cu echipa proprie sau parteneri, în municipiul Buzău și în tot județul, cu respectarea normelor producătorului pentru păstrarea garanției.
@@ -241,15 +241,10 @@ const MontajAerConditionat = () => {
                   <FileCheck className="w-6 h-6 text-primary" />
                   Ce factori influențează costul montajului
                 </h2>
-                <p className="text-muted-foreground mb-4">
-                  Prețul final depinde de aparat și de instalare. O instalare standard acoperă majoritatea apartamentelor de bloc, însă costul poate varia în funcție de:
+                <p className="text-muted-foreground">
+                  Prețul final depinde de capacitatea aparatului, de lungimea traseului frigorific, de tipul peretelui și de accesul la unitatea exterioară.
+                  Factorii sunt explicați în <Link to="/ghid/cost-montaj-aer-conditionat-buzau" className="text-primary font-semibold hover:underline">ghidul despre costul montajului</Link>.
                 </p>
-                <ul className="list-disc list-inside space-y-2 text-muted-foreground">
-                  <li><strong>Capacitatea aparatului:</strong> 9.000 – 12.000 BTU vs. 18.000 – 24.000 BTU (care necesită traseu frigorific cu diametru mai mare).</li>
-                  <li><strong>Lungimea traseului frigorific:</strong> dacă distanța dintre unitatea interioară și cea exterioară depășește kitul standard (de regulă 3 metri liniari).</li>
-                  <li><strong>Perforări suplimentare</strong> sau carotare în grinzi / pereți din beton armat gros.</li>
-                  <li><strong>Accesibilitatea unității exterioare:</strong> montaj la înălțime sau în poziții care necesită echipamente speciale de siguranță.</li>
-                </ul>
               </section>
 
               {/* Ce trebuie să pregătească clientul */}

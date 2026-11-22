@@ -51,3 +51,10 @@ export const GUIDE_LABEL: Record<string, string> = {
   "https://airlife.ro/ghid/ce-btu-aer-conditionat-buzau": "ghidul despre BTU pentru Buzău (calculator pe volum și tabel BTU)",
   "https://airlife.ro/ghid/cost-montaj-aer-conditionat-buzau": "ghidul despre costul montajului în Buzău",
 };
+
+// One name per service, used in every Service node so the detail pages, the hub and /servicii never disagree.
+export const SERVICE_NAMES = {
+  montaj: "Montaj aer condiționat",
+  igienizare: "Igienizare aer condiționat",
+  service: "Service aer condiționat",
+} as const;

@@ -121,6 +121,8 @@ const ProductDetails = ({ initial }: { initial: Loaded }) => {
   const structuredData = {
     "@context": "https://schema.org",
     "@type": "Product",
+    "@id": `https://airlife.ro/products/${productPath}#product`,
+    "url": `https://airlife.ro/products/${productPath}`,
     "name": product.name,
     "description": product.description,
     "image": product.gallery.length ? product.gallery : product.image_url ? (product.image_url.startsWith("http") ? product.image_url : `https://airlife.ro${product.image_url}`) : "https://airlife.ro/placeholder.svg",

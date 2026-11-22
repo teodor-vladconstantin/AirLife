@@ -10,32 +10,12 @@ import SEO from "@/components/SEO";
 import type { CategorySummary } from "@/lib/catalog";
 
 const Index = ({ categories = [] }: { categories?: CategorySummary[] }) => {
-  const homeStructuredData = {
-    "@context": "https://schema.org",
-    "@graph": [
-      {
-        "@type": "WebSite",
-        "@id": "https://airlife.ro/#website",
-        "url": "https://airlife.ro/",
-        "name": "AirLife",
-        "publisher": { "@id": "https://airlife.ro/#organization" },
-        "description": "Magazin online HVAC și servicii de climatizare în Buzău",
-        "potentialAction": {
-          "@type": "SearchAction",
-          "target": "https://airlife.ro/products?q={search_term_string}",
-          "query-input": "required name=search_term_string"
-        }
-      }
-    ]
-  };
-
   return (
     <div className="min-h-screen flex flex-col">
       <SEO
         title="AirLife Buzău | Magazin HVAC și Servicii Aer Condiționat"
         description="Magazin online HVAC cu livrare în toată țara: aer condiționat, dezumidificatoare, ventilatoare și accesorii. Montaj, igienizare și service în Buzău."
         canonical="https://airlife.ro/"
-        structuredData={homeStructuredData}
       />
       <Navbar />
       <main className="flex-1">

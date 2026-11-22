@@ -88,7 +88,7 @@ const IgienizareAerConditionat = () => {
     "@type": "Service",
     "@id": "https://airlife.ro/servicii/igienizare-aer-conditionat-buzau#service",
     "url": "https://airlife.ro/servicii/igienizare-aer-conditionat-buzau",
-    "name": "Igienizare Aer Condiționat",
+    "name": "Igienizare aer condiționat",
     "serviceType": "Curățare și Dezinfectare Climatizare",
     "provider": { "@id": "https://airlife.ro/#localbusiness" },
     "areaServed": AREA_SERVED,
@@ -114,7 +114,7 @@ const IgienizareAerConditionat = () => {
       {
         "@type": "ListItem",
         "position": 3,
-        "name": "Igienizare Aer Condiționat",
+        "name": "Igienizare aer condiționat",
         "item": "https://airlife.ro/servicii/igienizare-aer-conditionat-buzau"
       }
     ]
@@ -123,7 +123,7 @@ const IgienizareAerConditionat = () => {
   return (
     <div className="min-h-screen flex flex-col">
       <SEO
-        title="Igienizare Aer Condiționat Buzău | Curățare | AirLife"
+        title="Igienizare aer condiționat Buzău | Curățare | AirLife"
         description="Igienizare aer condiționat în Buzău și județ: curățare a vaporizatorului, turbinei și tăviței de condens. Elimină mirosurile și mucegaiul."
         canonical="https://airlife.ro/servicii/igienizare-aer-conditionat-buzau"
         structuredData={[structuredData, breadcrumbsData, faqSchema(FAQS)]}
@@ -140,7 +140,7 @@ const IgienizareAerConditionat = () => {
                 <Link to="/" className="hover:text-primary transition-colors">Acasă</Link>
               </li>
               <li>/</li>
-              <li className="text-foreground font-medium">Igienizare Aer Condiționat</li>
+              <li className="text-foreground font-medium">Igienizare aer condiționat</li>
             </ol>
           </nav>
 
@@ -150,7 +150,7 @@ const IgienizareAerConditionat = () => {
               <MapPin className="w-4 h-4" /> Buzău și tot județul
             </div>
             <h1 className="text-4xl md:text-5xl font-bold tracking-tight mb-4 text-foreground">
-              Igienizare Aer Condiționat Buzău
+              Igienizare aer condiționat Buzău
             </h1>
             <p className="lead text-lg text-muted-foreground leading-relaxed">
               Igienizarea aerului condiționat în Buzău durează 45–75 de minute și include curățarea vaporizatorului, a turbinei și a tăviței de condens, cu tratament antibacterian. Venim la domiciliu în municipiul Buzău și în tot județul, cu husă de protecție pentru pereți și pardoseală.
