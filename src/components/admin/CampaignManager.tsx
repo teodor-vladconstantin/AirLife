@@ -19,8 +19,8 @@ type Campaign = Tables<"campaigns">;
 const CATEGORY_NAMES = Object.values(CATEGORIES_DATA).map((c) => c.name);
 const PAGES = [
   { v: "/", l: "Pagina principală" }, { v: "/products", l: "Toate produsele" }, { v: "/aer-conditionat", l: "Aer condiționat" },
-  { v: "/aer-conditionat-buzau", l: "Aer condiționat Buzău (servicii)" }, { v: "/servicii/montaj-aer-conditionat", l: "Montaj" },
-  { v: "/servicii/igienizare-aer-conditionat", l: "Igienizare" }, { v: "/ventilatoare-baie", l: "Ventilatoare baie" },
+  { v: "/aer-conditionat-buzau", l: "Aer condiționat Buzău (servicii)" }, { v: "/servicii/montaj-aer-conditionat-buzau", l: "Montaj" },
+  { v: "/servicii/igienizare-aer-conditionat-buzau", l: "Igienizare" }, { v: "/ventilatoare-baie", l: "Ventilatoare baie" },
   { v: "/dezumidificatoare", l: "Dezumidificatoare" }, { v: "/recuperatoare-caldura", l: "Recuperatoare" }, { v: "/blog", l: "Blog" },
 ];
 const inputDate = (d: Date) => new Date(d.getTime() - d.getTimezoneOffset() * 60000).toISOString().slice(0, 16);

@@ -5,16 +5,19 @@ export const revalidate = 3600;
 
 const SITE = "https://airlife.ro";
 const STATIC = [
-  "/", "/aer-conditionat-buzau", "/products", "/servicii", "/servicii/montaj-aer-conditionat", "/servicii/igienizare-aer-conditionat", "/servicii/service-aer-conditionat",
-  "/ghid/igienizare-aer-conditionat", "/ghid/cost-montaj-aer-conditionat", "/ghid/ce-btu-aer-conditionat", "/blog", "/despre-noi", "/contact", "/livrare-si-retur", "/garantie",
+  "/", "/aer-conditionat-buzau", "/products", "/servicii", "/servicii/montaj-aer-conditionat-buzau", "/servicii/igienizare-aer-conditionat-buzau", "/servicii/service-aer-conditionat-buzau",
+  "/ghid/igienizare-aer-conditionat-buzau", "/ghid/cost-montaj-aer-conditionat-buzau", "/ghid/ce-btu-aer-conditionat-buzau", "/blog", "/despre-noi", "/contact", "/livrare-si-retur", "/garantie",
   "/termeni-si-conditii", "/politica-de-confidentialitate", "/politica-de-cookies", "/subprocesatori", "/formular-retragere",
 ];
+
+// Local pages (-buzau slugs and the Buzău hub) come first, then the other static pages, then deeper pages.
+const priorityOf = (p: string) => (p === "/" ? 1 : p.includes("-buzau") ? 0.9 : p.split("/").length > 2 ? 0.6 : 0.8);
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   if (process.env.NEXT_PUBLIC_COMING_SOON === "true") return [];
   const entries: MetadataRoute.Sitemap = [...STATIC, ...(await loadCategorySummaries().catch(() => [])).map((c) => `/${c.slug}`)].map((p) => ({
     url: SITE + p,
-    priority: p === "/" ? 1 : p.split("/").length > 2 ? 0.6 : 0.8,
+    priority: priorityOf(p),
   }));
   try {
     const client = db();

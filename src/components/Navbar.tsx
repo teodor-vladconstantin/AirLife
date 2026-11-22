@@ -108,7 +108,7 @@ const Navbar = () => {
                 </DropdownMenuItem>
                 <div className="h-px bg-border my-1" />
                 <DropdownMenuItem
-                  onClick={() => navigate("/servicii/montaj-aer-conditionat")}
+                  onClick={() => navigate("/servicii/montaj-aer-conditionat-buzau")}
                   className="cursor-pointer"
                 >
                   <Wrench className="w-4 h-4 mr-2 text-primary" />
@@ -120,7 +120,7 @@ const Navbar = () => {
                   </div>
                 </DropdownMenuItem>
                 <DropdownMenuItem
-                  onClick={() => navigate("/servicii/igienizare-aer-conditionat")}
+                  onClick={() => navigate("/servicii/igienizare-aer-conditionat-buzau")}
                   className="cursor-pointer"
                 >
                   <Sparkles className="w-4 h-4 mr-2 text-primary" />
@@ -132,7 +132,7 @@ const Navbar = () => {
                   </div>
                 </DropdownMenuItem>
                 <DropdownMenuItem
-                  onClick={() => navigate("/servicii/service-aer-conditionat")}
+                  onClick={() => navigate("/servicii/service-aer-conditionat-buzau")}
                   className="cursor-pointer"
                 >
                   <Activity className="w-4 h-4 mr-2 text-primary" />
@@ -243,21 +243,21 @@ const Navbar = () => {
               Servicii
             </div>
             <Link
-              to="/servicii/montaj-aer-conditionat"
+              to="/servicii/montaj-aer-conditionat-buzau"
               onClick={() => setMobileMenuOpen(false)}
               className="block px-4 py-1.5 rounded-md hover:bg-secondary text-xs text-muted-foreground hover:text-foreground"
             >
               • Montaj Aer Condiționat
             </Link>
             <Link
-              to="/servicii/igienizare-aer-conditionat"
+              to="/servicii/igienizare-aer-conditionat-buzau"
               onClick={() => setMobileMenuOpen(false)}
               className="block px-4 py-1.5 rounded-md hover:bg-secondary text-xs text-muted-foreground hover:text-foreground"
             >
               • Igienizare &amp; Dezinfectare AC
             </Link>
             <Link
-              to="/servicii/service-aer-conditionat"
+              to="/servicii/service-aer-conditionat-buzau"
               onClick={() => setMobileMenuOpen(false)}
               className="block px-4 py-1.5 rounded-md hover:bg-secondary text-xs text-muted-foreground hover:text-foreground"
             >

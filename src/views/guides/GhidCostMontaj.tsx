@@ -53,7 +53,7 @@ const GhidCostMontaj = () => {
     },
     "datePublished": "2025-02-05",
     "dateModified": "2026-10-27",
-    "mainEntityOfPage": "https://airlife.ro/ghid/cost-montaj-aer-conditionat"
+    "mainEntityOfPage": "https://airlife.ro/ghid/cost-montaj-aer-conditionat-buzau"
   };
 
   return (
@@ -61,7 +61,7 @@ const GhidCostMontaj = () => {
       <SEO
         title="Cât Costă Montajul unui Aer Condiționat | Ghid AirLife"
         description="Ghid de prețuri pentru montaj aer condiționat: ce include un montaj standard, ce factori cresc prețul (traseu, înălțime, carotare) și cum eviți un montaj neconform."
-        canonical="https://airlife.ro/ghid/cost-montaj-aer-conditionat"
+        canonical="https://airlife.ro/ghid/cost-montaj-aer-conditionat-buzau"
         structuredData={[structuredData, faqSchema(FAQS)]}
       />
 
@@ -194,7 +194,7 @@ const GhidCostMontaj = () => {
                 </p>
               </div>
               <div className="flex flex-col sm:flex-row gap-3 flex-shrink-0 w-full sm:w-auto">
-                <Link to="/servicii/montaj-aer-conditionat" className="w-full sm:w-auto">
+                <Link to="/servicii/montaj-aer-conditionat-buzau" className="w-full sm:w-auto">
                   <Button className="w-full flex items-center gap-2">
                     <Wrench className="w-4 h-4" /> Programează Montaj
                   </Button>

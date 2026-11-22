@@ -16,7 +16,7 @@ const copy = {
       "Echipa AirLife face igienizare și service. Spune-ne modelul aparatului și îți propunem o dată.",
     ],
     cta: "Cere o programare",
-    path: "/servicii/igienizare-aer-conditionat",
+    path: "/servicii/igienizare-aer-conditionat-buzau",
     productsTitle: "Din stoc, pentru ventilația din baie:",
   },
   primavara: {
@@ -28,7 +28,7 @@ const copy = {
       "Spune-ne modelul aparatului și îți propunem o dată.",
     ],
     cta: "Cere o programare",
-    path: "/servicii/igienizare-aer-conditionat",
+    path: "/servicii/igienizare-aer-conditionat-buzau",
     productsTitle: "Aparate de aer condiționat din stoc:",
   },
   "pompe-caldura": {
@@ -40,7 +40,7 @@ const copy = {
       "Un service făcut acum prinde problemele mici înainte să devină defecțiuni. Spune-ne modelul și stabilim o dată.",
     ],
     cta: "Cere un service",
-    path: "/servicii/service-aer-conditionat",
+    path: "/servicii/service-aer-conditionat-buzau",
     productsTitle: "Aparate de aer condiționat din stoc:",
   },
 } as const;

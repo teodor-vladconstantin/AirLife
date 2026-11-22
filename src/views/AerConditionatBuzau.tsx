@@ -20,9 +20,9 @@ const FAQS = [
 ];
 
 const SERVICES = [
-  { to: "/servicii/montaj-aer-conditionat", icon: Wrench, title: "Montaj aer condiționat Buzău", desc: "Instalare cu vidare, console, traseu frigorific și probă completă de funcționare." },
-  { to: "/servicii/igienizare-aer-conditionat", icon: Sparkles, title: "Igienizare aer condiționat Buzău", desc: "Curățare vaporizator, turbină și tăviță de condens, tratament antibacterian." },
-  { to: "/servicii/service-aer-conditionat", icon: Settings, title: "Service aer condiționat Buzău", desc: "Diagnosticare, freon, scurgeri de apă, coduri de eroare și piese." },
+  { to: "/servicii/montaj-aer-conditionat-buzau", icon: Wrench, title: "Montaj aer condiționat Buzău", desc: "Instalare cu vidare, console, traseu frigorific și probă completă de funcționare." },
+  { to: "/servicii/igienizare-aer-conditionat-buzau", icon: Sparkles, title: "Igienizare aer condiționat Buzău", desc: "Curățare vaporizator, turbină și tăviță de condens, tratament antibacterian." },
+  { to: "/servicii/service-aer-conditionat-buzau", icon: Settings, title: "Service aer condiționat Buzău", desc: "Diagnosticare, freon, scurgeri de apă, coduri de eroare și piese." },
 ];
 
 const AerConditionatBuzau = () => {
@@ -68,8 +68,8 @@ const AerConditionatBuzau = () => {
             <div className="inline-flex items-center gap-2 px-3 py-1 bg-primary/10 text-primary rounded-full text-sm font-medium mb-4">
               <MapPin className="w-4 h-4" /> Municipiul Buzău și tot județul
             </div>
-            <h1 className="text-4xl md:text-5xl font-bold tracking-tight mb-4 text-foreground">Aer Condiționat în Buzău</h1>
-            <p className="text-lg text-muted-foreground leading-relaxed">
+            <h1 className="text-4xl md:text-5xl font-bold tracking-tight mb-4 text-foreground">Aer Condiționat Buzău</h1>
+            <p className="lead text-lg text-muted-foreground leading-relaxed">
               AirLife face montaj, igienizare și service aer condiționat în municipiul Buzău și în tot județul Buzău, cu echipa AirLife sau parteneri.
               Aparatele le găsești în magazinul nostru online, iar montajul îl programăm tot noi.
             </p>
@@ -104,8 +104,8 @@ const AerConditionatBuzau = () => {
             </p>
             <div className="flex flex-wrap gap-4 text-sm font-semibold">
               <Link to="/aer-conditionat" className="text-primary hover:underline">Vezi aparatele de aer condiționat &rarr;</Link>
-              <Link to="/ghid/cost-montaj-aer-conditionat" className="text-primary hover:underline">Cât costă montajul &rarr;</Link>
-              <Link to="/ghid/ce-btu-aer-conditionat" className="text-primary hover:underline">Ce BTU ai nevoie (calculator) &rarr;</Link>
+              <Link to="/ghid/cost-montaj-aer-conditionat-buzau" className="text-primary hover:underline">Cât costă montajul &rarr;</Link>
+              <Link to="/ghid/ce-btu-aer-conditionat-buzau" className="text-primary hover:underline">Ce BTU ai nevoie (calculator) &rarr;</Link>
             </div>
           </section>
 

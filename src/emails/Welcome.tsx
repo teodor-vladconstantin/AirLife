@@ -15,7 +15,7 @@ const copy = {
       "Ca să începi, citește ghidul nostru despre igienizarea aerului condiționat: ce presupune, cât durează și la ce interval se face.",
     ],
     cta: "Citește ghidul",
-    path: "/ghid/igienizare-aer-conditionat",
+    path: "/ghid/igienizare-aer-conditionat-buzau",
     campaign: "welcome-0",
   },
   3: {
@@ -27,7 +27,7 @@ const copy = {
       "Un tehnician poate găsi rapid cauza și poate curăța aparatul. Spune-ne modelul și îți propunem o dată.",
     ],
     cta: "Cere o programare",
-    path: "/servicii/igienizare-aer-conditionat",
+    path: "/servicii/igienizare-aer-conditionat-buzau",
     campaign: "welcome-3",
   },
 } as const;

@@ -195,7 +195,7 @@ const CategoryPage = ({ forcedSlug, products }: CategoryPageProps) => {
                       <div className="relative aspect-video bg-white flex items-center justify-center p-4 border-b border-border/40">
                         <img
                           src={product.image_url}
-                          alt={product.name}
+                          alt={`${product.name} - AirLife Buzău`}
                           className="max-h-full max-w-full object-contain"
                           loading="lazy"
                         />
@@ -325,13 +325,13 @@ const CategoryPage = ({ forcedSlug, products }: CategoryPageProps) => {
             </div>
             <div className="flex gap-3 flex-shrink-0 w-full sm:w-auto">
               {activeSlug.includes("curatare") ? (
-                <Link to="/servicii/igienizare-aer-conditionat" className="w-full sm:w-auto">
+                <Link to="/servicii/igienizare-aer-conditionat-buzau" className="w-full sm:w-auto">
                   <Button className="w-full sm:w-auto flex items-center gap-2">
                     <Sparkles className="w-4 h-4" /> Serviciu Igienizare
                   </Button>
                 </Link>
               ) : (
-                <Link to="/servicii/montaj-aer-conditionat" className="w-full sm:w-auto">
+                <Link to="/servicii/montaj-aer-conditionat-buzau" className="w-full sm:w-auto">
                   <Button className="w-full sm:w-auto flex items-center gap-2">
                     <Wrench className="w-4 h-4" /> Serviciu Montaj
                   </Button>

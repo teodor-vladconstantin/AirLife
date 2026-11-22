@@ -2,6 +2,7 @@
 import { useEffect } from "react";
 import { useLocation } from "@/lib/router";
 import { trackPageView } from "@/lib/analytics";
+import JsonLd from "@/components/JsonLd";
 
 export interface SEOProps {
   title: string;
@@ -52,9 +53,7 @@ export const SEO = ({
       <meta name="twitter:title" content={title} />
       <meta name="twitter:description" content={description} />
       <meta name="twitter:image" content={ogImage} />
-      {structuredData && (
-        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData).split("<").join(String.fromCharCode(92) + "u003c") }} />
-      )}
+      {structuredData && <JsonLd data={structuredData} />}
     </>
   );
 };

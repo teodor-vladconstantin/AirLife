@@ -89,27 +89,27 @@ const Footer = () => {
                 </Link>
               </li>
               <li>
-                <Link to="/servicii/montaj-aer-conditionat" className="hover:text-brandlight transition-colors">
+                <Link to="/servicii/montaj-aer-conditionat-buzau" className="hover:text-brandlight transition-colors">
                   Montaj Aer Condiționat
                 </Link>
               </li>
               <li>
-                <Link to="/servicii/igienizare-aer-conditionat" className="hover:text-brandlight transition-colors">
+                <Link to="/servicii/igienizare-aer-conditionat-buzau" className="hover:text-brandlight transition-colors">
                   Igienizare &amp; Dezinfectare
                 </Link>
               </li>
               <li>
-                <Link to="/servicii/service-aer-conditionat" className="hover:text-brandlight transition-colors">
+                <Link to="/servicii/service-aer-conditionat-buzau" className="hover:text-brandlight transition-colors">
                   Service &amp; Reparații
                 </Link>
               </li>
               <li>
-                <Link to="/ghid/cost-montaj-aer-conditionat" className="hover:text-brandlight transition-colors">
+                <Link to="/ghid/cost-montaj-aer-conditionat-buzau" className="hover:text-brandlight transition-colors">
                   Ghid Cost Montaj
                 </Link>
               </li>
               <li>
-                <Link to="/ghid/ce-btu-aer-conditionat" className="hover:text-brandlight transition-colors">
+                <Link to="/ghid/ce-btu-aer-conditionat-buzau" className="hover:text-brandlight transition-colors">
                   Calculator BTU
                 </Link>
               </li>

@@ -122,7 +122,7 @@ const IgienizareAerConditionat = () => {
         "@type": "ListItem",
         "position": 3,
         "name": "Igienizare Aer Condiționat",
-        "item": "https://airlife.ro/servicii/igienizare-aer-conditionat"
+        "item": "https://airlife.ro/servicii/igienizare-aer-conditionat-buzau"
       }
     ]
   };
@@ -132,7 +132,7 @@ const IgienizareAerConditionat = () => {
       <SEO
         title="Igienizare Aer Condiționat Buzău | Curățare | AirLife"
         description="Igienizare aer condiționat în Buzău și județ. Curățare profundă a vaporizatorului, turbinei și tăviței de condens. Elimină mirosurile, bacteriile și mucegaiul."
-        canonical="https://airlife.ro/servicii/igienizare-aer-conditionat"
+        canonical="https://airlife.ro/servicii/igienizare-aer-conditionat-buzau"
         structuredData={[structuredData, breadcrumbsData, faqSchema(FAQS)]}
       />
 
@@ -157,11 +157,10 @@ const IgienizareAerConditionat = () => {
               <MapPin className="w-4 h-4" /> Buzău și tot județul
             </div>
             <h1 className="text-4xl md:text-5xl font-bold tracking-tight mb-4 text-foreground">
-              Igienizare Aer Condiționat în Buzău
+              Igienizare Aer Condiționat Buzău
             </h1>
-            <p className="text-lg text-muted-foreground leading-relaxed">
-              Respiră aer curat și proaspăt. Îndepărtăm praful acumulat, mucegaiul, ciupercile microscopice și bacteriile
-              din interiorul unității de aer condiționat folosind husă specială de protecție și soluții profesionale.
+            <p className="lead text-lg text-muted-foreground leading-relaxed">
+              Igienizarea aerului condiționat în Buzău durează 45–75 de minute și include curățarea vaporizatorului, a turbinei și a tăviței de condens, cu tratament antibacterian. Venim la domiciliu în municipiul Buzău și în tot județul, cu husă de protecție pentru pereți și pardoseală.
             </p>
           </div>
 
@@ -356,7 +355,7 @@ const IgienizareAerConditionat = () => {
                   <p className="text-muted-foreground text-xs leading-relaxed">
                     Filtrele se spală la 3-4 săptămâni în sezon. Ghidul nostru explică pas cu pas ce faci singur și când chemi un tehnician.
                   </p>
-                  <Link to="/ghid/igienizare-aer-conditionat" className="text-primary font-semibold text-xs inline-block hover:underline">
+                  <Link to="/ghid/igienizare-aer-conditionat-buzau" className="text-primary font-semibold text-xs inline-block hover:underline">
                     Citește ghidul &rarr;
                   </Link>
                 </CardContent>

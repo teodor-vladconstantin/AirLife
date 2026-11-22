@@ -11,7 +11,7 @@ import { Wrench, Sparkles, Activity, MapPin, ArrowRight, ShieldCheck, CheckCircl
 const servicesList = [
   {
     title: "Montaj Aer Condiționat",
-    path: "/servicii/montaj-aer-conditionat",
+    path: "/servicii/montaj-aer-conditionat-buzau",
     icon: Wrench,
     badge: "Instalare Profesională",
     description:
@@ -20,7 +20,7 @@ const servicesList = [
   },
   {
     title: "Igienizare & Curățare Aer Condiționat",
-    path: "/servicii/igienizare-aer-conditionat",
+    path: "/servicii/igienizare-aer-conditionat-buzau",
     icon: Sparkles,
     badge: "Sănătate & Confort",
     description:
@@ -29,7 +29,7 @@ const servicesList = [
   },
   {
     title: "Service & Reparații Climatizare",
-    path: "/servicii/service-aer-conditionat",
+    path: "/servicii/service-aer-conditionat-buzau",
     icon: Activity,
     badge: "Intervenție Rapidă",
     description:

@@ -6,7 +6,7 @@ import { Wrench, Sparkles, Activity, MapPin, ArrowRight, CheckCircle2 } from "lu
 const services = [
   {
     title: "Montaj Aer Condiționat",
-    slug: "montaj-aer-conditionat",
+    slug: "montaj-aer-conditionat-buzau",
     icon: Wrench,
     badge: "Instalare Autorizată",
     desc: "Instalare cu echipa proprie sau parteneri, echipamente profesionale și probe funcționale complete.",
@@ -14,7 +14,7 @@ const services = [
   },
   {
     title: "Igienizare & Curățare",
-    slug: "igienizare-aer-conditionat",
+    slug: "igienizare-aer-conditionat-buzau",
     icon: Sparkles,
     badge: "Curățare Profundă",
     desc: "Spălare cu husă etanșă pentru pereți, degresare vaporizator, curățare turbină și tratament antibacterian.",
@@ -22,7 +22,7 @@ const services = [
   },
   {
     title: "Service & Reparații",
-    slug: "service-aer-conditionat",
+    slug: "service-aer-conditionat-buzau",
     icon: Activity,
     badge: "Diagnosticare & Remediere",
     desc: "Identificare pierderi freon, reparare scurgeri de apă, înlocuire condensatori și senzori defecți.",

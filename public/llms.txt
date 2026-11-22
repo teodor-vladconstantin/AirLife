@@ -10,12 +10,12 @@
 
 ## Servicii în Buzău și ghiduri
 - [Aer condiționat Buzău: montaj, igienizare, service](https://airlife.ro/aer-conditionat-buzau)
-- [Montaj aer condiționat](https://airlife.ro/servicii/montaj-aer-conditionat)
-- [Igienizare aer condiționat](https://airlife.ro/servicii/igienizare-aer-conditionat)
-- [Service aer condiționat](https://airlife.ro/servicii/service-aer-conditionat)
-- [Ghid: cost montaj aer condiționat](https://airlife.ro/ghid/cost-montaj-aer-conditionat)
-- [Ghid: ce BTU ai nevoie (calculator pe volum, metri cubi)](https://airlife.ro/ghid/ce-btu-aer-conditionat)
-- [Ghid: igienizare aer condiționat](https://airlife.ro/ghid/igienizare-aer-conditionat)
+- [Montaj aer condiționat](https://airlife.ro/servicii/montaj-aer-conditionat-buzau)
+- [Igienizare aer condiționat](https://airlife.ro/servicii/igienizare-aer-conditionat-buzau)
+- [Service aer condiționat](https://airlife.ro/servicii/service-aer-conditionat-buzau)
+- [Ghid: cost montaj aer condiționat](https://airlife.ro/ghid/cost-montaj-aer-conditionat-buzau)
+- [Ghid: ce BTU ai nevoie (calculator pe volum, metri cubi)](https://airlife.ro/ghid/ce-btu-aer-conditionat-buzau)
+- [Ghid: igienizare aer condiționat](https://airlife.ro/ghid/igienizare-aer-conditionat-buzau)
 - [Blog](https://airlife.ro/blog)
 
 ## Informații
