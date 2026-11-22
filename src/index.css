@@ -1,11 +1,11 @@
 /* Brand selection color: must be after all Tailwind/base layers to override */
 ::selection {
-  background: #22c55e !important; /* Tailwind green-500 */
-  color: #fff !important;
+  background: #08AC48 !important; /* Verde AirLife (brand book) */
+  color: #0F2A1D !important; /* dark text on AirLife green: white only has 3:1 */
 }
 ::-moz-selection {
-  background: #22c55e !important;
-  color: #fff !important;
+  background: #08AC48 !important;
+  color: #0F2A1D !important;
 }
 @tailwind base;
 @tailwind components;
@@ -18,41 +18,41 @@ All colors MUST be HSL.
 @layer base {
   :root {
     --background: 0 0% 100%;
-    --foreground: 160 20% 15%;
+    --foreground: 151 47% 11%;
 
     --card: 0 0% 100%;
-    --card-foreground: 160 20% 15%;
+    --card-foreground: 151 47% 11%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 160 20% 15%;
+    --popover-foreground: 151 47% 11%;
 
-    --primary: 145 80% 25%;
+    --primary: 143 85% 26%;
     --primary-foreground: 0 0% 100%;
 
-    --secondary: 145 30% 95%;
-    --secondary-foreground: 145 65% 25%;
+    --secondary: 135 22% 96%;
+    --secondary-foreground: 143 85% 26%;
 
-    --muted: 145 20% 96%;
-    --muted-foreground: 160 12% 36%;
+    --muted: 135 22% 96%;
+    --muted-foreground: 149 12% 33%;
 
-    --accent: 145 45% 92%;
-    --accent-foreground: 150 40% 12%;
+    --accent: 146 44% 94%;
+    --accent-foreground: 151 47% 11%;
 
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 0 0% 100%;
 
     --border: 145 20% 90%;
     --input: 145 20% 90%;
-    --ring: 145 65% 45%;
+    --ring: 143 91% 35%;
 
     --radius: 0.75rem;
     
-    --hero-gradient: linear-gradient(135deg, hsl(145 65% 45%) 0%, hsl(145 65% 55%) 100%);
-    --subtle-gradient: linear-gradient(180deg, hsl(0 0% 100%) 0%, hsl(145 30% 98%) 100%);
+    --hero-gradient: linear-gradient(135deg, hsl(143 91% 35%) 0%, hsl(143 85% 26%) 100%);
+    --subtle-gradient: linear-gradient(180deg, hsl(0 0% 100%) 0%, hsl(135 22% 96%) 100%);
     
     --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    --shadow-soft: 0 4px 20px -4px hsl(145 40% 45% / 0.15);
-    --shadow-hover: 0 8px 30px -6px hsl(145 40% 45% / 0.25);
+    --shadow-soft: 0 4px 20px -4px hsl(143 91% 35% / 0.15);
+    --shadow-hover: 0 8px 30px -6px hsl(143 91% 35% / 0.25);
 
     --sidebar-background: 0 0% 98%;
 
@@ -72,8 +72,8 @@ All colors MUST be HSL.
   }
 
   .dark {
-    --background: 160 20% 10%;
-    --foreground: 145 20% 95%;
+    --background: 151 47% 11%;
+    --foreground: 135 22% 96%;
 
     --card: 160 20% 12%;
     --card-foreground: 145 20% 95%;
@@ -81,8 +81,8 @@ All colors MUST be HSL.
     --popover: 160 20% 12%;
     --popover-foreground: 145 20% 95%;
 
-    --primary: 145 65% 50%;
-    --primary-foreground: 160 20% 10%;
+    --primary: 143 91% 35%;
+    --primary-foreground: 151 47% 11%;
 
     --secondary: 160 20% 18%;
     --secondary-foreground: 145 20% 95%;
@@ -98,7 +98,7 @@ All colors MUST be HSL.
 
     --border: 160 20% 22%;
     --input: 160 20% 22%;
-    --ring: 145 65% 50%;
+    --ring: 143 91% 35%;
     --sidebar-background: 240 5.9% 10%;
     --sidebar-foreground: 240 4.8% 95.9%;
     --sidebar-primary: 224.3 76.3% 48%;

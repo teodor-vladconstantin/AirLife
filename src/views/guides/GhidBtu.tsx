@@ -154,7 +154,7 @@ const GhidBtu = ({ products = [] }: { products?: BtuProduct[] }) => {
               <form onSubmit={submitOffer} className="mt-6 rounded-xl border border-border p-4 space-y-3">
                 <h3 className="text-base font-bold text-foreground">Primește oferta</h3>
                 {status === "done" ? (
-                  <p className="text-sm text-emerald-700 font-medium" role="status">Mulțumim! Te contactăm în cel mai scurt timp{email ? " și ți-am trimis și un email cu recomandarea" : ""}.</p>
+                  <p className="text-sm text-primary font-medium" role="status">Mulțumim! Te contactăm în cel mai scurt timp{email ? " și ți-am trimis și un email cu recomandarea" : ""}.</p>
                 ) : (
                   <>
                     <p className="text-sm text-muted-foreground">Lasă telefonul sau emailul și îți trimitem oferta pentru un aparat de {r.size.toLocaleString("ro-RO")} BTU, cu montaj.</p>

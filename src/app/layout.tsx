@@ -11,7 +11,7 @@ export const metadata: Metadata = {
   icons: { icon: [{ url: "/airlife-icon.png", type: "image/png", sizes: "192x192" }, { url: "/favicon.ico", sizes: "48x48" }], apple: "/apple-touch-icon.png" },
   other: { "geo.region": "RO-BZ", "geo.placename": "Buzău" },
 };
-export const viewport: Viewport = { themeColor: "#16a34a" };
+export const viewport: Viewport = { themeColor: "#08AC48" };
 
 const orgSchema = {
   "@context": "https://schema.org",
