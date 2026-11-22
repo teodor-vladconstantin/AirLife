@@ -15,6 +15,15 @@ import { useTurnstile } from "@/components/Turnstile";
 import { trackCalculatorBtu, trackLead, trackError } from "@/lib/analytics";
 import { pickRecommended, type BtuProduct } from "@/lib/btu";
 
+const crumbs = (name: string, path: string) => ({
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Acasă", "item": "https://airlife.ro/" },
+    { "@type": "ListItem", "position": 2, "name": name, "item": `https://airlife.ro${path}` },
+  ],
+});
+
 const SIZES = [9000, 12000, 18000, 24000, 36000];
 
 // BTU is sized on room VOLUME: ~140 BTU/h per m³ (sources range 136-160), plus ~500 BTU per person beyond two and ~700 per heat-emitting appliance.
@@ -97,7 +106,7 @@ const GhidBtu = ({ products = [] }: { products?: BtuProduct[] }) => {
         description="Calculator BTU pentru aer condiționat, pe volum: 9.000 BTU până la 65 mc, 12.000 la 65–85 mc, 18.000 la 85–130 mc. Ține cont de soare și persoane."
         canonical="https://airlife.ro/ghid/ce-btu-aer-conditionat-buzau"
         ogType="article"
-        structuredData={[structuredData, faqSchema(FAQS)]}
+        structuredData={[structuredData, crumbs("Ghid BTU aer condiționat", "/ghid/ce-btu-aer-conditionat-buzau"), faqSchema(FAQS)]}
       />
       <Navbar />
       <main className="flex-1 bg-gradient-to-b from-background to-secondary/30 py-12">
@@ -112,7 +121,7 @@ const GhidBtu = ({ products = [] }: { products?: BtuProduct[] }) => {
           <header className="mb-8">
             <div className="inline-flex items-center gap-2 px-3 py-1 bg-primary/10 text-primary rounded-full text-xs font-semibold mb-4"><BookOpen className="w-3.5 h-3.5" /> Ghid</div>
             <h1 className="text-3xl md:text-5xl font-bold tracking-tight mb-4 text-foreground">Ce BTU ai nevoie pentru aerul condiționat?</h1>
-            <p className="text-xs text-muted-foreground mb-4">{bylineName()} • actualizat 20 noiembrie 2026</p>
+            <p className="text-xs text-muted-foreground mb-4">{bylineName()} • Actualizat <time dateTime="2026-11-20">20 noiembrie 2026</time></p>
             <p className="text-lg text-foreground/90">
               <strong>BTU se calculează după volumul camerei, în metri cubi (lungime × lățime × înălțime), nu după suprafață: aproximativ 140 BTU pe metru cub. Până la 65 mc ajung 9.000 BTU, între 65 și 85 mc 12.000 BTU, între 85 și 130 mc 18.000 BTU, iar între 130 și 170 mc 24.000 BTU.</strong>{" "}
               Valorile sunt pentru expunere normală la soare; calculatorul de mai jos le ajustează pentru camera ta.

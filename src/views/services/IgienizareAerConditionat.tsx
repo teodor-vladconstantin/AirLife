@@ -34,7 +34,7 @@ const FAQS = [
   },
   {
     "q": "Soluțiile folosite sunt toxice pentru animale sau copii?",
-    "a": "Folosim soluții profesionale, biodegradabile, destinate curățării aparatelor de climatizare. După clătire și uscare, aparatul este gata de utilizare în deplină siguranță."
+    "a": "Folosim soluții profesionale, biodegradabile, destinate curățării aparatelor de climatizare. După clătire și uscare, aparatul este gata de utilizare. Dacă ai animale de companie sau copii mici, spune-ne înainte de lucrare."
   },
   {
     "q": SERVICE_COVERAGE.igienizare.q,
@@ -177,7 +177,7 @@ const IgienizareAerConditionat = () => {
                     <ul className="list-disc list-inside space-y-1 text-muted-foreground text-xs mt-2">
                       <li>Miros neplăcut la pornirea aparatului</li>
                       <li>Flux de aer scăzut, deși turația e maximă</li>
-                      <li>Strănut, alergii sau iritații oculare în cameră</li>
+                      <li>Strănut sau iritații oculare în cameră (pot avea și alte cauze)</li>
                       <li>Consum crescut de curent electric</li>
                     </ul>
                   </div>

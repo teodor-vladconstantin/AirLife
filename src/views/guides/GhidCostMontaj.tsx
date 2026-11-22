@@ -9,6 +9,15 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { CheckCircle2, AlertOctagon, Wrench, Clock, BookOpen, ArrowRight } from "lucide-react";
 
+const crumbs = (name: string, path: string) => ({
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Acasă", "item": "https://airlife.ro/" },
+    { "@type": "ListItem", "position": 2, "name": name, "item": `https://airlife.ro${path}` },
+  ],
+});
+
 const FAQS = [
   {
     "q": "Cât durează montarea unui aparat de aer condiționat?",
@@ -43,7 +52,6 @@ const GhidCostMontaj = () => {
     "publisher": { "@id": "https://airlife.ro/#organization" },
     "image": "https://airlife.ro/og-image.jpg",
     "inLanguage": "ro-RO",
-    "datePublished": "2025-02-05",
     "dateModified": "2026-11-22",
     "mainEntityOfPage": "https://airlife.ro/ghid/cost-montaj-aer-conditionat-buzau"
   };
@@ -54,7 +62,7 @@ const GhidCostMontaj = () => {
         title="Cât costă montajul unui aer condiționat | Ghid AirLife"
         description="Ghid pentru montaj aer condiționat: ce include un montaj standard, ce factori cresc prețul (traseu, înălțime, carotare) și cum eviți greșelile."
         canonical="https://airlife.ro/ghid/cost-montaj-aer-conditionat-buzau"
-        structuredData={[structuredData, faqSchema(FAQS)]}
+        structuredData={[structuredData, crumbs("Ghid cost montaj aer condiționat", "/ghid/cost-montaj-aer-conditionat-buzau"), faqSchema(FAQS)]}
       />
 
       <Navbar />
@@ -75,7 +83,7 @@ const GhidCostMontaj = () => {
                 </Link>
               </li>
               <li>/</li>
-              <li className="text-foreground font-medium">Ghid Cost Montaj Aer Condiționat</li>
+              <li className="text-foreground font-medium">Ghid cost montaj aer condiționat</li>
             </ol>
           </nav>
 

@@ -105,7 +105,7 @@ const Footer = () => {
               </li>
               <li>
                 <Link to="/ghid/cost-montaj-aer-conditionat-buzau" className="hover:text-brandlight transition-colors">
-                  Ghid Cost Montaj
+                  Ghid cost montaj
                 </Link>
               </li>
               <li>

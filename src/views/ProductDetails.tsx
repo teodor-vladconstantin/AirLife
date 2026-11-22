@@ -115,7 +115,13 @@ const ProductDetails = ({ initial }: { initial: Loaded }) => {
 
   const productPath = product.slug ?? product.id;
   // Description unique per variant (name + price + delivery), then the product copy.
-  const cut = (s: string, n: number) => (s.length <= n ? s : s.slice(0, n).replace(/\s+\S*$/, "").replace(/[,;:\s-]+$/, ""));
+  const cut = (s: string, n: number) => {
+    if (s.length <= n) return s;
+    const head = s.slice(0, n - 1);
+    const stop = Math.max(head.lastIndexOf(". "), head.lastIndexOf("! "), head.lastIndexOf("? "));
+    if (stop > 90) return head.slice(0, stop + 1);
+    return head.replace(/\s+\S*$/, "").replace(/[,;:\s-]+$/, "") + "…";
+  };
   const seoTitle = product.name.length <= 50 ? `${product.name} | AirLife` : product.name; // never cut the name: BTU/model tell variants apart
   const seoDescription = cut(`${product.name}: ${product.price.toFixed(0)} RON, livrare în toată țara. ${product.description.replace(/\s+/g, " ")}`, 158);
   const structuredData = {

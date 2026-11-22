@@ -13,7 +13,7 @@ const CTASection = () => {
             className="text-3xl md:text-5xl font-bold mb-4"
             style={{ textShadow: "0 2px 12px rgba(0,0,0,0.3)" }}
           >
-            Pregătit pentru un Aer Curat și Confortabil?
+            Pregătit pentru un aer curat și confortabil?
           </h2>
           <p
             className="text-base md:text-lg mb-8 opacity-90 max-w-2xl mx-auto leading-relaxed"

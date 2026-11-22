@@ -35,7 +35,7 @@ const Hero = () => {
           className="text-4xl sm:text-5xl md:text-7xl font-bold mb-6 text-white leading-tight animate-in fade-in duration-700 max-w-4xl mx-auto"
           style={{ textShadow: "0 2px 16px rgba(0,0,0,0.4)" }}
         >
-          Magazin HVAC și Servicii<br />
+          Magazin HVAC și Servicii <br />
           <span className="text-brandlight">Aer Condiționat Buzău</span>
         </h1>
 

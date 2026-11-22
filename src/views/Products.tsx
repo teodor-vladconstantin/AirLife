@@ -36,7 +36,7 @@ const Products = ({ products }: { products: Product[] }) => {
   };
 
   const categories = [
-    { value: "all", label: "Toate Produsele" },
+    { value: "all", label: "Toate produsele" },
     ...Object.values(CATEGORIES_DATA)
       .map((c) => ({ value: c.name, label: c.name })),
   ];
