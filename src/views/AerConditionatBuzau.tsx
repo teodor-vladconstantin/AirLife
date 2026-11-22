@@ -5,7 +5,7 @@ import Footer from "@/components/Footer";
 import SEO from "@/components/SEO";
 import { FaqSection } from "@/components/FaqSection";
 import { faqSchema } from "@/lib/blogSchema";
-import { AREA_SERVED, BUZAU_LOCALITIES, COVERAGE_FAQ, PHONE_DISPLAY, PHONE_TEL } from "@/data/localSeo";
+import { AREA_SERVED, BUZAU_LOCALITIES, COVERAGE_FAQ, PHONE_DISPLAY, PHONE_TEL, SERVICE_NAMES } from "@/data/localSeo";
 import { MapPin, Wrench, Sparkles, Settings, ShoppingCart, PhoneCall } from "lucide-react";
 
 const URL = "https://airlife.ro/aer-conditionat-buzau";
@@ -14,7 +14,6 @@ const FAQS = [
   COVERAGE_FAQ,
   { q: "Cât durează montajul unui aer condiționat în Buzău?", a: "Un montaj standard durează între 2 și 3,5 ore, în funcție de grosimea peretelui și lungimea traseului frigorific. Vidăm obligatoriu fiecare instalație cu pompă de vid." },
   { q: "Cât durează o igienizare la domiciliu?", a: "Între 45 și 75 de minute per aparat. Curățăm vaporizatorul, turbina și tăvița de condens, cu husă de protecție ca să nu murdărim pereții." },
-  { q: "Cât de des trebuie igienizat aerul condiționat?", a: "Cel puțin o dată pe an pentru locuințe, ideal primăvara înainte de sezonul cald. În birouri și spații comerciale, de două ori pe an." },
   { q: "Pot cumpăra aparatul de la voi și să mi-l montați tot voi?", a: "Da. Comanzi aparatul de pe airlife.ro, iar montajul în Buzău sau în județ îl programăm cu echipa AirLife sau parteneri. Livrarea prin curier este gratuită peste 1000 RON." },
   { q: "Care este programul?", a: `Luni-vineri 09:00-18:00, sâmbătă 10:00-14:00. Ne găsești la ${PHONE_DISPLAY} sau prin formularul de pe paginile de servicii.` },
 ];
@@ -37,7 +36,7 @@ const AerConditionatBuzau = () => {
       about: { "@id": "https://airlife.ro/#localbusiness" },
       mainEntity: {
         "@type": "ItemList",
-        itemListElement: SERVICES.map((s, i) => ({ "@type": "ListItem", position: i + 1, item: { "@id": `https://airlife.ro${s.to}#service` } })),
+        itemListElement: SERVICES.map((s, i) => ({ "@type": "ListItem", position: i + 1, item: { "@type": "Service", "@id": `https://airlife.ro${s.to}#service`, name: Object.values(SERVICE_NAMES)[i], url: `https://airlife.ro${s.to}`, provider: { "@id": "https://airlife.ro/#localbusiness" } } })),
       },
     },
     {
@@ -54,7 +53,7 @@ const AerConditionatBuzau = () => {
   return (
     <div className="min-h-screen flex flex-col">
       <SEO
-        title="Aer Condiționat Buzău: Montaj, Igienizare, Service | AirLife"
+        title="Aer condiționat Buzău: montaj, igienizare, service | AirLife"
         description="Aer condiționat în Buzău: montaj cu vidare, igienizare și service la domiciliu, în municipiu și tot județul. Aparate cu livrare rapidă."
         canonical={URL}
         structuredData={schema}
@@ -70,7 +69,7 @@ const AerConditionatBuzau = () => {
             <div className="inline-flex items-center gap-2 px-3 py-1 bg-primary/10 text-primary rounded-full text-sm font-medium mb-4">
               <MapPin className="w-4 h-4" /> Municipiul Buzău și tot județul
             </div>
-            <h1 className="text-4xl md:text-5xl font-bold tracking-tight mb-4 text-foreground">Aer Condiționat Buzău</h1>
+            <h1 className="text-4xl md:text-5xl font-bold tracking-tight mb-4 text-foreground">Aer condiționat Buzău</h1>
             <p className="lead text-lg text-muted-foreground leading-relaxed">
               AirLife face montaj, igienizare și service aer condiționat în municipiul Buzău și în tot județul Buzău, cu echipa AirLife sau parteneri.
               Aparatele le găsești în magazinul nostru online, iar montajul îl programăm tot noi.

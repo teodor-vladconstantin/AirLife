@@ -32,7 +32,7 @@ const GhidIgienizare = () => {
   const structuredData = {
     "@context": "https://schema.org",
     "@type": "Article",
-    "headline": "Când și Cum se Curăță un Aer Condiționat: Ghid Pas cu Pas",
+    "headline": "Când și cum se curăță un aer condiționat: ghid pas cu pas",
     "description":
       "Ghid detaliat despre curățarea și dezinfectarea aparatului de aer condiționat. De la spălarea filtrelor la curățarea vaporizatorului și a tăviței de condens.",
     "author": { "@id": "https://airlife.ro/#organization" },
@@ -40,14 +40,14 @@ const GhidIgienizare = () => {
     "image": "https://airlife.ro/og-image.jpg",
     "inLanguage": "ro-RO",
     "datePublished": "2025-02-01",
-    "dateModified": "2026-10-27",
+    "dateModified": "2026-11-22",
     "mainEntityOfPage": "https://airlife.ro/ghid/igienizare-aer-conditionat-buzau"
   };
 
   return (
     <div className="min-h-screen flex flex-col">
       <SEO
-        title="Când și Cum se Curăță un Aer Condiționat | Ghid AirLife"
+        title="Când și cum se curăță un aer condiționat | Ghid AirLife"
         description="Ghid pentru igienizarea aerului condiționat: cum se curăță filtrele, vaporizatorul și turbina și când ai nevoie de tehnician."
         canonical="https://airlife.ro/ghid/igienizare-aer-conditionat-buzau"
         structuredData={[structuredData, faqSchema(FAQS)]}
@@ -80,10 +80,12 @@ const GhidIgienizare = () => {
               <BookOpen className="w-3.5 h-3.5" /> Ghid Practic HVAC
             </div>
             <h1 className="text-3xl md:text-5xl font-bold tracking-tight mb-4 text-foreground">
-              Când și Cum se Curăță un Aer Condiționat: Ghid Pas cu Pas
+              Când și cum se curăță un aer condiționat: ghid pas cu pas
             </h1>
             <div className="flex items-center gap-4 text-xs text-muted-foreground">
-              <span>Publicat de Echipa Tehnică AirLife</span>
+              <span>Echipa AirLife</span>
+              <span>•</span>
+              <span>Actualizat <time dateTime="2026-11-22">22 noiembrie 2026</time></span>
               <span>•</span>
               <span className="flex items-center gap-1">
                 <Clock className="w-3 h-3" /> Timp de citire: 6 minute
@@ -93,7 +95,7 @@ const GhidIgienizare = () => {
 
           <div className="space-y-8 text-foreground/90 leading-relaxed text-base">
             <p className="text-lg text-muted-foreground font-normal">
-              Aparatul de aer condiționat este plămânul casei tale pe timp de vară și în perioadele de tranziție. Însă, fără o igienizare meticuloasă la intervale regulate, vaporizatorul și tăvița de condens pot deveni focare de mucegai și bacterii recirculate în încăpere.
+              Aerul condiționat se igienizează cel puțin o dată pe an în locuințe, ideal primăvara, înainte de sezonul cald, și de două ori pe an în birouri și spații comerciale. Fără o igienizare la intervale regulate, vaporizatorul și tăvița de condens pot deveni focare de mucegai și bacterii recirculate în încăpere.
             </p>
 
             <Card className="border-border">

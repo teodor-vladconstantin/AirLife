@@ -1,5 +1,6 @@
 "use client";
 import { Link } from "@/lib/router";
+import { SERVICE_NAMES } from "@/data/localSeo";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import SEO from "@/components/SEO";
@@ -42,13 +43,13 @@ const Services = () => {
     {
       "@context": "https://schema.org",
       "@type": "CollectionPage",
-      "name": "Servicii Aer Condiționat Buzău",
+      "name": "Servicii aer condiționat Buzău",
       "url": "https://airlife.ro/servicii",
       "about": { "@id": "https://airlife.ro/#localbusiness" },
       "description": "Servicii complete de montaj, igienizare și service aer condiționat în Buzău și tot județul Buzău.",
       "mainEntity": {
         "@type": "ItemList",
-        "itemListElement": ["montaj", "igienizare", "service"].map((s, i) => ({ "@type": "ListItem", "position": i + 1, "item": { "@id": `https://airlife.ro/servicii/${s}-aer-conditionat-buzau#service` } })),
+        "itemListElement": (["montaj", "igienizare", "service"] as const).map((s, i) => ({ "@type": "ListItem", "position": i + 1, "item": { "@type": "Service", "@id": `https://airlife.ro/servicii/${s}-aer-conditionat-buzau#service`, "name": SERVICE_NAMES[s], "url": `https://airlife.ro/servicii/${s}-aer-conditionat-buzau`, "provider": { "@id": "https://airlife.ro/#localbusiness" } } })),
       },
     },
     {
@@ -64,7 +65,7 @@ const Services = () => {
   return (
     <div className="min-h-screen flex flex-col">
       <SEO
-        title="Servicii Aer Condiționat Buzău | Montaj, Igienizare, Service"
+        title="Servicii aer condiționat Buzău | Montaj, igienizare, service"
         description="Servicii de climatizare în Buzău și județ: montaj autorizat cu vidare, igienizare profesională a vaporizatorului și turbinei, depanare și reparații aer condiționat."
         canonical="https://airlife.ro/servicii"
         structuredData={structuredData}
@@ -79,7 +80,7 @@ const Services = () => {
               <MapPin className="w-4 h-4" /> Buzău și tot județul
             </div>
             <h1 className="text-4xl md:text-5xl font-bold tracking-tight mb-4 text-foreground">
-              Servicii Aer Condiționat în Buzău
+              Servicii aer condiționat în Buzău
             </h1>
             <p className="text-lg text-muted-foreground leading-relaxed">
               Echipa AirLife oferă servicii tehnice dedicate pentru sistemele de aer condiționat rezidențiale și comerciale.

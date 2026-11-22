@@ -132,7 +132,7 @@ const Contact = () => {
                 <CardHeader className="pb-3">
                   <CardTitle className="flex items-center gap-2 text-base font-bold">
                     <Clock className="h-5 w-5 text-primary" />
-                    Program de Lucru
+                    Program de lucru
                   </CardTitle>
                 </CardHeader>
                 <CardContent className="text-sm text-muted-foreground space-y-2">
@@ -167,7 +167,7 @@ const Contact = () => {
                   {submitted ? (
                     <div className="p-8 text-center bg-primary/10 rounded-xl border border-primary/20 space-y-3 animate-in fade-in">
                       <CheckCircle2 className="w-12 h-12 text-primary mx-auto" />
-                      <h3 className="text-xl font-bold text-foreground">Mesaj Trimis cu Succes!</h3>
+                      <h3 className="text-xl font-bold text-foreground">Mesaj trimis cu succes!</h3>
                       <p className="text-sm text-muted-foreground max-w-md mx-auto">
                         Am primit solicitarea ta și o analizăm cu atenție. Te vom contacta pe email sau telefonic în cel mai scurt timp.
                       </p>

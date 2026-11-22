@@ -7,7 +7,7 @@ import { Button } from "@/components/ui/button";
 import { Target, Eye, Award, Leaf, Users, HeartHandshake, Sparkles, MapPin } from "lucide-react";
 import { Link } from "@/lib/router";
 import { company } from "@/data/company";
-import { FGAS_TEXT } from "@/data/localSeo";
+import { FGAS_TEXT, PHONE_DISPLAY } from "@/data/localSeo";
 
 const AboutUs = () => {
   const structuredData = {
@@ -188,6 +188,8 @@ const AboutUs = () => {
                     <tr><th scope="row" className="p-3 text-left font-medium w-1/3">Denumire</th><td className="p-3 text-muted-foreground">{company.legalName} (brand {company.brand})</td></tr>
                     <tr className="border-t border-border"><th scope="row" className="p-3 text-left font-medium">CUI</th><td className="p-3 text-muted-foreground">{company.cui}</td></tr>
                     <tr className="border-t border-border"><th scope="row" className="p-3 text-left font-medium">Nr. Reg. Com.</th><td className="p-3 text-muted-foreground">{company.regCom}</td></tr>
+                    <tr className="border-t border-border"><th scope="row" className="p-3 text-left font-medium">Telefon</th><td className="p-3 text-muted-foreground">{PHONE_DISPLAY}</td></tr>
+                    <tr className="border-t border-border"><th scope="row" className="p-3 text-left font-medium">Program</th><td className="p-3 text-muted-foreground">Luni – vineri 09:00 – 18:00, sâmbătă 10:00 – 14:00</td></tr>
                     <tr className="border-t border-border"><th scope="row" className="p-3 text-left font-medium">Localitate</th><td className="p-3 text-muted-foreground">Mărăcineni, județul Buzău</td></tr>
                     <tr className="border-t border-border"><th scope="row" className="p-3 text-left font-medium">Atestări</th><td className="p-3 text-muted-foreground">{FGAS_TEXT}</td></tr>
                     <tr className="border-t border-border"><th scope="row" className="p-3 text-left font-medium">Zonă de servicii</th><td className="p-3 text-muted-foreground">Municipiul Buzău și județul Buzău; produse cu livrare în toată țara</td></tr>
