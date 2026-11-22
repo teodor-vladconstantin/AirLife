@@ -113,7 +113,7 @@ const Navbar = () => {
                 >
                   <Wrench className="w-4 h-4 mr-2 text-primary" />
                   <div>
-                    <div className="text-sm font-medium">Montaj Aer Condiționat</div>
+                    <div className="text-sm font-medium">Montaj aer condiționat</div>
                     <span className="text-[11px] text-muted-foreground block">
                       Instalare curată cu vidare
                     </span>

@@ -10,7 +10,7 @@ import { Wrench, Sparkles, Activity, MapPin, ArrowRight, ShieldCheck, CheckCircl
 
 const servicesList = [
   {
-    title: "Montaj Aer Condiționat",
+    title: "Montaj aer condiționat",
     path: "/servicii/montaj-aer-conditionat-buzau",
     icon: Wrench,
     badge: "Instalare Profesională",

@@ -82,7 +82,7 @@ const Contact = () => {
         <div className="container mx-auto px-4 max-w-5xl">
           <div className="text-center max-w-2xl mx-auto mb-12">
             <h1 className="text-3xl md:text-5xl font-bold mb-4 text-foreground tracking-tight">
-              Contact &amp; Asistență Clienți
+              Contact AirLife Buzău: asistență clienți
             </h1>
             <p className="text-muted-foreground text-base md:text-lg">
               Ai o întrebare despre produsele noastre sau dorești o programare pentru montaj ori igienizare? Scrie-ne și îți răspundem cu plăcere.
@@ -115,7 +115,7 @@ const Contact = () => {
                 <CardHeader className="pb-3">
                   <CardTitle className="flex items-center gap-2 text-base font-bold">
                     <Mail className="h-5 w-5 text-primary" />
-                    Adrese de E-mail
+                    Adrese de e-mail
                   </CardTitle>
                 </CardHeader>
                 <CardContent className="space-y-3 text-sm">
@@ -157,7 +157,7 @@ const Contact = () => {
               <Card className="border-border shadow-sm">
                 <CardHeader>
                   <CardTitle className="text-2xl font-bold text-foreground">
-                    Trimite-ne un Mesaj
+                    Trimite-ne un mesaj
                   </CardTitle>
                   <p className="text-sm text-muted-foreground">
                     Completează formularul de mai jos și un membru al echipei noastre îți va răspunde în maximum 24 de ore lucrătoare.

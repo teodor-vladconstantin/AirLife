@@ -104,7 +104,7 @@ const AboutUs = () => {
               <CardContent className="text-muted-foreground">
                 <p>
                   Mediul înconjurător este o prioritate. Toate produsele noastre sunt selectate pentru
-                  eficiența energetică ridicată și impactul minim asupra mediului.
+                  eficiența energetică și consumul redus.
                 </p>
               </CardContent>
             </Card>
@@ -119,7 +119,7 @@ const AboutUs = () => {
               <CardContent className="text-muted-foreground">
                 <p>
                   Clienții noștri sunt în centrul a tot ce facem. Oferim consultanță personalizată,
-                  livrare rapidă și suport post-vânzare pentru a asigura satisfacția totală.
+                  livrare rapidă și suport post-vânzare.
                 </p>
               </CardContent>
             </Card>
@@ -168,7 +168,7 @@ const AboutUs = () => {
                 </li>
                 <li className="flex items-start gap-2">
                   <div className="w-2 h-2 rounded-full bg-primary mt-2" />
-                  <span>Suport tehnic dedicat și service autorizat</span>
+                  <span>Suport tehnic dedicat și service profesional</span>
                 </li>
                 <li className="flex items-start gap-2">
                   <div className="w-2 h-2 rounded-full bg-primary mt-2" />

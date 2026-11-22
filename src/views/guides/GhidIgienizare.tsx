@@ -9,6 +9,15 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { CheckCircle2, AlertTriangle, Sparkles, Clock, BookOpen, ArrowRight } from "lucide-react";
 
+const crumbs = (name: string, path: string) => ({
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Acasă", "item": "https://airlife.ro/" },
+    { "@type": "ListItem", "position": 2, "name": name, "item": `https://airlife.ro${path}` },
+  ],
+});
+
 const FAQS = [
   {
     "q": "Cât de des trebuie curățat aerul condiționat?",
@@ -39,7 +48,6 @@ const GhidIgienizare = () => {
     "publisher": { "@id": "https://airlife.ro/#organization" },
     "image": "https://airlife.ro/og-image.jpg",
     "inLanguage": "ro-RO",
-    "datePublished": "2025-02-01",
     "dateModified": "2026-11-22",
     "mainEntityOfPage": "https://airlife.ro/ghid/igienizare-aer-conditionat-buzau"
   };
@@ -50,7 +58,7 @@ const GhidIgienizare = () => {
         title="Când și cum se curăță un aer condiționat | Ghid AirLife"
         description="Ghid pentru igienizarea aerului condiționat: cum se curăță filtrele, vaporizatorul și turbina și când ai nevoie de tehnician."
         canonical="https://airlife.ro/ghid/igienizare-aer-conditionat-buzau"
-        structuredData={[structuredData, faqSchema(FAQS)]}
+        structuredData={[structuredData, crumbs("Ghid igienizare aer condiționat", "/ghid/igienizare-aer-conditionat-buzau"), faqSchema(FAQS)]}
       />
 
       <Navbar />
@@ -71,7 +79,7 @@ const GhidIgienizare = () => {
                 </Link>
               </li>
               <li>/</li>
-              <li className="text-foreground font-medium">Ghid Igienizare Aer Condiționat</li>
+              <li className="text-foreground font-medium">Ghid igienizare aer condiționat</li>
             </ol>
           </nav>
 
@@ -123,7 +131,7 @@ const GhidIgienizare = () => {
             <Card className="border-border">
               <CardContent className="p-6 md:p-8 space-y-4">
                 <h2 className="text-2xl font-bold text-foreground">
-                  2. Ce poți curăța singur acasă (Întreținere lunară)
+                  2. Ce poți curăța singur acasă (filtrele, la 3–4 săptămâni)
                 </h2>
                 <div className="space-y-3 text-sm text-muted-foreground">
                   <p>

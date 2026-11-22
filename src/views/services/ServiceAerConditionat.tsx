@@ -223,7 +223,7 @@ const ServiceAerConditionat = () => {
               <section className="bg-card p-6 md:p-8 rounded-xl border border-border shadow-sm">
                 <h2 className="text-2xl font-bold mb-3 text-foreground flex items-center gap-2">
                   <ShieldCheck className="w-6 h-6 text-primary" />
-                  Politica noastră: Fără încărcare oarbă cu freon!
+                  Politica noastră: fără încărcare oarbă cu freon
                 </h2>
                 <p className="text-muted-foreground leading-relaxed mb-3">
                   Sistemul frigorific al unui aer condiționat este un circuit închis ermetic. Freonul nu „se consumă” și nu „expiră”. Dacă aparatul tău nu mai are agent frigorific, înseamnă că există o neetanșeitate sau o pierdere.

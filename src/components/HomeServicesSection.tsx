@@ -5,7 +5,7 @@ import { Wrench, Sparkles, Activity, MapPin, ArrowRight, CheckCircle2 } from "lu
 
 const services = [
   {
-    title: "Montaj Aer Condiționat",
+    title: "Montaj aer condiționat",
     slug: "montaj-aer-conditionat-buzau",
     icon: Wrench,
     badge: "Instalare Autorizată",
@@ -26,7 +26,7 @@ const services = [
     icon: Activity,
     badge: "Diagnosticare & Remediere",
     desc: "Identificare pierderi freon, reparare scurgeri de apă, înlocuire condensatori și senzori defecți.",
-    features: ["Diagnosticare precisă", "Încărcare freon cu vidare", "Piese originale"],
+    features: ["Diagnosticare precisă", "Încărcare freon cu vidare", "Piese potrivite aparatului"],
   },
 ];
 
