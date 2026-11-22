@@ -12,7 +12,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Mail, Phone, Clock, Send, CheckCircle2 } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { trackContactSubmit, trackClickToCall } from "@/lib/analytics";
-import { AREA_SERVED, PHONE_DISPLAY, PHONE_TEL } from "@/data/localSeo";
+import { PHONE_DISPLAY, PHONE_TEL } from "@/data/localSeo";
 
 const Contact = () => {
   const { toast } = useToast();
@@ -64,22 +64,7 @@ const Contact = () => {
     "@type": "ContactPage",
     "name": "Contact AirLife",
     "url": "https://airlife.ro/contact",
-    "mainEntity": {
-      "@type": "HVACBusiness",
-      "name": "AirLife",
-      "email": "contact@airlife.ro",
-      "telephone": PHONE_TEL,
-      "@id": "https://airlife.ro/#localbusiness",
-      "areaServed": AREA_SERVED,
-      "address": {
-        "@type": "PostalAddress",
-        "streetAddress": "Str. Centrală nr. 169",
-        "addressLocality": "Mărăcineni",
-        "addressRegion": "Buzău",
-        "postalCode": "127325",
-        "addressCountry": "RO"
-      }
-    }
+    "mainEntity": { "@id": "https://airlife.ro/#localbusiness" }
   };
 
   return (

@@ -3,7 +3,6 @@ import { Link } from "@/lib/router";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import SEO from "@/components/SEO";
-import { AREA_SERVED } from "@/data/localSeo";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Wrench, Sparkles, Activity, MapPin, ArrowRight, ShieldCheck, CheckCircle2 } from "lucide-react";
@@ -41,10 +40,10 @@ const servicesList = [
 const Services = () => {
   const structuredData = {
     "@context": "https://schema.org",
-    "@type": "HVACBusiness",
-    "name": "AirLife Servicii Climatizare",
+    "@type": "CollectionPage",
+    "name": "Servicii Aer Condiționat Buzău",
     "url": "https://airlife.ro/servicii",
-    "areaServed": AREA_SERVED,
+    "about": { "@id": "https://airlife.ro/#localbusiness" },
     "description": "Servicii complete de montaj, igienizare și service aer condiționat în Buzău și tot județul Buzău."
   };
 

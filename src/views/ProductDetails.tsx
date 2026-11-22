@@ -136,13 +136,10 @@ const ProductDetails = ({ initial }: { initial: Loaded }) => {
       "url": `https://airlife.ro/products/${productPath}`,
       "priceCurrency": "RON",
       "price": product.price.toFixed(2),
-      "priceValidUntil": "2027-12-31",
+      "priceValidUntil": `${new Date().getFullYear() + 1}-12-31`,
       "availability": product.stock > 0 ? "https://schema.org/InStock" : "https://schema.org/OutOfStock",
       "itemCondition": "https://schema.org/NewCondition",
-      "seller": {
-        "@type": "Organization",
-        "name": "AirLife"
-      },
+      "seller": { "@id": "https://airlife.ro/#organization" },
       // Mirrors /livrare-si-retur and the checkout rule: 20 RON under 1000 RON, free above; 14-day return, buyer pays return shipping.
       "shippingDetails": {
         "@type": "OfferShippingDetails",

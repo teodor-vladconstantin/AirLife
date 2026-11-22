@@ -7,6 +7,7 @@ import { useCart } from "@/contexts/CartContext";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { CATEGORIES_DATA } from "@/data/categoriesData";
+import JsonLd from "@/components/JsonLd";
 
 interface Product {
   id: string;
@@ -42,8 +43,32 @@ const Products = ({ products }: { products: Product[] }) => {
   const visible = selectedCategory === "all" ? products : products.filter((p) => p.category === selectedCategory);
 
 
+  const listSchema = [
+    {
+      "@context": "https://schema.org",
+      "@type": "CollectionPage",
+      name: "Produse HVAC AirLife",
+      url: "https://airlife.ro/products",
+      isPartOf: { "@id": "https://airlife.ro/#website" },
+      mainEntity: {
+        "@type": "ItemList",
+        numberOfItems: products.length,
+        itemListElement: products.map((p, i) => ({ "@type": "ListItem", position: i + 1, url: `https://airlife.ro/products/${p.slug ?? p.id}`, name: p.name })),
+      },
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      itemListElement: [
+        { "@type": "ListItem", position: 1, name: "Acasă", item: "https://airlife.ro/" },
+        { "@type": "ListItem", position: 2, name: "Produse", item: "https://airlife.ro/products" },
+      ],
+    },
+  ];
+
   return (
     <div className="min-h-screen flex flex-col">
+      <JsonLd data={listSchema} />
       <Navbar />
 
       <main className="flex-1 bg-gradient-to-b from-background to-secondary/30 py-12">
@@ -90,6 +115,9 @@ const Products = ({ products }: { products: Product[] }) => {
                       <img
                         src={product.image_url}
                         alt={`${product.name} - AirLife Buzău`}
+                        loading={idx < 4 ? undefined : "lazy"}
+                        fetchPriority={idx < 2 ? "high" : undefined}
+                        decoding="async"
                         className="max-h-64 w-auto max-w-full object-contain transition-opacity duration-400 will-change-opacity group-hover:opacity-90"
                         style={{display: 'block', margin: '0 auto'}}
                       />

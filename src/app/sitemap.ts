@@ -23,10 +23,10 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     const client = db();
     const [{ data: posts }, { data: products }] = await Promise.all([
       client.from("blog_posts").select("slug,published_at,updated_at").eq("status", "published"),
-      client.from("products").select("slug").not("slug", "is", null),
+      client.from("products").select("slug,updated_at").not("slug", "is", null),
     ]);
     for (const p of posts ?? []) entries.push({ url: `${SITE}/blog/${p.slug}`, lastModified: p.updated_at ?? p.published_at ?? undefined, priority: 0.6 });
-    for (const p of products ?? []) entries.push({ url: `${SITE}/products/${p.slug}`, priority: 0.6 });
+    for (const p of products ?? []) entries.push({ url: `${SITE}/products/${p.slug}`, lastModified: p.updated_at ?? undefined, priority: 0.6 });
   } catch {
     // DB down: serve the static part rather than failing the sitemap
   }

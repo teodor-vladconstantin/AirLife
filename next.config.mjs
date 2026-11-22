@@ -9,6 +9,7 @@ const vercelRelease = process.env.VERCEL_GIT_REPO_SLUG && process.env.VERCEL_GIT
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  poweredByHeader: false,
   // Keep the existing VITE_* variables in .env / Vercel working: they are exposed to the browser under NEXT_PUBLIC_*.
   env: {
     NEXT_PUBLIC_SUPABASE_URL: process.env.NEXT_PUBLIC_SUPABASE_URL ?? process.env.VITE_SUPABASE_URL,
