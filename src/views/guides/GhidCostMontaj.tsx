@@ -60,7 +60,7 @@ const GhidCostMontaj = () => {
     <div className="min-h-screen flex flex-col">
       <SEO
         title="Cât Costă Montajul unui Aer Condiționat | Ghid AirLife"
-        description="Ghid de prețuri pentru montaj aer condiționat: ce include un montaj standard, ce factori cresc prețul (traseu, înălțime, carotare) și cum eviți un montaj neconform."
+        description="Ghid pentru montaj aer condiționat: ce include un montaj standard, ce factori cresc prețul (traseu, înălțime, carotare) și cum eviți greșelile."
         canonical="https://airlife.ro/ghid/cost-montaj-aer-conditionat-buzau"
         structuredData={[structuredData, faqSchema(FAQS)]}
       />

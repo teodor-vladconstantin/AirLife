@@ -6,6 +6,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Target, Eye, Award, Leaf, Users, HeartHandshake, Sparkles, MapPin } from "lucide-react";
 import { Link } from "@/lib/router";
+import { company } from "@/data/company";
 
 const AboutUs = () => {
   const structuredData = {
@@ -19,7 +20,7 @@ const AboutUs = () => {
   return (
     <div className="min-h-screen flex flex-col">
       <SEO
-        title="Despre Noi | Misiunea & Valorile AirLife"
+        title="Despre AirLife Buzău | Misiune, valori și date firmă"
         description="Află mai multe despre AirLife: magazin online HVAC și echipă dedicată de montaj și igienizare sisteme de aer condiționat. Corectitudine și eficiență."
         canonical="https://airlife.ro/despre-noi"
         structuredData={structuredData}
@@ -171,6 +172,23 @@ const AboutUs = () => {
                   <span>Prețuri competitive și oferte speciale</span>
                 </li>
               </ul>
+            </CardContent>
+          </Card>
+
+          <Card className="mb-8 animate-in fade-in duration-700">
+            <CardHeader><CardTitle className="text-lg">Date firmă</CardTitle></CardHeader>
+            <CardContent>
+              <div className="overflow-x-auto rounded-xl border border-border">
+                <table className="w-full text-sm">
+                  <caption className="sr-only">Date de identificare ale firmei care operează AirLife</caption>
+                  <tbody>
+                    <tr><th scope="row" className="p-3 text-left font-medium w-1/3">Denumire</th><td className="p-3 text-muted-foreground">{company.legalName} (brand {company.brand})</td></tr>
+                    <tr className="border-t border-border"><th scope="row" className="p-3 text-left font-medium">CUI</th><td className="p-3 text-muted-foreground">{company.cui}</td></tr>
+                    <tr className="border-t border-border"><th scope="row" className="p-3 text-left font-medium">Nr. Reg. Com.</th><td className="p-3 text-muted-foreground">{company.regCom}</td></tr>
+                    <tr className="border-t border-border"><th scope="row" className="p-3 text-left font-medium">Zonă de servicii</th><td className="p-3 text-muted-foreground">Municipiul Buzău și județul Buzău; produse cu livrare în toată țara</td></tr>
+                  </tbody>
+                </table>
+              </div>
             </CardContent>
           </Card>
 

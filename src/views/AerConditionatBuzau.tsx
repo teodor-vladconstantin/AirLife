@@ -93,6 +93,22 @@ const AerConditionatBuzau = () => {
           </section>
 
           <section className="bg-card p-6 md:p-8 rounded-xl border border-border shadow-sm">
+            <h2 className="text-2xl font-bold mb-4 text-foreground">Servicii de aer condiționat în Buzău, pe scurt</h2>
+            <div className="overflow-x-auto rounded-xl border border-border">
+              <table className="w-full text-sm">
+                <caption className="sr-only">Serviciile AirLife pentru aer condiționat în Buzău: durată și ce include</caption>
+                <thead className="bg-secondary/50 text-left"><tr><th scope="col" className="p-3">Serviciu</th><th scope="col" className="p-3">Durată tipică</th><th scope="col" className="p-3">Ce include</th></tr></thead>
+                <tbody>
+                  <tr className="border-t border-border"><th scope="row" className="p-3 text-left font-normal"><Link to="/servicii/montaj-aer-conditionat-buzau" className="text-primary font-semibold hover:underline">Montaj</Link></th><td className="p-3">2 – 3,5 ore</td><td className="p-3">Unitate interioară și exterioară, traseu frigorific, vidare cu pompă de vid, probă completă</td></tr>
+                  <tr className="border-t border-border"><th scope="row" className="p-3 text-left font-normal"><Link to="/servicii/igienizare-aer-conditionat-buzau" className="text-primary font-semibold hover:underline">Igienizare</Link></th><td className="p-3">45 – 75 de minute pe aparat</td><td className="p-3">Curățare vaporizator, turbină și tăviță de condens, cu husă de protecție</td></tr>
+                  <tr className="border-t border-border"><th scope="row" className="p-3 text-left font-normal"><Link to="/servicii/service-aer-conditionat-buzau" className="text-primary font-semibold hover:underline">Service</Link></th><td className="p-3">După constatare</td><td className="p-3">Diagnosticare, freon, scurgeri de apă, coduri de eroare, piese</td></tr>
+                </tbody>
+              </table>
+            </div>
+            <p className="text-sm text-muted-foreground mt-3">Prețul exact îl stabilim după ce știm modelul și locul montajului. Vezi <Link to="/ghid/cost-montaj-aer-conditionat-buzau" className="text-primary font-semibold hover:underline">de ce depinde costul montajului</Link>.</p>
+          </section>
+
+          <section className="bg-card p-6 md:p-8 rounded-xl border border-border shadow-sm">
             <h2 className="text-2xl font-bold mb-3 text-foreground">Unde intervenim în județul Buzău</h2>
             <p className="text-muted-foreground mb-4">
               În oraș venim în toate cartierele: Micro 3, Micro 5, Micro 14, Dorobanți, Centru, Broșteni, Orizont. În județ ajungem în orașele și comunele de mai jos și în localitățile din jurul lor.

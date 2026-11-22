@@ -21,7 +21,7 @@ const Blog = ({ posts }: { posts: Post[] }) => {
       <main className="flex-1 bg-gradient-to-b from-background to-secondary/30 py-12">
         <div className="container mx-auto px-4 max-w-5xl space-y-10">
           <header className="max-w-2xl">
-            <h1 className="text-3xl md:text-5xl font-bold tracking-tight mb-3">Blog AirLife</h1>
+            <h1 className="text-3xl md:text-5xl font-bold tracking-tight mb-3">Blog AirLife: sfaturi despre aer condiționat și aer curat</h1>
             <p className="text-muted-foreground text-lg">Sfaturi practice despre aerul condiționat, de la echipa care îl montează și îl întreține.</p>
           </header>
 

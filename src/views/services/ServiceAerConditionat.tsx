@@ -7,7 +7,7 @@ import { Link } from "@/lib/router";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import SEO from "@/components/SEO";
-import { AREA_SERVED, COVERAGE_FAQ } from "@/data/localSeo";
+import { AREA_SERVED, SERVICE_COVERAGE } from "@/data/localSeo";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
@@ -37,8 +37,8 @@ const FAQS = [
     "a": "Deservim majoritatea mărcilor de pe piață: Daikin, Gree, Midea, Mitsubishi, Cooper&Hunter, Yamato, Vortex, Beko, Whirlpool, LG, Samsung și altele."
   },
   {
-    "q": COVERAGE_FAQ.q,
-    "a": COVERAGE_FAQ.a
+    "q": SERVICE_COVERAGE.service.q,
+    "a": SERVICE_COVERAGE.service.a
   }
 ];
 
@@ -122,7 +122,7 @@ const ServiceAerConditionat = () => {
     <div className="min-h-screen flex flex-col">
       <SEO
         title="Service Aer Condiționat Buzău | Reparații și Freon | AirLife"
-        description="Service și reparații aer condiționat în Buzău și județ. Diagnosticare rapidă, verificare freon R32/R410A, remediere scurgeri de apă și înlocuire componente defecte."
+        description="Service aer condiționat în Buzău și județ: diagnosticare, verificare freon, remediere scurgeri de apă și înlocuire componente defecte."
         canonical="https://airlife.ro/servicii/service-aer-conditionat-buzau"
         structuredData={[structuredData, breadcrumbsData, faqSchema(FAQS)]}
       />
@@ -224,7 +224,7 @@ const ServiceAerConditionat = () => {
                   Sistemul frigorific al unui aer condiționat este un circuit închis ermetic. Freonul nu „se consumă” și nu „expiră”. Dacă aparatul tău nu mai are agent frigorific, înseamnă că există o neetanșeitate sau o pierdere.
                 </p>
                 <p className="text-muted-foreground leading-relaxed">
-                  Completarea cu freon fără remedierea pierderii duce inevitabil la o nouă descărcare în câteva săptămâni. De aceea, la Airlife identificăm și reetanșăm întotdeauna traseul înainte de vidare și recântărirea agentului frigorific conform specificațiilor de pe eticheta aparatului.
+                  Completarea cu freon fără remedierea pierderii duce inevitabil la o nouă descărcare în câteva săptămâni. De aceea, la AirLife identificăm și reetanșăm întotdeauna traseul înainte de vidare și recântărirea agentului frigorific conform specificațiilor de pe eticheta aparatului.
                 </p>
               </section>
 
