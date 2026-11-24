@@ -52,6 +52,7 @@ export const ProductManager = () => {
   const [products, setProducts] = useState<Product[]>([]);
   const [q, setQ] = useState("");
   const [cat, setCat] = useState("all");
+  const [limit, setLimit] = useState(50); // the catalog has hundreds of products: render them in steps
   const [editing, setEditing] = useState<Product | "new" | null>(null);
   const [form, setForm] = useState<Form>(EMPTY);
   const [uploading, setUploading] = useState(false);
@@ -133,13 +134,13 @@ export const ProductManager = () => {
   return (
     <div className="space-y-4">
       <div className="flex flex-col sm:flex-row gap-3 sm:items-center justify-between">
-        <div className="flex flex-1 gap-3">
-          <div className="relative flex-1 max-w-sm">
+        <div className="flex flex-1 flex-col gap-3 sm:flex-row">
+          <div className="relative flex-1 sm:max-w-sm">
             <Search className="w-4 h-4 absolute left-3 top-3 text-muted-foreground" />
-            <Input value={q} onChange={(e) => setQ(e.target.value)} placeholder="Caută după nume sau SKU" className="pl-9" />
+            <Input value={q} onChange={(e) => { setQ(e.target.value); setLimit(50); }} placeholder="Caută după nume sau SKU" className="pl-9" />
           </div>
-          <Select value={cat} onValueChange={setCat}>
-            <SelectTrigger className="w-56"><SelectValue /></SelectTrigger>
+          <Select value={cat} onValueChange={(v) => { setCat(v); setLimit(50); }}>
+            <SelectTrigger className="w-full sm:w-56"><SelectValue /></SelectTrigger>
             <SelectContent>
               <SelectItem value="all">Toate categoriile</SelectItem>
               {CATEGORY_NAMES.map((c) => <SelectItem key={c} value={c}>{c}</SelectItem>)}
@@ -150,25 +151,25 @@ export const ProductManager = () => {
       </div>
       <p className="text-xs text-muted-foreground">{shown.length} din {products.length} produse. Produsele ascunse sau fără imagine nu apar în magazin.</p>
 
-      <div className="grid gap-3">
-        {shown.map((p) => {
+      <div className="grid grid-cols-1 gap-3">
+        {shown.slice(0, limit).map((p) => {
           const { price, compare_at } = salePricing(p);
           return (
             <Card key={p.id} className={p.hidden ? "opacity-60" : ""}>
-              <CardContent className="p-4 flex items-center gap-4">
+              <CardContent className="flex flex-wrap items-center gap-3 p-4 sm:flex-nowrap sm:gap-4">
                 <div className="w-16 h-16 rounded bg-white border flex items-center justify-center flex-shrink-0">
                   {p.image_url ? <img src={p.image_url} alt="" className="max-h-full max-w-full object-contain" /> : <EyeOff className="w-5 h-5 text-muted-foreground" />}
                 </div>
                 <div className="flex-1 min-w-0">
-                  <p className="font-semibold truncate">{p.name}</p>
-                  <p className="text-xs text-muted-foreground">{p.category}{p.sku ? ` · ${p.sku}` : ""} · stoc {p.stock}</p>
+                  <p className="break-words font-semibold sm:truncate">{p.name}</p>
+                  <p className="break-words text-xs text-muted-foreground">{p.category}{p.sku ? ` · ${p.sku}` : ""} · stoc {p.stock}</p>
                   <p className="text-sm mt-0.5">
                     <span className="font-semibold text-primary">{price} RON</span>
                     {compare_at && <span className="ml-2 line-through text-muted-foreground">{compare_at} RON</span>}
                     {p.hidden && <span className="ml-2 text-xs font-medium text-amber-700">ascuns</span>}
                   </p>
                 </div>
-                <div className="flex items-center gap-1">
+                <div className="flex w-full items-center justify-end gap-1 sm:w-auto">
                   <Button size="icon" variant="ghost" title={p.hidden ? "Arată în magazin" : "Ascunde din magazin"} onClick={() => quickToggle(p)}><EyeOff className="w-4 h-4" /></Button>
                   <Button size="icon" variant="outline" title="Editează" onClick={() => open(p)}><Pencil className="w-4 h-4" /></Button>
                   <Button size="icon" variant="destructive" title="Șterge" onClick={() => remove(p)}><Trash2 className="w-4 h-4" /></Button>
@@ -178,6 +179,11 @@ export const ProductManager = () => {
           );
         })}
       </div>
+      {shown.length > limit && (
+        <div className="text-center">
+          <Button variant="outline" onClick={() => setLimit((n) => n + 50)}>Arată mai multe ({shown.length - limit} rămase)</Button>
+        </div>
+      )}
 
       <Dialog open={editing !== null} onOpenChange={(o) => !o && setEditing(null)}>
         <DialogContent className="max-w-2xl max-h-[90vh] overflow-y-auto">

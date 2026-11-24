@@ -18,7 +18,7 @@ import { Trash2, Copy, Megaphone, Percent, Link2 } from "lucide-react";
 type Campaign = Tables<"campaigns">;
 const CATEGORY_NAMES = Object.values(CATEGORIES_DATA).map((c) => c.name);
 const PAGES = [
-  { v: "/", l: "Pagina principală" }, { v: "/products", l: "Toate produsele" }, { v: "/aer-conditionat", l: "Aer condiționat" },
+  { v: "/", l: "Pagina principală" }, { v: "/produse", l: "Toate produsele" }, { v: "/aer-conditionat", l: "Aer condiționat" },
   { v: "/aer-conditionat-buzau", l: "Aer condiționat Buzău (servicii)" }, { v: "/servicii/montaj-aer-conditionat-buzau", l: "Montaj" },
   { v: "/servicii/igienizare-aer-conditionat-buzau", l: "Igienizare" }, { v: "/ventilatoare-baie", l: "Ventilatoare baie" },
   { v: "/dezumidificatoare", l: "Dezumidificatoare" }, { v: "/recuperatoare-caldura", l: "Recuperatoare" }, { v: "/blog", l: "Blog" },
@@ -46,7 +46,7 @@ export const CampaignManager = () => {
   const { toast } = useToast();
   const [confirm, confirmDialog] = useConfirm();
   const [list, setList] = useState<Campaign[]>([]);
-  const [f, setF] = useState({ name: "", headline: "", cta_label: "Vezi ofertele", cta_url: "/products", starts_at: inputDate(new Date()), ends_at: "", active: true, discount: "", category: "all" });
+  const [f, setF] = useState({ name: "", headline: "", cta_label: "Vezi ofertele", cta_url: "/produse", starts_at: inputDate(new Date()), ends_at: "", active: true, discount: "", category: "all" });
   const [saleCat, setSaleCat] = useState("all");
   const [salePct, setSalePct] = useState("");
   const [saleEnd, setSaleEnd] = useState("");
@@ -98,7 +98,7 @@ export const CampaignManager = () => {
 
   return (
     <div className="space-y-8">
-      <div className="grid lg:grid-cols-2 gap-6">
+      <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
         <Card>
           <CardHeader><CardTitle className="flex items-center gap-2 text-lg"><Megaphone className="w-5 h-5" />Campanie nouă (banner pe site)</CardTitle></CardHeader>
           <CardContent>
@@ -145,7 +145,7 @@ export const CampaignManager = () => {
               <div className="space-y-1"><Label>Reducere (%)</Label><Input type="number" min="1" max="99" value={salePct} onChange={(e) => setSalePct(e.target.value)} /></div>
               <div className="space-y-1"><Label>Până la</Label><DateTimePicker value={saleEnd} onChange={setSaleEnd} placeholder="Fără dată de sfârșit" /></div>
             </div>
-            <div className="flex gap-3">
+            <div className="flex flex-col gap-3 sm:flex-row">
               <Button onClick={() => sale(false)} disabled={busy} className="flex-1">Aplică reducerea</Button>
               <Button onClick={() => sale(true)} disabled={busy} variant="outline" className="flex-1">Scoate ofertele</Button>
             </div>
@@ -160,7 +160,7 @@ export const CampaignManager = () => {
         {list.map((c) => (
           <Card key={c.id}><CardContent className="p-4 flex items-center gap-4">
             <div className="flex-1 min-w-0">
-              <p className="font-semibold">{c.name} {!c.active && <span className="text-xs text-amber-700 ml-1">oprită</span>}</p>
+              <p className="break-words font-semibold">{c.name} {!c.active && <span className="text-xs text-amber-700 ml-1">oprită</span>}</p>
               <p className="text-sm text-muted-foreground truncate">{c.headline}</p>
               <p className="text-xs text-muted-foreground">{new Date(c.starts_at).toLocaleString("ro-RO")} → {c.ends_at ? new Date(c.ends_at).toLocaleString("ro-RO") : "fără sfârșit"}</p>
             </div>
@@ -187,7 +187,7 @@ export const UtmBuilder = () => {
       <CardHeader><CardTitle className="flex items-center gap-2 text-lg"><Link2 className="w-5 h-5" />Linkuri cu UTM pe fiecare canal</CardTitle></CardHeader>
       <CardContent className="space-y-4">
         <p className="text-sm text-muted-foreground">Folosește aceste linkuri în postări, bio, reclame și emailuri. Statisticile apar în GA4 la Surse de trafic.</p>
-        <div className="grid sm:grid-cols-3 gap-3">
+        <div className="grid grid-cols-1 gap-3 sm:grid-cols-3">
           <Select value={page} onValueChange={setPage}>
             <SelectTrigger><SelectValue /></SelectTrigger>
             <SelectContent>{PAGES.map((p) => <SelectItem key={p.v} value={p.v}>{p.l}</SelectItem>)}</SelectContent>
@@ -199,10 +199,10 @@ export const UtmBuilder = () => {
           {UTM_CHANNELS.map((ch) => {
             const url = utmUrl(page, ch, campaign || "general", content || undefined);
             return (
-              <div key={ch.key} className="flex items-center gap-2 text-xs">
-                <span className="w-48 font-medium flex-shrink-0">{ch.label}</span>
-                <code className="flex-1 truncate bg-secondary rounded px-2 py-1">{url}</code>
-                <Button size="icon" variant="ghost" onClick={() => copy(url)} aria-label="Copiază"><Copy className="w-4 h-4" /></Button>
+              <div key={ch.key} className="flex flex-col gap-1 text-xs sm:flex-row sm:items-center sm:gap-2">
+                <span className="font-medium sm:w-48 sm:flex-shrink-0">{ch.label}</span>
+                <code className="min-w-0 break-all rounded bg-secondary px-2 py-1 sm:flex-1 sm:truncate">{url}</code>
+                <Button size="icon" variant="ghost" className="self-end sm:self-auto" onClick={() => copy(url)} aria-label="Copiază"><Copy className="w-4 h-4" /></Button>
               </div>
             );
           })}

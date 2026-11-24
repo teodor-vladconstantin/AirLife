@@ -78,7 +78,7 @@ const GhidCostMontaj = () => {
               </li>
               <li>/</li>
               <li>
-                <Link to="/products" className="hover:text-primary transition-colors">
+                <Link to="/produse" className="hover:text-primary transition-colors">
                   Ghiduri
                 </Link>
               </li>

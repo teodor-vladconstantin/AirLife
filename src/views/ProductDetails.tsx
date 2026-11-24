@@ -127,8 +127,8 @@ const ProductDetails = ({ initial }: { initial: Loaded }) => {
   const structuredData = {
     "@context": "https://schema.org",
     "@type": "Product",
-    "@id": `https://airlife.ro/products/${productPath}#product`,
-    "url": `https://airlife.ro/products/${productPath}`,
+    "@id": `https://airlife.ro/produse/${productPath}#product`,
+    "url": `https://airlife.ro/produse/${productPath}`,
     "name": product.name,
     "description": product.description,
     "image": product.gallery.length ? product.gallery : product.image_url ? (product.image_url.startsWith("http") ? product.image_url : `https://airlife.ro${product.image_url}`) : "https://airlife.ro/placeholder.svg",
@@ -141,7 +141,7 @@ const ProductDetails = ({ initial }: { initial: Loaded }) => {
     },
     "offers": {
       "@type": "Offer",
-      "url": `https://airlife.ro/products/${productPath}`,
+      "url": `https://airlife.ro/produse/${productPath}`,
       "priceCurrency": "RON",
       "price": product.price.toFixed(2),
       "priceValidUntil": `${new Date().getFullYear() + 1}-12-31`,
@@ -185,13 +185,13 @@ const ProductDetails = ({ initial }: { initial: Loaded }) => {
         "@type": "ListItem",
         "position": 2,
         "name": "Produse",
-        "item": "https://airlife.ro/products"
+        "item": "https://airlife.ro/produse"
       },
       {
         "@type": "ListItem",
         "position": 3,
         "name": product.name,
-        "item": `https://airlife.ro/products/${productPath}`
+        "item": `https://airlife.ro/produse/${productPath}`
       }
     ]
   };
@@ -201,7 +201,7 @@ const ProductDetails = ({ initial }: { initial: Loaded }) => {
       <SEO
         title={seoTitle}
         description={seoDescription}
-        canonical={`https://airlife.ro/products/${productPath}`}
+        canonical={`https://airlife.ro/produse/${productPath}`}
         ogType="product"
         structuredData={[structuredData, breadcrumbsData]}
       />
@@ -218,7 +218,7 @@ const ProductDetails = ({ initial }: { initial: Loaded }) => {
               </li>
               <li>/</li>
               <li>
-                <Link to="/products" className="hover:text-primary transition-colors">Produse</Link>
+                <Link to="/produse" className="hover:text-primary transition-colors">Produse</Link>
               </li>
               <li>/</li>
               <li className="text-foreground font-medium truncate max-w-xs">{product.name}</li>
@@ -510,14 +510,14 @@ const ProductDetails = ({ initial }: { initial: Loaded }) => {
                       </div>
                       <span className="text-[11px] text-primary font-semibold block mb-1">{rel.category}</span>
                       <h3 className="font-bold text-sm text-foreground mb-2 line-clamp-2">
-                        <Link to={`/products/${rel.slug ?? rel.id}`} className="hover:text-primary transition-colors">
+                        <Link to={`/produse/${rel.slug ?? rel.id}`} className="hover:text-primary transition-colors">
                           {rel.name}
                         </Link>
                       </h3>
                     </div>
                     <div className="pt-3 border-t border-border flex items-center justify-between">
                       <span className="font-bold text-primary">{rel.price.toFixed(2)} RON</span>
-                      <Link to={`/products/${rel.slug ?? rel.id}`}>
+                      <Link to={`/produse/${rel.slug ?? rel.id}`}>
                         <Button size="sm" variant="outline" className="text-xs">
                           Vezi Produs
                         </Button>

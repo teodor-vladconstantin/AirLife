@@ -47,7 +47,7 @@ const Hero = () => {
         </p>
 
         <div className="flex flex-col sm:flex-row gap-4 justify-center items-center animate-in fade-in duration-700">
-          <Link to="/products">
+          <Link to="/produse">
             <Button
               size="lg"
               className="bg-primary hover:bg-primary/90 text-primary-foreground shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-0.5 group w-full sm:w-auto font-semibold px-8"

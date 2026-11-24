@@ -18,7 +18,7 @@ export default async function Page({ searchParams }: { searchParams: Promise<{ o
           <p className="text-muted-foreground mb-8">Îți trimitem confirmarea pe email. Dacă ai plătit prin card, primești și chitanța de la Stripe. Te sunăm doar dacă avem nevoie de o clarificare.</p>
           <div className="flex flex-wrap items-center justify-center gap-3">
             {o && <Link href={`/urmarire-comanda?o=${encodeURIComponent(o)}`} className="inline-block px-6 py-3 rounded-lg bg-primary text-primary-foreground font-semibold">Urmărește comanda</Link>}
-            <Link href="/products" className="inline-block px-6 py-3 rounded-lg border font-semibold">Înapoi la produse</Link>
+            <Link href="/produse" className="inline-block px-6 py-3 rounded-lg border font-semibold">Înapoi la produse</Link>
           </div>
         </div>
       </main>

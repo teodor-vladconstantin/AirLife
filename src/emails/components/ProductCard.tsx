@@ -5,7 +5,7 @@ export type EmailProduct = { name: string; slug: string; price: number; image_ur
 
 // Image + name + price, all linking to the product page. Used inside a table row (3 per row).
 export function ProductCard({ p, campaign }: { p: EmailProduct; campaign: string }) {
-  const href = utm(`/products/${p.slug}`, campaign);
+  const href = utm(`/produse/${p.slug}`, campaign);
   return (
     <td width="33%" valign="top" style={{ padding: "0 6px", textAlign: "center" }}>
       <Link href={href}>

@@ -26,7 +26,7 @@ export async function GET() {
     const extra = (p.gallery ?? []).filter((g) => g && g !== p.image_url).slice(0, 10);
     return `<item>
 <g:id>${esc(p.sku ?? p.slug!)}</g:id><title>${esc(p.name.slice(0, 150))}</title><description>${esc(p.description.slice(0, 4900))}</description>
-<link>${SITE}/products/${p.slug}</link><g:image_link>${esc(abs(p.image_url!))}</g:image_link>${extra.map((g) => `<g:additional_image_link>${esc(abs(g))}</g:additional_image_link>`).join("")}
+<link>${SITE}/produse/${p.slug}</link><g:image_link>${esc(abs(p.image_url!))}</g:image_link>${extra.map((g) => `<g:additional_image_link>${esc(abs(g))}</g:additional_image_link>`).join("")}
 <g:availability>${(p.stock ?? 0) > 0 ? "in_stock" : "out_of_stock"}</g:availability><g:price>${list.toFixed(2)} RON</g:price>${compare_at ? `<g:sale_price>${price.toFixed(2)} RON</g:sale_price>` : ""}
 <g:condition>new</g:condition>${p.brand ? `<g:brand>${esc(p.brand)}</g:brand>` : ""}${gtin ? `<g:gtin>${gtin}</g:gtin>` : ""}${p.sku ? `<g:mpn>${esc(p.sku)}</g:mpn>` : ""}<g:identifier_exists>${p.brand && (gtin || p.sku) ? "yes" : "no"}</g:identifier_exists>
 <g:product_type>${esc(p.category)}</g:product_type>${GOOGLE_CATEGORY[p.category] ? `<g:google_product_category>${esc(GOOGLE_CATEGORY[p.category])}</g:google_product_category>` : ""}

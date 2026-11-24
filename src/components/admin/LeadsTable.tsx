@@ -30,7 +30,7 @@ export const LeadsTable = () => {
 
   return (
     <div className="space-y-4">
-      <div className="flex items-center justify-between">
+      <div className="flex flex-wrap items-center justify-between gap-2">
         <p className="text-sm text-muted-foreground">{leads.length} abonați</p>
         <Button variant="outline" size="sm" onClick={exportCsv} disabled={!leads.length}>
           <Download className="h-4 w-4 mr-2" />
@@ -41,9 +41,9 @@ export const LeadsTable = () => {
         <CardContent className="p-0 divide-y">
           {leads.length === 0 && <p className="p-6 text-muted-foreground">Niciun lead încă.</p>}
           {leads.map((l) => (
-            <div key={l.id} className="flex justify-between gap-4 p-3 text-sm">
-              <span className="font-medium">{l.email}</span>
-              <span className="text-muted-foreground">
+            <div key={l.id} className="flex flex-col gap-1 p-3 text-sm sm:flex-row sm:justify-between sm:gap-4">
+              <span className="break-all font-medium">{l.email}</span>
+              <span className="text-muted-foreground sm:text-right">
                 {l.magnet ?? "-"} · {new Date(l.created_at).toLocaleDateString("ro-RO")}
               </span>
             </div>

@@ -4,7 +4,7 @@ import { gtinOf, isShopVisible } from "../src/lib/pricing";
 
 const url = process.env.NEXT_PUBLIC_SUPABASE_URL ?? process.env.VITE_SUPABASE_URL!;
 const key = process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY ?? process.env.VITE_SUPABASE_PUBLISHABLE_KEY!;
-const res = await fetch(`${url}/rest/v1/products?select=*&order=name`, { headers: { apikey: key, Authorization: `Bearer ${key}` } });
+const res = await fetch(`${url}/rest/v1/produse?select=*&order=name`, { headers: { apikey: key, Authorization: `Bearer ${key}` } });
 if (!res.ok) throw new Error(`products: ${res.status} ${await res.text()}`);
 const data = (await res.json()) as Array<Record<string, any>>; // eslint-disable-line @typescript-eslint/no-explicit-any
 
