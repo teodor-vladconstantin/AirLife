@@ -1,6 +1,6 @@
 // Turns the public Shopify catalog of ecovent.ro (/products.json) into a Supabase migration for public.products.
 // Usage (from the repo root):
-//   npx tsx scripts/ecovent-import.ts --out supabase/migrations/<timestamp>_import_ecovent.sql [--types "Ventilatoare Baie,Dezumidificatoare"] [--per-type 5] [--limit 100] [--from cache.json]
+//   npx tsx scripts/ecovent-import.ts --out supabase/migrations/<timestamp>_import_ecovent [--chunk 100] [--types "Ventilatoare Baie,Dezumidificatoare"] [--per-type 5] [--limit 100] [--from cache.json]
 // Without --from the catalog is read live (sequential requests, 1.5 s apart). With --from it reads a saved products.json array.
 //
 // Rules:
@@ -16,13 +16,35 @@ type ShopifyProduct = {
   variants: { sku: string | null; available: boolean }[]; images: { src: string }[];
 };
 
-// Ecovent product_type -> category name used by the shop (see src/data/categoriesData.ts)
+// Ecovent product_type -> category name used by the shop (see src/data/categoriesData.ts).
+// Not imported on purpose (not HVAC): Aspiratoare, Accesorii Aspiratoare, Filtru Apă, Răcitoare Aer.
 const CATEGORY_MAP: Record<string, string> = {
   "Ventilatoare Baie": "Ventilatoare Baie",
   "Recuperatoare de Căldură": "Recuperatoare de Căldură",
+  "Sisteme descentralizate": "Recuperatoare de Căldură",
   "Dezumidificatoare": "Dezumidificatoare",
   "Purificator de Aer": "Purificatoare Aer",
+  "Filtre Purificator de Aer": "Filtre Purificatoare",
+  "Aer Condiționat": "Aer Condiționat",
+  "Aer Condiționat Portabil": "Aer Condiționat Portabil",
+  "Centrale de Ventilație": "Centrale de Ventilație",
+  "Filtre Centrale de Ventilație": "Filtre Centrale de Ventilație",
+  "Accesorii Ventilație": "Accesorii Ventilație",
+  "Grile Ventilație": "Grile de Ventilație",
+  "Sisteme de Distribuție a Aerului": "Tubulatură și Distribuție Aer",
+  "Tubulatură Ventilație": "Tubulatură și Distribuție Aer",
+  "Izolație Tubulatură": "Tubulatură și Distribuție Aer",
+  "Ventilatoare Portabile": "Ventilatoare",
+  "Ventilatoare Turn": "Ventilatoare",
+  "Ventilatoare Axiale": "Ventilatoare Axiale și Centrifugale",
+  "Ventilatoare Centrifugale": "Ventilatoare Axiale și Centrifugale",
+  "Umidificatoare": "Umidificatoare",
+  "Accesorii Umidificatoare": "Umidificatoare",
+  "Aerotermă": "Aeroterme",
+  "Monitoare Calitate Aer": "Monitoare Calitate Aer",
 };
+// Some portable units are filed under "Aer Condiționat" on their side.
+const categoryOf = (p: ShopifyProduct) => (p.product_type === "Aer Condiționat" && /portabil/i.test(p.title) ? "Aer Condiționat Portabil" : CATEGORY_MAP[p.product_type]);
 
 const args = process.argv.slice(2);
 const arg = (name: string) => { const i = args.indexOf(`--${name}`); return i >= 0 ? args[i + 1] : undefined; };
@@ -31,6 +53,7 @@ if (!out) { console.error("Missing --out <file.sql>"); process.exit(1); }
 const types = (arg("types") ?? Object.keys(CATEGORY_MAP).join(",")).split(",").map((s) => s.trim()).filter(Boolean);
 const perType = arg("per-type") ? Number(arg("per-type")) : Infinity;
 const limit = arg("limit") ? Number(arg("limit")) : Infinity;
+const chunk = arg("chunk") ? Number(arg("chunk")) : 0; // with --chunk N, --out is a file prefix and N products go in each _partNN.sql
 
 const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms));
 async function load(): Promise<ShopifyProduct[]> {
@@ -85,7 +108,7 @@ const dq = (s: string) => `$ev$${s.split("$ev$").join("")}$ev$`;
 (async () => {
   const all = await load();
   const isResealed = (p: ShopifyProduct) => (Array.isArray(p.tags) ? p.tags : [p.tags]).some((t) => /resigilat/i.test(t)) || /^resigilat/i.test(p.title);
-  const usable = all.filter((p) => !isResealed(p) && p.images.length > 0 && CATEGORY_MAP[p.product_type] && types.includes(p.product_type));
+  const usable = all.filter((p) => !isResealed(p) && p.images.length > 0 && categoryOf(p) && types.includes(p.product_type));
   const perVendorSeen: Record<string, number> = {};
   const taken: Record<string, number> = {};
   const picked: ShopifyProduct[] = [];
@@ -93,35 +116,46 @@ const dq = (s: string) => `$ev$${s.split("$ev$").join("")}$ev$`;
   const ordered = [...usable].sort((a, b) => Number(b.variants.some((v) => v.available)) - Number(a.variants.some((v) => v.available)));
   for (const p of ordered) {
     if (picked.length >= limit) break;
-    if ((taken[p.product_type] ?? 0) >= perType) continue;
-    const key = `${p.product_type}|${p.vendor}`;
+    if ((taken[categoryOf(p)!] ?? 0) >= perType) continue;
+    const key = `${categoryOf(p)}|${p.vendor}`;
     if (perType !== Infinity && (perVendorSeen[key] ?? 0) >= Math.ceil(perType / 2)) continue;
     const { description } = cleanHtml(p.body_html ?? "");
-    if (description.length < 80) continue;
+    if (perType !== Infinity && description.length < 80) continue; // quality bar only when sampling
     perVendorSeen[key] = (perVendorSeen[key] ?? 0) + 1;
-    taken[p.product_type] = (taken[p.product_type] ?? 0) + 1;
+    taken[categoryOf(p)!] = (taken[categoryOf(p)!] ?? 0) + 1;
     picked.push(p);
   }
 
   const slugs = new Set<string>();
   const rows = picked.map((p) => {
-    const { description, features } = cleanHtml(p.body_html ?? "");
+    const cleaned = cleanHtml(p.body_html ?? "");
+    const { features } = cleaned;
+    const description = cleaned.description || p.title; // some products have no text on their side: keep the title so the NOT NULL column is filled
     let slug = shortSlug(p.handle || p.title);
     for (let i = 2; slugs.has(slug); i++) slug = `${shortSlug(p.handle || p.title, 74)}-${i}`;
     slugs.add(slug);
     const [first, ...rest] = p.images.map((i) => i.src);
     const sku = p.variants[0]?.sku?.trim() || null;
-    return `(${q(p.title.slice(0, 200))}, ${dq(description)}, 0, ${q(CATEGORY_MAP[p.product_type])}, ${q(first)}, ${q(JSON.stringify(features))}::jsonb, 0, ${q(slug)}, ${sku ? q(sku) : "NULL"}, ${p.vendor ? q(p.vendor) : "NULL"}, ARRAY[${rest.slice(0, 10).map(q).join(", ")}]::text[], '{}'::jsonb, true)`;
+    return `(${q(p.title.slice(0, 200))}, ${dq(description)}, 0, ${q(categoryOf(p)!)}, ${q(first)}, ${q(JSON.stringify(features))}::jsonb, 0, ${q(slug)}, ${sku ? q(sku) : "NULL"}, ${p.vendor ? q(p.vendor) : "NULL"}, ARRAY[${rest.slice(0, 10).map(q).join(", ")}]::text[], '{}'::jsonb, true)`;
   });
 
-  const header = `-- Import from ecovent.ro (written agreement with the owner). ${rows.length} products, all hidden, price 0, stock 0.
+  const header = (n: number, part: string) => `-- Import from ecovent.ro (written agreement with the owner). ${n} products${part}, all hidden, price 0, stock 0.
 -- Set the price and unhide each product in /admin before it shows on the site. Safe to run again (ON CONFLICT (slug) DO NOTHING).
 -- Generated by scripts/ecovent-import.ts; "Resigilat!" (open-box) products are excluded on purpose.
 `;
   const cols = "(name, description, price, category, image_url, features, stock, slug, sku, brand, gallery, specs, hidden)";
-  const batches: string[] = [];
-  for (let i = 0; i < rows.length; i += 25) batches.push(`INSERT INTO public.products ${cols} VALUES\n${rows.slice(i, i + 25).join(",\n")}\nON CONFLICT (slug) DO NOTHING;`);
-  writeFileSync(out, `${header}\n${batches.join("\n\n")}\n`);
-  const bytes = Buffer.byteLength(batches.join("\n\n"));
-  console.log(`${rows.length} products -> ${out} (${(bytes / 1024).toFixed(0)} KB). Per category: ${JSON.stringify(taken)}`);
+  const insert = (r: string[]) => r.map((_, i) => i).filter((i) => i % 25 === 0).map((i) => `INSERT INTO public.products ${cols} VALUES\n${r.slice(i, i + 25).join(",\n")}\nON CONFLICT (slug) DO NOTHING;`).join("\n\n");
+  if (!chunk) {
+    writeFileSync(out, `${header(rows.length, "")}\n${insert(rows)}\n`);
+    console.log(`${rows.length} products -> ${out}. Per category: ${JSON.stringify(taken)}`);
+    return;
+  }
+  const parts = Math.ceil(rows.length / chunk);
+  for (let n = 0; n < parts; n++) {
+    const slice = rows.slice(n * chunk, (n + 1) * chunk);
+    const file = `${out}_part${String(n + 1).padStart(2, "0")}.sql`;
+    writeFileSync(file, `${header(slice.length, ` (part ${n + 1} of ${parts})`)}\n${insert(slice)}\n`);
+    console.log(`${file}: ${slice.length} products, ${(Buffer.byteLength(insert(slice)) / 1024).toFixed(0)} KB`);
+  }
+  console.log(`Total ${rows.length} products. Per category: ${JSON.stringify(taken)}`);
 })();
