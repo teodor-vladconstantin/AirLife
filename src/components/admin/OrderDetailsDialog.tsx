@@ -22,6 +22,7 @@ import {
 } from "@/components/ui/select";
 import { Separator } from "@/components/ui/separator";
 import { OrderStatusBadge } from "@/components/orders/OrderStatusBadge";
+import { ORDER_STATUSES } from "@/lib/orderStatus";
 import { Copy, Loader2, Save } from "lucide-react";
 import { format } from "date-fns";
 import { ro } from "date-fns/locale";
@@ -419,13 +420,7 @@ export const OrderDetailsDialog = ({
                     <SelectValue />
                   </SelectTrigger>
                   <SelectContent>
-                    <SelectItem value="pending">În așteptare</SelectItem>
-                    <SelectItem value="confirmed">Confirmată</SelectItem>
-                    <SelectItem value="processing">În procesare</SelectItem>
-                    <SelectItem value="shipped">Expediată</SelectItem>
-                    <SelectItem value="delivered">Livrată</SelectItem>
-                    <SelectItem value="cancelled">Anulată</SelectItem>
-                  </SelectContent>
+                    {ORDER_STATUSES.map((st) => <SelectItem key={st.value} value={st.value}>{st.label}</SelectItem>)}</SelectContent>
                 </Select>
               </div>
 
