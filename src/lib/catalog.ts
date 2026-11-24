@@ -4,6 +4,7 @@ import { createClient } from "@supabase/supabase-js";
 import type { Database, Tables } from "@/integrations/supabase/types";
 import { INITIAL_PRODUCTS, StaticProduct } from "@/data/initialProducts";
 import { isShopVisible, salePricing } from "@/lib/pricing";
+import type { ProductCardData } from "@/lib/shop";
 import { CATEGORIES_DATA } from "@/data/categoriesData";
 
 export const db = () =>
@@ -116,4 +117,26 @@ export async function loadCategorySummaries(): Promise<CategorySummary[]> {
     if (!items.length) return [];
     return [{ slug: c.slug, name: c.name, title: c.h1, description: c.metaDescription, image: items[0].image_url as string, count: items.length }];
   });
+}
+
+// Listing pages need only a few fields per product (the full rows carry long descriptions and galleries: ~3 KB each, which
+// would balloon the page for hundreds of products). Optionally limited to one category name.
+export async function loadProductCards(category?: string): Promise<ProductCardData[]> {
+  const out: ProductCardData[] = [];
+  try {
+    for (let from = 0; ; from += 1000) {
+      let q = db().from("products").select("id,slug,name,brand,category,price,sale_price,sale_ends_at,stock,image_url,hidden,created_at").not("slug", "is", null).order("created_at", { ascending: false }).range(from, from + 999);
+      if (category) q = q.eq("category", category);
+      const { data, error } = await q;
+      if (error || !data) break;
+      for (const r of data) {
+        if (!isShopVisible(r)) continue;
+        out.push({ id: r.id, slug: r.slug!, name: r.name, brand: r.brand, category: r.category, ...salePricing(r), stock: r.stock, image_url: r.image_url!, created_at: r.created_at });
+      }
+      if (data.length < 1000) break;
+    }
+  } catch {
+    /* database unreachable: the page renders its empty state */
+  }
+  return out;
 }

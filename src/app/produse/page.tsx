@@ -1,5 +1,5 @@
 import Products from "@/views/Products";
-import { loadAllProducts } from "@/lib/catalog";
+import { loadProductCards } from "@/lib/catalog";
 
 export const revalidate = 300;
 export const metadata = {
@@ -16,5 +16,5 @@ export const metadata = {
 };
 
 export default async function Page() {
-  return <Products products={await loadAllProducts()} />;
+  return <Products cards={await loadProductCards()} />;
 }
