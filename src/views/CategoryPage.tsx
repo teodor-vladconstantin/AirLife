@@ -1,5 +1,5 @@
 "use client";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "@/lib/router";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -27,6 +27,8 @@ interface CategoryPageProps {
 }
 
 const CategoryPage = ({ forcedSlug, products }: CategoryPageProps) => {
+  const PAGE = 48; // large categories: show the products in steps so the page stays light
+  const [shown, setShown] = useState(PAGE);
   const activeSlug = forcedSlug;
   const categoryInfo = CATEGORIES_DATA[activeSlug];
 
@@ -87,7 +89,7 @@ const CategoryPage = ({ forcedSlug, products }: CategoryPageProps) => {
     "url": `https://airlife.ro/${categoryInfo.slug}`,
     "mainEntity": {
       "@type": "ItemList",
-      "itemListElement": products.map((prod, idx) => ({
+      "itemListElement": products.slice(0, 100).map((prod, idx) => ({
         "@type": "ListItem",
         "position": idx + 1,
         "url": `https://airlife.ro/products/${prod.slug ?? prod.id}`,
@@ -186,7 +188,7 @@ const CategoryPage = ({ forcedSlug, products }: CategoryPageProps) => {
               </Card>
             ) : (
               <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                {products.map((product) => (
+                {products.slice(0, shown).map((product) => (
                   <Card
                     key={product.id}
                     className="flex flex-col justify-between border-border hover:border-primary/40 transition-all duration-300 hover:shadow-md bg-card overflow-hidden"
@@ -276,6 +278,13 @@ const CategoryPage = ({ forcedSlug, products }: CategoryPageProps) => {
                     </div>
                   </Card>
                 ))}
+              </div>
+            )}
+            {products.length > shown && (
+              <div className="text-center mt-10">
+                <Button variant="outline" size="lg" onClick={() => setShown((n) => n + PAGE)}>
+                  Arată mai multe produse ({products.length - shown} rămase)
+                </Button>
               </div>
             )}
           </div>
