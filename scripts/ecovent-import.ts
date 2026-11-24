@@ -1,5 +1,7 @@
 // Turns the public Shopify catalog of ecovent.ro (/products.json) into a Supabase migration for public.products.
 // Usage (from the repo root):
+//   Activation (make the imported products visible, with a price and stock):
+//   npx tsx scripts/ecovent-import.ts --activate supabase/migrations/<timestamp>_activate_ecovent.sql [--markup 0] [--stock 10]
 //   npx tsx scripts/ecovent-import.ts --out supabase/migrations/<timestamp>_import_ecovent [--chunk 100] [--types "Ventilatoare Baie,Dezumidificatoare"] [--per-type 5] [--limit 100] [--from cache.json]
 // Without --from the catalog is read live (sequential requests, 1.5 s apart). With --from it reads a saved products.json array.
 //
@@ -13,7 +15,7 @@ import { readFileSync, writeFileSync } from "node:fs";
 
 type ShopifyProduct = {
   title: string; handle: string; vendor: string; product_type: string; tags: string[] | string; body_html: string | null;
-  variants: { sku: string | null; available: boolean }[]; images: { src: string }[];
+  variants: { sku: string | null; available: boolean; price: string }[]; images: { src: string }[];
 };
 
 // Ecovent product_type -> category name used by the shop (see src/data/categoriesData.ts).
@@ -49,10 +51,13 @@ const categoryOf = (p: ShopifyProduct) => (p.product_type === "Aer Condiționat"
 const args = process.argv.slice(2);
 const arg = (name: string) => { const i = args.indexOf(`--${name}`); return i >= 0 ? args[i + 1] : undefined; };
 const out = arg("out");
-if (!out) { console.error("Missing --out <file.sql>"); process.exit(1); }
+if (!out && !arg("activate")) { console.error("Missing --out <file.sql> (or --activate <file.sql>)"); process.exit(1); }
 const types = (arg("types") ?? Object.keys(CATEGORY_MAP).join(",")).split(",").map((s) => s.trim()).filter(Boolean);
 const perType = arg("per-type") ? Number(arg("per-type")) : Infinity;
 const limit = arg("limit") ? Number(arg("limit")) : Infinity;
+const activateOut = arg("activate");
+const markup = arg("markup") ? Number(arg("markup")) : 0; // percent added to the price on their site
+const stockWhenAvailable = arg("stock") ? Number(arg("stock")) : 10;
 const chunk = arg("chunk") ? Number(arg("chunk")) : 0; // with --chunk N, --out is a file prefix and N products go in each _partNN.sql
 
 const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms));
@@ -127,6 +132,7 @@ const dq = (s: string) => `$ev$${s.split("$ev$").join("")}$ev$`;
   }
 
   const slugs = new Set<string>();
+  const activation: { slug: string; price: number; stock: number }[] = [];
   const rows = picked.map((p) => {
     const cleaned = cleanHtml(p.body_html ?? "");
     const { features } = cleaned;
@@ -134,11 +140,30 @@ const dq = (s: string) => `$ev$${s.split("$ev$").join("")}$ev$`;
     let slug = shortSlug(p.handle || p.title);
     for (let i = 2; slugs.has(slug); i++) slug = `${shortSlug(p.handle || p.title, 74)}-${i}`;
     slugs.add(slug);
+    const base = Number(p.variants[0]?.price);
+    const price = Math.round(base * (1 + markup / 100) * 100) / 100;
+    if (price > 0) activation.push({ slug, price, stock: p.variants.some((v) => v.available) ? stockWhenAvailable : 0 });
     const [first, ...rest] = p.images.map((i) => i.src);
     const sku = p.variants[0]?.sku?.trim() || null;
     return `(${q(p.title.slice(0, 200))}, ${dq(description)}, 0, ${q(categoryOf(p)!)}, ${q(first)}, ${q(JSON.stringify(features))}::jsonb, 0, ${q(slug)}, ${sku ? q(sku) : "NULL"}, ${p.vendor ? q(p.vendor) : "NULL"}, ARRAY[${rest.slice(0, 10).map(q).join(", ")}]::text[], '{}'::jsonb, true)`;
   });
 
+  if (activateOut) {
+    const values = activation.map((a) => `(${q(a.slug)}, ${a.price.toFixed(2)}, ${a.stock})`).join(",\n");
+    writeFileSync(activateOut, `-- Makes the products imported from ecovent.ro visible: sets price and stock and clears hidden.
+-- ${activation.length} products. Price = the price on ecovent.ro${markup ? ` + ${markup}%` : " (no markup)"}; stock = ${stockWhenAvailable} when ecovent.ro lists the product as available, otherwise 0 (shown as "Indisponibil").
+-- The stock number is a placeholder (their catalog does not publish quantities): adjust it in /admin. Products with no price on their side stay hidden.
+-- Only touches rows that are still hidden with price 0, so it never overwrites a price you set by hand. Safe to run again.
+UPDATE public.products AS p
+SET price = v.price, stock = v.stock, hidden = false
+FROM (VALUES
+${values}
+) AS v(slug, price, stock)
+WHERE p.slug = v.slug AND p.hidden = true AND p.price = 0;
+`);
+    console.log(`${activation.length} of ${picked.length} products -> ${activateOut} (price range ${Math.min(...activation.map((a) => a.price))} - ${Math.max(...activation.map((a) => a.price))} RON, ${activation.filter((a) => a.stock > 0).length} with stock).`);
+    return;
+  }
   const header = (n: number, part: string) => `-- Import from ecovent.ro (written agreement with the owner). ${n} products${part}, all hidden, price 0, stock 0.
 -- Set the price and unhide each product in /admin before it shows on the site. Safe to run again (ON CONFLICT (slug) DO NOTHING).
 -- Generated by scripts/ecovent-import.ts; "Resigilat!" (open-box) products are excluded on purpose.
@@ -146,7 +171,7 @@ const dq = (s: string) => `$ev$${s.split("$ev$").join("")}$ev$`;
   const cols = "(name, description, price, category, image_url, features, stock, slug, sku, brand, gallery, specs, hidden)";
   const insert = (r: string[]) => r.map((_, i) => i).filter((i) => i % 25 === 0).map((i) => `INSERT INTO public.products ${cols} VALUES\n${r.slice(i, i + 25).join(",\n")}\nON CONFLICT (slug) DO NOTHING;`).join("\n\n");
   if (!chunk) {
-    writeFileSync(out, `${header(rows.length, "")}\n${insert(rows)}\n`);
+    writeFileSync(out!, `${header(rows.length, "")}\n${insert(rows)}\n`);
     console.log(`${rows.length} products -> ${out}. Per category: ${JSON.stringify(taken)}`);
     return;
   }

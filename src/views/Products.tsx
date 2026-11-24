@@ -22,7 +22,9 @@ interface Product {
 }
 
 const Products = ({ products }: { products: Product[] }) => {
+  const PAGE = 48; // the catalog has hundreds of products: show them in steps so the page stays light
   const [selectedCategory, setSelectedCategory] = useState<string>("all");
+  const [shown, setShown] = useState(PAGE);
   const { addToCart } = useCart();
 
   const truncateText = (text: string, maxLength: number = 100) => {
@@ -52,8 +54,8 @@ const Products = ({ products }: { products: Product[] }) => {
       isPartOf: { "@id": "https://airlife.ro/#website" },
       mainEntity: {
         "@type": "ItemList",
-        numberOfItems: products.length,
-        itemListElement: products.map((p, i) => ({ "@type": "ListItem", position: i + 1, url: `https://airlife.ro/products/${p.slug ?? p.id}`, name: p.name })),
+        numberOfItems: Math.min(products.length, 100),
+        itemListElement: products.slice(0, 100).map((p, i) => ({ "@type": "ListItem", position: i + 1, url: `https://airlife.ro/products/${p.slug ?? p.id}`, name: p.name })),
       },
     },
     {
@@ -87,7 +89,7 @@ const Products = ({ products }: { products: Product[] }) => {
               <Button
                 key={cat.value}
                 variant={selectedCategory === cat.value ? "default" : "outline"}
-                onClick={() => setSelectedCategory(cat.value)}
+                onClick={() => { setSelectedCategory(cat.value); setShown(PAGE); }}
                 className="transition-opacity duration-400 will-change-opacity hover:opacity-90"
                 style={{animationDelay: `${idx * 50}ms`}}
               >
@@ -104,7 +106,7 @@ const Products = ({ products }: { products: Product[] }) => {
             </div>
           ) : (
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {visible.map((product, idx) => (
+              {visible.slice(0, shown).map((product, idx) => (
                 <Card
                   key={product.id}
                   className="group overflow-hidden border-border/50 hover:border-primary/30 transition-opacity duration-400 will-change-opacity hover:opacity-90 bg-card/50 backdrop-blur-sm animate-in fade-in"
@@ -169,6 +171,13 @@ const Products = ({ products }: { products: Product[] }) => {
                   </CardContent>
                 </Card>
               ))}
+            </div>
+          )}
+          {visible.length > shown && (
+            <div className="text-center mt-10">
+              <Button variant="outline" size="lg" onClick={() => setShown((n) => n + PAGE)}>
+                Arată mai multe produse ({visible.length - shown} rămase)
+              </Button>
             </div>
           )}
         </div>
