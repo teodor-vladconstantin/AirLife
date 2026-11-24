@@ -99,7 +99,13 @@ export function matches(c: ProductCardData, f: Filters, skip?: Skip) {
   return true;
 }
 
+// Whatever the sort, products that can be bought come first and unavailable ones go to the end of the list.
 export function sortCards(cards: ProductCardData[], sort: SortKey) {
+  const sorted = sortBy(cards, sort);
+  return [...sorted.filter((c) => c.stock > 0), ...sorted.filter((c) => c.stock <= 0)];
+}
+
+function sortBy(cards: ProductCardData[], sort: SortKey) {
   const out = [...cards];
   const byName = (a: ProductCardData, b: ProductCardData) => a.name.localeCompare(b.name, "ro");
   switch (sort) {

@@ -94,8 +94,8 @@ const Account = () => {
           </Link>
 
           <Card>
-            <CardHeader><CardTitle>Date personale</CardTitle></CardHeader>
-            <CardContent className="space-y-4">
+            <CardHeader className="p-5 sm:p-8"><CardTitle>Date personale</CardTitle></CardHeader>
+            <CardContent className="space-y-4 p-5 pt-0 sm:p-8 sm:pt-0">
               <div className="grid gap-4 sm:grid-cols-2">
                 <div><Label htmlFor="p-name">Nume complet</Label><Input id="p-name" value={profile.name} onChange={(e) => setProfile({ ...profile, name: e.target.value })} placeholder="Ex: Ion Popescu" /></div>
                 <div><Label htmlFor="p-phone">Telefon</Label><Input id="p-phone" value={profile.phone} onChange={(e) => setProfile({ ...profile, phone: e.target.value })} placeholder="07xxxxxxxx" /></div>
@@ -105,11 +105,11 @@ const Account = () => {
           </Card>
 
           <Card>
-            <CardHeader className="flex-row items-center justify-between space-y-0">
+            <CardHeader className="flex-row items-center justify-between space-y-0 p-5 sm:p-8">
               <CardTitle>Adrese de livrare</CardTitle>
               {!editing && <Button size="sm" variant="outline" onClick={() => setEditing({ ...EMPTY, name: profile.name, phone: profile.phone })}><Plus className="mr-1 h-4 w-4" /> Adaugă</Button>}
             </CardHeader>
-            <CardContent className="space-y-3">
+            <CardContent className="space-y-3 p-5 pt-0 sm:p-8 sm:pt-0">
               {profile.addresses.length === 0 && !editing && <p className="text-sm text-muted-foreground">Nu ai nicio adresă salvată. Adaugă una ca să finalizezi mai repede comenzile.</p>}
               {!editing && profile.addresses.map((a) => (
                 <div key={a.id} className="flex items-start gap-3 rounded-lg border border-border p-3">

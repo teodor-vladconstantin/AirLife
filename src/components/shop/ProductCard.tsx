@@ -1,6 +1,6 @@
 "use client";
-import { memo } from "react";
-import { ShoppingCart } from "lucide-react";
+import { memo, useState } from "react";
+import { Loader2, ShoppingCart } from "lucide-react";
 import { Link } from "@/lib/router";
 import { Button } from "@/components/ui/button";
 import { useCart } from "@/contexts/CartContext";
@@ -12,6 +12,7 @@ import { discountPct, formatPrice, type ProductCardData } from "@/lib/shop";
 // struck-through list price on sale) and a quick "add to cart".
 export const ProductCard = memo(function ProductCard({ product, priority = false }: { product: ProductCardData; priority?: boolean }) {
   const { addToCart } = useCart();
+  const [adding, setAdding] = useState(false);
   const out = product.stock <= 0;
   const pct = discountPct(product);
   const href = `/produse/${product.slug}`;
@@ -50,14 +51,18 @@ export const ProductCard = memo(function ProductCard({ product, priority = false
           size="sm"
           variant={out ? "outline" : "default"}
           className="mt-auto w-full"
-          disabled={out}
+          disabled={out || adding}
+          aria-busy={adding}
           onClick={async () => {
+            setAdding(true);
+            try {
             await addToCart({ id: product.id, name: product.name, description: "", price: product.price, category: product.category, image_url: product.image_url, features: [], stock: product.stock });
             trackAddToCart({ item_id: product.id, item_name: product.name, price: product.price, item_category: product.category, quantity: 1 });
+            } finally { setAdding(false); }
           }}
         >
-          <ShoppingCart className="mr-2 h-4 w-4" />
-          {out ? "Indisponibil" : "Adaugă în coș"}
+          {adding ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : <ShoppingCart className="mr-2 h-4 w-4" />}
+          {out ? "Indisponibil" : adding ? "Se adaugă…" : "Adaugă în coș"}
         </Button>
       </div>
     </article>

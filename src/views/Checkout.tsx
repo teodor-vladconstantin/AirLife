@@ -227,8 +227,8 @@ const Checkout = () => {
               <div className="min-w-0 space-y-6 lg:col-span-2">
                 {step === 1 && (
                   <Card>
-                    <CardHeader><CardTitle>1. Informații de contact</CardTitle></CardHeader>
-                    <CardContent className="space-y-4">
+                    <CardHeader className="p-5 sm:p-8"><CardTitle>1. Informații de contact</CardTitle></CardHeader>
+                    <CardContent className="space-y-4 p-5 pt-0 sm:p-8 sm:pt-0">
                       {!user && (
                         <p className="rounded-lg bg-secondary p-3 text-sm text-muted-foreground">
                           Ai deja cont? <Link to="/auth" className="font-semibold text-primary underline">Conectează-te</Link> ca să folosești adresele salvate. Poți comanda și fără cont.
@@ -255,8 +255,8 @@ const Checkout = () => {
 
                 {step === 2 && (
                   <Card>
-                    <CardHeader><CardTitle>2. Adresă de livrare</CardTitle></CardHeader>
-                    <CardContent className="space-y-4">
+                    <CardHeader className="p-5 sm:p-8"><CardTitle>2. Adresă de livrare</CardTitle></CardHeader>
+                    <CardContent className="space-y-4 p-5 pt-0 sm:p-8 sm:pt-0">
                       {saved.length > 0 && (
                         <div className="grid gap-2 sm:grid-cols-2" role="group" aria-label="Adrese salvate">
                           {saved.map((a) => (
@@ -302,8 +302,8 @@ const Checkout = () => {
                 {step === 3 && (
                   <>
                     <Card>
-                      <CardHeader><CardTitle>3. Verifică și plătește</CardTitle></CardHeader>
-                      <CardContent className="space-y-4 text-sm">
+                      <CardHeader className="p-5 sm:p-8"><CardTitle>3. Verifică și plătește</CardTitle></CardHeader>
+                      <CardContent className="space-y-4 p-5 pt-0 text-sm sm:p-8 sm:pt-0">
                         <div className="flex items-start justify-between gap-4 rounded-lg border border-border p-3">
                           <div><p className="font-semibold">Contact</p><p>{watch("customerName")}</p><p className="text-muted-foreground">{watch("customerEmail")} · {watch("customerPhone")}</p></div>
                           <button type="button" className="shrink-0 font-medium text-primary hover:underline" onClick={() => setStep(1)}>Modifică</button>
@@ -328,7 +328,7 @@ const Checkout = () => {
                     </Card>
 
                     <Card>
-                      <CardContent className="pt-6 space-y-4">
+                      <CardContent className="space-y-4 p-5 sm:p-8">
                         <div className="flex items-start space-x-2">
                           <Checkbox id="terms" checked={acceptTerms} onCheckedChange={(checked) => setValue("acceptTerms", checked === true, { shouldValidate: true })} />
                           <Label htmlFor="terms" className="text-sm cursor-pointer">
@@ -366,8 +366,8 @@ const Checkout = () => {
               {/* Order summary */}
               <div className="min-w-0 lg:col-span-1">
                 <Card className="lg:sticky lg:top-24">
-                  <CardHeader><CardTitle>Sumar comandă</CardTitle></CardHeader>
-                  <CardContent className="space-y-4">
+                  <CardHeader className="p-5 sm:p-8"><CardTitle>Sumar comandă</CardTitle></CardHeader>
+                  <CardContent className="space-y-4 p-5 pt-0 sm:p-8 sm:pt-0">
                     <div className="space-y-3">
                       {items.map((item) => (
                         <div key={item.id} className="flex items-start gap-3 text-sm">

@@ -25,15 +25,16 @@ const loadScript = () =>
 // Usage: `const [token, widget, reset] = useTurnstile();` put {widget} above the submit button, send `token` with the form, call reset() after.
 export function useTurnstile(): [string, ReactNode, () => void, boolean] {
   const [token, setToken] = useState("");
-  const box = useRef<HTMLDivElement>(null);
+  // callback ref in state: the effect runs again when the widget element appears (forms that open on click mount it late)
+  const [box, setBox] = useState<HTMLDivElement | null>(null);
   const id = useRef<string | undefined>(undefined);
 
   useEffect(() => {
-    if (!SITE_KEY || !box.current) return;
+    if (!SITE_KEY || !box) return;
     let dead = false;
     loadScript().then(() => {
-      if (dead || !box.current || !window.turnstile || id.current) return;
-      id.current = window.turnstile.render(box.current, {
+      if (dead || !window.turnstile || id.current) return;
+      id.current = window.turnstile.render(box, {
         sitekey: SITE_KEY,
         theme: "auto",
         language: "ro",
@@ -43,13 +44,13 @@ export function useTurnstile(): [string, ReactNode, () => void, boolean] {
       });
     }).catch(() => undefined);
     return () => { dead = true; if (id.current && window.turnstile) { window.turnstile.remove(id.current); id.current = undefined; } };
-  }, []);
+  }, [box]);
 
   const reset = useCallback(() => {
     setToken("");
     if (id.current && window.turnstile) window.turnstile.reset(id.current);
   }, []);
 
-  const widget = SITE_KEY ? <div ref={box} className="min-h-[65px]" /> : null;
+  const widget = SITE_KEY ? <div ref={setBox} className="min-h-[65px]" /> : null;
   return [token, widget, reset, !!SITE_KEY];
 }

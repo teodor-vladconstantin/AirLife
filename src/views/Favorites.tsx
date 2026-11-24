@@ -7,6 +7,7 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
 import { ProductCard } from "@/components/shop/ProductCard";
+import { CardSkeleton } from "@/components/shop/Skeletons";
 import { isShopVisible, salePricing } from "@/lib/pricing";
 import { useWishlist } from "@/lib/wishlist";
 import type { ProductCardData } from "@/lib/shop";
@@ -39,7 +40,7 @@ const Favorites = () => {
           <h1 className="mb-1 text-3xl font-bold text-foreground">Favorite</h1>
           <p className="mb-6 text-sm text-muted-foreground">Produsele salvate rămân în acest browser.</p>
           {cards === null ? (
-            <p className="text-muted-foreground" role="status">Se încarcă…</p>
+            <div className="grid grid-cols-2 gap-3 md:grid-cols-3 md:gap-4 xl:grid-cols-4" role="status" aria-label="Se încarcă">{Array.from({ length: 4 }).map((_, i) => <CardSkeleton key={i} />)}</div>
           ) : cards.length === 0 ? (
             <div className="rounded-xl border border-dashed border-border p-10 text-center">
               <Heart className="mx-auto mb-3 h-8 w-8 text-muted-foreground" />
