@@ -31,7 +31,8 @@ const ScrollToTop = () => {
           exit={{ opacity: 0, y: 40 }}
           transition={{ duration: 0.4 }}
           onClick={handleClick}
-          style={{ position: "fixed", right: 24, bottom: 32, zIndex: 1000 }}
+          // sits above the bottom bars (contact bar, product buy bar) when they are on screen
+          style={{ position: "fixed", right: 16, bottom: "calc(1rem + var(--bar-contact, 0px) + var(--bar-buy, 0px))", zIndex: 45 }}
           className="rounded-full bg-primary text-primary-foreground shadow-lg px-4 py-2"
         >
           ↑ Top
