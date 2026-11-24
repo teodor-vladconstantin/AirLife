@@ -70,7 +70,6 @@ export default function OrderEmail({ kind = "placed", o }: { kind?: OrderEmailKi
       {kind === "placed" && o.payment_method === "bank_transfer" && (
         <Text style={p}>Te contactăm în scurt timp cu datele pentru transferul bancar. Comanda se pregătește după confirmarea plății.</Text>
       )}
-      {kind === "placed" && o.payment_method === "cash_on_delivery" && <Text style={p}>Plătești curierului când primești coletul.</Text>}
       {kind === "shipped" && (o.tracking_number || o.courier) && (
         <Text style={p}>Curier: <strong>{o.courier || "-"}</strong>{o.tracking_number ? <> | AWB: <strong>{o.tracking_number}</strong></> : null}</Text>
       )}

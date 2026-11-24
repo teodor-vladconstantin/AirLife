@@ -15,7 +15,6 @@ const sections: LegalSection[] = [
           <p>Comandat la data de ____________ / primit la data de ____________ (număr comandă: ____________)</p>
           <p>Numele consumatorului: ________________________</p>
           <p>Adresa consumatorului: ________________________</p>
-          <p>Cont IBAN pentru restituire (doar dacă ai plătit ramburs): ________________________</p>
           <p>Semnătura consumatorului (doar dacă formularul este trimis pe hârtie): ____________</p>
           <p>Data: ____________</p>
         </div>

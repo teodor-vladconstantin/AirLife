@@ -14,10 +14,9 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
-import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Separator } from "@/components/ui/separator";
-import { Loader2 } from "lucide-react";
+import { CreditCard, Loader2 } from "lucide-react";
 import { useTurnstile } from "@/components/Turnstile";
 import { trackBeginCheckout, trackError } from "@/lib/analytics";
 
@@ -34,7 +33,7 @@ const checkoutSchema = z.object({
   city: z.string().min(2, "Orașul este obligatoriu"),
   address: z.string().min(5, "Adresa este obligatorie"),
   postalCode: z.string().min(5, "Cod poștal invalid"),
-  paymentMethod: z.enum(["cash_on_delivery", "card_online"]), // bank transfer is off until payment details are added to the order email
+  paymentMethod: z.enum(["card_online"]), // card only (Stripe); cash on delivery was removed, bank transfer stays off
   customerNotes: z.string().optional(),
   acceptTerms: z.boolean().refine((val) => val === true, "Trebuie să accep ți termenii și condițiile"),
   acceptGDPR: z.boolean().refine((val) => val === true, "Trebuie să accepți politica GDPR"),
@@ -65,13 +64,12 @@ const Checkout = () => {
   } = useForm<CheckoutFormData>({
     resolver: zodResolver(checkoutSchema),
     defaultValues: {
-      paymentMethod: PAYMENTS_ON ? "card_online" : "cash_on_delivery",
+      paymentMethod: "card_online",
       acceptTerms: false,
       acceptGDPR: false,
     },
   });
 
-  const paymentMethod = watch("paymentMethod");
   const acceptTerms = watch("acceptTerms");
   const acceptGDPR = watch("acceptGDPR");
 
@@ -127,110 +125,10 @@ const Checkout = () => {
     }
   };
 
+  // Every order is paid by card through Stripe (server side: /api/checkout). With NEXT_PUBLIC_PAYMENTS=off the shop sends visitors to /contact.
   const onSubmit = async (data: CheckoutFormData) => {
-    if (PAYMENTS_ON) return submitToServer(data);
-    setIsSubmitting(true);
-
-    try {
-      // Check stock for all products
-      for (const item of items) {
-        const { data: product } = await supabase
-          .from("products")
-          .select("stock")
-          .eq("id", item.product_id)
-          .single();
-
-        if (!product || product.stock < item.quantity) {
-          toast({
-            title: "Stoc insuficient",
-            description: `${item.name} nu are stoc suficient.`,
-            variant: "destructive",
-          });
-          setIsSubmitting(false);
-          return;
-        }
-      }
-
-      // Generate order number
-      const { data: orderNumData } = await supabase.rpc("generate_order_number");
-      const orderNumber = orderNumData;
-
-      // Create shipping address object
-      const shippingAddress = {
-        county: data.county,
-        city: data.city,
-        address: data.address,
-        postalCode: data.postalCode,
-      };
-
-      // Create order
-      const { data: order, error: orderError } = await supabase
-        .from("orders")
-        .insert({
-          order_number: orderNumber,
-          user_id: user?.id || null,
-          customer_name: data.customerName,
-          customer_email: data.customerEmail,
-          customer_phone: data.customerPhone,
-          shipping_address: shippingAddress,
-          payment_method: data.paymentMethod,
-          subtotal: total,
-          shipping_cost: shippingCost,
-          total_amount: grandTotal,
-          customer_notes: data.customerNotes || null,
-          status: "pending",
-        })
-        .select()
-        .single();
-
-      if (orderError) throw orderError;
-
-      // Create order items
-      for (const item of items) {
-        const { error: itemError } = await supabase.from("order_items").insert({
-          order_id: order.id,
-          product_id: item.product_id,
-          product_name: item.name,
-          product_category: item.category,
-          product_image_url: item.image_url,
-          quantity: item.quantity,
-          unit_price: item.price,
-          total_price: item.price * item.quantity,
-        });
-
-        if (itemError) throw itemError;
-
-        // Decrease stock
-        const { data: stockDecreased } = await supabase.rpc("decrease_product_stock", {
-          p_product_id: item.product_id,
-          p_quantity: item.quantity,
-        });
-
-        if (!stockDecreased) {
-          throw new Error(`Failed to decrease stock for ${item.name}`);
-        }
-      }
-
-      // Clear cart
-      await clearCart();
-
-      toast({
-        title: "Cerere trimisă cu succes!",
-        description: `Număr cerere: ${orderNumber}`,
-      });
-
-      // Redirect to confirmation
-      navigate(`/order-confirmation/${order.id}`);
-    } catch (error: any) {
-      console.error("Order creation error:", error);
-      toast({
-        title: "Eroare",
-        description: error.message || "Nu s-a putut plasa comanda. Te rugăm să încerci din nou.",
-        variant: "destructive",
-      });
-    } finally {
-      setIsSubmitting(false);
-    }
+    if (!PAYMENTS_ON) return navigate("/contact");
+    return submitToServer(data);
   };
 
   return (
@@ -350,25 +248,13 @@ const Checkout = () => {
                     <CardTitle>Metodă de Plată</CardTitle>
                   </CardHeader>
                   <CardContent>
-                    <RadioGroup value={paymentMethod} onValueChange={(value: any) => setValue("paymentMethod", value)}>
-                      {PAYMENTS_ON && (
-                        <div className="flex items-center space-x-2 border rounded-lg p-4 mb-2">
-                          <RadioGroupItem value="card_online" id="card" />
-                          <Label htmlFor="card" className="flex-1 cursor-pointer">
-                            <div className="font-semibold">Card online</div>
-                            <p className="text-sm text-muted-foreground">Plată securizată prin Stripe. Nu stocăm datele cardului.</p>
-                          </Label>
-                        </div>
-                      )}
-                      <div className="flex items-center space-x-2 border rounded-lg p-4">
-                        <RadioGroupItem value="cash_on_delivery" id="cod" />
-                        <Label htmlFor="cod" className="flex-1 cursor-pointer">
-                          <div className="font-semibold">Ramburs (Cash la Livrare)</div>
-                          <p className="text-sm text-muted-foreground">Plătești când primești produsele</p>
-                        </Label>
+                    <div className="flex items-start gap-3 rounded-lg border border-primary/40 bg-primary/5 p-4">
+                      <CreditCard className="mt-0.5 h-5 w-5 shrink-0 text-primary" />
+                      <div>
+                        <div className="font-semibold">Card online</div>
+                        <p className="text-sm text-muted-foreground">Plătești securizat prin Stripe (Visa, Mastercard și alte metode afișate la plată). Nu stocăm datele cardului. Comanda se pregătește după confirmarea plății.</p>
                       </div>
-
-                    </RadioGroup>
+                    </div>
                     {errors.paymentMethod && (
                       <p className="text-sm text-destructive mt-2">{errors.paymentMethod.message}</p>
                     )}

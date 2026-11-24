@@ -29,7 +29,7 @@ const orgSchema = {
     {
       "@type": "HVACBusiness", "@id": "https://airlife.ro/#localbusiness", name: "AirLife", logo: "https://airlife.ro/logo.png", parentOrganization: { "@id": "https://airlife.ro/#organization" },
       hasCredential: { "@type": "EducationalOccupationalCredential", credentialCategory: "certificate", name: "Atestat F-gaz (manipularea gazelor fluorurate)" }, telephone: "+40722153525", email: "contact@airlife.ro", url: "https://airlife.ro/",
-      address: { "@type": "PostalAddress", addressLocality: "Mărăcineni", addressRegion: "Buzău", addressCountry: "RO" },
+      address: { "@type": "PostalAddress", addressLocality: "Buzău", addressRegion: "Buzău", addressCountry: "RO" },
       openingHoursSpecification: [
         { "@type": "OpeningHoursSpecification", dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"], opens: "09:00", closes: "18:00" },
         { "@type": "OpeningHoursSpecification", dayOfWeek: "Saturday", opens: "10:00", closes: "14:00" },

@@ -32,7 +32,7 @@ const Footer = () => {
             <div className="space-y-2 text-xs opacity-75 pt-2">
               <div className="flex items-center gap-2">
                 <MapPin className="w-4 h-4 text-brandlight flex-shrink-0" />
-                <span>Mărăcineni, județul Buzău (servicii în municipiu și județ)</span>
+                <span>Buzău, România (servicii în municipiu și județ)</span>
               </div>
               <div className="flex items-center gap-2">
                 <Phone className="w-4 h-4 text-brandlight flex-shrink-0" />

@@ -42,7 +42,7 @@ const sections: LegalSection[] = [
       <>
         <p>Nu vindem datele tale. Le transmitem doar celor care ne ajută să furnizăm serviciul, în baza termenilor și a acordurilor standard de prelucrare a datelor ale acestor furnizori, care îi obligă să le protejeze:</p>
         <ul>
-          <li>firme de curierat (de exemplu FAN Courier, DPD, Sameday), pentru livrarea coletelor; primesc numele, telefonul, adresa de livrare și, la ramburs, suma de încasat;</li>
+          <li>firme de curierat (de exemplu FAN Courier, DPD, Sameday), pentru livrarea coletelor; primesc numele, telefonul și adresa de livrare;</li>
           <li>furnizori de infrastructură IT: găzduire (Vercel), bază de date și autentificare (Supabase), trimitere de e-mailuri (Resend), protecție anti-bot (Cloudflare Turnstile);</li>
           <li>procesatorul de plăți Stripe Payments Europe, Ltd. (Irlanda), pentru plățile cu cardul;</li>
           <li>instrumente de analiză și monitorizare, doar după consimțământ în cazul analizei: Google (Google Analytics 4, Google Tag Manager), Meta Platforms Ireland (Pixel Meta), PostHog (serverele din UE), Sentry;</li>
