@@ -119,7 +119,26 @@ const Checkout = () => {
   };
 
   const shippingCost = total >= 1000 ? 0 : 20;
-  const grandTotal = total + shippingCost;
+  const [codeInput, setCodeInput] = useState("");
+  const [applied, setApplied] = useState<{ code: string; amount: number } | null>(null);
+  const [codeBusy, setCodeBusy] = useState(false);
+  const discount = applied?.amount ?? 0;
+  const grandTotal = Math.round((total - discount + shippingCost) * 100) / 100;
+
+  const DISCOUNT_MSG: Record<string, string> = {
+    not_found: "Codul nu există.", inactive: "Codul nu mai este activ.", not_started: "Codul nu este încă valabil.", expired: "Codul a expirat.",
+    used_up: "Codul a fost folosit de prea multe ori.", min_order: "Comanda nu atinge valoarea minimă pentru acest cod.",
+  };
+  const applyCode = async () => {
+    if (!codeInput.trim()) return;
+    setCodeBusy(true);
+    try {
+      const res = await fetch("/api/discount", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ code: codeInput, items: items.map((i) => ({ id: i.product_id, quantity: i.quantity })) }) });
+      const out = await res.json().catch(() => ({}));
+      if (out.ok) { setApplied({ code: out.code, amount: out.amount }); toast({ title: "Cod aplicat", description: `Reducere: ${out.amount.toFixed(2)} RON` }); }
+      else toast({ title: "Cod invalid", description: out.reason === "min_order" && out.min ? `Comandă minimă: ${Number(out.min).toFixed(2)} RON.` : DISCOUNT_MSG[out.reason] ?? "Nu am putut verifica codul.", variant: "destructive" });
+    } finally { setCodeBusy(false); }
+  };
 
   // Payments on: the server reads prices from the database, creates the order and (for cards) the Stripe Checkout session.
   const submitToServer = async (data: CheckoutFormData) => {
@@ -146,11 +165,12 @@ const Checkout = () => {
           paymentMethod: data.paymentMethod,
           notes: data.customerNotes,
           token: tsToken,
+          discountCode: applied?.code,
         }),
       });
       const out = await res.json().catch(() => ({}));
       if (!res.ok) {
-        const msg = out.error === "out_of_stock" ? `${out.name} nu mai are stoc suficient.` : out.error === "product_unavailable" ? "Un produs din coș nu mai este disponibil." : "Nu am putut plasa comanda. Încearcă din nou sau sună-ne.";
+        const msg = out.error === "invalid_discount" ? (DISCOUNT_MSG[out.reason] ?? "Codul de reducere nu mai este valabil.") : out.error === "out_of_stock" ? `${out.name} nu mai are stoc suficient.` : out.error === "product_unavailable" ? "Un produs din coș nu mai este disponibil." : "Nu am putut plasa comanda. Încearcă din nou sau sună-ne.";
         trackError(String(out.error || `http_${res.status}`));
         toast({ title: "Eroare", description: msg, variant: "destructive" });
         return;
@@ -358,9 +378,16 @@ const Checkout = () => {
                       ))}
                     </div>
                     <Separator />
+                    {!applied && (
+                      <div className="flex gap-2">
+                        <Input value={codeInput} onChange={(e) => setCodeInput(e.target.value)} onKeyDown={(e) => { if (e.key === "Enter") { e.preventDefault(); void applyCode(); } }} placeholder="Cod de reducere" aria-label="Cod de reducere" className="uppercase" />
+                        <Button type="button" variant="outline" onClick={applyCode} disabled={codeBusy || !codeInput.trim()}>{codeBusy ? "…" : "Aplică"}</Button>
+                      </div>
+                    )}
                     <div className="space-y-2">
                       <div className="flex justify-between text-sm"><span className="text-muted-foreground">Subtotal</span><span className="font-semibold">{total.toFixed(2)} RON</span></div>
                       <div className="flex justify-between text-sm"><span className="text-muted-foreground">Livrare</span><span className="font-semibold">{shippingCost === 0 ? "GRATUIT" : `${shippingCost.toFixed(2)} RON`}</span></div>
+                      {applied && <div className="flex justify-between text-sm"><span className="text-muted-foreground">Reducere ({applied.code}) <button type="button" className="ml-1 text-xs text-primary hover:underline" onClick={() => { setApplied(null); setCodeInput(""); }}>șterge</button></span><span className="font-semibold text-primary">−{discount.toFixed(2)} RON</span></div>}
                       {total < 1000 && <p className="text-xs text-muted-foreground">Mai adaugă {(1000 - total).toFixed(2)} RON pentru livrare gratuită!</p>}
                     </div>
                     <Separator />

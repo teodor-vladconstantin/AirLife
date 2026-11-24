@@ -4,12 +4,14 @@ import { useNavigate } from "@/lib/router";
 import { supabase } from "@/integrations/supabase/client";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useToast } from "@/hooks/use-toast";
-import { Package, ShoppingBag, FileText, Mail, Megaphone } from "lucide-react";
+import { Package, ShoppingBag, FileText, Mail, Megaphone, Star, Tag } from "lucide-react";
 import { OrdersTable } from "@/components/admin/OrdersTable";
 import { BlogManager } from "@/components/admin/BlogManager";
 import { LeadsTable } from "@/components/admin/LeadsTable";
 import { ProductManager } from "@/components/admin/ProductManager";
 import { CampaignManager } from "@/components/admin/CampaignManager";
+import { ReviewsManager } from "@/components/admin/ReviewsManager";
+import { DiscountManager } from "@/components/admin/DiscountManager";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 
@@ -57,12 +59,16 @@ const Admin = () => {
               <TabsTrigger value="campaigns" className="flex flex-1 items-center justify-center gap-2"><Megaphone className="h-4 w-4" />Oferte</TabsTrigger>
               <TabsTrigger value="orders" className="flex flex-1 items-center justify-center gap-2"><ShoppingBag className="h-4 w-4" />Comenzi</TabsTrigger>
               <TabsTrigger value="blog" className="flex flex-1 items-center justify-center gap-2"><FileText className="h-4 w-4" />Blog</TabsTrigger>
+              <TabsTrigger value="discounts" className="flex flex-1 items-center justify-center gap-2"><Tag className="h-4 w-4" />Coduri</TabsTrigger>
+              <TabsTrigger value="reviews" className="flex flex-1 items-center justify-center gap-2"><Star className="h-4 w-4" />Recenzii</TabsTrigger>
               <TabsTrigger value="leads" className="flex flex-1 items-center justify-center gap-2"><Mail className="h-4 w-4" />Lead-uri</TabsTrigger>
             </TabsList>
             <TabsContent value="products"><ProductManager /></TabsContent>
             <TabsContent value="campaigns"><CampaignManager /></TabsContent>
             <TabsContent value="orders"><OrdersTable /></TabsContent>
             <TabsContent value="blog"><BlogManager /></TabsContent>
+            <TabsContent value="discounts"><DiscountManager /></TabsContent>
+            <TabsContent value="reviews"><ReviewsManager /></TabsContent>
             <TabsContent value="leads"><LeadsTable /></TabsContent>
           </Tabs>
         </div>

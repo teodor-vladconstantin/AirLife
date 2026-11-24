@@ -4,6 +4,7 @@ import { z } from "zod";
 import { stripe, paymentsEnabled } from "@/lib/stripe";
 import { isShopVisible, salePricing } from "@/lib/pricing";
 import { verifyTurnstile } from "@/lib/turnstile";
+import { evaluateDiscount } from "@/lib/discount";
 
 export const runtime = "nodejs";
 
@@ -18,6 +19,7 @@ const body = z.object({
   paymentMethod: z.enum(["card_online"]), // card only; cash on delivery was removed, bank transfer stays off
   notes: z.string().max(500).optional(),
   token: z.string().optional(), // Turnstile
+  discountCode: z.string().max(40).optional(),
 });
 
 const db = () => createClient(process.env.SUPABASE_URL || process.env.NEXT_PUBLIC_SUPABASE_URL!, process.env.SUPABASE_SERVICE_ROLE_KEY!, { auth: { persistSession: false } });
@@ -28,7 +30,7 @@ const bani = (n: number) => Math.round(n * 100);
 export async function POST(req: Request) {
   const parsed = body.safeParse(await req.json().catch(() => null));
   if (!parsed.success) return NextResponse.json({ error: "invalid_request" }, { status: 400 });
-  const { items, customer, address, paymentMethod, notes, token } = parsed.data;
+  const { items, customer, address, paymentMethod, notes, token, discountCode } = parsed.data;
   const ip = req.headers.get("x-forwarded-for")?.split(",")[0]?.trim();
   if (!(await verifyTurnstile(token, ip))) return NextResponse.json({ error: "captcha" }, { status: 403 });
   if (!paymentsEnabled()) return NextResponse.json({ error: "card_payments_disabled" }, { status: 503 });
@@ -48,14 +50,23 @@ export async function POST(req: Request) {
     lines.push({ p, quantity: it.quantity, unit: salePricing(p).price });
   }
   const subtotal = lines.reduce((s, l) => s + l.unit * l.quantity, 0);
-  const shipping = subtotal >= FREE_SHIPPING_FROM ? 0 : SHIPPING;
-  const total = subtotal + shipping;
+  const shipping = subtotal >= FREE_SHIPPING_FROM ? 0 : SHIPPING; // free shipping is judged on the cart value before the code
+  let discount = 0;
+  let appliedCode: string | null = null;
+  if (discountCode?.trim()) {
+    const d = await evaluateDiscount(sb, discountCode, subtotal);
+    if ("reason" in d) return NextResponse.json({ error: "invalid_discount", reason: d.reason }, { status: 409 });
+    discount = d.amount;
+    appliedCode = d.code;
+  }
+  const total = Math.round((subtotal - discount + shipping) * 100) / 100;
 
   const { data: orderNumber } = await sb.rpc("generate_order_number");
   const { data: order, error: oErr } = await sb.from("orders").insert({
     order_number: orderNumber, user_id: userId, customer_name: customer.name, customer_email: customer.email, customer_phone: customer.phone,
     shipping_address: address, payment_method: paymentMethod, subtotal, shipping_cost: shipping, total_amount: total,
     customer_notes: notes || null, status: "pending",
+    ...(appliedCode ? { discount_code: appliedCode, discount_amount: discount } : {}),
   }).select().single();
   if (oErr || !order) return NextResponse.json({ error: "order_failed" }, { status: 500 });
 
@@ -72,10 +83,22 @@ export async function POST(req: Request) {
   })));
   if (iErr) { await sb.from("orders").delete().eq("id", order.id); return NextResponse.json({ error: "order_failed" }, { status: 500 }); }
 
+  // count the use of the code (conditional update: no lost increments when two orders race)
+  const countCodeUse = async (delta: 1 | -1) => {
+    if (!appliedCode) return;
+    for (let i = 0; i < 3; i++) {
+      const { data: cur } = await sb.from("discount_codes").select("used_count").eq("code", appliedCode).single();
+      if (!cur) return;
+      const { data: ok } = await sb.from("discount_codes").update({ used_count: Math.max(0, cur.used_count + delta) }).eq("code", appliedCode).eq("used_count", cur.used_count).select("code");
+      if (ok?.length) return;
+    }
+  };
+  await countCodeUse(1);
+
   const taken: typeof lines = [];
   for (const l of lines) {
     const { data: ok } = await sb.rpc("decrease_product_stock", { p_product_id: l.p.id, p_quantity: l.quantity });
-    if (!ok) { await giveBack(taken); await sb.from("orders").delete().eq("id", order.id); return NextResponse.json({ error: "out_of_stock", name: l.p.name }, { status: 409 }); }
+    if (!ok) { await giveBack(taken); await countCodeUse(-1); await sb.from("orders").delete().eq("id", order.id); return NextResponse.json({ error: "out_of_stock", name: l.p.name }, { status: 409 }); }
     taken.push(l);
   }
 
@@ -88,6 +111,7 @@ export async function POST(req: Request) {
       metadata: { order_id: order.id, order_number: order.order_number },
       payment_intent_data: { metadata: { order_id: order.id, order_number: order.order_number } },
       expires_at: Math.floor(Date.now() / 1000) + 30 * 60,
+      ...(discount > 0 ? { discounts: [{ coupon: (await stripe().coupons.create({ amount_off: bani(discount), currency: "ron", duration: "once", name: `Cod ${appliedCode}`, max_redemptions: 1 })).id }] } : {}),
       line_items: [
         ...lines.map((l) => ({ quantity: l.quantity, price_data: { currency: "ron", unit_amount: bani(l.unit), product_data: { name: l.p.name, images: l.p.image_url?.startsWith("http") ? [l.p.image_url] : undefined } } })),
         ...(shipping > 0 ? [{ quantity: 1, price_data: { currency: "ron", unit_amount: bani(shipping), product_data: { name: "Transport prin curier" } } }] : []),
@@ -100,6 +124,7 @@ export async function POST(req: Request) {
     console.error("stripe checkout failed:", (e as Error)?.message);
     // Could not reach Stripe: give the stock back and drop the unpaid order.
     await giveBack(lines);
+    await countCodeUse(-1);
     await sb.from("orders").delete().eq("id", order.id);
     return NextResponse.json({ error: "payment_unavailable" }, { status: 502 });
   }

@@ -163,3 +163,20 @@ export async function loadAcBrands(): Promise<BrandSummary[]> {
   } catch { /* no brands: the section is hidden */ }
   return [...acc.values()].sort((a, b) => b.count - a.count || a.name.localeCompare(b.name, "ro"));
 }
+
+export interface Review { id: string; author_name: string; rating: number; title: string | null; body: string; verified_purchase: boolean; created_at: string }
+export interface ReviewData { reviews: Review[]; count: number; average: number }
+
+// Approved reviews of one product (empty while the product_reviews table does not exist yet).
+export async function loadReviews(productId: string): Promise<ReviewData> {
+  const empty: ReviewData = { reviews: [], count: 0, average: 0 };
+  try {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const { data, error } = await (db() as any).from("product_reviews").select("id,author_name,rating,title,body,verified_purchase,created_at").eq("product_id", productId).eq("status", "approved").order("created_at", { ascending: false }).limit(50);
+    if (error || !data?.length) return empty;
+    const reviews = data as Review[];
+    return { reviews, count: reviews.length, average: Math.round((reviews.reduce((s, r) => s + r.rating, 0) / reviews.length) * 10) / 10 };
+  } catch {
+    return empty;
+  }
+}
