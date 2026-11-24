@@ -18,6 +18,7 @@ import {
   Activity,
   Phone,
   Search,
+  Heart,
 } from "lucide-react";
 import {
   DropdownMenu,
@@ -25,6 +26,8 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { CategoryMenu, useCategories } from "@/components/shop/CategoryMenu";
+import { useWishlist } from "@/lib/wishlist";
 import { SearchBox } from "@/components/shop/SearchBox";
 import { CartButton } from "@/components/cart/CartButton";
 import { PHONE_DISPLAY, PHONE_TEL } from "@/data/localSeo";
@@ -35,6 +38,9 @@ const Navbar = () => {
   const [isAdmin, setIsAdmin] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
+  const [catsOpen, setCatsOpen] = useState(false);
+  const cats = useCategories();
+  const wish = useWishlist();
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -91,11 +97,7 @@ const Navbar = () => {
 
           {/* Desktop Navigation Links */}
           <div className="hidden md:flex items-center gap-1 lg:gap-2">
-            <Link to="/produse">
-              <Button variant="ghost" size="sm">
-                Magazin
-              </Button>
-            </Link>
+            <CategoryMenu />
 
             {/* Servicii Dropdown */}
             <DropdownMenu>
@@ -192,6 +194,10 @@ const Navbar = () => {
             >
               <Phone className="w-5 h-5" />
             </a>
+            <Link to="/favorite" aria-label={`Favorite${wish.count ? ` (${wish.count})` : ""}`} className="relative inline-flex h-10 w-10 items-center justify-center rounded-md hover:bg-secondary">
+              <Heart className="h-5 w-5" />
+              {wish.count > 0 && <span className="absolute -right-0.5 -top-0.5 flex h-5 min-w-5 items-center justify-center rounded-full bg-destructive px-1 text-[11px] font-semibold text-destructive-foreground">{wish.count > 99 ? "99+" : wish.count}</span>}
+            </Link>
             <CartButton />
 
             {user ? (
@@ -250,13 +256,17 @@ const Navbar = () => {
         {/* Mobile Navigation Drawer */}
         {mobileMenuOpen && (
           <div className="md:hidden pt-4 pb-3 border-t border-border mt-3 space-y-2 animate-in slide-in-from-top-2 duration-200">
-            <Link
-              to="/produse"
-              onClick={() => setMobileMenuOpen(false)}
-              className="block px-3 py-2 rounded-md hover:bg-secondary text-sm font-medium"
-            >
-              Toate Produsele
-            </Link>
+            <button type="button" onClick={() => setCatsOpen((v) => !v)} aria-expanded={catsOpen} className="flex w-full items-center justify-between px-3 py-2 rounded-md hover:bg-secondary text-sm font-medium">
+              Produse <ChevronDown className={`h-4 w-4 transition-transform ${catsOpen ? "rotate-180" : ""}`} />
+            </button>
+            {catsOpen && (
+              <div className="pl-3">
+                <Link to="/produse" onClick={() => setMobileMenuOpen(false)} className="block px-3 py-1.5 rounded-md text-sm font-semibold text-primary hover:bg-secondary">Toate produsele</Link>
+                {cats.map((c) => (
+                  <Link key={c.slug} to={`/${c.slug}`} onClick={() => setMobileMenuOpen(false)} className="block px-3 py-1.5 rounded-md text-sm text-muted-foreground hover:bg-secondary hover:text-foreground">{c.name}</Link>
+                ))}
+              </div>
+            )}
             <div className="px-3 py-1 text-xs font-semibold uppercase text-primary tracking-wider">
               Servicii
             </div>

@@ -5,6 +5,7 @@ import { Link } from "@/lib/router";
 import { Button } from "@/components/ui/button";
 import { useCart } from "@/contexts/CartContext";
 import { trackAddToCart } from "@/lib/analytics";
+import { WishlistButton } from "@/components/shop/WishlistButton";
 import { discountPct, formatPrice, type ProductCardData } from "@/lib/shop";
 
 // Collection card in the usual online-store layout: square photo with a badge, brand, two-line title, price (with the
@@ -16,7 +17,7 @@ export const ProductCard = memo(function ProductCard({ product, priority = false
   const href = `/produse/${product.slug}`;
 
   return (
-    <article className="group flex min-w-0 flex-col overflow-hidden rounded-xl border border-border bg-card transition-shadow hover:shadow-md">
+    <article className="group relative flex min-w-0 flex-col overflow-hidden rounded-xl border border-border bg-card transition-shadow hover:shadow-md">
       <Link to={href} className="relative block aspect-square bg-white" aria-label={product.name}>
         <img
           src={product.image_url}
@@ -34,6 +35,7 @@ export const ProductCard = memo(function ProductCard({ product, priority = false
           </span>
         )}
       </Link>
+      <WishlistButton productId={product.id} productName={product.name} className="absolute right-2 top-2 h-9 w-9 bg-background/90 shadow-sm hover:bg-background" />
       <div className="flex flex-1 flex-col gap-1 p-3 sm:p-4">
         {product.brand && <p className="truncate text-[11px] font-medium uppercase tracking-wide text-muted-foreground">{product.brand}</p>}
         <h3 className="line-clamp-2 min-h-[2.5rem] break-words text-sm font-semibold leading-snug text-foreground">
