@@ -1,6 +1,6 @@
 import type { MetadataRoute } from "next";
 
-const PRIVATE = ["/admin", "/checkout", "/order-confirmation", "/my-orders", "/auth"];
+const PRIVATE = ["/admin", "/checkout", "/order-confirmation", "/my-orders", "/cont", "/auth"];
 const BOTS = ["*", "GPTBot", "OAI-SearchBot", "ChatGPT-User", "ClaudeBot", "Claude-SearchBot", "PerplexityBot", "Google-Extended"];
 
 export default function robots(): MetadataRoute.Robots {
