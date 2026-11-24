@@ -1,8 +1,11 @@
 "use client";
-import { useState, useEffect } from "react";
-import { Link } from "@/lib/router";
+import { useState, useEffect, useRef } from "react";
+import { Link, useNavigate } from "@/lib/router";
 import type { loadProduct, Product } from "@/lib/catalog";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { ProductCard } from "@/components/shop/ProductCard";
+import { CATEGORIES_DATA } from "@/data/categoriesData";
+import { discountPct, formatPrice, type ProductCardData } from "@/lib/shop";
 import { Button } from "@/components/ui/button";
 import { useToast } from "@/hooks/use-toast";
 import { useCart } from "@/contexts/CartContext";
@@ -16,10 +19,10 @@ import {
   Loader2,
   Minus,
   Plus,
-  Package,
   Truck,
   RotateCcw,
   ShieldCheck,
+  CreditCard,
   CheckCircle2,
   ShoppingCart,
   PhoneCall,
@@ -40,11 +43,37 @@ const ProductDetails = ({ initial }: { initial: Loaded }) => {
   const [touchX, setTouchX] = useState<number | null>(null);
   const { toast } = useToast();
   const { addToCart } = useCart();
+  const navigate = useNavigate();
+  const [recent, setRecent] = useState<ProductCardData[]>([]);
+  const [stickyBar, setStickyBar] = useState(false);
+  const buyRef = useRef<HTMLDivElement>(null);
+
+  const toCard = (p: { id: string; slug?: string | null; name: string; brand?: string | null; category: string; price: number; compare_at?: number; stock: number; image_url: string | null }): ProductCardData => ({
+    id: p.id, slug: p.slug ?? p.id, name: p.name, brand: p.brand ?? null, category: p.category, price: p.price, compare_at: p.compare_at,
+    stock: p.stock, image_url: p.image_url || "/placeholder.svg", created_at: "",
+  });
 
   useEffect(() => {
     window.scrollTo(0, 0);
     setIdx(0);
+    setQuantity(1);
     trackViewItem({ item_id: product.id, item_name: product.name, price: product.price, item_category: product.category });
+    // "Văzute recent": kept only in this browser (no account needed)
+    try {
+      const prev: ProductCardData[] = JSON.parse(localStorage.getItem("airlife_recent") || "[]");
+      const list = Array.isArray(prev) ? prev.filter((p) => p && p.id !== product.id) : [];
+      setRecent(list.slice(0, 4));
+      localStorage.setItem("airlife_recent", JSON.stringify([toCard(product), ...list].slice(0, 8)));
+    } catch { /* storage blocked: skip */ }
+  }, [product.id]);
+
+  // the sticky mobile buy bar shows only once the main buy box has scrolled out of view
+  useEffect(() => {
+    const el = buyRef.current;
+    if (!el || typeof IntersectionObserver === "undefined") return;
+    const io = new IntersectionObserver(([e]) => setStickyBar(!e.isIntersecting && e.boundingClientRect.top < 0), { threshold: 0 });
+    io.observe(el);
+    return () => io.disconnect();
   }, [product.id]);
 
   const images = product.gallery.length ? product.gallery : [product.image_url || "/placeholder.svg"];
@@ -66,8 +95,8 @@ const ProductDetails = ({ initial }: { initial: Loaded }) => {
     };
   }, [zoom, images.length]);
 
-  const handleAddToCart = async () => {
-    if (!product || product.stock === 0) return;
+  const handleAddToCart = async (): Promise<boolean> => {
+    if (!product || product.stock === 0) return false;
 
     if (quantity > product.stock) {
       toast({
@@ -75,7 +104,7 @@ const ProductDetails = ({ initial }: { initial: Loaded }) => {
         description: `Disponibil doar ${product.stock} bucăți`,
         variant: "destructive",
       });
-      return;
+      return false;
     }
 
     try {
@@ -98,7 +127,14 @@ const ProductDetails = ({ initial }: { initial: Loaded }) => {
         description: "Nu s-a putut adăuga în coș",
         variant: "destructive",
       });
+      return false;
     }
+    return true;
+  };
+
+  // "Cumpără acum": straight to checkout
+  const handleBuyNow = async () => {
+    if (await handleAddToCart()) navigate("/checkout");
   };
 
   const incrementQuantity = () => {
@@ -196,6 +232,21 @@ const ProductDetails = ({ initial }: { initial: Loaded }) => {
     ]
   };
 
+  const categorySlug = Object.values(CATEGORIES_DATA).find((c) => c.name === product.category)?.slug;
+  const pct = discountPct({ price: product.price, compare_at: product.compare_at } as ProductCardData);
+  const saving = product.compare_at ? product.compare_at - product.price : 0;
+  const out = product.stock <= 0;
+  const intro = cut(product.description.replace(/\s+/g, " "), 240);
+  const specRows: [string, string][] = [
+    ...(product.brand ? ([["Brand", product.brand]] as [string, string][]) : []),
+    ...(product.sku ? ([["Cod produs", product.sku]] as [string, string][]) : []),
+    ["Categorie", product.category],
+    ...Object.entries(product.specs),
+  ];
+  const stockLine = out ? "Indisponibil momentan" : product.stock <= 3 ? `Ultimele ${product.stock} bucăți în stoc` : "În stoc";
+  const stockDot = out ? "bg-muted-foreground" : product.stock <= 3 ? "bg-amber-500" : "bg-primary";
+  const cards = relatedProducts.slice(0, 4).map(toCard);
+
   return (
     <div className="min-h-screen flex flex-col">
       <SEO
@@ -208,29 +259,29 @@ const ProductDetails = ({ initial }: { initial: Loaded }) => {
 
       <Navbar />
 
-      <main className="flex-1 bg-gradient-to-b from-background to-secondary/30 py-10">
+      <main className="flex-1 bg-background py-6 md:py-10 pb-24 md:pb-10">
         <div className="container mx-auto px-4 max-w-6xl">
-          {/* Breadcrumbs */}
-          <nav aria-label="Breadcrumb" className="mb-6 text-sm text-muted-foreground">
+          <nav aria-label="Breadcrumb" className="mb-5 text-sm text-muted-foreground">
             <ol className="flex items-center gap-2 flex-wrap">
-              <li>
-                <Link to="/" className="hover:text-primary transition-colors">Acasă</Link>
-              </li>
-              <li>/</li>
-              <li>
-                <Link to="/produse" className="hover:text-primary transition-colors">Produse</Link>
-              </li>
-              <li>/</li>
-              <li className="text-foreground font-medium truncate max-w-xs">{product.name}</li>
+              <li><Link to="/" className="hover:text-primary transition-colors">Acasă</Link></li>
+              <li aria-hidden>/</li>
+              <li><Link to="/produse" className="hover:text-primary transition-colors">Produse</Link></li>
+              {categorySlug && (
+                <>
+                  <li aria-hidden>/</li>
+                  <li><Link to={`/${categorySlug}`} className="hover:text-primary transition-colors">{product.category}</Link></li>
+                </>
+              )}
+              <li aria-hidden>/</li>
+              <li aria-current="page" className="text-foreground font-medium truncate max-w-[16rem] sm:max-w-md">{product.name}</li>
             </ol>
           </nav>
 
-          {/* Product Main Section */}
-          <div className="grid md:grid-cols-2 gap-8 mb-12 animate-in fade-in duration-500">
-            {/* Product Image */}
-            <div className="space-y-4">
+          <div className="grid gap-8 md:grid-cols-2 lg:gap-12 mb-12">
+            {/* Gallery */}
+            <div className="space-y-3 md:sticky md:top-24 md:self-start">
               <div
-                className="relative aspect-square bg-white rounded-2xl border border-border/60 p-8 flex items-center justify-center overflow-hidden shadow-sm select-none"
+                className="relative aspect-square bg-white rounded-2xl border border-border/60 p-6 flex items-center justify-center overflow-hidden select-none"
                 tabIndex={0}
                 onKeyDown={(e) => {
                   if (e.key === "ArrowLeft") go(-1);
@@ -244,12 +295,17 @@ const ProductDetails = ({ initial }: { initial: Loaded }) => {
                   setTouchX(null);
                 }}
               >
+                {(pct > 0 || out) && (
+                  <span className={`absolute left-3 top-3 z-10 rounded-full px-3 py-1 text-xs font-semibold ${out ? "bg-muted text-muted-foreground" : "bg-destructive text-destructive-foreground"}`}>
+                    {out ? "Indisponibil" : `-${pct}%`}
+                  </span>
+                )}
                 <img
                   src={images[idx]}
                   alt={`${product.name} Buzău - poza ${idx + 1}`}
                   fetchPriority="high"
                   decoding="async"
-                  className="max-h-full max-w-full object-contain cursor-zoom-in"
+                  className={`max-h-full max-w-full object-contain cursor-zoom-in ${out ? "opacity-70" : ""}`}
                   onClick={() => setZoom(true)}
                 />
                 {images.length > 1 && (
@@ -267,14 +323,15 @@ const ProductDetails = ({ initial }: { initial: Loaded }) => {
                 )}
               </div>
               {images.length > 1 && (
-                <div className="flex gap-2">
+                <div className="flex gap-2 overflow-x-auto pb-1">
                   {images.map((g, i) => (
                     <button
                       key={g}
                       type="button"
                       onClick={() => setIdx(i)}
                       aria-label={`Poza ${i + 1}`}
-                      className={`w-16 h-16 rounded-lg border bg-white p-1 ${i === idx ? "border-primary ring-1 ring-primary" : "border-border"}`}
+                      aria-current={i === idx}
+                      className={`w-16 h-16 shrink-0 rounded-lg border bg-white p-1 ${i === idx ? "border-primary ring-1 ring-primary" : "border-border"}`}
                     >
                       <img src={g} alt={`${product.name} Buzău - miniatura ${i + 1}`} loading="lazy" className="w-full h-full object-contain" />
                     </button>
@@ -321,215 +378,159 @@ const ProductDetails = ({ initial }: { initial: Loaded }) => {
                   )}
                 </div>
               )}
-
-              {/* Trust Badges */}
-              <div className="grid grid-cols-3 gap-2 text-center text-xs text-muted-foreground pt-2">
-                <div className="p-3 bg-card rounded-xl border border-border flex flex-col items-center gap-1.5">
-                  <Truck className="w-4 h-4 text-primary" />
-                  <span className="font-semibold text-foreground">Livrare Rapidă</span>
-                  <span>24-48h lucrătoare</span>
-                </div>
-                <div className="p-3 bg-card rounded-xl border border-border flex flex-col items-center gap-1.5">
-                  <RotateCcw className="w-4 h-4 text-primary" />
-                  <span className="font-semibold text-foreground">Retur 14 Zile</span>
-                  <span>Conform OUG 34/2014</span>
-                </div>
-                <div className="p-3 bg-card rounded-xl border border-border flex flex-col items-center gap-1.5">
-                  <ShieldCheck className="w-4 h-4 text-primary" />
-                  <span className="font-semibold text-foreground">Garanție 2 Ani</span>
-                  <span>Conformitate legală</span>
-                </div>
-              </div>
             </div>
 
-            {/* Product Info */}
-            <div className="space-y-6">
+            {/* Buy box */}
+            <div className="space-y-5">
               <div>
-                <span className="text-xs font-semibold px-2.5 py-1 rounded-full bg-primary/10 text-primary border border-primary/20">
-                  {product.category}
-                </span>
-                <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold mt-3 mb-3 text-foreground leading-tight">
-                  {product.name}
-                </h1>
-                <div className="flex items-baseline gap-3">
-                  <span className="text-3xl sm:text-4xl font-bold text-primary">
-                    {product.price.toFixed(2)} RON
-                    {product.compare_at ? <span className="ml-3 text-xl font-normal text-muted-foreground line-through">{product.compare_at.toFixed(2)} RON</span> : null}
-                  </span>
-                  <span className="text-xs text-muted-foreground">Preț final, TVA inclus</span>
-                </div>
+                {product.brand && (
+                  <Link to={`/produse?brand=${encodeURIComponent(product.brand)}`} className="text-xs font-semibold uppercase tracking-wide text-primary hover:underline">
+                    {product.brand}
+                  </Link>
+                )}
+                <h1 className="mt-1 text-2xl sm:text-3xl font-bold text-foreground leading-tight">{product.name}</h1>
+                {product.sku && <p className="mt-1 text-xs text-muted-foreground">Cod produs: {product.sku}</p>}
               </div>
 
-              {/* Stock status */}
-              <div className="flex items-center gap-2 text-sm">
-                <Package className="w-4 h-4 text-muted-foreground" />
-                <span className={product.stock > 0 ? "text-primary font-semibold" : "text-amber-600 font-semibold"}>
-                  {product.stock > 0 ? `În Stoc (${product.stock} bucăți disponibile)` : "Indisponibil momentan"}
-                </span>
-              </div>
-
-              {/* Key Features */}
-              {Object.keys(product.specs).length > 0 && (
-                <div>
-                  <h2 className="text-xs font-semibold text-foreground uppercase tracking-wider mb-2">Specificații:</h2>
-                  <dl className="text-sm divide-y border rounded-lg bg-card">
-                    {product.sku && (
-                      <div className="flex justify-between gap-4 px-3 py-2"><dt className="text-muted-foreground">Cod produs</dt><dd className="font-medium">{product.sku}</dd></div>
-                    )}
-                    {Object.entries(product.specs).map(([k, v]) => (
-                      <div key={k} className="flex justify-between gap-4 px-3 py-2"><dt className="text-muted-foreground">{k}</dt><dd className="font-medium text-right">{v}</dd></div>
-                    ))}
-                  </dl>
-                </div>
-              )}
-
-              {product.features && product.features.length > 0 && (
-                <div>
-                  <h2 className="text-xs font-semibold text-foreground uppercase tracking-wider mb-2">
-                    Caracteristici cheie:
-                  </h2>
-                  <div className="flex gap-2 flex-wrap">
-                    {product.features.map((feature: string, idx: number) => (
-                      <span
-                        key={idx}
-                        className="px-3 py-1 bg-secondary text-secondary-foreground text-xs rounded-lg border border-border"
-                      >
-                        {feature}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-              )}
-
-              {/* Description */}
               <div>
-                <h2 className="text-xs font-semibold text-foreground uppercase tracking-wider mb-2">
-                  Descriere Produs:
-                </h2>
-                <p className="text-sm text-muted-foreground leading-relaxed">
-                  {product.description}
+                <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
+                  <span className="text-3xl sm:text-4xl font-bold text-foreground">{formatPrice(product.price)}</span>
+                  {product.compare_at ? <span className="text-lg text-muted-foreground line-through">{formatPrice(product.compare_at)}</span> : null}
+                  {pct > 0 && <span className="rounded-full bg-destructive px-2.5 py-0.5 text-xs font-semibold text-destructive-foreground">-{pct}%</span>}
+                </div>
+                <p className="mt-1 text-xs text-muted-foreground">
+                  Preț final, TVA inclus{saving > 0 ? <> · <span className="font-semibold text-destructive">Economisești {formatPrice(saving)}</span></> : null}
                 </p>
               </div>
 
-              {/* Quantity Selector & Add to Cart */}
-              <div className="space-y-4 pt-4 border-t border-border">
-                <div className="flex items-center gap-4">
-                  <label className="text-xs font-semibold text-foreground block">Cantitate:</label>
-                  <div className="flex items-center gap-2">
-                    <Button
-                      variant="outline"
-                      size="icon"
-                      className="h-9 w-9"
-                      onClick={decrementQuantity}
-                      disabled={quantity <= 1}
-                      aria-label="Scade cantitatea"
-                    >
-                      <Minus className="w-3.5 h-3.5" />
-                    </Button>
-                    <Input
-                      type="number"
-                      value={quantity}
-                      onChange={(e) => {
-                        const val = parseInt(e.target.value);
-                        if (val >= 1 && val <= product.stock) {
-                          setQuantity(val);
-                        }
-                      }}
-                      className="text-center w-16 h-9 font-semibold text-sm"
-                      min={1}
-                      max={product.stock}
-                      aria-label="Cantitate produs"
-                    />
-                    <Button
-                      variant="outline"
-                      size="icon"
-                      className="h-9 w-9"
-                      onClick={incrementQuantity}
-                      disabled={quantity >= product.stock}
-                      aria-label="Crește cantitatea"
-                    >
-                      <Plus className="w-3.5 h-3.5" />
-                    </Button>
+              <p className="flex items-center gap-2 text-sm font-medium" role="status">
+                <span className={`h-2.5 w-2.5 rounded-full ${stockDot}`} aria-hidden />
+                <span className={out ? "text-muted-foreground" : product.stock <= 3 ? "text-amber-700" : "text-primary"}>{stockLine}</span>
+              </p>
+
+              {intro && <p className="text-sm text-muted-foreground leading-relaxed">{intro}</p>}
+
+              {/* Quantity + purchase */}
+              <div ref={buyRef} className="space-y-3 border-t border-border pt-5">
+                {!out && (
+                  <div className="flex items-center gap-4">
+                    <span className="text-sm font-semibold text-foreground" id="qty-label">Cantitate</span>
+                    <div className="flex items-center gap-2" role="group" aria-labelledby="qty-label">
+                      <Button variant="outline" size="icon" className="h-10 w-10" onClick={decrementQuantity} disabled={quantity <= 1} aria-label="Scade cantitatea">
+                        <Minus className="w-3.5 h-3.5" />
+                      </Button>
+                      <Input
+                        type="number"
+                        value={quantity}
+                        onChange={(e) => {
+                          const val = parseInt(e.target.value);
+                          if (val >= 1 && val <= product.stock) setQuantity(val);
+                        }}
+                        className="text-center w-16 h-10 font-semibold text-sm"
+                        min={1}
+                        max={product.stock}
+                        aria-label="Cantitate produs"
+                      />
+                      <Button variant="outline" size="icon" className="h-10 w-10" onClick={incrementQuantity} disabled={quantity >= product.stock} aria-label="Crește cantitatea">
+                        <Plus className="w-3.5 h-3.5" />
+                      </Button>
+                    </div>
                   </div>
-                </div>
-
-                <div className="flex flex-col sm:flex-row gap-3 pt-2">
-                  <Button
-                    size="lg"
-                    className="flex-1 font-semibold"
-                    disabled={product.stock === 0}
-                    onClick={handleAddToCart}
-                  >
+                )}
+                <div className="flex flex-col gap-2 sm:flex-row">
+                  <Button size="lg" className="flex-1 font-semibold" disabled={out} onClick={handleAddToCart}>
                     <ShoppingCart className="w-4 h-4 mr-2" />
-                    {product.stock > 0 ? "Adaugă în Coș" : "Indisponibil"}
+                    {out ? "Indisponibil" : "Adaugă în coș"}
                   </Button>
+                  {!out && (
+                    <Button size="lg" variant="outline" className="flex-1 font-semibold border-primary text-primary hover:bg-primary/5" onClick={handleBuyNow}>
+                      <CreditCard className="w-4 h-4 mr-2" /> Cumpără acum
+                    </Button>
+                  )}
                 </div>
-
-<ul className="grid sm:grid-cols-2 gap-2 text-sm text-muted-foreground">
-                  <li className="flex items-center gap-2"><Truck className="w-4 h-4 text-primary shrink-0" /> Livrare <strong className="text-foreground">gratuită</strong> peste 1000 RON</li>
-                  <li className="flex items-center gap-2"><ShieldCheck className="w-4 h-4 text-primary shrink-0" /> Garanție <strong className="text-foreground">24 luni</strong></li>
-                  <li className="flex items-center gap-2"><RotateCcw className="w-4 h-4 text-primary shrink-0" /> Retur în <strong className="text-foreground">14 zile</strong></li>
-                  <li className="flex items-center gap-2"><PhoneCall className="w-4 h-4 text-primary shrink-0" /> <a href={`tel:${PHONE_TEL}`} onClick={() => trackClickToCall("product-page")} className="font-semibold text-foreground hover:text-primary">{PHONE_DISPLAY}</a></li>
-                </ul>
-                <a href={whatsappLink(`Bună! Mă interesează ${product.name}`)} target="_blank" rel="noopener noreferrer" onClick={() => trackClickWhatsApp("product-page")} className="inline-flex items-center gap-2 text-sm font-semibold text-[#128C7E] hover:underline">
-                  <MessageCircle className="w-4 h-4" /> Întreabă pe WhatsApp despre acest produs
-                </a>
+                <p className="flex items-center gap-2 text-xs text-muted-foreground"><CreditCard className="w-3.5 h-3.5" /> Plată securizată online cu cardul</p>
               </div>
+
+              {/* Delivery / returns / warranty */}
+              <ul className="divide-y rounded-xl border border-border bg-card text-sm">
+                <li className="flex items-start gap-3 p-3"><Truck className="mt-0.5 h-4 w-4 shrink-0 text-primary" /><span><strong>Livrare în 24-48h lucrătoare</strong><br /><span className="text-muted-foreground">Gratuită peste 1.000 RON, altfel 20 RON</span></span></li>
+                <li className="flex items-start gap-3 p-3"><RotateCcw className="mt-0.5 h-4 w-4 shrink-0 text-primary" /><span><strong>Retur în 14 zile</strong><br /><span className="text-muted-foreground">Conform OUG 34/2014</span></span></li>
+                <li className="flex items-start gap-3 p-3"><ShieldCheck className="mt-0.5 h-4 w-4 shrink-0 text-primary" /><span><strong>Garanție 24 de luni</strong><br /><span className="text-muted-foreground">Conformitate legală, factură cu TVA</span></span></li>
+                <li className="flex flex-wrap items-center gap-x-4 gap-y-2 p-3">
+                  <a href={`tel:${PHONE_TEL}`} onClick={() => trackClickToCall("product-page")} className="inline-flex items-center gap-2 font-semibold hover:text-primary"><PhoneCall className="h-4 w-4 text-primary" /> {PHONE_DISPLAY}</a>
+                  <a href={whatsappLink(`Bună! Mă interesează ${product.name}`)} target="_blank" rel="noopener noreferrer" onClick={() => trackClickWhatsApp("product-page")} className="inline-flex items-center gap-2 font-semibold text-[#128C7E] hover:underline">
+                    <MessageCircle className="h-4 w-4" /> Întreabă pe WhatsApp
+                  </a>
+                </li>
+              </ul>
             </div>
           </div>
 
-          {/* Specifications Card */}
-          {product.features && product.features.length > 0 && (
-            <Card className="mb-12 border-border">
-              <CardHeader>
-                <CardTitle className="text-xl font-bold">Specificații și Avantaje</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <div className="grid sm:grid-cols-2 gap-4">
-                  {product.features.map((feature: string, idx: number) => (
-                    <div key={idx} className="flex items-start gap-2.5 text-sm">
-                      <CheckCircle2 className="w-4 h-4 text-primary flex-shrink-0 mt-0.5" />
-                      <span className="text-muted-foreground">{feature}</span>
-                    </div>
+          {/* Details tabs */}
+          <Tabs defaultValue="descriere" className="mb-12">
+            <TabsList className="h-auto w-full justify-start overflow-x-auto">
+              <TabsTrigger value="descriere">Descriere</TabsTrigger>
+              <TabsTrigger value="specificatii">Specificații</TabsTrigger>
+              <TabsTrigger value="livrare">Livrare și retur</TabsTrigger>
+            </TabsList>
+            <TabsContent value="descriere" className="mt-4 rounded-xl border border-border bg-card p-5">
+              <h2 className="mb-3 text-lg font-bold text-foreground">Despre {product.name}</h2>
+              <p className="whitespace-pre-line text-sm leading-relaxed text-muted-foreground">{product.description}</p>
+              {product.features.length > 0 && (
+                <ul className="mt-4 grid gap-2 sm:grid-cols-2">
+                  {product.features.map((f, i) => (
+                    <li key={i} className="flex items-start gap-2 text-sm text-muted-foreground"><CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-primary" />{f}</li>
                   ))}
-                </div>
-              </CardContent>
-            </Card>
+                </ul>
+              )}
+            </TabsContent>
+            <TabsContent value="specificatii" className="mt-4 rounded-xl border border-border bg-card p-5">
+              <h2 className="mb-3 text-lg font-bold text-foreground">Specificații tehnice</h2>
+              <dl className="divide-y text-sm">
+                {specRows.map(([k, v]) => (
+                  <div key={k} className="grid grid-cols-2 gap-4 py-2 sm:grid-cols-[14rem_1fr]"><dt className="text-muted-foreground">{k}</dt><dd className="font-medium">{v}</dd></div>
+                ))}
+              </dl>
+            </TabsContent>
+            <TabsContent value="livrare" className="mt-4 rounded-xl border border-border bg-card p-5 text-sm leading-relaxed text-muted-foreground">
+              <h2 className="mb-3 text-lg font-bold text-foreground">Livrare și retur</h2>
+              <p>Comenzile se expediază în 24-48h lucrătoare, cu curier, în toată țara. Livrarea este gratuită pentru comenzi de peste 1.000 RON; sub această valoare transportul costă 20 RON.</p>
+              <p className="mt-2">Ai 14 zile să te răzgândești, conform OUG 34/2014. Produsele au garanție de 24 de luni. Detalii complete: <Link to="/livrare-si-retur" className="font-medium text-primary hover:underline">Livrare și retur</Link>.</p>
+            </TabsContent>
+          </Tabs>
+
+          {cards.length > 0 && (
+            <section className="mb-12" aria-labelledby="rel-h">
+              <h2 id="rel-h" className="mb-4 text-xl font-bold text-foreground">Produse similare</h2>
+              <div className="grid grid-cols-2 gap-3 md:grid-cols-4 md:gap-4">
+                {cards.map((c) => <ProductCard key={c.id} product={c} />)}
+              </div>
+            </section>
           )}
 
-          {/* Cross-Selling / Related Products */}
-          {relatedProducts.length > 0 && (
-            <div className="mb-12">
-              <h2 className="text-2xl font-bold text-foreground mb-6">Produse Recomandate / Accesorii</h2>
-              <div className="grid sm:grid-cols-3 gap-6">
-                {relatedProducts.map((rel) => (
-                  <Card key={rel.id} className="border-border hover:border-primary/40 transition-all p-4 bg-card flex flex-col justify-between">
-                    <div>
-                      <div className="aspect-video bg-white rounded-lg flex items-center justify-center p-2 mb-3">
-                        <img src={rel.image_url} alt={`${rel.name} - AirLife Buzău`} loading="lazy" decoding="async" className="max-h-full max-w-full object-contain" />
-                      </div>
-                      <span className="text-[11px] text-primary font-semibold block mb-1">{rel.category}</span>
-                      <h3 className="font-bold text-sm text-foreground mb-2 line-clamp-2">
-                        <Link to={`/produse/${rel.slug ?? rel.id}`} className="hover:text-primary transition-colors">
-                          {rel.name}
-                        </Link>
-                      </h3>
-                    </div>
-                    <div className="pt-3 border-t border-border flex items-center justify-between">
-                      <span className="font-bold text-primary">{rel.price.toFixed(2)} RON</span>
-                      <Link to={`/produse/${rel.slug ?? rel.id}`}>
-                        <Button size="sm" variant="outline" className="text-xs">
-                          Vezi Produs
-                        </Button>
-                      </Link>
-                    </div>
-                  </Card>
-                ))}
+          {recent.length > 0 && (
+            <section className="mb-4" aria-labelledby="rec-h">
+              <h2 id="rec-h" className="mb-4 text-xl font-bold text-foreground">Văzute recent</h2>
+              <div className="grid grid-cols-2 gap-3 md:grid-cols-4 md:gap-4">
+                {recent.map((c) => <ProductCard key={c.id} product={c} />)}
               </div>
-            </div>
+            </section>
           )}
         </div>
       </main>
+
+      {/* Sticky buy bar (phones, after the main buttons scroll away) */}
+      {stickyBar && !out && (
+        <div className="fixed inset-x-0 bottom-0 z-40 border-t border-border bg-background/95 p-3 shadow-[0_-4px_12px_rgba(0,0,0,0.08)] backdrop-blur md:hidden">
+          <div className="mx-auto flex max-w-6xl items-center gap-3">
+            <div className="min-w-0 flex-1">
+              <p className="truncate text-xs text-muted-foreground">{product.name}</p>
+              <p className="text-base font-bold text-foreground">{formatPrice(product.price)}</p>
+            </div>
+            <Button className="shrink-0 font-semibold" onClick={handleAddToCart}><ShoppingCart className="mr-2 h-4 w-4" /> Adaugă în coș</Button>
+          </div>
+        </div>
+      )}
 
       <Footer />
     </div>
