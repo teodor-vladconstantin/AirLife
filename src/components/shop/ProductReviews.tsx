@@ -24,7 +24,7 @@ const ERR: Record<string, string> = {
 
 export function ProductReviews({ productId, data }: { productId: string; data: ReviewData }) {
   const { toast } = useToast();
-  const [signedIn, setSignedIn] = useState<boolean | null>(null);
+  const [elig, setElig] = useState<"loading" | "ok" | "login_required" | "not_purchased" | "already_reviewed">("loading");
   const [open, setOpen] = useState(false);
   const [rating, setRating] = useState(0);
   const [name, setName] = useState("");
@@ -33,13 +33,21 @@ export function ProductReviews({ productId, data }: { productId: string; data: R
   const [busy, setBusy] = useState(false);
   const [sent, setSent] = useState(false);
 
+  // Automatic check: signed in + paid order with this product + no review yet.
   useEffect(() => {
-    supabase.auth.getSession().then(({ data: { session } }) => {
-      setSignedIn(!!session);
+    let live = true;
+    (async () => {
+      const { data: { session } } = await supabase.auth.getSession();
       const n = session?.user.user_metadata?.full_name;
       if (typeof n === "string") setName(n);
-    });
-  }, []);
+      try {
+        const res = await fetch(`/api/reviews?productId=${encodeURIComponent(productId)}`, { headers: session?.access_token ? { Authorization: `Bearer ${session.access_token}` } : {} });
+        const out = await res.json().catch(() => ({}));
+        if (live) setElig(["ok", "login_required", "not_purchased", "already_reviewed"].includes(out.state) ? out.state : "login_required");
+      } catch { if (live) setElig("login_required"); }
+    })();
+    return () => { live = false; };
+  }, [productId]);
 
   const submit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -69,11 +77,11 @@ export function ProductReviews({ productId, data }: { productId: string; data: R
             <p className="mt-1 text-sm text-muted-foreground">Încă nu sunt recenzii pentru acest produs.</p>
           )}
         </div>
-        {!sent && !open && <Button variant="outline" onClick={() => setOpen(true)}>Scrie o recenzie</Button>}
+        {elig === "ok" && !sent && !open && <Button variant="outline" onClick={() => setOpen(true)}>Scrie o recenzie</Button>}
       </div>
 
-      {open && !sent && (
-        signedIn ? (
+      {open && !sent && elig === "ok" && (
+
           <form onSubmit={submit} className="mb-6 space-y-4 rounded-xl border border-border bg-card p-5">
             <div>
               <Label>Nota ta *</Label>
@@ -96,10 +104,10 @@ export function ProductReviews({ productId, data }: { productId: string; data: R
             </div>
             <p className="text-xs text-muted-foreground">Recenziile sunt acceptate doar de la clienții care au cumpărat produsul și apar după aprobare.</p>
           </form>
-        ) : (
-          <p className="mb-6 rounded-xl border border-border bg-card p-4 text-sm"><Link to="/auth" className="font-semibold text-primary underline">Conectează-te</Link> ca să scrii o recenzie (doar clienții care au cumpărat produsul).</p>
-        )
       )}
+      {elig === "login_required" && <p className="mb-6 rounded-xl border border-border bg-card p-4 text-sm"><Link to="/auth" className="font-semibold text-primary underline">Conectează-te</Link> dacă ai cumpărat acest produs, ca să poți scrie o recenzie.</p>}
+      {elig === "not_purchased" && <p className="mb-6 rounded-xl border border-border bg-card p-4 text-sm text-muted-foreground">Recenziile pot fi scrise doar de clienții care au cumpărat și plătit acest produs.</p>}
+      {elig === "already_reviewed" && !sent && <p className="mb-6 rounded-xl border border-border bg-card p-4 text-sm text-muted-foreground">Ai trimis deja o recenzie pentru acest produs. Apare pe site după aprobare.</p>}
       {sent && <p className="mb-6 rounded-xl border border-primary/30 bg-primary/5 p-4 text-sm" role="status">Mulțumim! Recenzia ta va apărea după aprobare.</p>}
 
       <ul className="space-y-4">
