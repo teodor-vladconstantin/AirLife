@@ -37,7 +37,7 @@ const AcBrands = ({ brands }: { brands: BrandSummary[] }) => {
           Mărcile și siglele aparțin proprietarilor lor și sunt afișate doar pentru a identifica produsele din magazin. AirLife nu este afiliat cu aceste mărci.
         </p>
         <div className="mt-6 text-center">
-          <Link to="/aer-conditionat" className="inline-flex items-center gap-2 text-sm font-semibold text-primary hover:underline">
+          <Link to="/aer-conditionat" className="inline-flex items-center gap-2 py-2 text-sm font-semibold text-primary hover:underline">
             Vezi toate aparatele de aer condiționat <ArrowRight className="h-4 w-4" />
           </Link>
         </div>

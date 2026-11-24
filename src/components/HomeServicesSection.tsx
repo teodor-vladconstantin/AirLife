@@ -91,7 +91,7 @@ export const HomeServicesSection = () => {
 
         <div className="text-center">
           <Link to="/servicii">
-            <Button variant="link" className="text-primary font-semibold text-sm">
+            <Button variant="link" className="h-11 text-primary font-semibold text-sm">
               Vezi toate serviciile oferite &rarr;
             </Button>
           </Link>
