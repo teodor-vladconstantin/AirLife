@@ -1,6 +1,7 @@
 ﻿import type { MetadataRoute } from "next";
 import { db, loadCategorySummaries } from "@/lib/catalog";
 import { BLOG_CANONICAL } from "@/data/localSeo";
+import { isShopVisible } from "@/lib/pricing";
 
 export const revalidate = 3600;
 
@@ -20,10 +21,10 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     const client = db();
     const [{ data: posts }, { data: products }] = await Promise.all([
       client.from("blog_posts").select("slug,published_at,updated_at").eq("status", "published"),
-      client.from("products").select("slug,updated_at").not("slug", "is", null),
+      client.from("products").select("slug,updated_at,hidden,image_url").not("slug", "is", null),
     ]);
     for (const p of (posts ?? []).filter((x) => !BLOG_CANONICAL[x.slug])) entries.push({ url: `${SITE}/blog/${p.slug}`, lastModified: p.updated_at ?? p.published_at ?? undefined });
-    for (const p of products ?? []) entries.push({ url: `${SITE}/products/${p.slug}`, lastModified: p.updated_at ?? undefined });
+    for (const p of (products ?? []).filter(isShopVisible)) entries.push({ url: `${SITE}/products/${p.slug}`, lastModified: p.updated_at ?? undefined });
   } catch {
     // DB down: serve the static part rather than failing the sitemap
   }
