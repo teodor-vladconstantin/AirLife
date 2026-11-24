@@ -3,6 +3,7 @@ import { useState, useEffect, useRef } from "react";
 import { Link, useNavigate } from "@/lib/router";
 import type { loadProduct, Product } from "@/lib/catalog";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { WishlistButton } from "@/components/shop/WishlistButton";
 import { ProductCard } from "@/components/shop/ProductCard";
 import { CATEGORIES_DATA } from "@/data/categoriesData";
 import { discountPct, formatPrice, type ProductCardData } from "@/lib/shop";
@@ -449,6 +450,7 @@ const ProductDetails = ({ initial }: { initial: Loaded }) => {
                   )}
                 </div>
                 <p className="flex items-center gap-2 text-xs text-muted-foreground"><CreditCard className="w-3.5 h-3.5" /> Plată securizată online cu cardul</p>
+                <WishlistButton productId={product.id} productName={product.name} withLabel className="px-1 py-1 hover:text-primary" />
               </div>
 
               {/* Delivery / returns / warranty */}
