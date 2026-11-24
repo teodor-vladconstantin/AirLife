@@ -208,6 +208,10 @@ const Navbar = () => {
                       Panou Admin
                     </DropdownMenuItem>
                   )}
+                  <DropdownMenuItem onClick={() => navigate("/cont")}>
+                    <User className="w-4 h-4 mr-2" />
+                    Contul meu
+                  </DropdownMenuItem>
                   <DropdownMenuItem onClick={() => navigate("/my-orders")}>
                     <Package className="w-4 h-4 mr-2" />
                     Comenzile Mele
