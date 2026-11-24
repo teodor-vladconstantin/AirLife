@@ -3,6 +3,7 @@ import { Link } from "@/lib/router";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import SEO from "@/components/SEO";
+import { SearchBox } from "@/components/shop/SearchBox";
 import { Button } from "@/components/ui/button";
 import { PHONE_DISPLAY, PHONE_TEL } from "@/data/localSeo";
 import { ArrowRight, Phone } from "lucide-react";
@@ -28,6 +29,7 @@ const NotFound = () => (
         <p className="text-lg text-muted-foreground mb-8">
           Verifică adresa și încearcă din nou. Sau pornește de aici: produsul căutat e probabil la un click distanță.
         </p>
+        <SearchBox className="mx-auto mb-8 max-w-md text-left" />
         <div className="flex flex-col sm:flex-row gap-3 justify-center mb-10">
           <Link to="/">
             <Button size="lg" className="w-full sm:w-auto font-semibold">
