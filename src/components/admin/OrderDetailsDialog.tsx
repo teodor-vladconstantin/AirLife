@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
+import { untypedDb } from "@/lib/untypedDb";
 import { useToast } from "@/hooks/use-toast";
 import {
   Dialog,
@@ -94,6 +95,8 @@ export const OrderDetailsDialog = ({
   const [supplierName, setSupplierName] = useState("");
   const [supplierRef, setSupplierRef] = useState("");
   const [supplierStatus, setSupplierStatus] = useState("new");
+  const [supplierNames, setSupplierNames] = useState<string[]>([]);
+  useEffect(() => { untypedDb.from("suppliers").select("name").order("name").then(({ data }: { data: { name: string }[] | null }) => setSupplierNames((data ?? []).map((s) => s.name))); }, []);
 
   useEffect(() => {
     if (open && orderId) {
@@ -386,7 +389,7 @@ export const OrderDetailsDialog = ({
               {"supplier_status" in order ? (
                 <>
                   <div className="grid gap-3 sm:grid-cols-2">
-                    <div><Label htmlFor="supplierName">Furnizor</Label><Input id="supplierName" value={supplierName} onChange={(e) => setSupplierName(e.target.value)} placeholder="Ex: Ecovent" /></div>
+                    <div><Label htmlFor="supplierName">Furnizor</Label><Input id="supplierName" list="supplier-names" value={supplierName} onChange={(e) => setSupplierName(e.target.value)} placeholder="Ex: Ecovent" /><datalist id="supplier-names">{supplierNames.map((n) => <option key={n} value={n} />)}</datalist></div>
                     <div><Label htmlFor="supplierRef">Nr. comandă la furnizor</Label><Input id="supplierRef" value={supplierRef} onChange={(e) => setSupplierRef(e.target.value)} /></div>
                   </div>
                   <div>

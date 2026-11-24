@@ -4,7 +4,7 @@ import { useNavigate } from "@/lib/router";
 import { supabase } from "@/integrations/supabase/client";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useToast } from "@/hooks/use-toast";
-import { Package, ShoppingBag, FileText, Mail, Megaphone, Star, Tag, Send } from "lucide-react";
+import { Package, ShoppingBag, FileText, Mail, Megaphone, Star, Tag, Send, Truck } from "lucide-react";
 import { OrdersTable } from "@/components/admin/OrdersTable";
 import { BlogManager } from "@/components/admin/BlogManager";
 import { LeadsTable } from "@/components/admin/LeadsTable";
@@ -13,6 +13,7 @@ import { CampaignManager } from "@/components/admin/CampaignManager";
 import { ReviewsManager } from "@/components/admin/ReviewsManager";
 import { DiscountManager } from "@/components/admin/DiscountManager";
 import { NewsletterManager } from "@/components/admin/NewsletterManager";
+import { SuppliersManager } from "@/components/admin/SuppliersManager";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 
@@ -52,11 +53,12 @@ const Admin = () => {
         <div className="container mx-auto px-4 py-8">
           <div className="mb-8">
             <h1 className="text-3xl font-bold">Panou Administrare</h1>
-            <p className="text-muted-foreground mt-1">Produse, prețuri, comenzi (inclusiv furnizor), newsletter, coduri de reducere, recenzii, blog și lead-uri.</p>
+            <p className="text-muted-foreground mt-1">Produse, furnizori și prețuri de achiziție, comenzi, newsletter, coduri de reducere, recenzii, blog și lead-uri.</p>
           </div>
           <Tabs defaultValue="products" className="space-y-6">
             <TabsList className="flex h-auto w-full max-w-3xl flex-wrap justify-start gap-1">
               <TabsTrigger value="products" className="flex flex-1 items-center justify-center gap-2"><Package className="h-4 w-4" />Produse</TabsTrigger>
+              <TabsTrigger value="suppliers" className="flex flex-1 items-center justify-center gap-2"><Truck className="h-4 w-4" />Furnizori</TabsTrigger>
               <TabsTrigger value="campaigns" className="flex flex-1 items-center justify-center gap-2"><Megaphone className="h-4 w-4" />Oferte</TabsTrigger>
               <TabsTrigger value="orders" className="flex flex-1 items-center justify-center gap-2"><ShoppingBag className="h-4 w-4" />Comenzi</TabsTrigger>
               <TabsTrigger value="blog" className="flex flex-1 items-center justify-center gap-2"><FileText className="h-4 w-4" />Blog</TabsTrigger>
@@ -66,6 +68,7 @@ const Admin = () => {
               <TabsTrigger value="leads" className="flex flex-1 items-center justify-center gap-2"><Mail className="h-4 w-4" />Lead-uri</TabsTrigger>
             </TabsList>
             <TabsContent value="products"><ProductManager /></TabsContent>
+            <TabsContent value="suppliers"><SuppliersManager /></TabsContent>
             <TabsContent value="campaigns"><CampaignManager /></TabsContent>
             <TabsContent value="orders"><OrdersTable /></TabsContent>
             <TabsContent value="blog"><BlogManager /></TabsContent>
