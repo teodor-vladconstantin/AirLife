@@ -13,7 +13,7 @@ import {
 } from "@/components/ui/table";
 import { OrderStatusBadge } from "@/components/orders/OrderStatusBadge";
 import { OrderDetailsDialog } from "./OrderDetailsDialog";
-import { Loader2, Eye } from "lucide-react";
+import { Download, Loader2, Eye } from "lucide-react";
 import { format } from "date-fns";
 import { ro } from "date-fns/locale";
 import {
@@ -34,7 +34,13 @@ interface Order {
   total_amount: number;
   created_at: string;
   tracking_number: string | null;
+  payment_status?: string;
+  supplier_status?: string | null;
+  shipping_address?: { address?: string; city?: string; county?: string; postalCode?: string } | null;
 }
+
+// Paid, not cancelled and not yet forwarded to the supplier (dropshipping to-do list).
+const needsSupplier = (o: Order) => o.payment_status === "paid" && o.status !== "cancelled" && (o.supplier_status ?? "new") === "new";
 
 export const OrdersTable = () => {
   const [orders, setOrders] = useState<Order[]>([]);
@@ -57,7 +63,7 @@ export const OrdersTable = () => {
     if (error) {
       console.error("Error fetching orders:", error);
     } else {
-      setOrders(data || []);
+      setOrders((data || []) as unknown as Order[]);
     }
 
     setLoading(false);
@@ -75,6 +81,7 @@ export const OrdersTable = () => {
 
   const statusTabs = [
     { value: "all", label: "Toate", count: orders.length },
+    { value: "supplier", label: "De trimis la furnizor", count: orders.filter(needsSupplier).length },
     { value: "pending", label: "În așteptare", count: orders.filter(o => o.status === 'pending').length },
     { value: "confirmed", label: "Confirmate", count: orders.filter(o => o.status === 'confirmed').length },
     { value: "processing", label: "În procesare", count: orders.filter(o => o.status === 'processing').length },
@@ -82,7 +89,22 @@ export const OrdersTable = () => {
     { value: "delivered", label: "Livrate", count: orders.filter(o => o.status === 'delivered').length },
   ];
 
-  const displayOrders = selectedStatus === "all" ? orders : orders.filter((o) => o.status === selectedStatus);
+  const displayOrders = selectedStatus === "all" ? orders : selectedStatus === "supplier" ? orders.filter(needsSupplier) : orders.filter((o) => o.status === selectedStatus);
+
+  const exportCsv = () => {
+    const q = (v: unknown) => `"${String(v ?? "").replace(/"/g, '""')}"`;
+    const rows = [["Comanda", "Data", "Status", "Plata", "Client", "Telefon", "Email", "Adresa", "Total", "Furnizor"].map(q).join(",")];
+    for (const o of displayOrders) {
+      const a = o.shipping_address;
+      rows.push([o.order_number, o.created_at, o.status, o.payment_status ?? "", o.customer_name, o.customer_phone, o.customer_email, a ? `${a.address ?? ""}, ${a.city ?? ""}, ${a.county ?? ""} ${a.postalCode ?? ""}` : "", o.total_amount, o.supplier_status ?? "new"].map(q).join(","));
+    }
+    const url = URL.createObjectURL(new Blob(["\ufeff" + rows.join("\n")], { type: "text/csv;charset=utf-8" }));
+    const link = document.createElement("a");
+    link.href = url;
+    link.download = `comenzi-${new Date().toISOString().slice(0, 10)}.csv`;
+    link.click();
+    URL.revokeObjectURL(url);
+  };
 
   const getRowClass = (status: string) => {
     switch (status) {
@@ -106,9 +128,10 @@ export const OrdersTable = () => {
   return (
     <div className="space-y-6">
       <div className="flex flex-wrap items-center justify-between gap-2">
-        <h2 className="text-2xl font-bold">Solicitări</h2>
-        <div className="text-sm text-muted-foreground">
-          Total: {orders.length} solicitări
+        <h2 className="text-2xl font-bold">Comenzi</h2>
+        <div className="flex items-center gap-3 text-sm text-muted-foreground">
+          Total: {orders.length} comenzi
+          <Button variant="outline" size="sm" onClick={exportCsv} disabled={!displayOrders.length}><Download className="mr-1 h-4 w-4" />Export CSV</Button>
         </div>
       </div>
 
@@ -116,7 +139,7 @@ export const OrdersTable = () => {
         <TabsList className="flex h-auto w-full flex-wrap justify-start gap-1">
           {statusTabs.map((tab) => (
             <TabsTrigger key={tab.value} value={tab.value} className="flex-1">
-              {tab.label}
+              {tab.label}{tab.value === "supplier" && tab.count > 0 ? ` (${tab.count})` : ""}
             </TabsTrigger>
           ))}
         </TabsList>
@@ -130,7 +153,7 @@ export const OrdersTable = () => {
                 </div>
               ) : displayOrders.length === 0 ? (
                 <div className="text-center py-12 text-muted-foreground">
-                  Nu există solicitări în această categorie
+                  Nu există comenzi în această categorie
                 </div>
               ) : (
                 <>
@@ -138,7 +161,7 @@ export const OrdersTable = () => {
                   <Table>
                       <TableHeader>
                         <TableRow>
-                          <TableHead>Număr Cerere</TableHead>
+                          <TableHead>Comandă</TableHead>
                           <TableHead>Client</TableHead>
                           <TableHead>Data</TableHead>
                           <TableHead>Status</TableHead>
