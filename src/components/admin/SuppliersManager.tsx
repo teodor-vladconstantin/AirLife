@@ -4,6 +4,7 @@ import { ExternalLink, Plus, Trash2 } from "lucide-react";
 import { untypedDb } from "@/lib/untypedDb";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { DatePicker } from "@/components/ui/date-picker";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -103,7 +104,7 @@ export function SuppliersManager() {
 
   return (
     <div className="space-y-6">
-      {missingTables && <p className="rounded-lg border border-amber-300 bg-amber-50 p-3 text-sm">Tabelele pentru furnizori nu există încă. Rulează migrarea <code>20251220000000_suppliers.sql</code> în Supabase (SQL Editor). Ea creează și furnizorii Ecovent și Novingair și leagă produsele.</p>}
+      {missingTables && <p className="rounded-lg border border-primary/30 bg-accent p-3 text-sm text-foreground">Tabelele pentru furnizori nu există încă. Rulează migrarea <code>20251220000000_suppliers.sql</code> în Supabase (SQL Editor). Ea creează și furnizorii Ecovent și Novingair și leagă produsele.</p>}
 
       <div className="flex flex-wrap items-center gap-2">
         {list?.map((s) => (
@@ -137,7 +138,7 @@ export function SuppliersManager() {
               <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
                 <div><Label htmlFor="sp-ol">Oferta de preț (denumire)</Label><Input id="sp-ol" value={form.offer_label} onChange={set("offer_label")} placeholder="ex: Listă de preț 2026" /></div>
                 <div><Label htmlFor="sp-ou">Link ofertă</Label><div className="flex gap-2"><Input id="sp-ou" value={form.offer_url} onChange={set("offer_url")} placeholder="https://" />{sel.offer_url && <a href={sel.offer_url} target="_blank" rel="noopener noreferrer" aria-label="Deschide oferta" className="inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-md border hover:bg-secondary"><ExternalLink className="h-4 w-4" /></a>}</div></div>
-                <div><Label htmlFor="sp-ov">Ofertă valabilă până la</Label><Input id="sp-ov" type="date" value={form.offer_valid_until} onChange={set("offer_valid_until")} />{expired && <p className="mt-1 text-xs text-destructive">Oferta a expirat.</p>}</div>
+                <div><Label htmlFor="sp-ov">Ofertă valabilă până la</Label><DatePicker id="sp-ov" value={form.offer_valid_until} onChange={(v) => setForm((f) => (f ? { ...f, offer_valid_until: v } : f))} placeholder="Fără dată" />{expired && <p className="mt-1 text-xs text-destructive">Oferta a expirat.</p>}</div>
               </div>
               <div><Label htmlFor="sp-notes">Note (condiții, termene de livrare, contract)</Label><Textarea id="sp-notes" rows={3} value={form.notes} onChange={set("notes")} /></div>
               <Button onClick={save}>Salvează furnizorul</Button>

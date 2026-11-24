@@ -21,7 +21,7 @@ export default function StickyContact() {
           href={whatsappLink(`Bună! Am o întrebare despre ${typeof document !== "undefined" ? document.title : "AirLife"}`)}
           target="_blank" rel="noopener noreferrer"
           onClick={() => trackClickWhatsApp("sticky-mobile")}
-          className="flex items-center justify-center gap-2 h-14 font-semibold text-white bg-[#0b7a6c]"
+          className="flex items-center justify-center gap-2 h-14 font-semibold text-primary-foreground bg-primary"
         >
           <MessageCircle className="w-5 h-5" /> WhatsApp
         </a>

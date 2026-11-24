@@ -36,7 +36,7 @@ export async function GET(req: Request) {
 }
 
 // A signed-in customer who bought and paid for the product can leave one review per product.
-// It is saved as "pending" and shows on the site after an admin approves it.
+// It is published immediately (the buyer check is the filter); an admin can hide or delete it afterwards.
 export async function POST(req: Request) {
   const parsed = body.safeParse(await req.json().catch(() => null));
   if (!parsed.success) return NextResponse.json({ error: "invalid_request" }, { status: 400 });
@@ -49,7 +49,7 @@ export async function POST(req: Request) {
   if (state === "not_purchased") return NextResponse.json({ error: "not_purchased" }, { status: 403 });
   if (state === "already_reviewed") return NextResponse.json({ error: "already_reviewed" }, { status: 409 });
 
-  const { error } = await sb.from("product_reviews").insert({ product_id: productId, user_id: userId, author_name: name, rating, title: title || null, body: text, verified_purchase: true, status: "pending" });
+  const { error } = await sb.from("product_reviews").insert({ product_id: productId, user_id: userId, author_name: name, rating, title: title || null, body: text, verified_purchase: true, status: "approved" });
   if (error) return NextResponse.json({ error: error.code === "23505" ? "already_reviewed" : "server_error" }, { status: error.code === "23505" ? 409 : 500 });
   return NextResponse.json({ ok: true });
 }

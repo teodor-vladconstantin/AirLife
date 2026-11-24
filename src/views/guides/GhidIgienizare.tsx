@@ -113,15 +113,15 @@ const GhidIgienizare = () => {
                 </h2>
                 <ul className="space-y-2 text-sm text-muted-foreground">
                   <li className="flex items-start gap-2">
-                    <AlertTriangle className="w-4 h-4 text-amber-500 flex-shrink-0 mt-0.5" />
+                    <AlertTriangle className="w-4 h-4 text-primary flex-shrink-0 mt-0.5" />
                     <span><strong>Miros de aer stătut sau oțetit:</strong> apare chiar în primele 2-3 minute după ce pornești climatizarea.</span>
                   </li>
                   <li className="flex items-start gap-2">
-                    <AlertTriangle className="w-4 h-4 text-amber-500 flex-shrink-0 mt-0.5" />
+                    <AlertTriangle className="w-4 h-4 text-primary flex-shrink-0 mt-0.5" />
                     <span><strong>Scăderea debitului de aer:</strong> chiar și la treapta maximă a ventilatorului, fluxul de aer suflat este slab din cauza depunerilor de praf pe turbină.</span>
                   </li>
                   <li className="flex items-start gap-2">
-                    <AlertTriangle className="w-4 h-4 text-amber-500 flex-shrink-0 mt-0.5" />
+                    <AlertTriangle className="w-4 h-4 text-primary flex-shrink-0 mt-0.5" />
                     <span><strong>Puncte negre vizibile pe fanta de evacuare:</strong> reprezintă colonii de spori de mucegai formate pe palele deflectorului de aer.</span>
                   </li>
                 </ul>

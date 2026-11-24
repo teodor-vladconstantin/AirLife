@@ -107,7 +107,7 @@ const Warranty = () => {
             {/* Situații de Excludere */}
             <Card className="border-border">
               <CardContent className="p-6 md:p-8 space-y-4">
-                <div className="flex items-center gap-3 text-amber-500 mb-2">
+                <div className="flex items-center gap-3 text-primary mb-2">
                   <AlertTriangle className="w-6 h-6" />
                   <h2 className="text-2xl font-bold text-foreground">3. Situații care duc la Pierderea Garanției</h2>
                 </div>

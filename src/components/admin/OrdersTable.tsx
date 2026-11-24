@@ -13,6 +13,7 @@ import {
 } from "@/components/ui/table";
 import { OrderStatusBadge } from "@/components/orders/OrderStatusBadge";
 import { OrderDetailsDialog } from "./OrderDetailsDialog";
+import { ORDER_STATUSES } from "@/lib/orderStatus";
 import { Download, Loader2, Eye } from "lucide-react";
 import { format } from "date-fns";
 import { ro } from "date-fns/locale";
@@ -82,11 +83,7 @@ export const OrdersTable = () => {
   const statusTabs = [
     { value: "all", label: "Toate", count: orders.length },
     { value: "supplier", label: "De trimis la furnizor", count: orders.filter(needsSupplier).length },
-    { value: "pending", label: "În așteptare", count: orders.filter(o => o.status === 'pending').length },
-    { value: "confirmed", label: "Confirmate", count: orders.filter(o => o.status === 'confirmed').length },
-    { value: "processing", label: "În procesare", count: orders.filter(o => o.status === 'processing').length },
-    { value: "shipped", label: "Expediate", count: orders.filter(o => o.status === 'shipped').length },
-    { value: "delivered", label: "Livrate", count: orders.filter(o => o.status === 'delivered').length },
+    ...ORDER_STATUSES.map((st) => ({ value: st.value as string, label: st.plural, count: orders.filter((o) => o.status === st.value).length })),
   ];
 
   const displayOrders = selectedStatus === "all" ? orders : selectedStatus === "supplier" ? orders.filter(needsSupplier) : orders.filter((o) => o.status === selectedStatus);
@@ -106,22 +103,16 @@ export const OrdersTable = () => {
     URL.revokeObjectURL(url);
   };
 
+  // Row tints use the brand palette only: the further along the order, the stronger the green.
   const getRowClass = (status: string) => {
     switch (status) {
-      case "pending":
-        return "bg-yellow-50/60 dark:bg-yellow-900/20";
-      case "confirmed":
-        return "bg-accent/60 dark:bg-primary/10";
-      case "processing":
-        return "bg-sky-50/60 dark:bg-sky-900/20";
-      case "shipped":
-        return "bg-indigo-50/60 dark:bg-indigo-900/20";
-      case "delivered":
-        return "bg-accent dark:bg-primary/20";
-      case "cancelled":
-        return "bg-rose-50/60 dark:bg-rose-900/20";
-      default:
-        return "";
+      case "pending": return "bg-secondary/70";
+      case "confirmed": return "bg-accent/50";
+      case "processing": return "bg-accent";
+      case "shipped": return "bg-primary/10";
+      case "delivered": return "bg-primary/15";
+      case "cancelled": return "bg-muted text-muted-foreground";
+      default: return "";
     }
   };
 
@@ -139,7 +130,7 @@ export const OrdersTable = () => {
         <TabsList className="flex h-auto w-full flex-wrap justify-start gap-1">
           {statusTabs.map((tab) => (
             <TabsTrigger key={tab.value} value={tab.value} className="flex-1">
-              {tab.label}{tab.value === "supplier" && tab.count > 0 ? ` (${tab.count})` : ""}
+              {tab.label}{tab.count > 0 || tab.value === "all" ? ` (${tab.count})` : ""}
             </TabsTrigger>
           ))}
         </TabsList>
@@ -195,13 +186,7 @@ export const OrdersTable = () => {
                                 <SelectValue />
                               </SelectTrigger>
                               <SelectContent>
-                                <SelectItem value="pending">În așteptare</SelectItem>
-                                <SelectItem value="confirmed">Confirmată</SelectItem>
-                                <SelectItem value="processing">În procesare</SelectItem>
-                                <SelectItem value="shipped">Expediată</SelectItem>
-                                <SelectItem value="delivered">Livrată</SelectItem>
-                                <SelectItem value="cancelled">Anulată</SelectItem>
-                              </SelectContent>
+                                {ORDER_STATUSES.map((st) => <SelectItem key={st.value} value={st.value}>{st.label}</SelectItem>)}</SelectContent>
                             </Select>
                           </TableCell>
                           <TableCell className="font-semibold">
@@ -239,13 +224,7 @@ export const OrdersTable = () => {
                         <Select value={order.status} onValueChange={(v) => updateOrderStatus(order.id, v)}>
                           <SelectTrigger><SelectValue /></SelectTrigger>
                           <SelectContent>
-                            <SelectItem value="pending">În așteptare</SelectItem>
-                            <SelectItem value="confirmed">Confirmată</SelectItem>
-                            <SelectItem value="processing">În procesare</SelectItem>
-                            <SelectItem value="shipped">Expediată</SelectItem>
-                            <SelectItem value="delivered">Livrată</SelectItem>
-                            <SelectItem value="cancelled">Anulată</SelectItem>
-                          </SelectContent>
+                            {ORDER_STATUSES.map((st) => <SelectItem key={st.value} value={st.value}>{st.label}</SelectItem>)}</SelectContent>
                         </Select>
                         <Button variant="outline" size="sm" className="sm:shrink-0" onClick={() => setSelectedOrder(order.id)}>
                           <Eye className="mr-1 h-4 w-4" />

@@ -166,7 +166,7 @@ export const ProductManager = () => {
                   <p className="text-sm mt-0.5">
                     <span className="font-semibold text-primary">{price} RON</span>
                     {compare_at && <span className="ml-2 line-through text-muted-foreground">{compare_at} RON</span>}
-                    {p.hidden && <span className="ml-2 text-xs font-medium text-amber-700">ascuns</span>}
+                    {p.hidden && <span className="ml-2 text-xs font-medium text-muted-foreground">ascuns</span>}
                   </p>
                 </div>
                 <div className="flex w-full items-center justify-end gap-1 sm:w-auto">

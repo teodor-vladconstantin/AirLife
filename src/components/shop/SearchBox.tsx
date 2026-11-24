@@ -69,7 +69,7 @@ export function SearchBox({ className = "", autoFocus = false, onDone }: { class
   return (
     <div ref={box} className={`relative ${className}`}>
       <form role="search" onSubmit={(e) => { e.preventDefault(); submit(); }}>
-        <Search className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" aria-hidden />
+        <Search className="pointer-events-none absolute left-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" aria-hidden />
         <input
           type="search"
           value={q}
@@ -87,7 +87,7 @@ export function SearchBox({ className = "", autoFocus = false, onDone }: { class
           aria-expanded={show}
           aria-controls={listId}
           aria-autocomplete="list"
-          className="h-10 w-full rounded-full border border-input bg-background pl-9 pr-3 text-sm outline-none focus-visible:ring-2 focus-visible:ring-ring"
+          className="h-11 w-full rounded-full border border-transparent bg-secondary/70 pl-10 pr-4 text-sm outline-none placeholder:text-muted-foreground focus-visible:border-primary/40 focus-visible:bg-background focus-visible:ring-2 focus-visible:ring-ring xl:h-10"
         />
       </form>
       {show && (

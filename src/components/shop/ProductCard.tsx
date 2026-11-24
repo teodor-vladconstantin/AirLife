@@ -31,7 +31,7 @@ export const ProductCard = memo(function ProductCard({ product, priority = false
           className={`h-full w-full object-contain p-3 transition-transform duration-300 group-hover:scale-[1.03] ${out ? "opacity-60" : ""}`}
         />
         {(pct > 0 || out) && (
-          <span className={`absolute left-2 top-2 rounded-full px-2.5 py-1 text-xs font-semibold ${out ? "bg-muted text-muted-foreground" : "bg-destructive text-destructive-foreground"}`}>
+          <span className={`absolute left-2 top-2 rounded-full px-2.5 py-1 text-xs font-semibold ${out ? "bg-muted text-muted-foreground" : "bg-primary text-primary-foreground"}`}>
             {out ? "Indisponibil" : `-${pct}%`}
           </span>
         )}
