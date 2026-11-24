@@ -17,6 +17,7 @@ import {
   Sparkles,
   Activity,
   Phone,
+  Search,
 } from "lucide-react";
 import {
   DropdownMenu,
@@ -24,6 +25,7 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { SearchBox } from "@/components/shop/SearchBox";
 import { CartButton } from "@/components/cart/CartButton";
 import { PHONE_DISPLAY, PHONE_TEL } from "@/data/localSeo";
 import { trackClickToCall } from "@/lib/analytics";
@@ -32,6 +34,7 @@ const Navbar = () => {
   const [user, setUser] = useState<SupabaseUser | null>(null);
   const [isAdmin, setIsAdmin] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [searchOpen, setSearchOpen] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -165,8 +168,13 @@ const Navbar = () => {
             </Link>
           </div>
 
+          <SearchBox className="mx-3 hidden w-56 xl:block 2xl:w-72" />
+
           {/* Right Action Buttons */}
           <div className="flex items-center gap-2 sm:gap-3">
+            <Button variant="ghost" size="icon" className="xl:hidden" onClick={() => setSearchOpen((v) => !v)} aria-label="Caută produse" aria-expanded={searchOpen}>
+              <Search className="w-5 h-5" />
+            </Button>
             <a
               href={`tel:${PHONE_TEL}`}
               onClick={() => trackClickToCall("navbar")}
@@ -228,6 +236,12 @@ const Navbar = () => {
             </Button>
           </div>
         </div>
+
+        {searchOpen && (
+          <div className="xl:hidden pt-3">
+            <SearchBox autoFocus onDone={() => setSearchOpen(false)} />
+          </div>
+        )}
 
         {/* Mobile Navigation Drawer */}
         {mobileMenuOpen && (

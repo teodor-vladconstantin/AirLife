@@ -105,11 +105,14 @@ export const CartDrawer = ({ open, onClose }: CartDrawerProps) => {
                     </span>
                   </div>
                 </div>
-                {total < 1000 && (
-                  <p className="text-xs text-muted-foreground text-center pt-2">
-                    Mai adaugă {(1000 - total).toFixed(2)} RON pentru livrare gratuită!
+                <div className="pt-2">
+                  <div className="h-2 w-full overflow-hidden rounded-full bg-secondary" role="progressbar" aria-valuemin={0} aria-valuemax={1000} aria-valuenow={Math.min(total, 1000)} aria-label="Progres spre livrare gratuită">
+                    <div className="h-full rounded-full bg-primary transition-all" style={{ width: `${Math.min(100, (total / 1000) * 100)}%` }} />
+                  </div>
+                  <p className="mt-1.5 text-center text-xs text-muted-foreground">
+                    {total >= 1000 ? "Ai livrare gratuită!" : <>Mai adaugă <strong className="text-foreground">{(1000 - total).toFixed(2)} RON</strong> pentru livrare gratuită</>}
                   </p>
-                )}
+                </div>
               </div>
 
               <Button onClick={handleCheckout} className="w-full" size="lg">
