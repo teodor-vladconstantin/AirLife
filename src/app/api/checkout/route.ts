@@ -83,6 +83,9 @@ export async function POST(req: Request) {
   })));
   if (iErr) { await sb.from("orders").delete().eq("id", order.id); return NextResponse.json({ error: "order_failed" }, { status: 500 }); }
 
+  // the customer is buying: close any open abandoned-cart record (best effort)
+  void Promise.resolve(sb.from("abandoned_carts").update({ recovered_at: new Date().toISOString() }).eq("email", customer.email.toLowerCase()).is("recovered_at", null)).catch(() => {});
+
   // count the use of the code (conditional update: no lost increments when two orders race)
   const countCodeUse = async (delta: 1 | -1) => {
     if (!appliedCode) return;

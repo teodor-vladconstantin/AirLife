@@ -4,7 +4,7 @@ import { resend, REPLY_TO } from "./client";
 import OrderEmail, { OrderAdminEmail, orderSubject, type OrderEmailKind, type OrderEmailData } from "@/emails/OrderEmail";
 
 // Transactional mail (order confirmation, payment, shipping...). Sent from the verified news. subdomain; replies go to contact@.
-const ORDERS_FROM = "AirLife <comenzi@news.airlife.ro>";
+export const ORDERS_FROM = "AirLife <comenzi@news.airlife.ro>";
 const ADMIN_TO = "contact@airlife.ro";
 
 const db = () => createClient(process.env.SUPABASE_URL || process.env.NEXT_PUBLIC_SUPABASE_URL!, process.env.SUPABASE_SERVICE_ROLE_KEY!, { auth: { persistSession: false } });
