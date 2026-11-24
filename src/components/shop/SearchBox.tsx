@@ -1,6 +1,6 @@
 "use client";
 import { useEffect, useId, useRef, useState } from "react";
-import { Search } from "lucide-react";
+import { Loader2, Search } from "lucide-react";
 import { useLocation, useNavigate } from "@/lib/router";
 import { supabase } from "@/integrations/supabase/client";
 import { isShopVisible } from "@/lib/pricing";
@@ -14,6 +14,7 @@ export function SearchBox({ className = "", autoFocus = false, onDone }: { class
   const [hits, setHits] = useState<Hit[]>([]);
   const [open, setOpen] = useState(false);
   const [active, setActive] = useState(-1);
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
   const { pathname } = useLocation();
   const box = useRef<HTMLDivElement>(null);
@@ -21,8 +22,9 @@ export function SearchBox({ className = "", autoFocus = false, onDone }: { class
 
   useEffect(() => {
     const term = q.trim().replace(/[,()%*\\]/g, " ").replace(/\s+/g, " ");
-    if (term.length < 2) { setHits([]); return; }
+    if (term.length < 2) { setHits([]); setLoading(false); return; }
     let live = true;
+    setLoading(true);
     const t = setTimeout(async () => {
       const like = `%${term.split(" ").join("%")}%`;
       const { data } = await supabase
@@ -33,6 +35,7 @@ export function SearchBox({ className = "", autoFocus = false, onDone }: { class
         .order("stock", { ascending: false })
         .limit(24);
       if (!live) return;
+      setLoading(false);
       setHits((data ?? []).filter(isShopVisible).slice(0, 6) as Hit[]);
       setActive(-1);
     }, 220);
@@ -101,7 +104,8 @@ export function SearchBox({ className = "", autoFocus = false, onDone }: { class
               </button>
             </li>
           ))}
-          {hits.length === 0 && <li className="px-3 py-2 text-sm text-muted-foreground" role="presentation">Niciun produs găsit pentru „{q.trim()}”.</li>}
+          {loading && hits.length === 0 && <li className="flex items-center gap-2 px-3 py-2 text-sm text-muted-foreground" role="presentation"><Loader2 className="h-4 w-4 animate-spin" /> Se caută…</li>}
+          {!loading && hits.length === 0 && <li className="px-3 py-2 text-sm text-muted-foreground" role="presentation">Niciun produs găsit pentru „{q.trim()}”.</li>}
           <li role="presentation">
             <button type="button" onClick={() => go(`/produse?q=${encodeURIComponent(q.trim())}`)} className="w-full rounded-lg p-2 text-center text-sm font-semibold text-primary hover:bg-secondary">
               Vezi toate rezultatele

@@ -138,6 +138,8 @@ export async function loadProductCards(category?: string): Promise<ProductCardDa
   } catch {
     /* database unreachable: the page renders its empty state */
   }
+  // available products first (stable), so the structured data and any unsorted use also list what can be bought first
+  out.sort((a, b) => Number(b.stock > 0) - Number(a.stock > 0));
   return out;
 }
 

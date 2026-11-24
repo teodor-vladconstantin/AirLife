@@ -1,5 +1,6 @@
 "use client";
 import { useState, useEffect, useRef } from "react";
+import { createPortal } from "react-dom";
 import { Link, useNavigate } from "@/lib/router";
 import type { loadProduct, Product, ReviewData } from "@/lib/catalog";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
@@ -51,6 +52,7 @@ const ProductDetails = ({ initial, reviews = NO_REVIEWS }: { initial: Loaded; re
   const navigate = useNavigate();
   const [recent, setRecent] = useState<ProductCardData[]>([]);
   const [stickyBar, setStickyBar] = useState(false);
+  const [busy, setBusy] = useState<"add" | "buy" | null>(null);
   const buyRef = useRef<HTMLDivElement>(null);
 
   const toCard = (p: { id: string; slug?: string | null; name: string; brand?: string | null; category: string; price: number; compare_at?: number; stock: number; image_url: string | null }): ProductCardData => ({
@@ -139,7 +141,13 @@ const ProductDetails = ({ initial, reviews = NO_REVIEWS }: { initial: Loaded; re
 
   // "Cumpără acum": straight to checkout
   const handleBuyNow = async () => {
-    if (await handleAddToCart()) navigate("/checkout");
+    setBusy("buy");
+    if (await handleAddToCart()) navigate("/checkout"); // stays "busy" while the checkout page loads
+    else setBusy(null);
+  };
+  const addWithSpinner = async () => {
+    setBusy("add");
+    try { await handleAddToCart(); } finally { setBusy(null); }
   };
 
   const incrementQuantity = () => {
@@ -356,7 +364,7 @@ const ProductDetails = ({ initial, reviews = NO_REVIEWS }: { initial: Loaded; re
                 </div>
               )}
 
-              {zoom && (
+              {zoom && typeof document !== "undefined" && createPortal(
                 <div
                   className="fixed inset-0 z-[100] bg-black/90 flex items-center justify-center p-4"
                   onClick={() => setZoom(false)}
@@ -394,7 +402,7 @@ const ProductDetails = ({ initial, reviews = NO_REVIEWS }: { initial: Loaded; re
                     </>
                   )}
                 </div>
-              )}
+                , document.body)}
             </div>
 
             {/* Buy box */}
@@ -460,13 +468,13 @@ const ProductDetails = ({ initial, reviews = NO_REVIEWS }: { initial: Loaded; re
                   </div>
                 )}
                 <div className="flex flex-col gap-2 lg:flex-row">
-                  <Button size="lg" className="font-semibold lg:flex-1" disabled={out} onClick={handleAddToCart}>
-                    <ShoppingCart className="w-4 h-4 mr-2" />
-                    {out ? "Indisponibil" : "Adaugă în coș"}
+                  <Button size="lg" className="font-semibold lg:flex-1" disabled={out || !!busy} aria-busy={busy === "add"} onClick={addWithSpinner}>
+                    {busy === "add" ? <Loader2 className="w-4 h-4 mr-2 animate-spin" /> : <ShoppingCart className="w-4 h-4 mr-2" />}
+                    {out ? "Indisponibil" : busy === "add" ? "Se adaugă…" : "Adaugă în coș"}
                   </Button>
                   {!out && (
-                    <Button size="lg" variant="outline" className="font-semibold lg:flex-1 border-primary text-primary hover:bg-primary/5" onClick={handleBuyNow}>
-                      <CreditCard className="w-4 h-4 mr-2" /> Cumpără acum
+                    <Button size="lg" variant="outline" className="font-semibold lg:flex-1 border-primary text-primary hover:bg-primary/5" disabled={!!busy} aria-busy={busy === "buy"} onClick={handleBuyNow}>
+                      {busy === "buy" ? <Loader2 className="w-4 h-4 mr-2 animate-spin" /> : <CreditCard className="w-4 h-4 mr-2" />} {busy === "buy" ? "Se pregătește…" : "Cumpără acum"}
                     </Button>
                   )}
                 </div>
@@ -553,7 +561,7 @@ const ProductDetails = ({ initial, reviews = NO_REVIEWS }: { initial: Loaded; re
               <p className="truncate text-xs text-muted-foreground">{product.name}</p>
               <p className="text-base font-bold text-foreground">{formatPrice(product.price)}</p>
             </div>
-            <Button className="shrink-0 font-semibold" onClick={handleAddToCart}><ShoppingCart className="mr-2 h-4 w-4" /> Adaugă în coș</Button>
+            <Button className="shrink-0 font-semibold" disabled={!!busy} onClick={addWithSpinner}>{busy === "add" ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : <ShoppingCart className="mr-2 h-4 w-4" />} {busy === "add" ? "Se adaugă…" : "Adaugă în coș"}</Button>
           </div>
         </div>
       )}

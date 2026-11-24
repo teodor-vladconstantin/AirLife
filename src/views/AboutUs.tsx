@@ -204,7 +204,7 @@ const AboutUs = () => {
             <h3 className="text-2xl font-bold mb-4">Gata să începem?</h3>
             <p className="text-muted-foreground mb-6 max-w-2xl mx-auto">
               Descoperă gama completă de produse HVAC eco-friendly și alege soluția perfectă pentru
-              căminul sau biroul tău.
+              casa sau biroul tău.
             </p>
             <div className="flex gap-4 justify-center flex-wrap">
               <Link to="/produse">
