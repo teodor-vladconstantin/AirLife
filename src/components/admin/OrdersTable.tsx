@@ -105,7 +105,7 @@ export const OrdersTable = () => {
 
   return (
     <div className="space-y-6">
-      <div className="flex items-center justify-between">
+      <div className="flex flex-wrap items-center justify-between gap-2">
         <h2 className="text-2xl font-bold">Solicitări</h2>
         <div className="text-sm text-muted-foreground">
           Total: {orders.length} solicitări
@@ -113,9 +113,9 @@ export const OrdersTable = () => {
       </div>
 
       <Tabs value={selectedStatus} onValueChange={setSelectedStatus}>
-        <TabsList className="grid grid-cols-6 w-full">
+        <TabsList className="flex h-auto w-full flex-wrap justify-start gap-1">
           {statusTabs.map((tab) => (
-            <TabsTrigger key={tab.value} value={tab.value}>
+            <TabsTrigger key={tab.value} value={tab.value} className="flex-1">
               {tab.label}
             </TabsTrigger>
           ))}
@@ -133,7 +133,8 @@ export const OrdersTable = () => {
                   Nu există solicitări în această categorie
                 </div>
               ) : (
-                <div className="overflow-x-auto">
+                <>
+                <div className="hidden lg:block">
                   <Table>
                       <TableHeader>
                         <TableRow>
@@ -154,7 +155,7 @@ export const OrdersTable = () => {
                           <TableCell>
                             <div>
                               <p className="font-medium">{order.customer_name}</p>
-                              <p className="text-sm text-muted-foreground">
+                              <p className="break-all text-sm text-muted-foreground">
                                 {order.customer_email}
                               </p>
                             </div>
@@ -164,7 +165,7 @@ export const OrdersTable = () => {
                               locale: ro,
                             })}
                           </TableCell>
-                          <TableCell className="flex items-center gap-2">
+                          <TableCell className="flex flex-wrap items-center gap-2">
                             <OrderStatusBadge status={order.status} />
                             <Select value={order.status} onValueChange={(v) => updateOrderStatus(order.id, v)}>
                               <SelectTrigger>
@@ -198,6 +199,40 @@ export const OrdersTable = () => {
                     </TableBody>
                   </Table>
                 </div>
+                <div className="divide-y lg:hidden">
+                  {displayOrders.map((order) => (
+                    <div key={order.id} className={`${getRowClass(order.status)} space-y-3 p-4`}>
+                      <div className="flex flex-wrap items-start justify-between gap-2">
+                        <p className="font-semibold">{order.order_number}</p>
+                        <OrderStatusBadge status={order.status} />
+                      </div>
+                      <div className="min-w-0 text-sm">
+                        <p className="break-words font-medium">{order.customer_name}</p>
+                        <p className="break-all text-muted-foreground">{order.customer_email}</p>
+                        <p className="text-muted-foreground">{format(new Date(order.created_at), "dd MMM yyyy, HH:mm", { locale: ro })}</p>
+                      </div>
+                      <p className="font-semibold">{order.total_amount.toFixed(2)} RON</p>
+                      <div className="flex flex-col gap-2 sm:flex-row">
+                        <Select value={order.status} onValueChange={(v) => updateOrderStatus(order.id, v)}>
+                          <SelectTrigger><SelectValue /></SelectTrigger>
+                          <SelectContent>
+                            <SelectItem value="pending">În așteptare</SelectItem>
+                            <SelectItem value="confirmed">Confirmată</SelectItem>
+                            <SelectItem value="processing">În procesare</SelectItem>
+                            <SelectItem value="shipped">Expediată</SelectItem>
+                            <SelectItem value="delivered">Livrată</SelectItem>
+                            <SelectItem value="cancelled">Anulată</SelectItem>
+                          </SelectContent>
+                        </Select>
+                        <Button variant="outline" size="sm" className="sm:shrink-0" onClick={() => setSelectedOrder(order.id)}>
+                          <Eye className="mr-1 h-4 w-4" />
+                          Detalii
+                        </Button>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+                </>
               )}
             </CardContent>
           </Card>

@@ -42,7 +42,7 @@ const OrderConfirmation = () => {
 
   useEffect(() => {
     if (!orderId) {
-      navigate("/products");
+      navigate("/produse");
       return;
     }
     fetchOrder();
@@ -70,7 +70,7 @@ const OrderConfirmation = () => {
       setOrderItems(itemsData || []);
     } catch (error) {
       console.error("Error fetching order:", error);
-      navigate("/products");
+      navigate("/produse");
     } finally {
       setLoading(false);
     }
@@ -249,7 +249,7 @@ const OrderConfirmation = () => {
                 Vezi Solicitările Mele
               </Button>
             </Link>
-            <Link to="/products">
+            <Link to="/produse">
               <Button className="gap-2">
                 <ShoppingBag className="h-4 w-4" />
                 Vezi Produsele

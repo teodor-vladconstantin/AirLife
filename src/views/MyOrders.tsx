@@ -187,7 +187,7 @@ const MyOrders = () => {
                 <Package className="h-16 w-16 text-muted-foreground mb-4" />
                 <h3 className="text-xl font-semibold mb-2">Nu ai comenzi încă</h3>
                 <p className="text-muted-foreground mb-6">Adaugă produse în coș și plasează prima comandă.</p>
-                <Button onClick={() => navigate("/products")}>Vezi Produsele</Button>
+                <Button onClick={() => navigate("/produse")}>Vezi Produsele</Button>
               </CardContent>
             </Card>
           ) : (

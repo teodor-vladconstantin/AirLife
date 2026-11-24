@@ -39,7 +39,7 @@ export const CartDrawer = ({ open, onClose }: CartDrawerProps) => {
             </p>
             <Button onClick={() => {
               onClose();
-              navigate("/products");
+              navigate("/produse");
             }}>
               Vezi Produsele
             </Button>

@@ -207,7 +207,7 @@ const AboutUs = () => {
               căminul sau biroul tău.
             </p>
             <div className="flex gap-4 justify-center flex-wrap">
-              <Link to="/products">
+              <Link to="/produse">
                 <Button size="lg">Vezi Produsele</Button>
               </Link>
               <Link to="/contact">

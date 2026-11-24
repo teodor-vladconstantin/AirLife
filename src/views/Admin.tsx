@@ -52,12 +52,12 @@ const Admin = () => {
             <p className="text-muted-foreground mt-1">Produse, prețuri, oferte și campanii, comenzi, blog și lead-uri.</p>
           </div>
           <Tabs defaultValue="products" className="space-y-6">
-            <TabsList className="grid w-full max-w-3xl grid-cols-5">
-              <TabsTrigger value="products" className="flex items-center gap-2"><Package className="h-4 w-4" />Produse</TabsTrigger>
-              <TabsTrigger value="campaigns" className="flex items-center gap-2"><Megaphone className="h-4 w-4" />Oferte</TabsTrigger>
-              <TabsTrigger value="orders" className="flex items-center gap-2"><ShoppingBag className="h-4 w-4" />Comenzi</TabsTrigger>
-              <TabsTrigger value="blog" className="flex items-center gap-2"><FileText className="h-4 w-4" />Blog</TabsTrigger>
-              <TabsTrigger value="leads" className="flex items-center gap-2"><Mail className="h-4 w-4" />Lead-uri</TabsTrigger>
+            <TabsList className="flex h-auto w-full max-w-3xl flex-wrap justify-start gap-1">
+              <TabsTrigger value="products" className="flex flex-1 items-center justify-center gap-2"><Package className="h-4 w-4" />Produse</TabsTrigger>
+              <TabsTrigger value="campaigns" className="flex flex-1 items-center justify-center gap-2"><Megaphone className="h-4 w-4" />Oferte</TabsTrigger>
+              <TabsTrigger value="orders" className="flex flex-1 items-center justify-center gap-2"><ShoppingBag className="h-4 w-4" />Comenzi</TabsTrigger>
+              <TabsTrigger value="blog" className="flex flex-1 items-center justify-center gap-2"><FileText className="h-4 w-4" />Blog</TabsTrigger>
+              <TabsTrigger value="leads" className="flex flex-1 items-center justify-center gap-2"><Mail className="h-4 w-4" />Lead-uri</TabsTrigger>
             </TabsList>
             <TabsContent value="products"><ProductManager /></TabsContent>
             <TabsContent value="campaigns"><CampaignManager /></TabsContent>

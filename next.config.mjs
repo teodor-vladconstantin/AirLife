@@ -26,7 +26,10 @@ const nextConfig = {
   async redirects() {
     const r = (source, destination) => ({ source, destination, permanent: true });
     return [
-      r("/request-quote", "/products"),
+      r("/request-quote", "/produse"),
+      // The shop section lives at /produse (Romanian keyword); the old English URLs 308 to it, product pages included.
+      r("/products", "/produse"),
+      r("/products/:productId", "/produse/:productId"),
       // Local slugs (-buzau) are canonical; the old slugs 301 to them.
       r("/servicii/montaj-aer-conditionat", "/servicii/montaj-aer-conditionat-buzau"),
       r("/servicii/igienizare-aer-conditionat", "/servicii/igienizare-aer-conditionat-buzau"),

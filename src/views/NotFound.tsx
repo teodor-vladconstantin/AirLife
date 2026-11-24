@@ -34,7 +34,7 @@ const NotFound = () => (
               Înapoi acasă <ArrowRight className="ml-2 w-4 h-4" />
             </Button>
           </Link>
-          <Link to="/products">
+          <Link to="/produse">
             <Button size="lg" variant="outline" className="w-full sm:w-auto font-semibold">Vezi produsele</Button>
           </Link>
         </div>

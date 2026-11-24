@@ -26,7 +26,7 @@ const supabase = createClient(url, key, {
 
 const BUCKET = "media";
 const SOURCE = "cdn.shopify.com";
-const EXT: Record<string, string> = { "image/webp": "webp", "image/png": "png", "image/jpeg": "jpg", "image/gif": "gif", "image/avif": "avif" };
+const EXT: Record<string, string> = { "image/webp": "webp", "image/png": "png", "image/jpeg": "jpg", "image/gif": "gif", "image/avif": "avif", "image/svg+xml": "svg" };
 const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms));
 
 async function download(src: string): Promise<{ bytes: ArrayBuffer; type: string } | null> {

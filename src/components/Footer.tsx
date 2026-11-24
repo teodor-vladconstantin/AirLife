@@ -72,7 +72,7 @@ const Footer = () => {
             <h3 className="font-semibold text-sm mb-4 text-white uppercase tracking-wider">Magazin HVAC</h3>
             <ul className="space-y-2 text-sm opacity-80">
               <li>
-                <Link to="/products" className="hover:text-brandlight transition-colors">
+                <Link to="/produse" className="hover:text-brandlight transition-colors">
                   Toate Produsele
                 </Link>
               </li>

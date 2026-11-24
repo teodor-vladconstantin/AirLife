@@ -50,12 +50,12 @@ const Products = ({ products }: { products: Product[] }) => {
       "@context": "https://schema.org",
       "@type": "CollectionPage",
       name: "Produse HVAC AirLife",
-      url: "https://airlife.ro/products",
+      url: "https://airlife.ro/produse",
       isPartOf: { "@id": "https://airlife.ro/#website" },
       mainEntity: {
         "@type": "ItemList",
         numberOfItems: Math.min(products.length, 100),
-        itemListElement: products.slice(0, 100).map((p, i) => ({ "@type": "ListItem", position: i + 1, url: `https://airlife.ro/products/${p.slug ?? p.id}`, name: p.name })),
+        itemListElement: products.slice(0, 100).map((p, i) => ({ "@type": "ListItem", position: i + 1, url: `https://airlife.ro/produse/${p.slug ?? p.id}`, name: p.name })),
       },
     },
     {
@@ -63,7 +63,7 @@ const Products = ({ products }: { products: Product[] }) => {
       "@type": "BreadcrumbList",
       itemListElement: [
         { "@type": "ListItem", position: 1, name: "Acasă", item: "https://airlife.ro/" },
-        { "@type": "ListItem", position: 2, name: "Produse", item: "https://airlife.ro/products" },
+        { "@type": "ListItem", position: 2, name: "Produse", item: "https://airlife.ro/produse" },
       ],
     },
   ];
@@ -155,7 +155,7 @@ const Products = ({ products }: { products: Product[] }) => {
                     </div>
 
                     <div className="flex gap-2 mt-4">
-                      <Link to={`/products/${product.slug ?? product.id}`} className="flex-1">
+                      <Link to={`/produse/${product.slug ?? product.id}`} className="flex-1">
                         <Button variant="outline" className="w-full">
                           Vezi Descriere
                         </Button>

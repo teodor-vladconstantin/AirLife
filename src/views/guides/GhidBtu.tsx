@@ -156,7 +156,7 @@ const GhidBtu = ({ products = [] }: { products?: BtuProduct[] }) => {
                   <h3 className="text-base font-bold text-foreground mb-3">Aparate potrivite din stoc</h3>
                   <div className="grid sm:grid-cols-3 gap-3">
                     {recommended.map((p) => (
-                      <Link key={p.path} to={`/products/${p.path}`} className="rounded-xl border border-border p-3 hover:border-primary transition-colors text-center">
+                      <Link key={p.path} to={`/produse/${p.path}`} className="rounded-xl border border-border p-3 hover:border-primary transition-colors text-center">
                         <img src={p.image} alt={p.name} loading="lazy" className="h-28 w-full object-contain mb-2" />
                         <span className="block text-sm font-semibold text-foreground leading-snug">{p.name}</span>
                         <span className="block text-primary font-bold mt-1">{p.price.toFixed(0)} RON</span>

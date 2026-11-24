@@ -7,7 +7,7 @@ export const revalidate = 3600;
 
 const SITE = "https://airlife.ro";
 const STATIC = [
-  "/", "/aer-conditionat-buzau", "/products", "/servicii", "/servicii/montaj-aer-conditionat-buzau", "/servicii/igienizare-aer-conditionat-buzau", "/servicii/service-aer-conditionat-buzau",
+  "/", "/aer-conditionat-buzau", "/produse", "/servicii", "/servicii/montaj-aer-conditionat-buzau", "/servicii/igienizare-aer-conditionat-buzau", "/servicii/service-aer-conditionat-buzau",
   "/ghid/igienizare-aer-conditionat-buzau", "/ghid/cost-montaj-aer-conditionat-buzau", "/ghid/ce-btu-aer-conditionat-buzau", "/blog", "/despre-noi", "/contact", "/livrare-si-retur", "/garantie",
   "/termeni-si-conditii", "/politica-de-confidentialitate", "/politica-de-cookies", "/subprocesatori", "/formular-retragere",
 ];
@@ -24,7 +24,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       client.from("products").select("slug,updated_at,hidden,image_url").not("slug", "is", null),
     ]);
     for (const p of (posts ?? []).filter((x) => !BLOG_CANONICAL[x.slug])) entries.push({ url: `${SITE}/blog/${p.slug}`, lastModified: p.updated_at ?? p.published_at ?? undefined });
-    for (const p of (products ?? []).filter(isShopVisible)) entries.push({ url: `${SITE}/products/${p.slug}`, lastModified: p.updated_at ?? undefined });
+    for (const p of (products ?? []).filter(isShopVisible)) entries.push({ url: `${SITE}/produse/${p.slug}`, lastModified: p.updated_at ?? undefined });
   } catch {
     // DB down: serve the static part rather than failing the sitemap
   }

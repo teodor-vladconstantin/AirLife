@@ -24,7 +24,7 @@ const orgSchema = {
     {
       "@type": "WebSite", "@id": "https://airlife.ro/#website", url: "https://airlife.ro/", name: "AirLife", inLanguage: "ro-RO", publisher: { "@id": "https://airlife.ro/#organization" },
       description: "Magazin online HVAC și servicii de climatizare în Buzău",
-      potentialAction: { "@type": "SearchAction", target: "https://airlife.ro/products?q={search_term_string}", "query-input": "required name=search_term_string" },
+      potentialAction: { "@type": "SearchAction", target: "https://airlife.ro/produse?q={search_term_string}", "query-input": "required name=search_term_string" },
     },
     {
       "@type": "HVACBusiness", "@id": "https://airlife.ro/#localbusiness", name: "AirLife", logo: "https://airlife.ro/logo.png", parentOrganization: { "@id": "https://airlife.ro/#organization" },

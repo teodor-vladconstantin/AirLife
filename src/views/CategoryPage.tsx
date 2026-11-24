@@ -72,7 +72,7 @@ const CategoryPage = ({ forcedSlug, products }: CategoryPageProps) => {
           <p className="text-muted-foreground mb-6">
             Categoria solicitată nu există sau a fost mutată.
           </p>
-          <Link to="/products">
+          <Link to="/produse">
             <Button>Vezi Toate Produsele</Button>
           </Link>
         </main>
@@ -92,7 +92,7 @@ const CategoryPage = ({ forcedSlug, products }: CategoryPageProps) => {
       "itemListElement": products.slice(0, 100).map((prod, idx) => ({
         "@type": "ListItem",
         "position": idx + 1,
-        "url": `https://airlife.ro/products/${prod.slug ?? prod.id}`,
+        "url": `https://airlife.ro/produse/${prod.slug ?? prod.id}`,
         "name": prod.name,
       })),
     },
@@ -112,7 +112,7 @@ const CategoryPage = ({ forcedSlug, products }: CategoryPageProps) => {
         "@type": "ListItem",
         "position": 2,
         "name": "Produse",
-        "item": "https://airlife.ro/products",
+        "item": "https://airlife.ro/produse",
       },
       {
         "@type": "ListItem",
@@ -147,7 +147,7 @@ const CategoryPage = ({ forcedSlug, products }: CategoryPageProps) => {
               </li>
               <li>/</li>
               <li>
-                <Link to="/products" className="hover:text-primary transition-colors">
+                <Link to="/produse" className="hover:text-primary transition-colors">
                   Produse
                 </Link>
               </li>
@@ -181,7 +181,7 @@ const CategoryPage = ({ forcedSlug, products }: CategoryPageProps) => {
                   <Link to="/contact">
                     <Button variant="default">Contactează-ne</Button>
                   </Link>
-                  <Link to="/products">
+                  <Link to="/produse">
                     <Button variant="outline">Toate Produsele</Button>
                   </Link>
                 </div>
@@ -212,7 +212,7 @@ const CategoryPage = ({ forcedSlug, products }: CategoryPageProps) => {
                         </span>
                         <h2 className="text-lg font-bold text-foreground mb-2 line-clamp-2">
                           <Link
-                            to={`/products/${product.slug ?? product.id}`}
+                            to={`/produse/${product.slug ?? product.id}`}
                             className="hover:text-primary transition-colors"
                             onClick={() =>
                               trackViewItem({
@@ -261,7 +261,7 @@ const CategoryPage = ({ forcedSlug, products }: CategoryPageProps) => {
                       </div>
 
                       <div className="flex gap-2">
-                        <Link to={`/products/${product.slug ?? product.id}`} className="flex-1">
+                        <Link to={`/produse/${product.slug ?? product.id}`} className="flex-1">
                           <Button variant="outline" size="sm" className="w-full text-xs">
                             Detalii
                           </Button>

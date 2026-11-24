@@ -88,7 +88,7 @@ const Navbar = () => {
 
           {/* Desktop Navigation Links */}
           <div className="hidden md:flex items-center gap-1 lg:gap-2">
-            <Link to="/products">
+            <Link to="/produse">
               <Button variant="ghost" size="sm">
                 Magazin
               </Button>
@@ -233,7 +233,7 @@ const Navbar = () => {
         {mobileMenuOpen && (
           <div className="md:hidden pt-4 pb-3 border-t border-border mt-3 space-y-2 animate-in slide-in-from-top-2 duration-200">
             <Link
-              to="/products"
+              to="/produse"
               onClick={() => setMobileMenuOpen(false)}
               className="block px-3 py-2 rounded-md hover:bg-secondary text-sm font-medium"
             >

@@ -144,7 +144,7 @@ export const BlogManager = () => {
             </div>
 
             <div>
-              <div className="flex items-center justify-between">
+              <div className="flex flex-wrap items-center justify-between gap-2">
                 <Label htmlFor="b_content">Conținut (Markdown: ## titlu, **bold**, - listă, [text](url))</Label>
                 <Button type="button" variant="ghost" size="sm" onClick={() => setPreview((p) => !p)}>
                   {preview ? "Editează" : "Previzualizare"}
@@ -204,7 +204,7 @@ export const BlogManager = () => {
         <CardContent className="p-0 divide-y">
           {posts.length === 0 && <p className="p-6 text-muted-foreground">Niciun articol încă.</p>}
           {posts.map((p) => (
-            <div key={p.id} className="flex items-center justify-between gap-4 p-4">
+            <div key={p.id} className="flex flex-wrap items-center justify-between gap-3 p-4 sm:flex-nowrap sm:gap-4">
               <div className="min-w-0">
                 <p className="font-medium truncate">{p.title}</p>
                 <p className="text-xs text-muted-foreground">
