@@ -190,7 +190,7 @@ const AboutUs = () => {
                     <tr className="border-t border-border"><th scope="row" className="p-3 text-left font-medium">Nr. Reg. Com.</th><td className="p-3 text-muted-foreground">{company.regCom}</td></tr>
                     <tr className="border-t border-border"><th scope="row" className="p-3 text-left font-medium">Telefon</th><td className="p-3 text-muted-foreground">{PHONE_DISPLAY}</td></tr>
                     <tr className="border-t border-border"><th scope="row" className="p-3 text-left font-medium">Program</th><td className="p-3 text-muted-foreground">Luni – vineri 09:00 – 18:00, sâmbătă 10:00 – 14:00</td></tr>
-                    <tr className="border-t border-border"><th scope="row" className="p-3 text-left font-medium">Localitate</th><td className="p-3 text-muted-foreground">Mărăcineni, județul Buzău</td></tr>
+                    <tr className="border-t border-border"><th scope="row" className="p-3 text-left font-medium">Localitate</th><td className="p-3 text-muted-foreground">Buzău</td></tr>
                     <tr className="border-t border-border"><th scope="row" className="p-3 text-left font-medium">Atestări</th><td className="p-3 text-muted-foreground">{FGAS_TEXT}</td></tr>
                     <tr className="border-t border-border"><th scope="row" className="p-3 text-left font-medium">Zonă de servicii</th><td className="p-3 text-muted-foreground">Municipiul Buzău și județul Buzău; produse cu livrare în toată țara</td></tr>
                   </tbody>

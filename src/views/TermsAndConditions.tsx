@@ -54,9 +54,9 @@ const sections: LegalSection[] = [
     title: "Plata și facturarea",
     body: (
       <>
-        <p>Metode de plată disponibile pentru produse: <strong>card bancar online</strong> (Visa, Mastercard și alte metode afișate la plată), procesat securizat de Stripe, și <strong>ramburs</strong> (numerar sau card la curier, la livrare). Pentru servicii, plata se face conform ofertei acceptate.</p>
+        <p>Metode de plată disponibile pentru produse: <strong>card bancar online</strong> (Visa, Mastercard și alte metode afișate la plată), procesat securizat de Stripe. Nu se acceptă plata ramburs. Pentru servicii, plata se face conform ofertei acceptate.</p>
         <p>La plata cu cardul ești redirecționat către pagina securizată Stripe; datele cardului sunt introduse direct acolo și <strong>nu sunt văzute sau stocate de AirLife</strong>. Comanda plătită cu cardul se onorează după confirmarea plății. Sesiunea de plată expiră după 30 de minute; dacă nu o finalizezi în acest interval, comanda neplătită se anulează automat, iar stocul se eliberează. Plata cu cardul este un serviciu al Stripe Payments Europe, Ltd., care își aplică propriii termeni.</p>
-        <p>Prețul comenzii este datorat integral la plasarea comenzii (card) sau la livrare (ramburs). Pentru comenzile cu plata la livrare, refuzul nejustificat repetat de a ridica coletul ne poate determina să nu mai acceptăm comenzi ulterioare cu ramburs de la același client.</p>
+        <p>Prețul comenzii este datorat integral la plasarea comenzii, prin card.</p>
         <p>Factura fiscală se emite pentru fiecare comandă sau serviciu și ți se transmite electronic, la adresa de e-mail indicată. Pentru factură pe persoană juridică te rugăm să ne transmiți datele firmei înainte de plasarea comenzii sau cel târziu la confirmare.</p>
         <p>Poți urmări o comandă din contul tău sau, ca vizitator, din pagina <Link to="/urmarire-comanda">Urmărire comandă</Link>, cu numărul comenzii și adresa de e-mail folosită.</p>
       </>

@@ -5,6 +5,8 @@ import { useCart } from "@/contexts/CartContext";
 import { CartItem } from "./CartItem";
 import { useNavigate } from "@/lib/router";
 import { ShoppingCart } from "lucide-react";
+import { useToast } from "@/hooks/use-toast";
+import { ToastAction } from "@/components/ui/toast";
 
 interface CartDrawerProps {
   open: boolean;
@@ -12,8 +14,28 @@ interface CartDrawerProps {
 }
 
 export const CartDrawer = ({ open, onClose }: CartDrawerProps) => {
-  const { items, updateQuantity, removeFromCart, total, itemCount } = useCart();
+  const { items, updateQuantity, removeFromCart, addToCart, total, itemCount } = useCart();
   const navigate = useNavigate();
+  const { toast } = useToast();
+
+  // Remove a line, and offer "Anulează" in case it was a mistake.
+  const handleRemove = async (productId: string) => {
+    const item = items.find((i) => i.product_id === productId);
+    await removeFromCart(productId);
+    if (!item) return;
+    toast({
+      title: "Produs scos din coș",
+      description: item.name,
+      action: (
+        <ToastAction
+          altText="Anulează ștergerea"
+          onClick={() => addToCart({ id: item.product_id, name: item.name, description: "", price: item.price, category: item.category, image_url: item.image_url, features: [], stock: item.stock }, item.quantity)}
+        >
+          Anulează
+        </ToastAction>
+      ),
+    });
+  };
 
   const handleCheckout = () => {
     onClose();
@@ -22,7 +44,11 @@ export const CartDrawer = ({ open, onClose }: CartDrawerProps) => {
 
   return (
     <Sheet open={open} onOpenChange={onClose}>
-      <SheetContent className="w-full sm:max-w-lg flex flex-col">
+      <SheetContent
+        className="w-full sm:max-w-lg flex flex-col"
+        // Pressing "Anulează" in the toast is "outside" the drawer: keep the drawer open so the restored item is visible.
+        onInteractOutside={(e) => { if ((e.target as HTMLElement | null)?.closest('[aria-label^="Notifications"]')) e.preventDefault(); }}
+      >
         <SheetHeader>
           <SheetTitle className="flex items-center gap-2">
             <ShoppingCart className="h-5 w-5" />
@@ -53,7 +79,7 @@ export const CartDrawer = ({ open, onClose }: CartDrawerProps) => {
                     key={item.id}
                     item={item}
                     onUpdateQuantity={updateQuantity}
-                    onRemove={removeFromCart}
+                    onRemove={handleRemove}
                   />
                 ))}
               </div>

@@ -4,7 +4,6 @@ import { z } from "zod";
 import { stripe, paymentsEnabled } from "@/lib/stripe";
 import { isShopVisible, salePricing } from "@/lib/pricing";
 import { verifyTurnstile } from "@/lib/turnstile";
-import { sendOrderEmail } from "@/lib/email/order";
 
 export const runtime = "nodejs";
 
@@ -16,7 +15,7 @@ const body = z.object({
   items: z.array(z.object({ id: z.string().uuid(), quantity: z.number().int().min(1).max(20) })).min(1).max(50),
   customer: z.object({ name: z.string().min(2).max(120), email: z.string().email().max(200), phone: z.string().min(6).max(30) }),
   address: z.object({ county: z.string().min(2).max(80), city: z.string().min(2).max(80), address: z.string().min(3).max(200), postalCode: z.string().max(12).optional() }),
-  paymentMethod: z.enum(["card_online", "cash_on_delivery"]), // bank_transfer disabled for now
+  paymentMethod: z.enum(["card_online"]), // card only; cash on delivery was removed, bank transfer stays off
   notes: z.string().max(500).optional(),
   token: z.string().optional(), // Turnstile
 });
@@ -25,14 +24,14 @@ const db = () => createClient(process.env.SUPABASE_URL || process.env.NEXT_PUBLI
 const bani = (n: number) => Math.round(n * 100);
 
 // Creates the order with prices read from the database (never from the browser), reserves stock,
-// then either returns a Stripe Checkout URL (card) or the confirmation page (cash on delivery / bank transfer).
+// then returns the Stripe Checkout URL (card payment).
 export async function POST(req: Request) {
   const parsed = body.safeParse(await req.json().catch(() => null));
   if (!parsed.success) return NextResponse.json({ error: "invalid_request" }, { status: 400 });
   const { items, customer, address, paymentMethod, notes, token } = parsed.data;
   const ip = req.headers.get("x-forwarded-for")?.split(",")[0]?.trim();
   if (!(await verifyTurnstile(token, ip))) return NextResponse.json({ error: "captcha" }, { status: 403 });
-  if (paymentMethod === "card_online" && !paymentsEnabled()) return NextResponse.json({ error: "card_payments_disabled" }, { status: 503 });
+  if (!paymentsEnabled()) return NextResponse.json({ error: "card_payments_disabled" }, { status: 503 });
 
   const sb = db();
   // Logged-in customers: link the order to the account so it shows up in "Comenzile mele" (guests order with userId null).
@@ -78,11 +77,6 @@ export async function POST(req: Request) {
     const { data: ok } = await sb.rpc("decrease_product_stock", { p_product_id: l.p.id, p_quantity: l.quantity });
     if (!ok) { await giveBack(taken); await sb.from("orders").delete().eq("id", order.id); return NextResponse.json({ error: "out_of_stock", name: l.p.name }, { status: 409 }); }
     taken.push(l);
-  }
-
-  if (paymentMethod !== "card_online") {
-    await sendOrderEmail(order.id, "placed"); // card orders are emailed by the Stripe webhook once paid
-    return NextResponse.json({ redirect: `/comanda-confirmata?o=${encodeURIComponent(order.order_number)}` });
   }
 
   try {

@@ -6,7 +6,7 @@ export const PHONE_TEL = "+40722153525";
 // Products still ship nationwide. Change the area here, not in each page.
 export const SERVICE_AREA = "municipiul Buzău și tot județul Buzău";
 export const BUZAU_LOCALITIES = [
-  "Buzău", "Râmnicu Sărat", "Nehoiu", "Pogoanele", "Pătârlagele", "Mărăcineni", "Vernești", "Țintești",
+  "Buzău", "Râmnicu Sărat", "Nehoiu", "Pogoanele", "Pătârlagele", "Vernești", "Țintești",
   "Săgeata", "Stâlpu", "Cernătești", "Merei", "Pietroasele", "Berca", "Vadu Pașii", "Costești", "Pârscov", "Cislău",
 ];
 export const AREA_SERVED = [
