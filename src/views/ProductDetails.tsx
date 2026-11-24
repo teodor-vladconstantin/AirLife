@@ -4,6 +4,7 @@ import { Link, useNavigate } from "@/lib/router";
 import type { loadProduct, Product, ReviewData } from "@/lib/catalog";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { ProductReviews, Stars } from "@/components/shop/ProductReviews";
+import { StockAlertForm } from "@/components/shop/StockAlertForm";
 import { WishlistButton } from "@/components/shop/WishlistButton";
 import { ProductCard } from "@/components/shop/ProductCard";
 import { CATEGORIES_DATA } from "@/data/categoriesData";
@@ -471,6 +472,7 @@ const ProductDetails = ({ initial, reviews = NO_REVIEWS }: { initial: Loaded; re
                 </div>
                 <p className="flex items-center gap-2 text-xs text-muted-foreground"><CreditCard className="w-3.5 h-3.5" /> Plată securizată online cu cardul</p>
                 <WishlistButton productId={product.id} productName={product.name} withLabel className="px-1 py-1 hover:text-primary" />
+                {/^[0-9a-f]{8}-[0-9a-f]{4}-/i.test(product.id) && <StockAlertForm productId={product.id} kind={out ? "back_in_stock" : "price_drop"} />}
               </div>
 
               {/* Delivery / returns / warranty */}

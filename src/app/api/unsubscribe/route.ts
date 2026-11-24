@@ -20,6 +20,13 @@ export async function POST(req: Request) {
     .in("status", ["pending", "active"])
     .select("id");
   if (error) return NextResponse.json({ error: "server" }, { status: 500 });
+  // Tokens of the other lists: stock/price alerts are deleted, cart reminders are closed.
+  if (data.length === 0) {
+    const sb = adminDb();
+    const a = await sb.from("stock_alerts").delete().eq("unsubscribe_token", parsed.data).select("id");
+    const c = await sb.from("abandoned_carts").update({ recovered_at: new Date().toISOString() }).eq("unsubscribe_token", parsed.data).is("recovered_at", null).select("id");
+    if (a.data?.length || c.data?.length) return NextResponse.json({ ok: true });
+  }
   if (data.length === 0) {
     const { data: row } = await adminDb().from("subscribers").select("status").eq("unsubscribe_token", parsed.data).maybeSingle();
     if (row?.status !== "unsubscribed") return NextResponse.json({ error: "invalid" }, { status: 404 });

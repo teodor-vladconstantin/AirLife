@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { adminDb, siteUrl } from "@/lib/email/db";
 import { authorized, sendMany, type Msg } from "@/lib/email/send";
+import { cartReminders, reviewRequests, stockAlerts } from "@/lib/email/automations";
 import Welcome, { welcomeSubject } from "@/emails/Welcome";
 
 const DAY = 86_400_000;
@@ -37,5 +38,11 @@ export async function GET(req: Request) {
   }));
   const res = await sendMany(msgs, `welcome3-${iso(now).slice(0, 10)}`);
   if (res.failedIds.length) await db.from("subscribers").update({ welcome2_sent_at: null }).in("id", res.failedIds);
-  return NextResponse.json({ welcome3: { sent: res.sent, failed: res.failedIds.length } });
+  const safe = async <T,>(f: () => Promise<T>) => { try { return await f(); } catch (e) { return { error: (e as Error)?.message ?? "failed" }; } };
+  return NextResponse.json({
+    welcome3: { sent: res.sent, failed: res.failedIds.length },
+    carts: await safe(() => cartReminders(now)),
+    alerts: await safe(() => stockAlerts(now)),
+    reviews: await safe(() => reviewRequests(now)),
+  });
 }
