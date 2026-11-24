@@ -140,3 +140,26 @@ export async function loadProductCards(category?: string): Promise<ProductCardDa
   }
   return out;
 }
+
+export interface BrandSummary { name: string; count: number; categories: string[] }
+
+// Brands of the air-conditioner categories ("Aer Condiționat…", portable included, heaters excluded), for the home page.
+export async function loadAcBrands(): Promise<BrandSummary[]> {
+  const acc = new Map<string, BrandSummary>();
+  try {
+    for (let from = 0; ; from += 1000) {
+      const { data, error } = await db().from("products").select("brand,category,image_url,hidden").like("category", "Aer Condiționat%").not("slug", "is", null).range(from, from + 999);
+      if (error || !data) break;
+      for (const r of data) {
+        const name = r.brand?.trim();
+        if (!name || !isShopVisible(r)) continue;
+        const b = acc.get(name) ?? { name, count: 0, categories: [] };
+        b.count++;
+        if (!b.categories.includes(r.category)) b.categories.push(r.category);
+        acc.set(name, b);
+      }
+      if (data.length < 1000) break;
+    }
+  } catch { /* no brands: the section is hidden */ }
+  return [...acc.values()].sort((a, b) => b.count - a.count || a.name.localeCompare(b.name, "ro"));
+}
