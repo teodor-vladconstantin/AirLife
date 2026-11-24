@@ -85,7 +85,7 @@ export function SuppliersManager() {
     if (markup !== null && markup !== sel.default_markup_percent) {
       const r = await applySupplierMarkup(sel.id, markup);
       setRev((v) => v + 1);
-      toast({ title: r.failed ? `Prețuri actualizate la ${r.updated} produse, ${r.failed} au eșuat` : `Prețurile s-au actualizat automat la ${r.updated} produse`, description: `Preț listă și preț vânzare = achiziție + ${markup}%` });
+      toast({ title: r.failed ? `Prețuri actualizate la ${r.updated} produse, ${r.failed} au eșuat` : `Prețurile s-au actualizat automat la ${r.updated} produse`, description: `Preț vânzare = achiziție + ${markup}%` });
     }
     void load();
   };
@@ -132,7 +132,7 @@ export function SuppliersManager() {
                 <div><Label htmlFor="sp-em">Email de contact</Label><Input id="sp-em" type="email" value={form.contact_email} onChange={set("contact_email")} /></div>
                 <div><Label htmlFor="sp-ph">Telefon</Label><Input id="sp-ph" value={form.contact_phone} onChange={set("contact_phone")} /></div>
                 <div><Label htmlFor="sp-web">Site</Label><Input id="sp-web" value={form.website} onChange={set("website")} placeholder="https://" /></div>
-                <div><Label htmlFor="sp-mk">Adaos contractual (%)</Label><Input id="sp-mk" inputMode="decimal" value={form.default_markup_percent} onChange={set("default_markup_percent")} placeholder="ex: 25" /><p className="mt-1 text-xs text-muted-foreground">Se aplică tuturor produselor furnizorului: prețul de listă și cel de vânzare se calculează automat (achiziție + adaos).</p></div>
+                <div><Label htmlFor="sp-mk">Adaos contractual (%)</Label><Input id="sp-mk" inputMode="decimal" value={form.default_markup_percent} onChange={set("default_markup_percent")} placeholder="ex: 25" /><p className="mt-1 text-xs text-muted-foreground">Se aplică tuturor produselor furnizorului: prețul de vânzare se calculează automat din prețul de achiziție (achiziție + adaos).</p></div>
               </div>
               <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
                 <div><Label htmlFor="sp-ol">Oferta de preț (denumire)</Label><Input id="sp-ol" value={form.offer_label} onChange={set("offer_label")} placeholder="ex: Listă de preț 2026" /></div>

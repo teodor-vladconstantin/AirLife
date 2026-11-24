@@ -26,7 +26,7 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { CategoryMenu, useCategories } from "@/components/shop/CategoryMenu";
+import { CategoryMenu, sectionHref, useShopMenu } from "@/components/shop/CategoryMenu";
 import { useWishlist } from "@/lib/wishlist";
 import { SearchBox } from "@/components/shop/SearchBox";
 import { CartButton } from "@/components/cart/CartButton";
@@ -39,7 +39,8 @@ const Navbar = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
   const [catsOpen, setCatsOpen] = useState(false);
-  const cats = useCategories();
+  const menu = useShopMenu();
+  const [openSection, setOpenSection] = useState<string | null>(null);
   const wish = useWishlist();
   const navigate = useNavigate();
 
@@ -255,15 +256,32 @@ const Navbar = () => {
 
         {/* Mobile Navigation Drawer */}
         {mobileMenuOpen && (
-          <div className="md:hidden pt-4 pb-3 border-t border-border mt-3 space-y-2 animate-in slide-in-from-top-2 duration-200">
+          <div className="md:hidden pt-4 pb-3 border-t border-border mt-3 space-y-2 animate-in slide-in-from-top-2 duration-200 max-h-[calc(100dvh-5.5rem)] overflow-y-auto overscroll-contain">
             <button type="button" onClick={() => setCatsOpen((v) => !v)} aria-expanded={catsOpen} className="flex w-full items-center justify-between px-3 py-2 rounded-md hover:bg-secondary text-sm font-medium">
               Produse <ChevronDown className={`h-4 w-4 transition-transform ${catsOpen ? "rotate-180" : ""}`} />
             </button>
             {catsOpen && (
-              <div className="pl-3">
+              <div className="space-y-1 pl-3">
                 <Link to="/produse" onClick={() => setMobileMenuOpen(false)} className="block px-3 py-1.5 rounded-md text-sm font-semibold text-primary hover:bg-secondary">Toate produsele</Link>
-                {cats.map((c) => (
-                  <Link key={c.slug} to={`/${c.slug}`} onClick={() => setMobileMenuOpen(false)} className="block px-3 py-1.5 rounded-md text-sm text-muted-foreground hover:bg-secondary hover:text-foreground">{c.name}</Link>
+                {menu.map((sec) => (
+                  <div key={sec.key}>
+                    <button type="button" onClick={() => setOpenSection((v) => (v === sec.key ? null : sec.key))} aria-expanded={openSection === sec.key} className="flex w-full items-center justify-between rounded-md px-3 py-2 text-left text-sm font-semibold hover:bg-secondary">
+                      {sec.title} <ChevronDown className={`h-4 w-4 transition-transform ${openSection === sec.key ? "rotate-180" : ""}`} />
+                    </button>
+                    {openSection === sec.key && (
+                      <div className="space-y-2 pb-2 pl-3">
+                        <Link to={sectionHref(sec.names)} onClick={() => setMobileMenuOpen(false)} className="block px-3 py-1 text-xs font-medium text-primary hover:underline">Vezi tot din „{sec.title}”</Link>
+                        {sec.groups.map((g) => (
+                          <div key={g.title}>
+                            <p className="px-3 text-[11px] font-semibold uppercase tracking-wider text-muted-foreground">{g.title}</p>
+                            {g.links.map((l) => (
+                              <Link key={l.slug} to={`/${l.slug}`} onClick={() => setMobileMenuOpen(false)} className="block rounded-md px-3 py-1.5 text-sm text-muted-foreground hover:bg-secondary hover:text-foreground">{l.name}</Link>
+                            ))}
+                          </div>
+                        ))}
+                      </div>
+                    )}
+                  </div>
                 ))}
               </div>
             )}

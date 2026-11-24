@@ -1,8 +1,8 @@
 import { untypedDb } from "@/lib/untypedDb";
 import { recommendedPrice } from "@/lib/suppliers";
 
-// The contract markup belongs to the supplier. Whenever it changes (or purchase prices change), the list price and the
-// selling price of every product of that supplier that has a purchase price become: purchase price + markup.
+// The contract markup belongs to the supplier. Whenever it changes (or purchase prices change), the selling price of every
+// product of that supplier that has a purchase price becomes: purchase price + markup.
 // Returns how many products were updated.
 export async function applySupplierMarkup(supplierId: string, markup: number | null): Promise<{ updated: number; failed: number }> {
   if (markup == null) return { updated: 0, failed: 0 };
@@ -18,9 +18,8 @@ export async function applySupplierMarkup(supplierId: string, markup: number | n
   let updated = 0, failed = 0;
   for (let i = 0; i < todo.length; i += 20) {
     const res = await Promise.all(todo.slice(i, i + 20).map(async ({ r, p }) => {
-      const a = await untypedDb.from("supplier_products").update({ list_price: p, updated_at: new Date().toISOString() }).eq("id", r.id);
-      const b = await untypedDb.from("products").update({ price: p }).eq("id", r.product_id);
-      return !a.error && !b.error;
+      const { error } = await untypedDb.from("products").update({ price: p }).eq("id", r.product_id);
+      return !error;
     }));
     updated += res.filter(Boolean).length;
     failed += res.filter((x) => !x).length;

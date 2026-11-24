@@ -11,7 +11,7 @@ import { applySupplierMarkup } from "@/lib/supplierPricing";
 
 type Row = SupplierProductRow & { products: { id: string; name: string; slug: string | null; sku: string | null; price: number; stock: number; hidden: boolean } };
 const PAGE = 50;
-const SEL = "id,supplier_id,product_id,supplier_sku,purchase_price,list_price,markup_percent,products!inner(id,name,slug,sku,price,stock,hidden)";
+const SEL = "id,supplier_id,product_id,supplier_sku,purchase_price,products!inner(id,name,slug,sku,price,stock,hidden)";
 const money = (n: number | null) => (n == null ? "–" : `${n.toLocaleString("ro-RO", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`);
 
 // Editable number: commits on blur / Enter, only when the value changed and is a valid non-negative number (empty = clear).
@@ -53,36 +53,39 @@ export function SupplierProducts({ supplierId, supplierName, defaultMarkup, onCh
   useEffect(() => { setPage(0); }, [supplierId, q, missing]);
   useEffect(() => { const t = setTimeout(() => void load(), q ? 250 : 0); return () => clearTimeout(t); }, [load, q]);
 
-  // Changing the purchase price fills the list price and the selling price automatically: purchase + the supplier's markup.
+  // Changing the purchase price sets the selling price automatically: purchase price + the supplier's contract markup.
   const patchRow = async (r: Row, patch: Partial<SupplierProductRow>) => {
-    const auto = "purchase_price" in patch ? recommendedPrice(patch.purchase_price ?? null, defaultMarkup) : null;
-    const full = auto != null ? { ...patch, list_price: auto } : patch;
-    const { error } = await untypedDb.from("supplier_products").update({ ...full, updated_at: new Date().toISOString() }).eq("id", r.id);
+    const { error } = await untypedDb.from("supplier_products").update({ ...patch, updated_at: new Date().toISOString() }).eq("id", r.id);
     if (error) return toast({ title: "Nu am putut salva", variant: "destructive" });
+    const auto = "purchase_price" in patch ? recommendedPrice(patch.purchase_price ?? null, defaultMarkup) : null;
     let price = r.products.price;
     if (auto != null) {
       const { error: pe } = await untypedDb.from("products").update({ price: auto }).eq("id", r.product_id);
-      if (pe) toast({ title: "Prețul de listă s-a salvat, dar prețul de vânzare nu", variant: "destructive" });
+      if (pe) toast({ title: "Prețul de achiziție s-a salvat, dar prețul de vânzare nu", variant: "destructive" });
       else price = auto;
+    } else if ("purchase_price" in patch && defaultMarkup == null && patch.purchase_price != null) {
+      toast({ title: "Prețul de achiziție salvat", description: "Setează adaosul contractual în fișa furnizorului ca să se calculeze prețul de vânzare." });
     }
-    setRows((prev) => prev && prev.map((x) => (x.id === r.id ? { ...x, ...full, products: { ...x.products, price } } : x)));
+    setRows((prev) => prev && prev.map((x) => (x.id === r.id ? { ...x, ...patch, products: { ...x.products, price } } : x)));
     onChanged();
-  };
-  const setSellPrice = async (r: Row, price: number | null) => {
-    if (price == null) return;
-    const { error } = await untypedDb.from("products").update({ price }).eq("id", r.product_id);
-    if (error) return toast({ title: "Nu am putut salva prețul de vânzare", variant: "destructive" });
-    setRows((prev) => prev && prev.map((x) => (x.id === r.id ? { ...x, products: { ...x.products, price } } : x)));
   };
 
   const chosen = (rows ?? []).filter((r) => sel.has(r.id));
-  const applyListPrice = async () => {
-    const todo = chosen.filter((r) => r.list_price != null);
-    if (!todo.length) return toast({ title: "Nimic de aplicat", description: "Selectează produse cu preț de listă (se calculează din prețul de achiziție și adaosul furnizorului).", variant: "destructive" });
-    if (!window.confirm(`Setezi prețul de vânzare = prețul de listă pentru ${todo.length} produse? Prețurile actuale se înlocuiesc.`)) return;
-    const res = await Promise.all(todo.map((r) => untypedDb.from("products").update({ price: r.list_price }).eq("id", r.product_id)));
+  // Re-applies the supplier markup to the selected products (e.g. after a price was changed by hand elsewhere).
+  const recalcSelected = async () => {
+    const todo = chosen.flatMap((r) => { const p = recommendedPrice(r.purchase_price, defaultMarkup); return p == null ? [] : [{ r, p }]; });
+    if (!todo.length) return toast({ title: "Nimic de recalculat", description: "Selectează produse cu preț de achiziție și setează adaosul furnizorului.", variant: "destructive" });
+    if (!window.confirm(`Recalculezi prețul de vânzare (achiziție + ${defaultMarkup}%) pentru ${todo.length} produse? Prețurile actuale se înlocuiesc.`)) return;
+    const res = await Promise.all(todo.map(({ r, p }) => untypedDb.from("products").update({ price: p }).eq("id", r.product_id)));
     const failed = res.filter((x) => x.error).length;
-    toast({ title: failed ? `Gata, dar ${failed} nu s-au salvat` : `Prețuri actualizate (${todo.length})`, variant: failed ? "destructive" : undefined });
+    toast({ title: failed ? `Gata, dar ${failed} nu s-au salvat` : `Prețuri recalculate (${todo.length})`, variant: failed ? "destructive" : undefined });
+    void load();
+  };
+  const recalcAll = async () => {
+    if (defaultMarkup == null) return toast({ title: "Setează adaosul contractual în fișa furnizorului", variant: "destructive" });
+    if (!window.confirm(`Recalculezi prețul de vânzare (achiziție + ${defaultMarkup}%) pentru toate produsele ${supplierName} care au preț de achiziție? Prețurile actuale se înlocuiesc.`)) return;
+    const r = await applySupplierMarkup(supplierId, defaultMarkup);
+    toast({ title: r.failed ? `Recalculat la ${r.updated}, ${r.failed} au eșuat` : `Prețuri recalculate pentru ${r.updated} produse`, variant: r.failed ? "destructive" : undefined });
     void load();
   };
   const removeSelected = async () => {
@@ -104,7 +107,7 @@ export function SupplierProducts({ supplierId, supplierName, defaultMarkup, onCh
   };
   const exportCsv = async () => {
     const list = await allRows();
-    const csv = toCsv([["sku", "produs", "purchase_price", "list_price", "pret_vanzare"], ...list.map((r) => [r.supplier_sku ?? r.products.sku, r.products.name, r.purchase_price, r.list_price, r.products.price])]);
+    const csv = toCsv([["sku", "produs", "purchase_price", "pret_vanzare"], ...list.map((r) => [r.supplier_sku ?? r.products.sku, r.products.name, r.purchase_price, r.products.price])]);
     const a = document.createElement("a");
     a.href = URL.createObjectURL(new Blob([csv], { type: "text/csv;charset=utf-8" }));
     a.download = `${supplierName.toLowerCase().replace(/\W+/g, "-")}-produse.csv`;
@@ -122,7 +125,6 @@ export function SupplierProducts({ supplierId, supplierName, defaultMarkup, onCh
       if (!r) { unmatched.push(l.sku); continue; }
       const patch: Record<string, number | null | string> = { updated_at: new Date().toISOString() };
       if ("purchase_price" in l) patch.purchase_price = l.purchase_price ?? null;
-      if ("list_price" in l) patch.list_price = l.list_price ?? null;
       const { error: e } = await untypedDb.from("supplier_products").update(patch).eq("id", r.id);
       if (!e) ok++;
     }
@@ -132,7 +134,7 @@ export function SupplierProducts({ supplierId, supplierName, defaultMarkup, onCh
   };
 
   const pages = Math.max(1, Math.ceil(total / PAGE));
-  const grid = "grid gap-2 lg:grid-cols-[28px_minmax(0,2.6fr)_repeat(4,minmax(0,1fr))] lg:items-center";
+  const grid = "grid gap-2 lg:grid-cols-[28px_minmax(0,2.8fr)_repeat(3,minmax(0,1fr))] lg:items-center";
 
   return (
     <div className="space-y-3">
@@ -142,6 +144,7 @@ export function SupplierProducts({ supplierId, supplierName, defaultMarkup, onCh
           <Input aria-label="Caută produs sau cod" className="pl-9" placeholder="Caută după nume sau cod…" value={q} onChange={(e) => setQ(e.target.value)} />
         </div>
         <Button size="sm" variant={missing ? "default" : "outline"} onClick={() => setMissing((v) => !v)}>Fără preț de achiziție</Button>
+        <Button size="sm" variant="outline" onClick={recalcAll} disabled={defaultMarkup == null}>Recalculează toate prețurile</Button>
         <Button size="sm" variant="outline" onClick={() => setAdding((v) => !v)}><Plus className="mr-1 h-4 w-4" />Adaugă produse</Button>
         <Button size="sm" variant="outline" onClick={() => file.current?.click()}><Upload className="mr-1 h-4 w-4" />Import ofertă (CSV)</Button>
         <Button size="sm" variant="outline" onClick={exportCsv}><Download className="mr-1 h-4 w-4" />Export CSV</Button>
@@ -149,17 +152,17 @@ export function SupplierProducts({ supplierId, supplierName, defaultMarkup, onCh
       </div>
       <p className="text-xs text-muted-foreground">
         {defaultMarkup != null
-          ? <>Adaosul contractual al furnizorului este <strong>{defaultMarkup}%</strong>. Când introduci prețul de achiziție, <strong>prețul de listă și prețul de vânzare se completează automat</strong> (achiziție + adaos). Adaosul îl schimbi din fișa furnizorului și se aplică tuturor produselor.</>
-          : <>Setează <strong>adaosul contractual</strong> în fișa furnizorului (mai sus): prețul de listă și prețul de vânzare se vor calcula automat din prețul de achiziție.</>}
+          ? <>Adaosul contractual al furnizorului este <strong>{defaultMarkup}%</strong>. Introduci doar <strong>prețul de achiziție</strong>; <strong>prețul de vânzare se calculează automat</strong> (achiziție + adaos). Adaosul îl schimbi din fișa furnizorului și se aplică tuturor produselor.</>
+          : <>Setează <strong>adaosul contractual</strong> în fișa furnizorului (mai sus): prețul de vânzare se va calcula automat din prețul de achiziție.</>}
       </p>
-      <p className="text-xs text-muted-foreground">Import: CSV cu coloana <code>sku</code> (sau <code>cod</code>) și <code>purchase_price</code> (preț achiziție fără TVA). După import, prețurile se recalculează cu adaosul furnizorului.</p>
+      <p className="text-xs text-muted-foreground">Import: CSV cu coloana <code>sku</code> (sau <code>cod</code>) și <code>purchase_price</code> (preț achiziție fără TVA). După import, prețurile de vânzare se recalculează cu adaosul furnizorului.</p>
 
       {adding && <AddProducts supplierId={supplierId} onDone={() => { setAdding(false); void load(); onChanged(); }} />}
 
       {chosen.length > 0 && (
         <div className="flex flex-wrap items-center gap-2 rounded-lg border border-primary/30 bg-primary/5 p-2 text-sm">
           <span className="font-medium">{chosen.length} selectate</span>
-          <Button size="sm" onClick={applyListPrice}>Preț vânzare = preț listă</Button>
+          <Button size="sm" onClick={recalcSelected}>Recalculează prețul de vânzare</Button>
           <Button size="sm" variant="ghost" onClick={removeSelected}><Trash2 className="mr-1 h-4 w-4 text-destructive" />Scoate de la furnizor</Button>
         </div>
       )}
@@ -167,7 +170,7 @@ export function SupplierProducts({ supplierId, supplierName, defaultMarkup, onCh
       <div className="rounded-lg border border-border bg-card">
         <div className={`${grid} hidden border-b bg-muted/50 px-3 py-2 text-xs font-semibold text-muted-foreground lg:grid`}>
           <Checkbox aria-label="Selectează toate" checked={!!rows?.length && sel.size === rows.length} onCheckedChange={(c) => setSel(c === true ? new Set((rows ?? []).map((r) => r.id)) : new Set())} />
-          <span>Produs</span><span className="text-right">Preț achiziție</span><span className="text-right">Preț listă (calculat)</span><span className="text-right">Preț vânzare</span><span className="text-right">Adaos real %</span>
+          <span>Produs</span><span className="text-right">Preț achiziție</span><span className="text-right">Preț vânzare (calculat)</span><span className="text-right">Adaos real %</span>
         </div>
         {rows === null && <p className="p-4 text-sm text-muted-foreground">Se încarcă…</p>}
         {rows?.length === 0 && <p className="p-4 text-sm text-muted-foreground">{q || missing ? "Niciun produs pentru filtrul ales." : "Furnizorul nu are produse încă. Folosește „Adaugă produse”."}</p>}
@@ -180,8 +183,7 @@ export function SupplierProducts({ supplierId, supplierName, defaultMarkup, onCh
               <Checkbox aria-label={`Selectează ${r.products.name}`} checked={sel.has(r.id)} onCheckedChange={(c) => setSel((s) => { const n = new Set(s); if (c === true) n.add(r.id); else n.delete(r.id); return n; })} />
               <div className="min-w-0"><p className="line-clamp-2 break-words text-sm font-medium">{r.products.name}</p><p className="text-xs text-muted-foreground">{r.supplier_sku ?? r.products.sku ?? "–"}{r.products.hidden ? " · ascuns" : ""} · stoc {r.products.stock}</p></div>
               <div><L>Preț achiziție</L><NumCell label="Preț achiziție" value={r.purchase_price} onCommit={(v) => patchRow(r, { purchase_price: v })} /></div>
-              <div className="flex items-center justify-between lg:justify-end"><L>Preț listă (calculat)</L><span className="text-sm tabular-nums">{money(r.list_price)}</span></div>
-              <div><L>Preț vânzare</L><NumCell label="Preț vânzare" value={r.products.price} onCommit={(v) => setSellPrice(r, v)} /></div>
+              <div className="flex items-center justify-between lg:justify-end"><L>Preț vânzare (calculat)</L><span className="text-sm font-semibold tabular-nums">{money(r.products.price)}</span></div>
               <div className="flex items-center justify-between lg:justify-end"><L>Adaos real %</L><span className={`text-sm font-semibold tabular-nums ${low ? "text-destructive" : real != null ? "text-primary" : ""}`} title={low ? "Sub adaosul contractual al furnizorului" : undefined}>{real == null ? "–" : `${real.toLocaleString("ro-RO")}%`}</span></div>
             </div>
           );
