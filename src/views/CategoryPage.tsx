@@ -1,16 +1,15 @@
 "use client";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { Link } from "@/lib/router";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import SEO from "@/components/SEO";
 import { CATEGORIES_DATA } from "@/data/categoriesData";
 import { faqSchema } from "@/lib/blogSchema";
-import type { StaticProduct } from "@/data/initialProducts";
+import type { ProductCardData } from "@/lib/shop";
+import { CollectionView } from "@/components/shop/CollectionView";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { useCart } from "@/contexts/CartContext";
-import { trackAddToCart, trackViewItem } from "@/lib/analytics";
 import {
   Package,
   CheckCircle2,
@@ -19,49 +18,20 @@ import {
   Sparkles,
   ShoppingBag,
 } from "lucide-react";
-import { useToast } from "@/hooks/use-toast";
 
 interface CategoryPageProps {
   forcedSlug: string;
-  products: StaticProduct[];
+  cards: ProductCardData[];
 }
 
-const CategoryPage = ({ forcedSlug, products }: CategoryPageProps) => {
-  const PAGE = 48; // large categories: show the products in steps so the page stays light
-  const [shown, setShown] = useState(PAGE);
+const CategoryPage = ({ forcedSlug, cards }: CategoryPageProps) => {
   const activeSlug = forcedSlug;
   const categoryInfo = CATEGORIES_DATA[activeSlug];
 
-  const { addToCart } = useCart();
-  const { toast } = useToast();
 
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [activeSlug]);
-
-  const handleAddToCart = async (product: StaticProduct) => {
-    if (product.stock <= 0) return;
-    try {
-      await addToCart(product, 1);
-      trackAddToCart({
-        item_id: product.id,
-        item_name: product.name,
-        price: product.price,
-        item_category: product.category,
-        quantity: 1,
-      });
-      toast({
-        title: "Adăugat în coș",
-        description: `${product.name} a fost adăugat în coșul tău.`,
-      });
-    } catch {
-      toast({
-        title: "Eroare",
-        description: "Nu s-a putut adăuga produsul în coș.",
-        variant: "destructive",
-      });
-    }
-  };
 
   if (!categoryInfo) {
     return (
@@ -89,10 +59,10 @@ const CategoryPage = ({ forcedSlug, products }: CategoryPageProps) => {
     "url": `https://airlife.ro/${categoryInfo.slug}`,
     "mainEntity": {
       "@type": "ItemList",
-      "itemListElement": products.slice(0, 100).map((prod, idx) => ({
+      "itemListElement": cards.slice(0, 100).map((prod, idx) => ({
         "@type": "ListItem",
         "position": idx + 1,
-        "url": `https://airlife.ro/produse/${prod.slug ?? prod.id}`,
+        "url": `https://airlife.ro/produse/${prod.slug}`,
         "name": prod.name,
       })),
     },
@@ -129,7 +99,7 @@ const CategoryPage = ({ forcedSlug, products }: CategoryPageProps) => {
         title={categoryInfo.title}
         description={categoryInfo.metaDescription}
         canonical={`https://airlife.ro/${categoryInfo.slug}`}
-        noindex={products.length === 0}
+        noindex={cards.length === 0}
         structuredData={categoryInfo.faq ? [structuredData, breadcrumbsData, faqSchema(categoryInfo.faq)] : [structuredData, breadcrumbsData]}
       />
 
@@ -168,7 +138,7 @@ const CategoryPage = ({ forcedSlug, products }: CategoryPageProps) => {
 
           {/* Products Grid */}
           <div className="mb-16">
-            {products.length === 0 ? (
+            {cards.length === 0 ? (
               <Card className="p-8 text-center bg-card border-border max-w-2xl mx-auto">
                 <ShoppingBag className="w-12 h-12 text-muted-foreground mx-auto mb-3" />
                 <h3 className="text-xl font-bold text-foreground mb-2">
@@ -187,105 +157,7 @@ const CategoryPage = ({ forcedSlug, products }: CategoryPageProps) => {
                 </div>
               </Card>
             ) : (
-              <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                {products.slice(0, shown).map((product) => (
-                  <Card
-                    key={product.id}
-                    className="flex flex-col justify-between border-border hover:border-primary/40 transition-all duration-300 hover:shadow-md bg-card overflow-hidden"
-                  >
-                    <div>
-                      <div className="relative aspect-video bg-white flex items-center justify-center p-4 border-b border-border/40">
-                        <img
-                          src={product.image_url}
-                          alt={`${product.name} - AirLife Buzău`}
-                          className="max-h-full max-w-full object-contain"
-                          loading="lazy"
-                        />
-                        <span className="absolute top-2 right-2 text-[11px] font-semibold px-2 py-0.5 rounded-full bg-secondary text-secondary-foreground border border-border">
-                          {product.stock > 0 ? "În Stoc" : "La Comandă"}
-                        </span>
-                      </div>
-
-                      <CardContent className="p-5">
-                        <span className="text-xs font-semibold text-primary block mb-1">
-                          {product.category}
-                        </span>
-                        <h2 className="text-lg font-bold text-foreground mb-2 line-clamp-2">
-                          <Link
-                            to={`/produse/${product.slug ?? product.id}`}
-                            className="hover:text-primary transition-colors"
-                            onClick={() =>
-                              trackViewItem({
-                                item_id: product.id,
-                                item_name: product.name,
-                                price: product.price,
-                                item_category: product.category,
-                              })
-                            }
-                          >
-                            {product.name}
-                          </Link>
-                        </h2>
-                        <p className="text-xs text-muted-foreground line-clamp-2 mb-4 leading-relaxed">
-                          {product.description}
-                        </p>
-
-                        {product.features && product.features.length > 0 && (
-                          <div className="flex flex-wrap gap-1.5 mb-4">
-                            {product.features.slice(0, 3).map((f, i) => (
-                              <span
-                                key={i}
-                                className="text-[11px] px-2 py-0.5 rounded-md bg-secondary text-secondary-foreground"
-                              >
-                                {f}
-                              </span>
-                            ))}
-                          </div>
-                        )}
-                      </CardContent>
-                    </div>
-
-                    <div className="p-5 pt-0">
-                      <div className="flex items-center justify-between mb-4 pt-3 border-t border-border/50">
-                        <div>
-                          <span className="text-2xl font-bold text-primary">
-                            {product.price.toFixed(2)} RON
-                            {product.compare_at ? <span className="ml-2 text-sm font-normal text-muted-foreground line-through">{product.compare_at.toFixed(2)} RON</span> : null}
-                          </span>
-                          <span className="block text-[11px] text-muted-foreground">Preț final, TVA inclus</span>
-                        </div>
-                        <div className="text-right text-[11px] text-muted-foreground flex items-center gap-1">
-                          <Package className="w-3.5 h-3.5" />
-                          <span>Stoc: {product.stock} buc</span>
-                        </div>
-                      </div>
-
-                      <div className="flex gap-2">
-                        <Link to={`/produse/${product.slug ?? product.id}`} className="flex-1">
-                          <Button variant="outline" size="sm" className="w-full text-xs">
-                            Detalii
-                          </Button>
-                        </Link>
-                        <Button
-                          size="sm"
-                          className="flex-1 text-xs"
-                          disabled={product.stock <= 0}
-                          onClick={() => handleAddToCart(product)}
-                        >
-                          Adaugă în Coș
-                        </Button>
-                      </div>
-                    </div>
-                  </Card>
-                ))}
-              </div>
-            )}
-            {products.length > shown && (
-              <div className="text-center mt-10">
-                <Button variant="outline" size="lg" onClick={() => setShown((n) => n + PAGE)}>
-                  Arată mai multe produse ({products.length - shown} rămase)
-                </Button>
-              </div>
+              <CollectionView cards={cards} hideCategory heading={categoryInfo.name} />
             )}
           </div>
 
