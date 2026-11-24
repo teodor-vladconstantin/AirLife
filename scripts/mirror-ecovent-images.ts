@@ -14,9 +14,15 @@ const flag = (n: string) => args.includes(`--${n}`);
 const num = (n: string, d: number) => { const i = args.indexOf(`--${n}`); return i >= 0 ? Number(args[i + 1]) : d; };
 
 const url = process.env.SUPABASE_URL ?? process.env.NEXT_PUBLIC_SUPABASE_URL;
-const key = process.env.SUPABASE_SERVICE_ROLE_KEY;
+// SUPABASE_KEY_VIA_PROXY=1: the service key is added to the request by a network proxy (the cloud sandbox), so the script
+// never holds it and must not send its own Authorization header. Normal use: set SUPABASE_SERVICE_ROLE_KEY.
+const viaProxy = process.env.SUPABASE_KEY_VIA_PROXY === "1";
+const key = viaProxy ? "proxy-injected" : process.env.SUPABASE_SERVICE_ROLE_KEY;
 if (!url || !key) { console.error("Set SUPABASE_URL and SUPABASE_SERVICE_ROLE_KEY."); process.exit(1); }
-const supabase = createClient(url, key, { auth: { persistSession: false, autoRefreshToken: false } });
+const supabase = createClient(url, key, {
+  auth: { persistSession: false, autoRefreshToken: false },
+  ...(viaProxy ? { global: { fetch: (input: RequestInfo | URL, init?: RequestInit) => { const h = new Headers(init?.headers); h.delete("authorization"); return fetch(input, { ...init, headers: h }); } } } : {}),
+});
 
 const BUCKET = "media";
 const SOURCE = "cdn.shopify.com";
