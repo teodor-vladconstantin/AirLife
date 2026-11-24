@@ -1,6 +1,7 @@
 "use client";
 import { useState, useEffect, useRef } from "react";
 import { createPortal } from "react-dom";
+import { useBarOffset } from "@/lib/bars";
 import { Link, useNavigate } from "@/lib/router";
 import type { loadProduct, Product, ReviewData } from "@/lib/catalog";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
@@ -54,6 +55,8 @@ const ProductDetails = ({ initial, reviews = NO_REVIEWS }: { initial: Loaded; re
   const [stickyBar, setStickyBar] = useState(false);
   const [busy, setBusy] = useState<"add" | "buy" | null>(null);
   const buyRef = useRef<HTMLDivElement>(null);
+  const [buyBar, setBuyBar] = useState<HTMLDivElement | null>(null);
+  useBarOffset(buyBar, "--bar-buy");
 
   const toCard = (p: { id: string; slug?: string | null; name: string; brand?: string | null; category: string; price: number; compare_at?: number; stock: number; image_url: string | null }): ProductCardData => ({
     id: p.id, slug: p.slug ?? p.id, name: p.name, brand: p.brand ?? null, category: p.category, price: p.price, compare_at: p.compare_at,
@@ -74,11 +77,11 @@ const ProductDetails = ({ initial, reviews = NO_REVIEWS }: { initial: Loaded; re
     } catch { /* storage blocked: skip */ }
   }, [product.id]);
 
-  // the sticky mobile buy bar shows only once the main buy box has scrolled out of view
+  // the sticky mobile buy bar shows whenever the main buy buttons are not on screen (below the fold or already scrolled past)
   useEffect(() => {
     const el = buyRef.current;
     if (!el || typeof IntersectionObserver === "undefined") return;
-    const io = new IntersectionObserver(([e]) => setStickyBar(!e.isIntersecting && e.boundingClientRect.top < 0), { threshold: 0 });
+    const io = new IntersectionObserver(([e]) => setStickyBar(!e.isIntersecting), { threshold: 0 });
     io.observe(el);
     return () => io.disconnect();
   }, [product.id]);
@@ -555,7 +558,7 @@ const ProductDetails = ({ initial, reviews = NO_REVIEWS }: { initial: Loaded; re
 
       {/* Sticky buy bar (phones, after the main buttons scroll away) */}
       {stickyBar && !out && (
-        <div className="fixed inset-x-0 bottom-0 z-40 border-t border-border bg-background/95 p-3 shadow-[0_-4px_12px_rgba(0,0,0,0.08)] backdrop-blur md:hidden">
+        <div ref={setBuyBar} style={{ bottom: "var(--bar-contact, 0px)" }} className="fixed inset-x-0 z-40 border-t border-border bg-background/95 p-3 shadow-[0_-4px_12px_rgba(0,0,0,0.08)] backdrop-blur md:hidden">
           <div className="mx-auto flex max-w-6xl items-center gap-3">
             <div className="min-w-0 flex-1">
               <p className="truncate text-xs text-muted-foreground">{product.name}</p>
