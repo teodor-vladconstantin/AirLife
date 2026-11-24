@@ -1,8 +1,9 @@
 "use client";
 import { useState, useEffect, useRef } from "react";
 import { Link, useNavigate } from "@/lib/router";
-import type { loadProduct, Product } from "@/lib/catalog";
+import type { loadProduct, Product, ReviewData } from "@/lib/catalog";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { ProductReviews, Stars } from "@/components/shop/ProductReviews";
 import { WishlistButton } from "@/components/shop/WishlistButton";
 import { ProductCard } from "@/components/shop/ProductCard";
 import { CATEGORIES_DATA } from "@/data/categoriesData";
@@ -36,7 +37,9 @@ import { Input } from "@/components/ui/input";
 
 type Loaded = NonNullable<Awaited<ReturnType<typeof loadProduct>>>;
 
-const ProductDetails = ({ initial }: { initial: Loaded }) => {
+const NO_REVIEWS: ReviewData = { reviews: [], count: 0, average: 0 };
+
+const ProductDetails = ({ initial, reviews = NO_REVIEWS }: { initial: Loaded; reviews?: ReviewData }) => {
   const { product, related: relatedProducts } = initial;
   const [quantity, setQuantity] = useState(1);
   const [idx, setIdx] = useState(0);
@@ -176,6 +179,18 @@ const ProductDetails = ({ initial }: { initial: Loaded }) => {
       "@type": "Brand",
       "name": product.brand ?? "AirLife"
     },
+    // only real, approved reviews
+    ...(reviews.count > 0 ? {
+      "aggregateRating": { "@type": "AggregateRating", "ratingValue": reviews.average, "reviewCount": reviews.count, "bestRating": 5, "worstRating": 1 },
+      "review": reviews.reviews.slice(0, 10).map((r) => ({
+        "@type": "Review",
+        "author": { "@type": "Person", "name": r.author_name },
+        "datePublished": r.created_at.slice(0, 10),
+        "reviewRating": { "@type": "Rating", "ratingValue": r.rating, "bestRating": 5, "worstRating": 1 },
+        ...(r.title ? { "name": r.title } : {}),
+        "reviewBody": r.body,
+      })),
+    } : {}),
     "offers": {
       "@type": "Offer",
       "url": `https://airlife.ro/produse/${productPath}`,
@@ -390,6 +405,11 @@ const ProductDetails = ({ initial }: { initial: Loaded }) => {
                   </Link>
                 )}
                 <h1 className="mt-1 text-2xl sm:text-3xl font-bold text-foreground leading-tight">{product.name}</h1>
+                {reviews.count > 0 && (
+                  <a href="#reviews-h" className="mt-2 inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-primary">
+                    <Stars value={reviews.average} /> {reviews.average.toFixed(1)} ({reviews.count})
+                  </a>
+                )}
                 {product.sku && <p className="mt-1 text-xs text-muted-foreground">Cod produs: {product.sku}</p>}
               </div>
 
@@ -500,6 +520,8 @@ const ProductDetails = ({ initial }: { initial: Loaded }) => {
               <p className="mt-2">Ai 14 zile să te răzgândești, conform OUG 34/2014. Produsele au garanție de 24 de luni. Detalii complete: <Link to="/livrare-si-retur" className="font-medium text-primary hover:underline">Livrare și retur</Link>.</p>
             </TabsContent>
           </Tabs>
+
+          <ProductReviews productId={product.id} data={reviews} />
 
           {cards.length > 0 && (
             <section className="mb-12" aria-labelledby="rel-h">
