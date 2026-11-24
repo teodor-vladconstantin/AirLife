@@ -382,10 +382,10 @@ const ProductDetails = ({ initial }: { initial: Loaded }) => {
             </div>
 
             {/* Buy box */}
-            <div className="space-y-5">
+            <div className="min-w-0 space-y-5">
               <div>
                 {product.brand && (
-                  <Link to={`/produse?brand=${encodeURIComponent(product.brand)}`} className="text-xs font-semibold uppercase tracking-wide text-primary hover:underline">
+                  <Link to={`/produse?brand=${encodeURIComponent(product.brand)}`} className="inline-block py-1 text-xs font-semibold uppercase tracking-wide text-primary hover:underline">
                     {product.brand}
                   </Link>
                 )}
@@ -438,13 +438,13 @@ const ProductDetails = ({ initial }: { initial: Loaded }) => {
                     </div>
                   </div>
                 )}
-                <div className="flex flex-col gap-2 sm:flex-row">
-                  <Button size="lg" className="flex-1 font-semibold" disabled={out} onClick={handleAddToCart}>
+                <div className="flex flex-col gap-2 lg:flex-row">
+                  <Button size="lg" className="font-semibold lg:flex-1" disabled={out} onClick={handleAddToCart}>
                     <ShoppingCart className="w-4 h-4 mr-2" />
                     {out ? "Indisponibil" : "Adaugă în coș"}
                   </Button>
                   {!out && (
-                    <Button size="lg" variant="outline" className="flex-1 font-semibold border-primary text-primary hover:bg-primary/5" onClick={handleBuyNow}>
+                    <Button size="lg" variant="outline" className="font-semibold lg:flex-1 border-primary text-primary hover:bg-primary/5" onClick={handleBuyNow}>
                       <CreditCard className="w-4 h-4 mr-2" /> Cumpără acum
                     </Button>
                   )}

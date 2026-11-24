@@ -36,13 +36,13 @@ const Footer = () => {
               </div>
               <div className="flex items-center gap-2">
                 <Phone className="w-4 h-4 text-brandlight flex-shrink-0" />
-                <a href={`tel:${PHONE_TEL}`} onClick={() => trackClickToCall("footer")} className="hover:underline">
+                <a href={`tel:${PHONE_TEL}`} onClick={() => trackClickToCall("footer")} className="inline-block py-1.5 hover:underline">
                   {PHONE_DISPLAY}
                 </a>
               </div>
               <div className="flex items-center gap-2">
                 <Mail className="w-4 h-4 text-brandlight flex-shrink-0" />
-                <a href="mailto:contact@airlife.ro" className="hover:underline">
+                <a href="mailto:contact@airlife.ro" className="inline-block py-1.5 hover:underline">
                   contact@airlife.ro
                 </a>
               </div>
@@ -194,7 +194,7 @@ const Footer = () => {
             <p>&copy; {new Date().getFullYear()} AirLife.ro. Toate drepturile rezervate.</p>
             <p className="text-[11px]">{company.legalName} | CUI {company.cui} | {company.regCom}</p>
             <p className="text-[11px]">
-              <a href={SAL_URL} target="_blank" rel="noopener noreferrer" aria-label="ANPC Soluționarea Alternativă a Litigiilor">
+              <a href={SAL_URL} target="_blank" rel="noopener noreferrer" className="inline-block py-1" aria-label="ANPC Soluționarea Alternativă a Litigiilor">
                 <img src="/legal/anpc-sal-badge.png" alt="ANPC SAL - Soluționarea Alternativă a Litigiilor" width={250} height={62} className="inline-block h-auto w-[250px] max-w-full rounded bg-white" loading="lazy" />
               </a>
               {" | "}
@@ -204,7 +204,7 @@ const Footer = () => {
           <div className="flex items-center gap-4">
             <span className="text-[11px]">Buzău, România</span>
             <span>•</span>
-            <Link to="/politica-de-cookies" className="hover:underline">
+            <Link to="/politica-de-cookies" className="inline-block py-1.5 hover:underline">
               Setări Cookies
             </Link>
           </div>

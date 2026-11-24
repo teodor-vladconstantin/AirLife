@@ -2,6 +2,7 @@ import { ArrowRight } from "lucide-react";
 import { Link } from "@/lib/router";
 import { DEFAULT_FILTERS, toQuery } from "@/lib/shop";
 import type { BrandSummary } from "@/lib/catalog";
+import { BRAND_LOGOS } from "@/data/brandLogos";
 
 // Brands of the air conditioners in the shop; each opens the product list filtered by that brand.
 const AcBrands = ({ brands }: { brands: BrandSummary[] }) => {
@@ -22,14 +23,21 @@ const AcBrands = ({ brands }: { brands: BrandSummary[] }) => {
                 className="group flex h-full min-h-28 flex-col items-center justify-center rounded-xl border border-border bg-card p-4 text-center transition-all hover:border-primary/40 hover:shadow-md"
                 aria-label={`${b.name}: ${b.count} ${b.count === 1 ? "model" : "modele"} de aer condiționat`}
               >
-                <span className="text-xl font-bold tracking-tight text-foreground group-hover:text-primary md:text-2xl">{b.name}</span>
+                {BRAND_LOGOS[b.name] ? (
+                  <img src={BRAND_LOGOS[b.name]} alt={b.name} loading="lazy" decoding="async" className="h-10 w-auto max-w-full object-contain md:h-12" />
+                ) : (
+                  <span className="text-xl font-bold tracking-tight text-foreground group-hover:text-primary md:text-2xl">{b.name}</span>
+                )}
                 <span className="mt-1 text-xs text-muted-foreground">{b.count} {b.count === 1 ? "model" : "modele"}</span>
               </Link>
             </li>
           ))}
         </ul>
-        <div className="mt-8 text-center">
-          <Link to="/aer-conditionat" className="inline-flex items-center gap-2 text-sm font-semibold text-primary hover:underline">
+        <p className="mx-auto mt-6 max-w-2xl text-center text-xs text-muted-foreground">
+          Mărcile și siglele aparțin proprietarilor lor și sunt afișate doar pentru a identifica produsele din magazin. AirLife nu este afiliat cu aceste mărci.
+        </p>
+        <div className="mt-6 text-center">
+          <Link to="/aer-conditionat" className="inline-flex items-center gap-2 py-2 text-sm font-semibold text-primary hover:underline">
             Vezi toate aparatele de aer condiționat <ArrowRight className="h-4 w-4" />
           </Link>
         </div>

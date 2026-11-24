@@ -204,7 +204,7 @@ const Checkout = () => {
 
           <form onSubmit={(e) => { if (step < 3) { e.preventDefault(); void next(); } else void handleSubmit(onSubmit)(e); }} noValidate>
             <div className="grid lg:grid-cols-3 gap-8">
-              <div className="lg:col-span-2 space-y-6">
+              <div className="min-w-0 space-y-6 lg:col-span-2">
                 {step === 1 && (
                   <Card>
                     <CardHeader><CardTitle>1. Informații de contact</CardTitle></CardHeader>
@@ -328,8 +328,8 @@ const Checkout = () => {
                   </>
                 )}
 
-                <div className="flex items-center justify-between gap-3">
-                  {step > 1 ? <Button type="button" variant="ghost" onClick={() => setStep(step - 1)}><ChevronLeft className="mr-1 h-4 w-4" /> Înapoi</Button> : <Link to="/produse"><Button type="button" variant="ghost"><ChevronLeft className="mr-1 h-4 w-4" /> Continuă cumpărăturile</Button></Link>}
+                <div className="flex flex-wrap items-center justify-between gap-3">
+                  {step > 1 ? <Button type="button" variant="ghost" onClick={() => setStep(step - 1)}><ChevronLeft className="mr-1 h-4 w-4" /> Înapoi</Button> : <Link to="/produse"><Button type="button" variant="ghost"><ChevronLeft className="mr-1 h-4 w-4" /> Înapoi la magazin</Button></Link>}
                   {step < 3 ? (
                     <Button type="submit" size="lg">Continuă</Button>
                   ) : (
@@ -344,7 +344,7 @@ const Checkout = () => {
               </div>
 
               {/* Order summary */}
-              <div className="lg:col-span-1">
+              <div className="min-w-0 lg:col-span-1">
                 <Card className="lg:sticky lg:top-24">
                   <CardHeader><CardTitle>Sumar comandă</CardTitle></CardHeader>
                   <CardContent className="space-y-4">
