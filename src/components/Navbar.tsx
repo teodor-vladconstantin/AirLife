@@ -17,8 +17,8 @@ import {
   Sparkles,
   Activity,
   Phone,
-  Search,
   Heart,
+  Wind,
 } from "lucide-react";
 import {
   DropdownMenu,
@@ -26,7 +26,7 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { CategoryMenu, sectionHref, useShopMenu } from "@/components/shop/CategoryMenu";
+import { CategoryMenu, SECTION_ICONS, sectionHref, useShopMenu } from "@/components/shop/CategoryMenu";
 import { useWishlist } from "@/lib/wishlist";
 import { SearchBox } from "@/components/shop/SearchBox";
 import { CartButton } from "@/components/cart/CartButton";
@@ -37,7 +37,6 @@ const Navbar = () => {
   const [user, setUser] = useState<SupabaseUser | null>(null);
   const [isAdmin, setIsAdmin] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [searchOpen, setSearchOpen] = useState(false);
   const [catsOpen, setCatsOpen] = useState(false);
   const menu = useShopMenu();
   const [openSection, setOpenSection] = useState<string | null>(null);
@@ -90,14 +89,14 @@ const Navbar = () => {
           {/* Logo */}
           <Link
             to="/"
-            className="flex items-center gap-2 text-primary hover:opacity-90 transition-opacity"
+            className="flex shrink-0 items-center gap-2 text-primary hover:opacity-90 transition-opacity"
             aria-label="AirLife Acasă"
           >
-            <img src="/logo.png" alt="AirLife" width={161} height={36} className="h-9 w-auto" />
+            <img src="/logo.png" alt="AirLife" width={161} height={36} className="h-8 w-auto max-w-none sm:h-9" />
           </Link>
 
           {/* Desktop Navigation Links */}
-          <div className="hidden md:flex items-center gap-1 lg:gap-2">
+          <div className="hidden lg:flex items-center gap-1 xl:gap-2">
             <CategoryMenu />
 
             {/* Servicii Dropdown */}
@@ -174,14 +173,11 @@ const Navbar = () => {
           <SearchBox className="mx-3 hidden w-56 xl:block 2xl:w-72" />
 
           {/* Right Action Buttons */}
-          <div className="flex items-center gap-2 sm:gap-3">
-            <Button variant="ghost" size="icon" className="xl:hidden" onClick={() => setSearchOpen((v) => !v)} aria-label="Caută produse" aria-expanded={searchOpen}>
-              <Search className="w-5 h-5" />
-            </Button>
+          <div className="flex items-center gap-0.5 sm:gap-3">
             <a
               href={`tel:${PHONE_TEL}`}
               onClick={() => trackClickToCall("navbar")}
-              className="hidden lg:inline-flex items-center gap-1.5 text-sm font-semibold text-primary hover:underline"
+              className="hidden xl:inline-flex items-center gap-1.5 text-sm font-semibold text-primary hover:underline"
               aria-label={`Sună la ${PHONE_DISPLAY}`}
             >
               <Phone className="w-4 h-4" />
@@ -190,14 +186,14 @@ const Navbar = () => {
             <a
               href={`tel:${PHONE_TEL}`}
               onClick={() => trackClickToCall("navbar-mobile")}
-              className="lg:hidden p-2 rounded-md text-primary hover:bg-secondary"
+              className="hidden sm:inline-flex xl:hidden p-2 rounded-md text-primary hover:bg-secondary"
               aria-label={`Sună la ${PHONE_DISPLAY}`}
             >
               <Phone className="w-5 h-5" />
             </a>
-            <Link to="/favorite" aria-label={`Favorite${wish.count ? ` (${wish.count})` : ""}`} className="relative inline-flex h-10 w-10 items-center justify-center rounded-md hover:bg-secondary">
+            <Link to="/favorite" aria-label={`Favorite${wish.signedIn && wish.count ? ` (${wish.count})` : ""}`} className="relative hidden h-10 w-10 items-center justify-center rounded-md hover:bg-secondary sm:inline-flex">
               <Heart className="h-5 w-5" />
-              {wish.count > 0 && <span className="absolute -right-0.5 -top-0.5 flex h-5 min-w-5 items-center justify-center rounded-full bg-destructive px-1 text-[11px] font-semibold text-destructive-foreground">{wish.count > 99 ? "99+" : wish.count}</span>}
+              {wish.signedIn && wish.count > 0 && <span className="absolute -right-0.5 -top-0.5 flex h-5 min-w-5 items-center justify-center rounded-full bg-primary px-1 text-[11px] font-semibold text-primary-foreground">{wish.count > 99 ? "99+" : wish.count}</span>}
             </Link>
             <CartButton />
 
@@ -239,7 +235,7 @@ const Navbar = () => {
             <Button
               variant="ghost"
               size="icon"
-              className="md:hidden"
+              className="lg:hidden"
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
               aria-label="Deschide meniul"
             >
@@ -248,43 +244,61 @@ const Navbar = () => {
           </div>
         </div>
 
-        {searchOpen && (
-          <div className="xl:hidden pt-3">
-            <SearchBox autoFocus onDone={() => setSearchOpen(false)} />
-          </div>
-        )}
+        <div className="pt-3 xl:hidden"><SearchBox /></div>
 
         {/* Mobile Navigation Drawer */}
         {mobileMenuOpen && (
-          <div className="md:hidden pt-4 pb-3 border-t border-border mt-3 space-y-2 animate-in slide-in-from-top-2 duration-200 max-h-[calc(100dvh-5.5rem)] overflow-y-auto overscroll-contain">
-            <button type="button" onClick={() => setCatsOpen((v) => !v)} aria-expanded={catsOpen} className="flex w-full items-center justify-between px-3 py-2 rounded-md hover:bg-secondary text-sm font-medium">
-              Produse <ChevronDown className={`h-4 w-4 transition-transform ${catsOpen ? "rotate-180" : ""}`} />
+          <div className="lg:hidden pt-4 pb-3 border-t border-border mt-3 space-y-2 animate-in slide-in-from-top-2 duration-200 max-h-[calc(100dvh-5.5rem)] overflow-y-auto overscroll-contain">
+            <button type="button" onClick={() => setCatsOpen((v) => !v)} aria-expanded={catsOpen} className="flex w-full items-center justify-between rounded-lg bg-primary/5 px-3 py-3 text-base font-extrabold text-foreground">
+              Produse <ChevronDown className={`h-5 w-5 text-primary transition-transform ${catsOpen ? "rotate-180" : ""}`} />
             </button>
             {catsOpen && (
-              <div className="space-y-1 pl-3">
-                <Link to="/produse" onClick={() => setMobileMenuOpen(false)} className="block px-3 py-1.5 rounded-md text-sm font-semibold text-primary hover:bg-secondary">Toate produsele</Link>
-                {menu.map((sec) => (
-                  <div key={sec.key}>
-                    <button type="button" onClick={() => setOpenSection((v) => (v === sec.key ? null : sec.key))} aria-expanded={openSection === sec.key} className="flex w-full items-center justify-between rounded-md px-3 py-2 text-left text-sm font-semibold hover:bg-secondary">
-                      {sec.title} <ChevronDown className={`h-4 w-4 transition-transform ${openSection === sec.key ? "rotate-180" : ""}`} />
-                    </button>
-                    {openSection === sec.key && (
-                      <div className="space-y-2 pb-2 pl-3">
-                        <Link to={sectionHref(sec.names)} onClick={() => setMobileMenuOpen(false)} className="block px-3 py-1 text-xs font-medium text-primary hover:underline">Vezi tot din „{sec.title}”</Link>
-                        {sec.groups.map((g) => (
-                          <div key={g.title}>
-                            <p className="px-3 text-[11px] font-semibold uppercase tracking-wider text-muted-foreground">{g.title}</p>
-                            {g.links.map((l) => (
-                              <Link key={l.slug} to={`/${l.slug}`} onClick={() => setMobileMenuOpen(false)} className="block rounded-md px-3 py-1.5 text-sm text-muted-foreground hover:bg-secondary hover:text-foreground">{l.name}</Link>
-                            ))}
-                          </div>
-                        ))}
-                      </div>
-                    )}
-                  </div>
-                ))}
+              <div className="space-y-3 pb-1">
+                <Link to="/produse" onClick={() => setMobileMenuOpen(false)} className="flex items-center justify-between rounded-lg bg-primary px-4 py-3 text-sm font-bold text-primary-foreground">
+                  Toate produsele <span aria-hidden>→</span>
+                </Link>
+                {menu.map((sec) => {
+                  const Icon = SECTION_ICONS[sec.key as keyof typeof SECTION_ICONS] ?? Wind;
+                  const open = openSection === sec.key;
+                  return (
+                    <div key={sec.key} className={`overflow-hidden rounded-xl border ${open ? "border-primary/40 shadow-sm" : "border-border"} bg-card`}>
+                      <button type="button" onClick={() => setOpenSection((v) => (v === sec.key ? null : sec.key))} aria-expanded={open} className="flex w-full items-center gap-3 p-3 text-left">
+                        <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-primary/10 text-primary"><Icon className="h-5 w-5" /></span>
+                        <span className="min-w-0 flex-1">
+                          <span className="block text-[15px] font-extrabold leading-tight text-foreground">{sec.title}</span>
+                          {sec.description && <span className="block text-xs text-muted-foreground">{sec.description}</span>}
+                        </span>
+                        <ChevronDown className={`h-5 w-5 shrink-0 text-muted-foreground transition-transform ${open ? "rotate-180" : ""}`} />
+                      </button>
+                      {open && (
+                        <div className="border-t border-border bg-secondary/20 px-3 pb-3 pt-2">
+                          {sec.groups.map((g) => (
+                            <div key={g.title} className="pt-2">
+                              <p className="mb-1 flex items-center gap-2 text-[11px] font-bold uppercase tracking-widest text-primary">{g.title}<span className="h-px flex-1 bg-border" aria-hidden /></p>
+                              <ul className="divide-y divide-border/70 rounded-lg border border-border/70 bg-card">
+                                {g.links.map((l) => (
+                                  <li key={l.slug}>
+                                    <Link to={`/${l.slug}`} onClick={() => setMobileMenuOpen(false)} className="flex items-center justify-between gap-2 px-3 py-3 text-[15px] font-medium text-foreground active:bg-secondary">
+                                      <span>{l.name}</span>
+                                      <span className="flex items-center gap-2">{l.count != null && <span className="rounded-full bg-secondary px-2 py-0.5 text-[11px] font-semibold text-muted-foreground">{l.count}</span>}<span className="text-muted-foreground" aria-hidden>›</span></span>
+                                    </Link>
+                                  </li>
+                                ))}
+                              </ul>
+                            </div>
+                          ))}
+                          <Link to={sectionHref(sec.names)} onClick={() => setMobileMenuOpen(false)} className="mt-3 flex items-center justify-center rounded-lg border border-primary/40 py-2.5 text-sm font-bold text-primary">Vezi tot din {sec.title.toLowerCase()} →</Link>
+                        </div>
+                      )}
+                    </div>
+                  );
+                })}
               </div>
             )}
+            <div className="grid grid-cols-2 gap-2 sm:hidden">
+              <Link to="/favorite" onClick={() => setMobileMenuOpen(false)} className="flex items-center justify-center gap-2 rounded-lg border border-border py-2.5 text-sm font-semibold"><Heart className="h-4 w-4" />Favorite{wish.signedIn && wish.count ? ` (${wish.count})` : ""}</Link>
+              <a href={`tel:${PHONE_TEL}`} onClick={() => trackClickToCall("navbar-mobile-menu")} className="flex items-center justify-center gap-2 rounded-lg border border-border py-2.5 text-sm font-semibold text-primary"><Phone className="h-4 w-4" />Sună</a>
+            </div>
             <div className="px-3 py-1 text-xs font-semibold uppercase text-primary tracking-wider">
               Servicii
             </div>

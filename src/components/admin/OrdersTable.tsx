@@ -103,22 +103,16 @@ export const OrdersTable = () => {
     URL.revokeObjectURL(url);
   };
 
+  // Row tints use the brand palette only: the further along the order, the stronger the green.
   const getRowClass = (status: string) => {
     switch (status) {
-      case "pending":
-        return "bg-yellow-50/60 dark:bg-yellow-900/20";
-      case "confirmed":
-        return "bg-accent/60 dark:bg-primary/10";
-      case "processing":
-        return "bg-sky-50/60 dark:bg-sky-900/20";
-      case "shipped":
-        return "bg-indigo-50/60 dark:bg-indigo-900/20";
-      case "delivered":
-        return "bg-accent dark:bg-primary/20";
-      case "cancelled":
-        return "bg-rose-50/60 dark:bg-rose-900/20";
-      default:
-        return "";
+      case "pending": return "bg-secondary/70";
+      case "confirmed": return "bg-accent/50";
+      case "processing": return "bg-accent";
+      case "shipped": return "bg-primary/10";
+      case "delivered": return "bg-primary/15";
+      case "cancelled": return "bg-muted text-muted-foreground";
+      default: return "";
     }
   };
 

@@ -8,11 +8,12 @@ import { Stars } from "@/components/shop/ProductReviews";
 import { useToast } from "@/hooks/use-toast";
 
 type Row = { id: string; product_id: string; author_name: string; rating: number; title: string | null; body: string; status: "pending" | "approved" | "rejected"; verified_purchase: boolean; created_at: string; products: { name: string } | null };
-const FILTERS = [["pending", "În așteptare"], ["approved", "Aprobate"], ["rejected", "Respinse"]] as const;
+// Reviews are published as soon as a verified buyer submits them; here an admin can hide or delete the ones that should not stay.
+const FILTERS = [["approved", "Publicate"], ["rejected", "Ascunse"], ["pending", "În așteptare (vechi)"]] as const;
 
 export function ReviewsManager() {
   const { toast } = useToast();
-  const [status, setStatus] = useState<Row["status"]>("pending");
+  const [status, setStatus] = useState<Row["status"]>("approved");
   const [rows, setRows] = useState<Row[] | null>(null);
   const [missing, setMissing] = useState(false);
 
@@ -27,7 +28,7 @@ export function ReviewsManager() {
   const setTo = async (id: string, next: Row["status"]) => {
     const { error } = await untypedDb.from("product_reviews").update({ status: next }).eq("id", id);
     if (error) return toast({ title: "Nu am putut salva", variant: "destructive" });
-    toast({ title: next === "approved" ? "Recenzie aprobată" : "Recenzie respinsă" });
+    toast({ title: next === "approved" ? "Recenzie publicată" : "Recenzie ascunsă" });
     void load();
   };
   const remove = async (id: string) => {
@@ -42,7 +43,7 @@ export function ReviewsManager() {
       <div className="flex flex-wrap gap-2">
         {FILTERS.map(([k, label]) => <Button key={k} size="sm" variant={status === k ? "default" : "outline"} onClick={() => setStatus(k)}>{label}</Button>)}
       </div>
-      {missing && <p className="rounded-lg border border-amber-300 bg-amber-50 p-3 text-sm">Tabelul de recenzii nu există încă. Rulează migrarea <code>20251219000000_shop_features.sql</code> în Supabase.</p>}
+      {missing && <p className="rounded-lg border border-primary/30 bg-accent p-3 text-sm text-foreground">Tabelul de recenzii nu există încă. Rulează migrarea <code>20251219000000_shop_features.sql</code> în Supabase.</p>}
       {rows === null && <p className="text-sm text-muted-foreground">Se încarcă…</p>}
       {rows?.length === 0 && !missing && <p className="text-sm text-muted-foreground">Nicio recenzie în această listă.</p>}
       {rows?.map((r) => (
@@ -53,8 +54,8 @@ export function ReviewsManager() {
             {r.title && <p className="font-medium">{r.title}</p>}
             <p className="whitespace-pre-line text-sm">{r.body}</p>
             <div className="flex flex-wrap gap-2 pt-1">
-              {r.status !== "approved" && <Button size="sm" onClick={() => setTo(r.id, "approved")}><Check className="mr-1 h-4 w-4" />Aprobă</Button>}
-              {r.status !== "rejected" && <Button size="sm" variant="outline" onClick={() => setTo(r.id, "rejected")}><X className="mr-1 h-4 w-4" />Respinge</Button>}
+              {r.status !== "approved" && <Button size="sm" onClick={() => setTo(r.id, "approved")}><Check className="mr-1 h-4 w-4" />Publică</Button>}
+              {r.status !== "rejected" && <Button size="sm" variant="outline" onClick={() => setTo(r.id, "rejected")}><X className="mr-1 h-4 w-4" />Ascunde</Button>}
               <Button size="sm" variant="ghost" onClick={() => remove(r.id)} aria-label="Șterge recenzia"><Trash2 className="h-4 w-4 text-destructive" /></Button>
             </div>
           </CardContent>

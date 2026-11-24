@@ -10,6 +10,7 @@ import { faqSchema, authorSchema } from "@/lib/blogSchema";
 import { bylineName } from "@/data/author";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { BookOpen, Calculator, ArrowRight, Send } from "lucide-react";
 import { useTurnstile } from "@/components/Turnstile";
 import { trackCalculatorBtu, trackLead, trackError } from "@/lib/analytics";
@@ -135,9 +136,12 @@ const GhidBtu = ({ products = [] }: { products?: BtuProduct[] }) => {
                 <label className="space-y-1"><span className="font-medium">Suprafața (mp)</span><input className={field} type="number" min={5} max={200} value={area} onChange={num((n) => setArea(Math.min(Math.max(n, 5), 200)))} /></label>
                 <label className="space-y-1"><span className="font-medium">Înălțimea tavanului (m)</span><input className={field} type="number" min={2} max={5} step={0.1} value={height} onChange={num((n) => setHeight(Math.min(Math.max(n, 2), 5)))} /></label>
                 <label className="space-y-1"><span className="font-medium">Expunere la soare</span>
-                  <select className={field} value={sun} onChange={num(setSun)}>
-                    <option value={0.9}>Nord / umbrită</option><option value={1}>Normală</option><option value={1.15}>Sud / vest, ferestre mari</option><option value={1.3}>Ultimul etaj / mansardă</option>
-                  </select>
+                  <Select value={String(sun)} onValueChange={(v) => setSun(Number(v))}>
+                    <SelectTrigger className="h-10"><SelectValue /></SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="0.9">Nord / umbrită</SelectItem><SelectItem value="1">Normală</SelectItem><SelectItem value="1.15">Sud / vest, ferestre mari</SelectItem><SelectItem value="1.3">Ultimul etaj / mansardă</SelectItem>
+                    </SelectContent>
+                  </Select>
                 </label>
                 <label className="space-y-1"><span className="font-medium">Persoane în cameră</span><input className={field} type="number" min={1} max={20} value={people} onChange={num((n) => setPeople(Math.min(Math.max(n, 1), 20)))} /></label>
                 <label className="space-y-1"><span className="font-medium">Aparate care degajă căldură (PC, TV, cuptor)</span><input className={field} type="number" min={0} max={10} value={appliances} onChange={num((n) => setAppliances(Math.min(Math.max(n, 0), 10)))} /></label>

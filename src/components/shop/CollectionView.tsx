@@ -3,6 +3,7 @@ import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { ChevronLeft, ChevronRight, Search, SlidersHorizontal, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Sheet, SheetContent, SheetFooter, SheetHeader, SheetTitle } from "@/components/ui/sheet";
 import { ProductCard } from "@/components/shop/ProductCard";
 import {
@@ -137,14 +138,10 @@ export function CollectionView({ cards, hideCategory = false, heading = "Produse
           </Button>
           <label className="flex min-w-0 flex-1 items-center gap-2 text-sm sm:flex-none">
             <span className="hidden whitespace-nowrap text-muted-foreground sm:inline">Sortează:</span>
-            <select
-              value={f.sort}
-              onChange={(e) => update({ sort: e.target.value as SortKey })}
-              aria-label="Sortează produsele"
-              className="h-10 min-w-0 flex-1 rounded-md border border-input bg-background px-3 text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring sm:flex-none"
-            >
-              {SORTS.map((s) => <option key={s.value} value={s.value}>{s.label}</option>)}
-            </select>
+            <Select value={f.sort} onValueChange={(v) => update({ sort: v as SortKey })}>
+              <SelectTrigger aria-label="Sortează produsele" className="h-10 min-w-0 flex-1 sm:w-56 sm:flex-none"><SelectValue /></SelectTrigger>
+              <SelectContent>{SORTS.map((s) => <SelectItem key={s.value} value={s.value}>{s.label}</SelectItem>)}</SelectContent>
+            </Select>
           </label>
         </div>
       </div>

@@ -385,7 +385,7 @@ export const OrderDetailsDialog = ({
             <div className="space-y-3">
               <h4 className="font-semibold">Furnizor (dropshipping)</h4>
               {order.payment_status !== "paid" && (
-                <p className="rounded-md border border-amber-300 bg-amber-50 p-2 text-sm">Comanda nu e plătită încă. Nu o trimite la furnizor până nu apare ca plătită.</p>
+                <p className="rounded-md border border-primary/30 bg-accent p-2 text-sm text-foreground">Comanda nu e plătită încă. Nu o trimite la furnizor până nu apare ca plătită.</p>
               )}
               {"supplier_status" in order ? (
                 <>

@@ -269,7 +269,7 @@ const ProductDetails = ({ initial, reviews = NO_REVIEWS }: { initial: Loaded; re
     ...Object.entries(product.specs),
   ];
   const stockLine = out ? "Indisponibil momentan" : product.stock <= 3 ? `Ultimele ${product.stock} bucăți în stoc` : "În stoc";
-  const stockDot = out ? "bg-muted-foreground" : product.stock <= 3 ? "bg-amber-500" : "bg-primary";
+  const stockDot = out ? "bg-muted-foreground" : product.stock <= 3 ? "bg-foreground/60" : "bg-primary";
   const cards = relatedProducts.slice(0, 4).map(toCard);
 
   return (
@@ -321,7 +321,7 @@ const ProductDetails = ({ initial, reviews = NO_REVIEWS }: { initial: Loaded; re
                 }}
               >
                 {(pct > 0 || out) && (
-                  <span className={`absolute left-3 top-3 z-10 rounded-full px-3 py-1 text-xs font-semibold ${out ? "bg-muted text-muted-foreground" : "bg-destructive text-destructive-foreground"}`}>
+                  <span className={`absolute left-3 top-3 z-10 rounded-full px-3 py-1 text-xs font-semibold ${out ? "bg-muted text-muted-foreground" : "bg-primary text-primary-foreground"}`}>
                     {out ? "Indisponibil" : `-${pct}%`}
                   </span>
                 )}
@@ -426,16 +426,16 @@ const ProductDetails = ({ initial, reviews = NO_REVIEWS }: { initial: Loaded; re
                 <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
                   <span className="text-3xl sm:text-4xl font-bold text-foreground">{formatPrice(product.price)}</span>
                   {product.compare_at ? <span className="text-lg text-muted-foreground line-through">{formatPrice(product.compare_at)}</span> : null}
-                  {pct > 0 && <span className="rounded-full bg-destructive px-2.5 py-0.5 text-xs font-semibold text-destructive-foreground">-{pct}%</span>}
+                  {pct > 0 && <span className="rounded-full bg-primary px-2.5 py-0.5 text-xs font-semibold text-primary-foreground">-{pct}%</span>}
                 </div>
                 <p className="mt-1 text-xs text-muted-foreground">
-                  Preț final, TVA inclus{saving > 0 ? <> · <span className="font-semibold text-destructive">Economisești {formatPrice(saving)}</span></> : null}
+                  Preț final, TVA inclus{saving > 0 ? <> · <span className="font-semibold text-primary">Economisești {formatPrice(saving)}</span></> : null}
                 </p>
               </div>
 
               <p className="flex items-center gap-2 text-sm font-medium" role="status">
                 <span className={`h-2.5 w-2.5 rounded-full ${stockDot}`} aria-hidden />
-                <span className={out ? "text-muted-foreground" : product.stock <= 3 ? "text-amber-700" : "text-primary"}>{stockLine}</span>
+                <span className={out ? "text-muted-foreground" : product.stock <= 3 ? "text-foreground" : "text-primary"}>{stockLine}</span>
               </p>
 
               {intro && <p className="text-sm text-muted-foreground leading-relaxed">{intro}</p>}
@@ -490,7 +490,7 @@ const ProductDetails = ({ initial, reviews = NO_REVIEWS }: { initial: Loaded; re
                 <li className="flex items-start gap-3 p-3"><ShieldCheck className="mt-0.5 h-4 w-4 shrink-0 text-primary" /><span><strong>Garanție 24 de luni</strong><br /><span className="text-muted-foreground">Conformitate legală, factură cu TVA</span></span></li>
                 <li className="flex flex-wrap items-center gap-x-4 gap-y-2 p-3">
                   <a href={`tel:${PHONE_TEL}`} onClick={() => trackClickToCall("product-page")} className="inline-flex items-center gap-2 font-semibold hover:text-primary"><PhoneCall className="h-4 w-4 text-primary" /> {PHONE_DISPLAY}</a>
-                  <a href={whatsappLink(`Bună! Mă interesează ${product.name}`)} target="_blank" rel="noopener noreferrer" onClick={() => trackClickWhatsApp("product-page")} className="inline-flex items-center gap-2 font-semibold text-[#128C7E] hover:underline">
+                  <a href={whatsappLink(`Bună! Mă interesează ${product.name}`)} target="_blank" rel="noopener noreferrer" onClick={() => trackClickWhatsApp("product-page")} className="inline-flex items-center gap-2 font-semibold text-primary hover:underline">
                     <MessageCircle className="h-4 w-4" /> Întreabă pe WhatsApp
                   </a>
                 </li>

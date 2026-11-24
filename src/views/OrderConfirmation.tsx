@@ -230,7 +230,7 @@ const OrderConfirmation = () => {
           </Card>
 
           {/* Info Card */}
-          <Card className="mb-6 bg-blue-50 dark:bg-blue-950/20 border-blue-200 dark:border-blue-900">
+          <Card className="mb-6 bg-accent border-primary/20">
             <CardContent className="pt-6">
               <h3 className="font-semibold mb-2">Ce urmează?</h3>
               <ul className="space-y-2 text-sm text-muted-foreground">

@@ -220,7 +220,7 @@ const MyOrders = () => {
 
                       {/* Tracking Number */}
                       {order.tracking_number && (
-                        <div className="mb-4 p-3 bg-blue-50 dark:bg-blue-950/20 rounded-lg">
+                        <div className="mb-4 p-3 bg-accent rounded-lg">
                           <p className="text-sm">
                             <span className="font-semibold">Număr de urmărire:</span> {order.tracking_number}
                           </p>

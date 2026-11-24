@@ -172,7 +172,7 @@ const IgienizareAerConditionat = () => {
                 <div className="grid sm:grid-cols-2 gap-4 mt-4">
                   <div className="p-4 rounded-lg bg-secondary/50 border border-border/50 text-sm">
                     <strong className="block text-foreground mb-1 flex items-center gap-1.5">
-                      <AlertTriangle className="w-4 h-4 text-amber-500" /> Semne că ai nevoie de igienizare:
+                      <AlertTriangle className="w-4 h-4 text-primary" /> Semne că ai nevoie de igienizare:
                     </strong>
                     <ul className="list-disc list-inside space-y-1 text-muted-foreground text-xs mt-2">
                       <li>Miros neplăcut la pornirea aparatului</li>

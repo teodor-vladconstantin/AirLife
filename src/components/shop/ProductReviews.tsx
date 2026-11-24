@@ -12,7 +12,7 @@ import type { ReviewData } from "@/lib/catalog";
 
 export const Stars = ({ value, className = "h-4 w-4" }: { value: number; className?: string }) => (
   <span className="inline-flex" role="img" aria-label={`${value} din 5 stele`}>
-    {[1, 2, 3, 4, 5].map((i) => <Star key={i} className={`${className} ${i <= Math.round(value) ? "fill-amber-400 text-amber-400" : "text-muted-foreground/40"}`} />)}
+    {[1, 2, 3, 4, 5].map((i) => <Star key={i} className={`${className} ${i <= Math.round(value) ? "fill-primary text-primary" : "text-muted-foreground/40"}`} />)}
   </span>
 );
 
@@ -88,7 +88,7 @@ export function ProductReviews({ productId, data }: { productId: string; data: R
               <div className="mt-1 flex gap-1" role="radiogroup" aria-label="Nota">
                 {[1, 2, 3, 4, 5].map((i) => (
                   <button key={i} type="button" role="radio" aria-checked={rating === i} aria-label={`${i} ${i === 1 ? "stea" : "stele"}`} onClick={() => setRating(i)} className="rounded p-1">
-                    <Star className={`h-7 w-7 ${i <= rating ? "fill-amber-400 text-amber-400" : "text-muted-foreground/40"}`} />
+                    <Star className={`h-7 w-7 ${i <= rating ? "fill-primary text-primary" : "text-muted-foreground/40"}`} />
                   </button>
                 ))}
               </div>
@@ -102,13 +102,13 @@ export function ProductReviews({ productId, data }: { productId: string; data: R
               <Button type="submit" disabled={busy}>{busy ? "Se trimite…" : "Trimite recenzia"}</Button>
               <Button type="button" variant="ghost" onClick={() => setOpen(false)}>Renunță</Button>
             </div>
-            <p className="text-xs text-muted-foreground">Recenziile sunt acceptate doar de la clienții care au cumpărat produsul și apar după aprobare.</p>
+            <p className="text-xs text-muted-foreground">Recenziile sunt acceptate doar de la clienții care au cumpărat produsul și se publică imediat.</p>
           </form>
       )}
       {elig === "login_required" && <p className="mb-6 rounded-xl border border-border bg-card p-4 text-sm"><Link to="/auth" className="font-semibold text-primary underline">Conectează-te</Link> dacă ai cumpărat acest produs, ca să poți scrie o recenzie.</p>}
       {elig === "not_purchased" && <p className="mb-6 rounded-xl border border-border bg-card p-4 text-sm text-muted-foreground">Recenziile pot fi scrise doar de clienții care au cumpărat și plătit acest produs.</p>}
-      {elig === "already_reviewed" && !sent && <p className="mb-6 rounded-xl border border-border bg-card p-4 text-sm text-muted-foreground">Ai trimis deja o recenzie pentru acest produs. Apare pe site după aprobare.</p>}
-      {sent && <p className="mb-6 rounded-xl border border-primary/30 bg-primary/5 p-4 text-sm" role="status">Mulțumim! Recenzia ta va apărea după aprobare.</p>}
+      {elig === "already_reviewed" && !sent && <p className="mb-6 rounded-xl border border-border bg-card p-4 text-sm text-muted-foreground">Ai trimis deja o recenzie pentru acest produs. Îți mulțumim!</p>}
+      {sent && <p className="mb-6 rounded-xl border border-primary/30 bg-primary/5 p-4 text-sm" role="status">Mulțumim! Recenzia ta a fost publicată.</p>}
 
       <ul className="space-y-4">
         {data.reviews.map((r) => (

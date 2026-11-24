@@ -1,6 +1,6 @@
 "use client";
 import { useEffect, useState } from "react";
-import { ArrowRight, ChevronDown, Fan, Snowflake, Wind } from "lucide-react";
+import { ArrowRight, ChevronDown, Fan, LayoutGrid, Snowflake, Wind } from "lucide-react";
 import { Link } from "@/lib/router";
 import { supabase } from "@/integrations/supabase/client";
 import { CATEGORIES_DATA } from "@/data/categoriesData";
@@ -39,22 +39,23 @@ export function useShopMenu() {
 // Link to the product list filtered by every category of a section.
 export const sectionHref = (names: string[]) => `/produse${toQuery({ ...DEFAULT_FILTERS, categories: names })}`;
 
-const ICONS = { climatizare: Snowflake, ventilatie: Fan, "aer-sanatos": Wind } as const;
+export const SECTION_ICONS = { climatizare: Snowflake, ventilatie: Fan, "aer-sanatos": Wind } as const;
 
 export function CategoryMenu() {
   const menu = useShopMenu();
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Button variant="ghost" size="sm" className="flex items-center gap-1 font-semibold">
+        <Button size="sm" className="flex items-center gap-1.5 font-bold">
+          <LayoutGrid className="h-4 w-4" />
           <span>Magazin</span>
-          <ChevronDown className="h-3.5 w-3.5 opacity-70" />
+          <ChevronDown className="h-3.5 w-3.5 opacity-80" />
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="start" className="w-[min(62rem,94vw)] overflow-hidden p-0">
         <div className="grid md:grid-cols-3 md:divide-x md:divide-border">
           {menu.map((s) => {
-            const Icon = ICONS[s.key as keyof typeof ICONS] ?? Wind;
+            const Icon = SECTION_ICONS[s.key as keyof typeof SECTION_ICONS] ?? Wind;
             return (
               <section key={s.key} aria-labelledby={`menu-${s.key}`} className="flex flex-col p-6 md:odd:bg-transparent md:[&:nth-child(2)]:bg-secondary/30">
                 <Link to={sectionHref(s.names)} className="group flex items-start gap-3 border-b-2 border-primary/25 pb-4">
