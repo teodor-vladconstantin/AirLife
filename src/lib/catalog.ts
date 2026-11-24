@@ -58,7 +58,7 @@ export async function loadProduct(productId: string): Promise<{ product: Product
     const { data: d } = await client.from("products").select("*").eq(UUID_RE.test(productId) ? "id" : "slug", productId).maybeSingle();
     if (!d || !isShopVisible(d)) return null;
     const { data: rel } = await client.from("products").select("*").eq("category", d.category).neq("id", d.id).limit(12);
-    const related = (rel ?? []).filter(isShopVisible).slice(0, 3).map((r) => toStatic(r));
+    const related = (rel ?? []).filter(isShopVisible).sort((a, b) => Number(b.brand === d.brand) - Number(a.brand === d.brand)).slice(0, 4).map((r) => toStatic(r));
     return {
       product: {
         id: d.id, name: d.name, description: d.description, ...salePricing(d), category: d.category, image_url: d.image_url,
