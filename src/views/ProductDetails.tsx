@@ -1,4 +1,5 @@
 "use client";
+import { ProductDescription } from "@/components/shop/ProductDescription";
 import { useState, useEffect, useRef } from "react";
 import { createPortal } from "react-dom";
 import { useBarOffset } from "@/lib/bars";
@@ -306,7 +307,7 @@ const ProductDetails = ({ initial, reviews = NO_REVIEWS }: { initial: Loaded; re
 
           <div className="grid gap-5 md:grid-cols-2 md:gap-8 lg:gap-12 mb-12">
             {/* Gallery */}
-            <div className="space-y-3 md:sticky md:top-24 md:self-start">
+            <div className="min-w-0 space-y-3 md:sticky md:top-24 md:self-start">
               <div
                 className="relative h-44 sm:h-auto sm:aspect-square bg-secondary/70 rounded-xl p-4 sm:p-6 flex items-center justify-center overflow-hidden select-none"
                 tabIndex={0}
@@ -475,7 +476,7 @@ const ProductDetails = ({ initial, reviews = NO_REVIEWS }: { initial: Loaded; re
                     {out ? "Indisponibil" : busy === "add" ? "Se adaugă…" : "Adaugă în coș"}
                   </Button>
                   {!out && (
-                    <Button size="lg" variant="ghost" className="text-primary hover:bg-primary/5 hover:text-primary lg:flex-1" disabled={!!busy} aria-busy={busy === "buy"} onClick={handleBuyNow}>
+                    <Button size="lg" variant="outline" className="border-2 border-primary text-primary hover:bg-primary/5 hover:text-primary lg:flex-1" disabled={!!busy} aria-busy={busy === "buy"} onClick={handleBuyNow}>
                       {busy === "buy" ? <Loader2 className="w-4 h-4 mr-2 animate-spin" /> : <CreditCard className="w-4 h-4 mr-2" />} {busy === "buy" ? "Se pregătește…" : "Cumpără acum"}
                     </Button>
                   )}
@@ -504,14 +505,7 @@ const ProductDetails = ({ initial, reviews = NO_REVIEWS }: { initial: Loaded; re
           <div className="mb-12 divide-y divide-border">
             <section className="pb-8" aria-labelledby="desc-h">
               <h2 id="desc-h" className="mb-3 text-xl font-bold text-foreground">Despre {product.name}</h2>
-              <p className="whitespace-pre-line text-sm leading-relaxed text-muted-foreground md:text-base">{product.description}</p>
-              {product.features.length > 0 && (
-                <ul className="mt-4 grid gap-2 sm:grid-cols-2">
-                  {product.features.map((f, i) => (
-                    <li key={i} className="flex items-start gap-2 text-sm text-muted-foreground"><CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-primary" />{f}</li>
-                  ))}
-                </ul>
-              )}
+              <ProductDescription description={product.description} features={product.features} />
             </section>
             <section className="py-8" aria-labelledby="spec-h">
               <h2 id="spec-h" className="mb-3 text-xl font-bold text-foreground">Specificații tehnice</h2>
