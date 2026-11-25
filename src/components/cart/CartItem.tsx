@@ -1,4 +1,5 @@
 import { Button } from "@/components/ui/button";
+import { thumbUrl, fallbackTo } from "@/lib/thumb";
 import { Minus, Plus, Trash2 } from "lucide-react";
 import { CartItem as CartItemType } from "@/contexts/CartContext";
 
@@ -17,7 +18,8 @@ export const CartItem = ({ item, onUpdateQuantity, onRemove }: CartItemProps) =>
       <div className="w-20 h-20 flex-shrink-0 bg-secondary rounded-lg overflow-hidden">
         {item.image_url ? (
           <img
-            src={item.image_url}
+            src={thumbUrl(item.image_url)}
+            onError={fallbackTo(item.image_url)}
             alt={item.name}
             className="w-full h-full object-cover"
           />
