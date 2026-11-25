@@ -33,7 +33,7 @@ export const ProductCard = memo(function ProductCard({ product, priority = false
           className={`h-full w-full object-contain p-4 mix-blend-multiply transition-transform duration-300 group-hover:scale-[1.03] ${out ? "opacity-60" : ""}`}
         />
         {(pct > 0 || out) && (
-          <span className={`absolute left-2 top-2 rounded-full px-2.5 py-1 text-xs font-semibold ${out ? "bg-muted text-muted-foreground" : "bg-primary text-primary-foreground"}`}>
+          <span className={`absolute left-2 top-2 rounded-full px-2.5 py-1 text-xs font-semibold ${out ? "bg-muted text-muted-foreground" : "bg-promo text-promo-foreground"}`}>
             {out ? "Indisponibil" : `-${pct}%`}
           </span>
         )}
@@ -45,7 +45,7 @@ export const ProductCard = memo(function ProductCard({ product, priority = false
           <Link to={href} className="hover:text-primary">{product.name}</Link>
         </h3>
         <div className="mt-1 flex flex-wrap items-baseline gap-x-2">
-          <span className="text-base font-bold text-foreground sm:text-lg">{formatPrice(product.price)}</span>
+          <span className={`text-base font-bold sm:text-lg ${product.compare_at ? "text-promo" : "text-foreground"}`}>{formatPrice(product.price)}</span>
           {product.compare_at && <span className="text-sm text-muted-foreground line-through">{formatPrice(product.compare_at)}</span>}
         </div>
         <p className={`text-xs ${out ? "text-muted-foreground" : "text-primary"}`}>{out ? "Indisponibil momentan" : product.stock <= 3 ? `Ultimele ${product.stock} bucăți` : "În stoc"}</p>
