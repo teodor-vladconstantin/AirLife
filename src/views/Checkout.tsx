@@ -1,4 +1,5 @@
 "use client";
+import PaymentBadges from "@/components/PaymentBadges";
 import { useEffect, useRef, useState } from "react";
 import { Link, useNavigate } from "@/lib/router";
 import { useForm } from "react-hook-form";
@@ -358,6 +359,7 @@ const Checkout = () => {
                       <Button type="submit" size="lg" disabled={isSubmitting}>
                         {isSubmitting ? (<><Loader2 className="mr-2 h-4 w-4 animate-spin" /> Se procesează...</>) : `Plătește ${grandTotal.toFixed(2)} RON`}
                       </Button>
+                      <PaymentBadges className="justify-end text-xs" />
                     </div>
                   )}
                 </div>

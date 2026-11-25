@@ -1,4 +1,5 @@
 "use client";
+import PaymentBadges from "@/components/PaymentBadges";
 import { MapPin, Mail, Phone, Facebook, Instagram, Linkedin } from "lucide-react";
 import { Link } from "@/lib/router";
 import SubscribeForm from "@/components/SubscribeForm";
@@ -191,8 +192,9 @@ const Footer = () => {
         {/* Bottom row */}
         <div className="border-t border-background/20 pt-8 flex flex-col sm:flex-row items-center justify-between text-xs opacity-75 gap-4">
           <div className="space-y-1 text-center sm:text-left">
-            <p>&copy; {new Date().getFullYear()} AirLife.ro. Toate drepturile rezervate.</p>
-            <p className="text-[11px]">{company.legalName} | CUI {company.cui} | {company.regCom}</p>
+            <p>&copy; {new Date().getFullYear()} Teta ABC SRL. Toate drepturile rezervate.</p>
+            <p className="text-[11px]">CUI {company.cui} | {company.regCom}</p>
+            <PaymentBadges dark className="justify-center pt-1 text-[11px] sm:justify-start" />
             <p className="text-[11px]">
               <a href={SAL_URL} target="_blank" rel="noopener noreferrer" className="inline-block py-1" aria-label="ANPC Soluționarea Alternativă a Litigiilor">
                 <img src="/legal/anpc-sal-badge.png" alt="ANPC SAL - Soluționarea Alternativă a Litigiilor" width={250} height={62} className="inline-block h-auto w-[250px] max-w-full rounded bg-white" loading="lazy" />

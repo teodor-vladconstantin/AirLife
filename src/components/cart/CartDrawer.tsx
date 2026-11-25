@@ -1,4 +1,5 @@
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetFooter } from "@/components/ui/sheet";
+import PaymentBadges from "@/components/PaymentBadges";
 import { Button } from "@/components/ui/button";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { useCart } from "@/contexts/CartContext";
@@ -85,7 +86,7 @@ export const CartDrawer = ({ open, onClose }: CartDrawerProps) => {
               </div>
             </ScrollArea>
 
-            <SheetFooter className="flex-col gap-4 mt-4">
+            <SheetFooter className="mt-4 flex-col gap-4 sm:flex-col sm:justify-start sm:space-x-0">
               <div className="w-full space-y-2">
                 <div className="flex justify-between text-sm">
                   <span className="text-muted-foreground">Subtotal</span>
@@ -118,6 +119,7 @@ export const CartDrawer = ({ open, onClose }: CartDrawerProps) => {
               <Button onClick={handleCheckout} className="w-full" size="lg">
                 Finalizează comanda
               </Button>
+              <PaymentBadges className="justify-center text-xs" />
             </SheetFooter>
           </>
         )}
