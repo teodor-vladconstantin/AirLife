@@ -37,7 +37,7 @@ const Products = ({ cards }: { cards: ProductCardData[] }) => {
       <main className="flex-1 bg-background py-8 md:py-12">
         <div className="container mx-auto px-4">
           <nav aria-label="Breadcrumb" className="mb-4 text-sm text-muted-foreground">
-            <Link to="/" className="hover:text-primary">Acasă</Link> / <span className="font-medium text-foreground">Produse</span>
+            <Link to="/" className="inline-flex min-h-11 items-center hover:text-primary">Acasă</Link> / <span className="font-medium text-foreground">Produse</span>
           </nav>
           <h1 className="mb-6 text-3xl font-bold tracking-tight text-foreground md:text-4xl">Produse</h1>
           <CollectionView cards={cards} heading="Toate produsele" />

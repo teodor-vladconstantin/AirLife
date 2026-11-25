@@ -20,8 +20,8 @@ const Index = ({ categories = [] }: { categories?: CategorySummary[] }) => {
       <Navbar />
       <main className="flex-1">
         <Hero />
-        <HomeServicesSection />
         <ProductCategories categories={categories} />
+        <HomeServicesSection />
         <Features />
         <CTASection />
       </main>

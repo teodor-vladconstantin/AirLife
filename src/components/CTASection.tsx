@@ -1,73 +1,37 @@
 import { Link } from "@/lib/router";
 import { Button } from "@/components/ui/button";
-import { Mail, Wrench, PhoneCall } from "lucide-react";
+import { PhoneCall } from "lucide-react";
 import { trackClickToCall } from "@/lib/analytics";
 import { PHONE_DISPLAY, PHONE_TEL } from "@/data/localSeo";
 
+// One primary action (call); message and installation booking are quiet text links.
 const CTASection = () => {
   return (
-    <section className="py-20 bg-gradient-to-br from-primary via-primary to-[#0F2A1D] relative overflow-hidden text-primary-foreground">
-      <div className="container mx-auto px-4 relative z-10">
-        <div className="max-w-3xl mx-auto text-center animate-in fade-in duration-700">
-          <h2
-            className="text-3xl md:text-5xl font-bold mb-4"
-            style={{ textShadow: "0 2px 12px rgba(0,0,0,0.3)" }}
-          >
-            Pregătit pentru un aer curat și confortabil?
-          </h2>
-          <p
-            className="text-base md:text-lg mb-8 opacity-90 max-w-2xl mx-auto leading-relaxed"
-            style={{ textShadow: "0 2px 8px rgba(0,0,0,0.2)" }}
-          >
+    <section className="section bg-foreground text-background">
+      <div className="container mx-auto px-4">
+        <div className="mx-auto max-w-2xl text-center">
+          <h2 className="text-title mb-3 !text-background">Pregătit pentru un aer curat și confortabil?</h2>
+          <p className="mb-8 text-base leading-relaxed text-background/80 md:text-lg">
             Fie că ai nevoie de aparate de aer condiționat și ventilație livrate rapid sau de montaj și igienizare profesională, echipa AirLife îți stă la dispoziție.
           </p>
 
-          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-10">
-            <a href={`tel:${PHONE_TEL}`} onClick={() => trackClickToCall("home-cta")} className="w-full sm:w-auto">
-              <Button
-                size="lg"
-                className="bg-white text-foreground hover:bg-white/90 font-semibold shadow-md transition-all duration-300 hover:-translate-y-0.5 w-full sm:w-auto"
-              >
-                <PhoneCall className="mr-2 w-4 h-4 text-primary" />
-                Sună acum: {PHONE_DISPLAY}
-              </Button>
-            </a>
-            <Link to="/contact">
-              <Button
-                size="lg"
-                className="bg-white text-foreground hover:bg-white/90 font-semibold shadow-md transition-all duration-300 hover:-translate-y-0.5 w-full sm:w-auto"
-              >
-                <Mail className="mr-2 w-4 h-4 text-primary" />
-                Trimite un Mesaj
-              </Button>
-            </Link>
-            <Link to="/servicii/montaj-aer-conditionat-buzau">
-              <Button
-                size="lg"
-                variant="outline"
-                className="bg-transparent border-white text-white hover:bg-white/10 hover:text-white font-semibold transition-all duration-300 hover:-translate-y-0.5 w-full sm:w-auto"
-              >
-                <Wrench className="mr-2 w-4 h-4" />
-                Programare Montaj
-              </Button>
-            </Link>
-          </div>
+          <a href={`tel:${PHONE_TEL}`} onClick={() => trackClickToCall("home-cta")} className="inline-block w-full sm:w-auto">
+            <Button size="lg" className="w-full bg-brandlight text-white hover:bg-brandlight/90 sm:w-auto">
+              <PhoneCall className="mr-2 h-4 w-4" />
+              Sună acum: {PHONE_DISPLAY}
+            </Button>
+          </a>
 
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 pt-8 border-t border-white/20 text-xs opacity-90">
-            <div>
-              <div className="font-bold text-sm mb-0.5">Program Asistență</div>
-              <div>Luni – Vineri: 09:00 – 18:00</div>
-              <div>Sâmbătă: 10:00 – 14:00</div>
-            </div>
-            <div>
-              <div className="font-bold text-sm mb-0.5">Livrare Curier</div>
-              <div>Gratuit peste 1000 RON</div>
-            </div>
-            <div>
-              <div className="font-bold text-sm mb-0.5">Servicii Montaj</div>
-              <div>Buzău și tot județul</div>
-            </div>
-          </div>
+          <p className="mt-5 text-sm text-background/80">
+            <Link to="/contact" className="inline-flex min-h-11 items-center font-semibold underline underline-offset-4 hover:text-background">Trimite un mesaj</Link>
+            <span aria-hidden className="mx-3">·</span>
+            <Link to="/servicii/montaj-aer-conditionat-buzau" className="inline-flex min-h-11 items-center font-semibold underline underline-offset-4 hover:text-background">Programare montaj</Link>
+          </p>
+          <dl className="mt-8 grid gap-4 border-t border-background/20 pt-6 text-sm text-background/80 sm:grid-cols-3">
+            <div><dt className="font-semibold text-background">Program Asistență</dt><dd>Luni – Vineri: 09:00 – 18:00<br />Sâmbătă: 10:00 – 14:00</dd></div>
+            <div><dt className="font-semibold text-background">Livrare Curier</dt><dd>Gratuit peste 1000 RON</dd></div>
+            <div><dt className="font-semibold text-background">Servicii Montaj</dt><dd>Buzău și tot județul</dd></div>
+          </dl>
         </div>
       </div>
     </section>

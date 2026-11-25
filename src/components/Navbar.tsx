@@ -89,10 +89,10 @@ const Navbar = () => {
           {/* Logo */}
           <Link
             to="/"
-            className="flex shrink-0 items-center gap-2 text-primary hover:opacity-90 transition-opacity"
+            className="flex min-h-11 shrink-0 items-center gap-2 text-primary hover:opacity-90 transition-opacity"
             aria-label="AirLife Acasă"
           >
-            <img src="/logo.png" alt="AirLife" width={161} height={36} className="h-8 w-auto max-w-none sm:h-9" />
+            <img src="/logo-sm.png" alt="AirLife" width={161} height={36} className="h-8 w-auto max-w-none sm:h-9" />
           </Link>
 
           {/* Desktop Navigation Links */}
@@ -186,12 +186,12 @@ const Navbar = () => {
             <a
               href={`tel:${PHONE_TEL}`}
               onClick={() => trackClickToCall("navbar-mobile")}
-              className="hidden sm:inline-flex xl:hidden p-2 rounded-md text-primary hover:bg-secondary"
+              className="hidden sm:inline-flex xl:hidden h-11 w-11 items-center justify-center rounded-md text-primary hover:bg-secondary"
               aria-label={`Sună la ${PHONE_DISPLAY}`}
             >
               <Phone className="w-5 h-5" />
             </a>
-            <Link to="/favorite" aria-label={`Favorite${wish.signedIn && wish.count ? ` (${wish.count})` : ""}`} className="relative hidden h-10 w-10 items-center justify-center rounded-md hover:bg-secondary sm:inline-flex">
+            <Link to="/favorite" aria-label={`Favorite${wish.signedIn && wish.count ? ` (${wish.count})` : ""}`} className="relative hidden h-11 w-11 items-center justify-center rounded-md hover:bg-secondary sm:inline-flex">
               <Heart className="h-5 w-5" />
               {wish.signedIn && wish.count > 0 && <span className="absolute -right-0.5 -top-0.5 flex h-5 min-w-5 items-center justify-center rounded-full bg-primary px-1 text-[11px] font-semibold text-primary-foreground">{wish.count > 99 ? "99+" : wish.count}</span>}
             </Link>
@@ -227,7 +227,7 @@ const Navbar = () => {
               </DropdownMenu>
             ) : (
               <Link to="/auth" rel="nofollow" className="hidden sm:inline-block">
-                <Button size="sm">Conectare</Button>
+                <Button variant="outline">Conectare</Button>
               </Link>
             )}
 
@@ -305,42 +305,42 @@ const Navbar = () => {
             <Link
               to="/servicii/montaj-aer-conditionat-buzau"
               onClick={() => setMobileMenuOpen(false)}
-              className="block px-4 py-1.5 rounded-md hover:bg-secondary text-xs text-muted-foreground hover:text-foreground"
+              className="flex min-h-11 items-center px-4 rounded-md hover:bg-secondary text-sm text-muted-foreground hover:text-foreground"
             >
               • Montaj Aer Condiționat
             </Link>
             <Link
               to="/servicii/igienizare-aer-conditionat-buzau"
               onClick={() => setMobileMenuOpen(false)}
-              className="block px-4 py-1.5 rounded-md hover:bg-secondary text-xs text-muted-foreground hover:text-foreground"
+              className="flex min-h-11 items-center px-4 rounded-md hover:bg-secondary text-sm text-muted-foreground hover:text-foreground"
             >
               • Igienizare &amp; Dezinfectare AC
             </Link>
             <Link
               to="/servicii/service-aer-conditionat-buzau"
               onClick={() => setMobileMenuOpen(false)}
-              className="block px-4 py-1.5 rounded-md hover:bg-secondary text-xs text-muted-foreground hover:text-foreground"
+              className="flex min-h-11 items-center px-4 rounded-md hover:bg-secondary text-sm text-muted-foreground hover:text-foreground"
             >
               • Service &amp; Reparații Climatizare
             </Link>
             <Link
               to="/blog"
               onClick={() => setMobileMenuOpen(false)}
-              className="block px-3 py-2 rounded-md hover:bg-secondary text-sm font-medium"
+              className="flex min-h-11 items-center px-3 rounded-md hover:bg-secondary text-sm font-medium"
             >
               Blog
             </Link>
             <Link
               to="/despre-noi"
               onClick={() => setMobileMenuOpen(false)}
-              className="block px-3 py-2 rounded-md hover:bg-secondary text-sm font-medium"
+              className="flex min-h-11 items-center px-3 rounded-md hover:bg-secondary text-sm font-medium"
             >
               Despre Noi
             </Link>
             <Link
               to="/contact"
               onClick={() => setMobileMenuOpen(false)}
-              className="block px-3 py-2 rounded-md hover:bg-secondary text-sm font-medium"
+              className="flex min-h-11 items-center px-3 rounded-md hover:bg-secondary text-sm font-medium"
             >
               Contact &amp; Suport
             </Link>

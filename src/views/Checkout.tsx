@@ -1,4 +1,5 @@
 "use client";
+import PaymentBadges from "@/components/PaymentBadges";
 import { useEffect, useRef, useState } from "react";
 import { Link, useNavigate } from "@/lib/router";
 import { useForm } from "react-hook-form";
@@ -195,9 +196,9 @@ const Checkout = () => {
     <div className="min-h-screen flex flex-col">
       <Navbar />
 
-      <main className="flex-1 bg-gradient-to-b from-background to-secondary/30 py-12">
+      <main className="flex-1 bg-secondary/30 py-8 md:py-12">
         <div className="container mx-auto px-4 max-w-7xl">
-          <h1 className="text-4xl font-bold mb-8 text-center">Finalizează comanda</h1>
+          <h1 className="text-title mb-6 text-center md:mb-8">Finalizează comanda</h1>
 
           <ol className="mx-auto mb-8 flex max-w-xl items-center" aria-label="Pașii comenzii">
             {STEPS.map((label, i) => {
@@ -209,7 +210,7 @@ const Checkout = () => {
                     type="button"
                     disabled={!done}
                     onClick={() => setStep(n)}
-                    className="flex items-center gap-2 text-sm disabled:cursor-default"
+                    className="flex min-h-11 min-w-11 items-center gap-2 text-sm disabled:cursor-default"
                   >
                     <span className={`flex h-8 w-8 items-center justify-center rounded-full border text-sm font-semibold ${done ? "border-primary bg-primary text-primary-foreground" : step === n ? "border-primary text-primary" : "border-border text-muted-foreground"}`}>
                       {done ? <Check className="h-4 w-4" /> : n}
@@ -358,6 +359,7 @@ const Checkout = () => {
                       <Button type="submit" size="lg" disabled={isSubmitting}>
                         {isSubmitting ? (<><Loader2 className="mr-2 h-4 w-4 animate-spin" /> Se procesează...</>) : `Plătește ${grandTotal.toFixed(2)} RON`}
                       </Button>
+                      <PaymentBadges className="justify-end text-xs" />
                     </div>
                   )}
                 </div>
