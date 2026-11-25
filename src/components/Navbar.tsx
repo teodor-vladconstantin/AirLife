@@ -33,13 +33,18 @@ import { CartButton } from "@/components/cart/CartButton";
 import { PHONE_DISPLAY, PHONE_TEL } from "@/data/localSeo";
 import { trackClickToCall } from "@/lib/analytics";
 
+// Row styles for the phone menu: big text, 56px rows, one tap each.
+const MOBILE_ROW = "flex min-h-14 w-full items-center justify-between text-left text-lg font-semibold text-foreground";
+const MOBILE_SUB = "flex min-h-12 items-center justify-between rounded-md px-3 text-base text-foreground active:bg-secondary";
+
 const Navbar = () => {
   const [user, setUser] = useState<SupabaseUser | null>(null);
   const [isAdmin, setIsAdmin] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [catsOpen, setCatsOpen] = useState(false);
   const menu = useShopMenu();
-  const [openSection, setOpenSection] = useState<string | null>(null);
+  const [servOpen, setServOpen] = useState(false);
+  const closeMenu = () => setMobileMenuOpen(false);
   const wish = useWishlist();
   const navigate = useNavigate();
 
@@ -82,7 +87,7 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="border-b bg-background/80 backdrop-blur-md sticky top-0 z-50">
+    <nav className={`border-b sticky top-0 z-50 ${mobileMenuOpen ? "bg-background" : "bg-background/80 backdrop-blur-md"}`}>
       <CampaignBanner />
       <div className="container mx-auto px-4 py-3.5">
         <div className="flex items-center justify-between">
@@ -246,113 +251,49 @@ const Navbar = () => {
 
         <div className="pt-3 xl:hidden"><SearchBox /></div>
 
-        {/* Mobile Navigation Drawer */}
+        {/* Mobile menu: 5 big rows, two of them expand (progressive disclosure); account + favorites quiet at the bottom. */}
         {mobileMenuOpen && (
-          <div className="lg:hidden pt-4 pb-3 border-t border-border mt-3 space-y-2 animate-in slide-in-from-top-2 duration-200 max-h-[calc(100dvh-5.5rem)] overflow-y-auto overscroll-contain">
-            <button type="button" onClick={() => setCatsOpen((v) => !v)} aria-expanded={catsOpen} className="flex w-full items-center justify-between rounded-lg bg-primary/5 px-3 py-3 text-base font-extrabold text-foreground">
-              Produse <ChevronDown className={`h-5 w-5 text-primary transition-transform ${catsOpen ? "rotate-180" : ""}`} />
-            </button>
-            {catsOpen && (
-              <div className="space-y-3 pb-1">
-                <Link to="/produse" onClick={() => setMobileMenuOpen(false)} className="flex items-center justify-between rounded-lg bg-primary px-4 py-3 text-sm font-bold text-primary-foreground">
-                  Toate produsele <span aria-hidden>→</span>
+          <div className="lg:hidden -mx-4 mt-3 max-h-[calc(100dvh-8.5rem)] overflow-y-auto overscroll-contain border-t border-border bg-background px-4 animate-in slide-in-from-top-2 duration-200">
+            <ul className="divide-y divide-border">
+              <li>
+                <button type="button" onClick={() => setCatsOpen((v) => !v)} aria-expanded={catsOpen} className={MOBILE_ROW}>
+                  Produse <ChevronDown className={`h-5 w-5 text-muted-foreground transition-transform ${catsOpen ? "rotate-180" : ""}`} />
+                </button>
+                {catsOpen && (
+                  <ul className="mb-3 space-y-1 rounded-lg bg-secondary/60 p-2">
+                    <li><Link to="/produse" onClick={closeMenu} className={MOBILE_SUB + " font-semibold text-primary"}>Toate produsele <span aria-hidden>→</span></Link></li>
+                    {menu.map((sec) => (
+                      <li key={sec.key}><Link to={sectionHref(sec.names)} onClick={closeMenu} className={MOBILE_SUB}>{sec.title}</Link></li>
+                    ))}
+                  </ul>
+                )}
+              </li>
+              <li>
+                <button type="button" onClick={() => setServOpen((v) => !v)} aria-expanded={servOpen} className={MOBILE_ROW}>
+                  Servicii <ChevronDown className={`h-5 w-5 text-muted-foreground transition-transform ${servOpen ? "rotate-180" : ""}`} />
+                </button>
+                {servOpen && (
+                  <ul className="mb-3 space-y-1 rounded-lg bg-secondary/60 p-2">
+                    <li><Link to="/servicii/montaj-aer-conditionat-buzau" onClick={closeMenu} className={MOBILE_SUB}>Montaj aer condiționat</Link></li>
+                    <li><Link to="/servicii/igienizare-aer-conditionat-buzau" onClick={closeMenu} className={MOBILE_SUB}>Igienizare &amp; dezinfectare</Link></li>
+                    <li><Link to="/servicii/service-aer-conditionat-buzau" onClick={closeMenu} className={MOBILE_SUB}>Service &amp; reparații</Link></li>
+                  </ul>
+                )}
+              </li>
+              <li><Link to="/blog" onClick={closeMenu} className={MOBILE_ROW}>Blog</Link></li>
+              <li><Link to="/despre-noi" onClick={closeMenu} className={MOBILE_ROW}>Despre noi</Link></li>
+              <li><Link to="/contact" onClick={closeMenu} className={MOBILE_ROW}>Contact</Link></li>
+            </ul>
+            <div className="flex items-center justify-between gap-4 border-t border-border py-2 text-sm text-muted-foreground">
+              <Link to="/favorite" onClick={closeMenu} className="inline-flex min-h-11 items-center gap-2 font-medium hover:text-foreground">
+                <Heart className="h-4 w-4" />Favorite{wish.signedIn && wish.count ? ` (${wish.count})` : ""}
+              </Link>
+              {!user && (
+                <Link to="/auth" rel="nofollow" onClick={closeMenu} className="inline-flex min-h-11 items-center gap-2 font-semibold text-primary">
+                  <User className="h-4 w-4" />Conectare
                 </Link>
-                {menu.map((sec) => {
-                  const Icon = SECTION_ICONS[sec.key as keyof typeof SECTION_ICONS] ?? Wind;
-                  const open = openSection === sec.key;
-                  return (
-                    <div key={sec.key} className={`overflow-hidden rounded-xl border ${open ? "border-primary/40 shadow-sm" : "border-border"} bg-card`}>
-                      <button type="button" onClick={() => setOpenSection((v) => (v === sec.key ? null : sec.key))} aria-expanded={open} className="flex w-full items-center gap-3 p-3 text-left">
-                        <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-primary/10 text-primary"><Icon className="h-5 w-5" /></span>
-                        <span className="min-w-0 flex-1">
-                          <span className="block text-[15px] font-extrabold leading-tight text-foreground">{sec.title}</span>
-                          {sec.description && <span className="block text-xs text-muted-foreground">{sec.description}</span>}
-                        </span>
-                        <ChevronDown className={`h-5 w-5 shrink-0 text-muted-foreground transition-transform ${open ? "rotate-180" : ""}`} />
-                      </button>
-                      {open && (
-                        <div className="border-t border-border bg-secondary/20 px-3 pb-3 pt-2">
-                          {sec.groups.map((g) => (
-                            <div key={g.title} className="pt-2">
-                              <p className="mb-1 flex items-center gap-2 text-[11px] font-bold uppercase tracking-widest text-primary">{g.title}<span className="h-px flex-1 bg-border" aria-hidden /></p>
-                              <ul className="divide-y divide-border/70 rounded-lg border border-border/70 bg-card">
-                                {g.links.map((l) => (
-                                  <li key={l.slug}>
-                                    <Link to={`/${l.slug}`} onClick={() => setMobileMenuOpen(false)} className="flex items-center justify-between gap-2 px-3 py-3 text-[15px] font-medium text-foreground active:bg-secondary">
-                                      <span>{l.name}</span>
-                                      <span className="flex items-center gap-2">{l.count != null && <span className="rounded-full bg-secondary px-2 py-0.5 text-[11px] font-semibold text-muted-foreground">{l.count}</span>}<span className="text-muted-foreground" aria-hidden>›</span></span>
-                                    </Link>
-                                  </li>
-                                ))}
-                              </ul>
-                            </div>
-                          ))}
-                          <Link to={sectionHref(sec.names)} onClick={() => setMobileMenuOpen(false)} className="mt-3 flex items-center justify-center rounded-lg border border-primary/40 py-2.5 text-sm font-bold text-primary">Vezi tot din {sec.title.toLowerCase()} →</Link>
-                        </div>
-                      )}
-                    </div>
-                  );
-                })}
-              </div>
-            )}
-            <div className="grid grid-cols-2 gap-2 sm:hidden">
-              <Link to="/favorite" onClick={() => setMobileMenuOpen(false)} className="flex items-center justify-center gap-2 rounded-lg border border-border py-2.5 text-sm font-semibold"><Heart className="h-4 w-4" />Favorite{wish.signedIn && wish.count ? ` (${wish.count})` : ""}</Link>
-              <a href={`tel:${PHONE_TEL}`} onClick={() => trackClickToCall("navbar-mobile-menu")} className="flex items-center justify-center gap-2 rounded-lg border border-border py-2.5 text-sm font-semibold text-primary"><Phone className="h-4 w-4" />Sună</a>
+              )}
             </div>
-            <div className="px-3 py-1 text-xs font-semibold uppercase text-primary tracking-wider">
-              Servicii
-            </div>
-            <Link
-              to="/servicii/montaj-aer-conditionat-buzau"
-              onClick={() => setMobileMenuOpen(false)}
-              className="flex min-h-11 items-center px-4 rounded-md hover:bg-secondary text-sm text-muted-foreground hover:text-foreground"
-            >
-              • Montaj Aer Condiționat
-            </Link>
-            <Link
-              to="/servicii/igienizare-aer-conditionat-buzau"
-              onClick={() => setMobileMenuOpen(false)}
-              className="flex min-h-11 items-center px-4 rounded-md hover:bg-secondary text-sm text-muted-foreground hover:text-foreground"
-            >
-              • Igienizare &amp; Dezinfectare AC
-            </Link>
-            <Link
-              to="/servicii/service-aer-conditionat-buzau"
-              onClick={() => setMobileMenuOpen(false)}
-              className="flex min-h-11 items-center px-4 rounded-md hover:bg-secondary text-sm text-muted-foreground hover:text-foreground"
-            >
-              • Service &amp; Reparații Climatizare
-            </Link>
-            <Link
-              to="/blog"
-              onClick={() => setMobileMenuOpen(false)}
-              className="flex min-h-11 items-center px-3 rounded-md hover:bg-secondary text-sm font-medium"
-            >
-              Blog
-            </Link>
-            <Link
-              to="/despre-noi"
-              onClick={() => setMobileMenuOpen(false)}
-              className="flex min-h-11 items-center px-3 rounded-md hover:bg-secondary text-sm font-medium"
-            >
-              Despre Noi
-            </Link>
-            <Link
-              to="/contact"
-              onClick={() => setMobileMenuOpen(false)}
-              className="flex min-h-11 items-center px-3 rounded-md hover:bg-secondary text-sm font-medium"
-            >
-              Contact &amp; Suport
-            </Link>
-            {!user && (
-              <div className="pt-2">
-                <Link to="/auth" rel="nofollow" onClick={() => setMobileMenuOpen(false)} className="w-full block">
-                  <Button size="sm" className="w-full">
-                    Conectare / Cont Nou
-                  </Button>
-                </Link>
-              </div>
-            )}
           </div>
         )}
       </div>
