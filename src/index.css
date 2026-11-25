@@ -73,6 +73,10 @@ All colors MUST be HSL.
 
     --radius: 0.75rem;
 
+    /* Brand Book p.10, accent mov (test): only for the promo bar. #7C3AED, white text = 5.7:1 */
+    --promo: 262 83% 58%;
+    --promo-foreground: 0 0% 100%;
+
     /* Spacing scale (4/8px). Sections use --section-y, headings use --section-gap. */
     --section-y: 3rem;
     --section-gap: 2rem;

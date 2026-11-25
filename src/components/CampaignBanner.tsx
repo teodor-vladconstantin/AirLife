@@ -24,7 +24,7 @@ const CampaignBanner = () => {
   }, []);
   if (!c) {
     return (
-      <div className="bg-foreground text-xs text-background sm:text-sm">
+      <div className="bg-promo text-xs text-promo-foreground sm:text-sm">
         <div className="container mx-auto flex items-center justify-center gap-x-6 px-4 py-2 sm:justify-between">
           <span>Livrare gratuită peste 1000 RON</span>
           <a href={`tel:${PHONE_TEL}`} onClick={() => trackClickToCall("announcement-bar")} className="hidden font-semibold hover:underline sm:inline">
@@ -40,7 +40,7 @@ const CampaignBanner = () => {
   const dismiss = () => { try { sessionStorage.setItem(`airlife_banner_${c.id}`, "1"); } catch { /* ignore */ } setC(null); };
 
   return (
-    <div className="bg-foreground text-background text-sm">
+    <div className="bg-promo text-promo-foreground text-sm">
       <div className="container mx-auto px-4 py-2 flex items-center justify-center gap-3 relative">
         <span className="font-medium text-center">{c.headline}</span>
         {href && c.cta_label && (
