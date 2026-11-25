@@ -309,7 +309,7 @@ const ProductDetails = ({ initial, reviews = NO_REVIEWS }: { initial: Loaded; re
             {/* Gallery */}
             <div className="min-w-0 space-y-3 md:sticky md:top-24 md:self-start">
               <div
-                className="relative h-44 sm:h-auto sm:aspect-square bg-secondary/70 rounded-xl p-4 sm:p-6 flex items-center justify-center overflow-hidden select-none"
+                className="relative aspect-square bg-secondary/70 rounded-xl p-4 sm:p-6 flex items-center justify-center overflow-hidden select-none"
                 tabIndex={0}
                 onKeyDown={(e) => {
                   if (e.key === "ArrowLeft") go(-1);

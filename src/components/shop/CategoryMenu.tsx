@@ -43,8 +43,12 @@ export const SECTION_ICONS = { climatizare: Snowflake, ventilatie: Fan, "aer-san
 
 export function CategoryMenu() {
   const menu = useShopMenu();
+  // Controlled: the links inside are plain <Link>s (not menu items), so the menu has to be closed by hand. On pages where
+  // the navbar stays mounted (e.g. /produse -> /produse?categorie=...) an open menu would otherwise block the whole page.
+  const [open, setOpen] = useState(false);
+  const close = () => setOpen(false);
   return (
-    <DropdownMenu>
+    <DropdownMenu open={open} onOpenChange={setOpen}>
       <DropdownMenuTrigger asChild>
         <Button variant="ghost" size="sm" className="flex items-center gap-1">
           <span>Magazin</span>
@@ -57,7 +61,7 @@ export function CategoryMenu() {
             const Icon = SECTION_ICONS[s.key as keyof typeof SECTION_ICONS] ?? Wind;
             return (
               <section key={s.key} aria-labelledby={`menu-${s.key}`} className="flex flex-col p-6 md:odd:bg-transparent md:[&:nth-child(2)]:bg-secondary/30">
-                <Link to={sectionHref(s.names)} className="group flex items-start gap-3 border-b-2 border-primary/25 pb-4">
+                <Link onClick={close} to={sectionHref(s.names)} className="group flex items-start gap-3 border-b-2 border-primary/25 pb-4">
                   <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-primary/10 text-primary transition-colors group-hover:bg-primary group-hover:text-primary-foreground"><Icon className="h-6 w-6" /></span>
                   <span>
                     <h3 id={`menu-${s.key}`} className="text-lg font-extrabold leading-tight text-foreground group-hover:text-primary">{s.title}</h3>
@@ -75,7 +79,7 @@ export function CategoryMenu() {
                       <ul>
                         {g.links.map((l) => (
                           <li key={l.slug}>
-                            <Link to={`/${l.slug}`} className="flex items-center justify-between gap-3 rounded-md px-2 py-2 text-[15px] font-medium text-foreground transition-colors hover:bg-primary/10 hover:text-primary">
+                            <Link onClick={close} to={`/${l.slug}`} className="flex items-center justify-between gap-3 rounded-md px-2 py-2 text-[15px] font-medium text-foreground transition-colors hover:bg-primary/10 hover:text-primary">
                               <span>{l.name}</span>
                               {l.count != null && <span className="rounded-full bg-secondary px-2 py-0.5 text-[11px] font-semibold text-muted-foreground">{l.count}</span>}
                             </Link>
@@ -86,14 +90,14 @@ export function CategoryMenu() {
                   ))}
                 </div>
 
-                <Link to={sectionHref(s.names)} className="mt-5 inline-flex items-center gap-1.5 border-t border-border pt-4 text-sm font-bold text-primary hover:underline">
+                <Link onClick={close} to={sectionHref(s.names)} className="mt-5 inline-flex items-center gap-1.5 border-t border-border pt-4 text-sm font-bold text-primary hover:underline">
                   Vezi tot din {s.title.toLowerCase()} <ArrowRight className="h-4 w-4" />
                 </Link>
               </section>
             );
           })}
         </div>
-        <Link to="/produse" className="flex items-center justify-center gap-2 border-t border-border bg-primary px-4 py-3 text-sm font-bold text-primary-foreground transition-colors hover:bg-primary/90">
+        <Link onClick={close} to="/produse" className="flex items-center justify-center gap-2 border-t border-border bg-primary px-4 py-3 text-sm font-bold text-primary-foreground transition-colors hover:bg-primary/90">
           Vezi toate produsele <ArrowRight className="h-4 w-4" />
         </Link>
       </DropdownMenuContent>

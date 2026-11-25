@@ -1,5 +1,6 @@
 "use client";
-import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { Suspense, useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { useSearchParams } from "next/navigation";
 import { ChevronLeft, ChevronRight, Search, SlidersHorizontal, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -10,6 +11,14 @@ import {
   DEFAULT_FILTERS, PAGE_SIZE, SORTS, activeFilterCount, applyFilters, facets, formatPrice, parseFilters, toQuery,
   type Facets, type Filters, type ProductCardData, type SortKey,
 } from "@/lib/shop";
+
+// Tells the list when the address changes without a page load (menu, brand strip and search links that point to
+// /produse?... while the list is already open). Wrapped in <Suspense> by the caller so static pages stay static.
+function UrlSync({ onChange }: { onChange: (p: URLSearchParams) => void }) {
+  const key = useSearchParams()?.toString() ?? "";
+  useEffect(() => { onChange(new URLSearchParams(key)); }, [key, onChange]);
+  return null;
+}
 
 function Group({ title, children, open = true }: { title: string; children: React.ReactNode; open?: boolean }) {
   return (
@@ -91,16 +100,18 @@ export function CollectionView({ cards, hideCategory = false, heading = "Produse
   const [drawer, setDrawer] = useState(false);
   const top = useRef<HTMLDivElement>(null);
 
-  useEffect(() => {
-    const read = () => setF(parseFilters(new URLSearchParams(window.location.search)));
-    read();
-    window.addEventListener("popstate", read);
-    return () => window.removeEventListener("popstate", read);
+  // the last address this component wrote itself: a change that matches it is not re-applied
+  const written = useRef<string | null>(null);
+  const fromUrl = useCallback((p: URLSearchParams) => {
+    if (written.current !== null && written.current === p.toString()) return;
+    written.current = null;
+    setF(parseFilters(p));
   }, []);
 
   const update = useCallback((patch: Partial<Filters>, keepPage = false) => {
     setF((prev) => {
       const next = { ...prev, ...patch, page: keepPage ? (patch.page ?? prev.page) : 1 };
+      written.current = new URLSearchParams(toQuery(next)).toString();
       window.history.replaceState(null, "", `${window.location.pathname}${toQuery(next)}`);
       return next;
     });
@@ -126,6 +137,7 @@ export function CollectionView({ cards, hideCategory = false, heading = "Produse
 
   return (
     <div ref={top} className="scroll-mt-24">
+      <Suspense fallback={null}><UrlSync onChange={fromUrl} /></Suspense>
       <div className="mb-4 flex flex-col gap-3 sm:flex-row sm:items-center">
         <div className="relative hidden flex-1 sm:max-w-md">
           <Search className="pointer-events-none absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
