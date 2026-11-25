@@ -4,15 +4,19 @@ import { ArrowRight } from "lucide-react";
 import { thumbUrl, fallbackTo } from "@/lib/thumb";
 import type { CategorySummary } from "@/lib/catalog";
 
-const FEATURED = 6;
+// Order chosen by the owner: dezumidificatoare, umidificatoare, purificatoare, aeroterme, ventilatoare, monitoare calitate
+// aer, ventilatoare baie, aere condiționate, recuperatoare de căldură. The cards show these; every other category follows
+// as a link below, so all of them stay one click away.
+const ORDER = [
+  "dezumidificatoare", "umidificatoare", "purificatoare-aer", "aeroterme", "ventilatoare", "monitoare-calitate-aer",
+  "ventilatoare-baie", "aer-conditionat", "aer-conditionat-fara-unitate-exterioara", "aer-conditionat-portabil", "recuperatoare-caldura",
+];
 
 // Cards come from the database: only categories that have real products with photos.
-// Home shows the 6 biggest; the rest live in the menu and on /produse.
 const ProductCategories = ({ categories }: { categories: CategorySummary[] }) => {
   if (!categories.length) return null;
-  const sorted = [...categories].sort((a, b) => b.count - a.count);
-  const shown = sorted.filter((c) => c.image).slice(0, FEATURED);
-  const rest = sorted.filter((c) => !shown.includes(c));
+  const shown = ORDER.map((slug) => categories.find((c) => c.slug === slug)).filter((c): c is CategorySummary => !!c && !!c.image);
+  const rest = [...categories].filter((c) => !shown.includes(c)).sort((a, b) => b.count - a.count);
   return (
     <section className="section bg-background">
       <div className="container mx-auto px-4">
@@ -43,7 +47,7 @@ const ProductCategories = ({ categories }: { categories: CategorySummary[] }) =>
 
         {rest.length > 0 && (
           <nav aria-label="Toate categoriile" className="mt-8">
-            <p className="mb-3 text-center text-sm font-semibold text-foreground">Alte categorii</p>
+            <p className="mb-3 text-center text-sm font-semibold text-foreground">Și alte categorii</p>
             <ul className="flex flex-wrap justify-center gap-2">
               {rest.map((c) => (
                 <li key={c.slug}>

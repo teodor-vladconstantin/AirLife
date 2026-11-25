@@ -1,6 +1,6 @@
 # Logo-uri de mărci (banda de pe homepage)
 
-Logo-urile sunt luate de pe site-urile oficiale ale mărcilor (nov. 2026), verificate vizual și, la SVG, fără script sau referințe externe. Rasterele sunt tăiate la margini și redimensionate la ~96px înălțime (WebP). Se afișează în tonuri de gri, doar pentru a identifica produsele vândute; sub bandă apare nota că AirLife nu este afiliat cu aceste mărci.
+Logo-urile sunt luate de pe site-urile oficiale ale mărcilor (nov. 2026), verificate vizual și, la SVG, fără script sau referințe externe. Rasterele sunt tăiate la margini și redimensionate la ~96px înălțime (WebP). Se afișează în culorile lor, doar pentru a identifica produsele vândute; sub bandă apare nota că AirLife nu este afiliat cu aceste mărci.
 
 | Marcă | Fișier | Site oficial | Sursa fișierului |
 | --- | --- | --- | --- |
