@@ -8,12 +8,10 @@ import CTASection from "@/components/CTASection";
 import Footer from "@/components/Footer";
 import SEO from "@/components/SEO";
 import TrustStrip from "@/components/TrustStrip";
-import FeaturedProducts from "@/components/FeaturedProducts";
 import BrandMarquee, { type MarqueeBrand } from "@/components/BrandMarquee";
 import type { CategorySummary } from "@/lib/catalog";
-import type { ProductCardData } from "@/lib/shop";
 
-const Index = ({ categories = [], featured = [], brands = [] }: { categories?: CategorySummary[]; featured?: ProductCardData[]; brands?: MarqueeBrand[] }) => {
+const Index = ({ categories = [], brands = [] }: { categories?: CategorySummary[]; brands?: MarqueeBrand[] }) => {
   return (
     <div className="min-h-screen flex flex-col">
       <SEO
@@ -25,9 +23,8 @@ const Index = ({ categories = [], featured = [], brands = [] }: { categories?: C
       <main className="flex-1">
         <Hero />
         <TrustStrip />
-        <FeaturedProducts products={featured} />
-        <BrandMarquee brands={brands} />
         <ProductCategories categories={categories} />
+        <BrandMarquee brands={brands} />
         <HomeServicesSection />
         <Features />
         <CTASection />

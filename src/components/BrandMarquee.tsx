@@ -2,7 +2,7 @@ import { Link } from "@/lib/router";
 import { DEFAULT_FILTERS, toQuery } from "@/lib/shop";
 import { BRAND_LOGOS } from "@/data/brandLogos";
 
-// Brands sold in the shop, drifting right to left. Each one opens the product list filtered by that brand.
+// Brands sold in the shop, drifting right to left, logos in their own colours. Each one opens the product list filtered by that brand.
 // A logo file listed in src/data/brandLogos.ts is shown when there is one, otherwise the brand name as a wordmark.
 // Brands are shown only to identify the products sold; AirLife is not affiliated with them (note under the strip).
 export type MarqueeBrand = { name: string; count: number };
@@ -24,7 +24,7 @@ const BrandMarquee = ({ brands: all }: { brands: MarqueeBrand[] }) => {
             className="group flex min-h-11 items-center px-6 text-foreground/55 transition-colors hover:text-foreground md:px-8"
           >
             {logo ? (
-              <img src={logo} alt={hidden ? "" : b.name} loading="lazy" decoding="async" className="h-8 w-auto max-w-[8rem] object-contain opacity-60 grayscale transition-opacity group-hover:opacity-100 md:h-9" />
+              <img src={logo} alt={hidden ? "" : b.name} loading="lazy" decoding="async" className="h-8 w-auto max-w-[8rem] object-contain md:h-9" />
             ) : (
               <span className="whitespace-nowrap text-xl font-bold tracking-tight md:text-2xl">{b.name}</span>
             )}
