@@ -1,54 +1,47 @@
-import { Leaf, Shield, Zap, Heart } from "lucide-react";
+import { Shield, Zap, Heart, Wrench } from "lucide-react";
 
 const features = [
   {
-    icon: Leaf,
-    title: "Eco-Friendly",
-    description: "Tehnologii verzi care protejează mediul și reduc amprenta de carbon"
+    icon: Wrench,
+    title: "Montaj & Service",
+    description: "Instalare curată cu echipa proprie sau parteneri și asistență promptă.",
   },
   {
     icon: Zap,
-    title: "Eficiență Energetică",
-    description: "Economisește până la 40% din costurile de energie cu produsele noastre"
+    title: "Eficiență & Randament Maxim",
+    description: "Aparate și componente calitative, care funcționează la randamentul nominal.",
   },
   {
     icon: Shield,
-    title: "Garanție Extinsă",
-    description: "10 ani garanție completă și service gratuit în primul an"
+    title: "Garanție Conform Legii",
+    description: "Garanție legală de conformitate 24 luni pentru persoane fizice și garanție de execuție la montaj.",
   },
   {
     icon: Heart,
-    title: "Sănătate & Confort",
-    description: "Aer curat și temperatură perfectă pentru bunăstarea ta"
-  }
+    title: "Aer Curat & Sănătate",
+    description: "Produse profesionale de igienizare și dezinfectare a vaporizatorului pentru eliminarea mucegaiului.",
+  },
 ];
 
 const Features = () => {
   return (
-    <section className="py-24 bg-background">
+    <section className="section bg-background">
       <div className="container mx-auto px-4">
-        <div className="text-center mb-16 animate-in fade-in duration-700">
-          <h2 className="text-4xl md:text-5xl font-bold mb-4 text-foreground">
-            De Ce AirLife?
-          </h2>
-          <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-            Investește în sănătatea ta și a planetei
-          </p>
+        <div className="section-head">
+          <h2 className="text-title mb-3">De ce să lucrezi cu AirLife?</h2>
+          <p className="text-lead">Prioritizăm corectitudinea tehnică, transparența costurilor și respectul pentru casa ta.</p>
         </div>
-        
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-          {features.map((feature, index) => {
+
+        <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4">
+          {features.map((feature) => {
             const Icon = feature.icon;
             return (
-              <div
-                key={index}
-                className="text-center group animate-in fade-in duration-700"
-              >
-                <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-br from-primary to-accent rounded-2xl mb-6 transition-all duration-300 shadow-lg group-hover:scale-110 group-hover:rotate-3 group-hover:shadow-xl">
-                  <Icon className="w-8 h-8 text-primary-foreground" />
-                </div>
-                <h3 className="text-xl font-bold mb-3 text-foreground">{feature.title}</h3>
-                <p className="text-muted-foreground">{feature.description}</p>
+              <div key={feature.title} className="flex flex-col items-center gap-2 text-center">
+                <span className="mb-1 inline-flex h-12 w-12 items-center justify-center rounded-lg bg-primary/10 text-primary">
+                  <Icon className="h-6 w-6" />
+                </span>
+                <h3 className="text-subtitle">{feature.title}</h3>
+                <p className="text-sm leading-relaxed text-muted-foreground">{feature.description}</p>
               </div>
             );
           })}

@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
+import { untypedDb } from "@/lib/untypedDb";
 import { useToast } from "@/hooks/use-toast";
 import {
   Dialog,
@@ -21,7 +22,8 @@ import {
 } from "@/components/ui/select";
 import { Separator } from "@/components/ui/separator";
 import { OrderStatusBadge } from "@/components/orders/OrderStatusBadge";
-import { Loader2, Save } from "lucide-react";
+import { ORDER_STATUSES } from "@/lib/orderStatus";
+import { Copy, Loader2, Save } from "lucide-react";
 import { format } from "date-fns";
 import { ro } from "date-fns/locale";
 
@@ -50,7 +52,21 @@ interface Order {
   customer_notes: string | null;
   admin_notes: string | null;
   created_at: string;
+  // present after supabase/migrations/20251219000000_shop_features.sql
+  discount_code?: string | null;
+  discount_amount?: number | null;
+  supplier_name?: string | null;
+  supplier_order_ref?: string | null;
+  supplier_status?: string | null;
 }
+
+const SUPPLIER_STATUSES: [string, string][] = [
+  ["new", "De trimis la furnizor"],
+  ["ordered", "Trimisă la furnizor"],
+  ["shipped", "Expediată de furnizor"],
+  ["delivered", "Livrată de furnizor"],
+  ["problem", "Problemă la furnizor"],
+];
 
 interface OrderItem {
   id: string;
@@ -77,6 +93,11 @@ export const OrderDetailsDialog = ({
   const [trackingNumber, setTrackingNumber] = useState("");
   const [courier, setCourier] = useState("");
   const [adminNotes, setAdminNotes] = useState("");
+  const [supplierName, setSupplierName] = useState("");
+  const [supplierRef, setSupplierRef] = useState("");
+  const [supplierStatus, setSupplierStatus] = useState("new");
+  const [supplierNames, setSupplierNames] = useState<string[]>([]);
+  useEffect(() => { untypedDb.from("suppliers").select("name").order("name").then(({ data }: { data: { name: string }[] | null }) => setSupplierNames((data ?? []).map((s) => s.name))); }, []);
 
   useEffect(() => {
     if (open && orderId) {
@@ -102,6 +123,10 @@ export const OrderDetailsDialog = ({
       setTrackingNumber(orderData.tracking_number || "");
       setCourier(orderData.courier || "");
       setAdminNotes(orderData.admin_notes || "");
+      const od = orderData as unknown as Order;
+      setSupplierName(od.supplier_name || "");
+      setSupplierRef(od.supplier_order_ref || "");
+      setSupplierStatus(od.supplier_status || "new");
 
       // Fetch order items
       const { data: itemsData, error: itemsError } = await supabase
@@ -116,7 +141,7 @@ export const OrderDetailsDialog = ({
       console.error("Error fetching order details:", error);
       toast({
         title: "Eroare",
-        description: "Nu s-au putut încărca detaliile solicitării",
+        description: "Nu s-au putut încărca detaliile comenzii",
         variant: "destructive",
       });
     } finally {
@@ -136,6 +161,14 @@ export const OrderDetailsDialog = ({
         updated_at: new Date().toISOString(),
       };
 
+      // Dropshipping fields exist only after the shop-features migration: never send them before that.
+      if (order && "supplier_status" in order) {
+        updates.supplier_name = supplierName || null;
+        updates.supplier_order_ref = supplierRef || null;
+        updates.supplier_status = supplierStatus;
+        if (supplierStatus === "ordered" && order.supplier_status !== "ordered") updates.supplier_ordered_at = new Date().toISOString();
+      }
+
       // Update timestamps based on status
       if (status === "confirmed" && order?.status !== "confirmed") {
         updates.confirmed_at = new Date().toISOString();
@@ -153,6 +186,18 @@ export const OrderDetailsDialog = ({
         .eq("id", orderId);
 
       if (error) throw error;
+
+      // Email the customer when the status moves to a customer-facing step (the server checks the caller is an admin).
+      if (order && status !== order.status && ["processing", "shipped", "delivered", "cancelled"].includes(status)) {
+        const { data: { session } } = await supabase.auth.getSession();
+        if (session?.access_token) {
+          await fetch("/api/admin/order-email", {
+            method: "POST",
+            headers: { "Content-Type": "application/json", Authorization: `Bearer ${session.access_token}` },
+            body: JSON.stringify({ orderId, kind: status }),
+          }).catch(() => undefined);
+        }
+      }
 
       toast({
         title: "Succes",
@@ -173,6 +218,23 @@ export const OrderDetailsDialog = ({
     }
   };
 
+  // Plain text with everything the supplier needs to ship to the customer (dropshipping).
+  const copyForSupplier = async () => {
+    if (!order) return;
+    const a = order.shipping_address || {};
+    const text = [
+      `Comandă ${order.order_number}`,
+      ...orderItems.map((i) => `- ${i.product_name} × ${i.quantity}`),
+      "",
+      `Destinatar: ${order.customer_name}`,
+      `Telefon: ${order.customer_phone}`,
+      `Adresă: ${a.address || ""}, ${a.city || ""}, ${a.county || ""}, ${a.postalCode || ""}`,
+      ...(order.customer_notes ? [`Observații: ${order.customer_notes}`] : []),
+    ].join("\n");
+    try { await navigator.clipboard.writeText(text); toast({ title: "Copiat", description: "Datele comenzii sunt în clipboard." }); }
+    catch { toast({ title: "Nu am putut copia", variant: "destructive" }); }
+  };
+
   const getPaymentMethodLabel = (method: string) => {
     switch (method) {
       case "cash_on_delivery":
@@ -190,9 +252,9 @@ export const OrderDetailsDialog = ({
     <Dialog open={open} onOpenChange={onClose}>
       <DialogContent className="max-w-3xl max-h-[90vh] overflow-y-auto">
         <DialogHeader>
-          <DialogTitle>Detalii Cerere</DialogTitle>
+          <DialogTitle>Detalii comandă</DialogTitle>
           <DialogDescription>
-            Vizualizează și actualizează statusul, detaliile de livrare și notițele interne pentru această cerere.
+            Vizualizează și actualizează statusul, livrarea, datele furnizorului și notițele interne ale comenzii.
           </DialogDescription>
         </DialogHeader>
 
@@ -251,7 +313,7 @@ export const OrderDetailsDialog = ({
 
             {/* Products */}
             <div>
-              <h4 className="font-semibold mb-3">Produse solicitate</h4>
+              <h4 className="font-semibold mb-3">Produse comandate</h4>
               <div className="space-y-2">
                 {orderItems.map((item) => (
                   <div
@@ -283,6 +345,12 @@ export const OrderDetailsDialog = ({
                       : `${order.shipping_cost.toFixed(2)} RON`}
                   </span>
                 </div>
+                {!!order.discount_amount && order.discount_amount > 0 && (
+                  <div className="flex justify-between text-sm">
+                    <span className="text-muted-foreground">Reducere ({order.discount_code})</span>
+                    <span className="font-semibold text-primary">−{Number(order.discount_amount).toFixed(2)} RON</span>
+                  </div>
+                )}
                 <Separator />
                 <div className="flex justify-between font-bold">
                   <span>Total</span>
@@ -313,9 +381,37 @@ export const OrderDetailsDialog = ({
 
             <Separator />
 
+            {/* Dropshipping: forward the paid order to the supplier */}
+            <div className="space-y-3">
+              <h4 className="font-semibold">Furnizor (dropshipping)</h4>
+              {order.payment_status !== "paid" && (
+                <p className="rounded-md border border-primary/30 bg-accent p-2 text-sm text-foreground">Comanda nu e plătită încă. Nu o trimite la furnizor până nu apare ca plătită.</p>
+              )}
+              {"supplier_status" in order ? (
+                <>
+                  <div className="grid gap-3 sm:grid-cols-2">
+                    <div><Label htmlFor="supplierName">Furnizor</Label><Input id="supplierName" list="supplier-names" value={supplierName} onChange={(e) => setSupplierName(e.target.value)} placeholder="Ex: Ecovent" /><datalist id="supplier-names">{supplierNames.map((n) => <option key={n} value={n} />)}</datalist></div>
+                    <div><Label htmlFor="supplierRef">Nr. comandă la furnizor</Label><Input id="supplierRef" value={supplierRef} onChange={(e) => setSupplierRef(e.target.value)} /></div>
+                  </div>
+                  <div>
+                    <Label>Stare la furnizor</Label>
+                    <Select value={supplierStatus} onValueChange={setSupplierStatus}>
+                      <SelectTrigger><SelectValue /></SelectTrigger>
+                      <SelectContent>{SUPPLIER_STATUSES.map(([v, l]) => <SelectItem key={v} value={v}>{l}</SelectItem>)}</SelectContent>
+                    </Select>
+                  </div>
+                </>
+              ) : (
+                <p className="text-sm text-muted-foreground">Câmpurile pentru furnizor apar după ce rulezi migrarea <code>20251219000000_shop_features.sql</code>.</p>
+              )}
+              <Button type="button" variant="outline" size="sm" onClick={copyForSupplier}><Copy className="mr-2 h-4 w-4" />Copiază datele pentru furnizor</Button>
+            </div>
+
+            <Separator />
+
             {/* Admin Controls */}
                 <div className="space-y-4">
-              <h4 className="font-semibold">Actualizare Solicitare</h4>
+              <h4 className="font-semibold">Actualizare comandă</h4>
 
               <div>
                 <Label htmlFor="status">Status</Label>
@@ -324,13 +420,7 @@ export const OrderDetailsDialog = ({
                     <SelectValue />
                   </SelectTrigger>
                   <SelectContent>
-                    <SelectItem value="pending">În așteptare</SelectItem>
-                    <SelectItem value="confirmed">Confirmată</SelectItem>
-                    <SelectItem value="processing">În procesare</SelectItem>
-                    <SelectItem value="shipped">Expediată</SelectItem>
-                    <SelectItem value="delivered">Livrată</SelectItem>
-                    <SelectItem value="cancelled">Anulată</SelectItem>
-                  </SelectContent>
+                    {ORDER_STATUSES.map((st) => <SelectItem key={st.value} value={st.value}>{st.label}</SelectItem>)}</SelectContent>
                 </Select>
               </div>
 

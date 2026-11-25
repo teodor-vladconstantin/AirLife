@@ -1,6 +1,7 @@
 import React, { createContext, useContext, useState, useEffect, ReactNode } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
+import { salePricing } from "@/lib/pricing";
 
 // Cart item interface
 export interface CartItem {
@@ -98,6 +99,8 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
           id,
           name,
           price,
+          sale_price,
+          sale_ends_at,
           image_url,
           stock,
           category
@@ -116,7 +119,7 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
         id: item.id,
         product_id: item.product_id,
         name: item.products.name,
-        price: item.products.price,
+        price: salePricing(item.products).price,
         quantity: item.quantity,
         image_url: item.products.image_url,
         stock: item.products.stock,
@@ -132,6 +135,7 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
       try {
         const parsed = JSON.parse(stored);
         setItems(parsed);
+        void refreshLocalPrices(parsed);
       } catch (e) {
         console.error("Error parsing cart from localStorage:", e);
         setItems([]);
@@ -139,6 +143,19 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
     } else {
       setItems([]);
     }
+  };
+
+  // A guest cart lives in the browser for days: re-read price, sale and stock so the cart never shows a stale price.
+  const refreshLocalPrices = async (cartItems: CartItem[]) => {
+    if (cartItems.length === 0) return;
+    const { data } = await supabase.from("products").select("id,price,sale_price,sale_ends_at,stock").in("id", cartItems.map((i) => i.product_id));
+    if (!data) return;
+    const fresh = cartItems.map((i) => {
+      const p = data.find((d) => d.id === i.product_id);
+      return p ? { ...i, price: salePricing(p).price, stock: p.stock } : i;
+    });
+    setItems(fresh);
+    saveToLocalStorage(fresh);
   };
 
   const saveToLocalStorage = (cartItems: CartItem[]) => {

@@ -1,0 +1,30 @@
+# AirLife
+
+> AirLife (airlife.ro) este un magazin online românesc de aer condiționat, dezumidificatoare, ventilatoare de baie și recuperatoare de căldură, cu livrare în toată țara prin curier. Serviciile de montaj, igienizare și service aer condiționat se fac cu echipa AirLife sau parteneri în municipiul Buzău și în tot județul Buzău (inclusiv Râmnicu Sărat, Nehoiu, Pogoanele și comunele din jur).
+
+## Magazin
+- [Aer condiționat](https://airlife.ro/aer-conditionat)
+- [Aer condiționat fără unitate exterioară](https://airlife.ro/aer-conditionat-fara-unitate-exterioara)
+- [Dezumidificatoare](https://airlife.ro/dezumidificatoare)
+- [Ventilatoare de baie](https://airlife.ro/ventilatoare-baie)
+- [Ventilație descentralizată cu recuperare de căldură](https://airlife.ro/recuperatoare-caldura)
+
+## Servicii în Buzău și ghiduri
+- [Aer condiționat Buzău: montaj, igienizare, service](https://airlife.ro/aer-conditionat-buzau)
+- [Servicii aer condiționat Buzău](https://airlife.ro/servicii)
+- [Despre AirLife (date firmă, zonă de servicii)](https://airlife.ro/despre-noi)
+- [Montaj aer condiționat](https://airlife.ro/servicii/montaj-aer-conditionat-buzau)
+- [Igienizare aer condiționat](https://airlife.ro/servicii/igienizare-aer-conditionat-buzau)
+- [Service aer condiționat](https://airlife.ro/servicii/service-aer-conditionat-buzau)
+- [Ghid: cost montaj aer condiționat](https://airlife.ro/ghid/cost-montaj-aer-conditionat-buzau)
+- [Ghid: ce BTU ai nevoie (calculator pe volum, metri cubi)](https://airlife.ro/ghid/ce-btu-aer-conditionat-buzau)
+- [Ghid: igienizare aer condiționat](https://airlife.ro/ghid/igienizare-aer-conditionat-buzau)
+- [Blog](https://airlife.ro/blog)
+
+## Informații
+- [Livrare și retur](https://airlife.ro/livrare-si-retur)
+- [Garanție](https://airlife.ro/garantie)
+- [Contact](https://airlife.ro/contact): +40 722 15 35 25
+
+## Opțional
+- [Informații complete (llms-full.txt)](https://airlife.ro/llms-full.txt): livrare, retur, garanție, servicii, întrebări frecvente
