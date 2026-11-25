@@ -291,13 +291,13 @@ const ProductDetails = ({ initial, reviews = NO_REVIEWS }: { initial: Loaded; re
         <div className="container mx-auto px-4 max-w-6xl">
           <nav aria-label="Breadcrumb" className="mb-3 text-sm text-muted-foreground md:mb-5">
             <ol className="flex items-center gap-2 flex-wrap">
-              <li><Link to="/" className="hover:text-primary transition-colors">Acasă</Link></li>
+              <li><Link to="/" className="inline-flex min-h-11 items-center hover:text-primary transition-colors">Acasă</Link></li>
               <li aria-hidden>/</li>
-              <li><Link to="/produse" className="hover:text-primary transition-colors">Produse</Link></li>
+              <li><Link to="/produse" className="inline-flex min-h-11 items-center hover:text-primary transition-colors">Produse</Link></li>
               {categorySlug && (
                 <>
                   <li aria-hidden>/</li>
-                  <li><Link to={`/${categorySlug}`} className="hover:text-primary transition-colors">{product.category}</Link></li>
+                  <li><Link to={`/${categorySlug}`} className="inline-flex min-h-11 items-center hover:text-primary transition-colors">{product.category}</Link></li>
                 </>
               )}
               <li aria-hidden className="hidden sm:block">/</li>
@@ -412,7 +412,7 @@ const ProductDetails = ({ initial, reviews = NO_REVIEWS }: { initial: Loaded; re
             <div className="min-w-0 space-y-4 md:space-y-5">
               <div>
                 {product.brand && (
-                  <Link to={`/produse?brand=${encodeURIComponent(product.brand)}`} className="inline-block py-1 text-xs font-semibold uppercase tracking-wide text-primary hover:underline">
+                  <Link to={`/produse?brand=${encodeURIComponent(product.brand)}`} className="inline-flex min-h-11 items-center text-xs font-semibold uppercase tracking-wide text-primary hover:underline">
                     {product.brand}
                   </Link>
                 )}

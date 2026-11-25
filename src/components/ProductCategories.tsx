@@ -56,7 +56,7 @@ const ProductCategories = ({ categories }: { categories: CategorySummary[] }) =>
         )}
 
         <div className="mt-8 text-center">
-          <Link to="/produse">
+          <Link to="/produse" className="inline-block">
             <Button variant="outline" size="lg" className="group">
               Vezi toate produsele
               <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />

@@ -210,7 +210,7 @@ const Checkout = () => {
                     type="button"
                     disabled={!done}
                     onClick={() => setStep(n)}
-                    className="flex items-center gap-2 text-sm disabled:cursor-default"
+                    className="flex min-h-11 min-w-11 items-center gap-2 text-sm disabled:cursor-default"
                   >
                     <span className={`flex h-8 w-8 items-center justify-center rounded-full border text-sm font-semibold ${done ? "border-primary bg-primary text-primary-foreground" : step === n ? "border-primary text-primary" : "border-border text-muted-foreground"}`}>
                       {done ? <Check className="h-4 w-4" /> : n}

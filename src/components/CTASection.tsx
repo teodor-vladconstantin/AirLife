@@ -23,9 +23,9 @@ const CTASection = () => {
           </a>
 
           <p className="mt-5 text-sm text-background/80">
-            <Link to="/contact" className="inline-block py-2 font-semibold underline underline-offset-4 hover:text-background">Trimite un mesaj</Link>
+            <Link to="/contact" className="inline-flex min-h-11 items-center font-semibold underline underline-offset-4 hover:text-background">Trimite un mesaj</Link>
             <span aria-hidden className="mx-3">·</span>
-            <Link to="/servicii/montaj-aer-conditionat-buzau" className="inline-block py-2 font-semibold underline underline-offset-4 hover:text-background">Programare montaj</Link>
+            <Link to="/servicii/montaj-aer-conditionat-buzau" className="inline-flex min-h-11 items-center font-semibold underline underline-offset-4 hover:text-background">Programare montaj</Link>
           </p>
           <dl className="mt-8 grid gap-4 border-t border-background/20 pt-6 text-sm text-background/80 sm:grid-cols-3">
             <div><dt className="font-semibold text-background">Program Asistență</dt><dd>Luni – Vineri: 09:00 – 18:00<br />Sâmbătă: 10:00 – 14:00</dd></div>

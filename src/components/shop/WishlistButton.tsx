@@ -32,7 +32,7 @@ export function WishlistButton({ productId, productName, className = "", withLab
       onClick={click}
       aria-pressed={on}
       aria-label={on ? `Scoate ${productName} din favorite` : `Adaugă ${productName} la favorite`}
-      className={`inline-flex items-center justify-center gap-2 rounded-full transition-colors ${className}`}
+      className={`inline-flex min-h-11 min-w-11 items-center justify-center gap-2 rounded-full transition-colors ${className}`}
     >
       <Heart className={`h-4 w-4 ${on ? "fill-primary text-primary" : ""}`} />
       {withLabel && <span className="text-sm font-medium">{on ? "În favorite" : "Adaugă la favorite"}</span>}

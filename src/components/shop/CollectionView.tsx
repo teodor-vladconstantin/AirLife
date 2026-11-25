@@ -139,7 +139,7 @@ export function CollectionView({ cards, hideCategory = false, heading = "Produse
           <label className="flex min-w-0 flex-1 items-center gap-2 text-sm sm:flex-none">
             <span className="hidden whitespace-nowrap text-muted-foreground sm:inline">Sortează:</span>
             <Select value={f.sort} onValueChange={(v) => update({ sort: v as SortKey })}>
-              <SelectTrigger aria-label="Sortează produsele" className="h-10 min-w-0 flex-1 sm:w-56 sm:flex-none"><SelectValue /></SelectTrigger>
+              <SelectTrigger aria-label="Sortează produsele" className="h-11 min-w-0 flex-1 sm:w-56 sm:flex-none"><SelectValue /></SelectTrigger>
               <SelectContent>{SORTS.map((s) => <SelectItem key={s.value} value={s.value}>{s.label}</SelectItem>)}</SelectContent>
             </Select>
           </label>

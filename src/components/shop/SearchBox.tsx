@@ -87,7 +87,7 @@ export function SearchBox({ className = "", autoFocus = false, onDone }: { class
           aria-expanded={show}
           aria-controls={listId}
           aria-autocomplete="list"
-          className="h-11 w-full rounded-full border border-transparent bg-secondary/70 pl-10 pr-4 text-sm outline-none placeholder:text-muted-foreground focus-visible:border-primary/40 focus-visible:bg-background focus-visible:ring-2 focus-visible:ring-ring xl:h-10"
+          className="h-11 w-full rounded-full border border-transparent bg-secondary/70 pl-10 pr-4 text-base outline-none placeholder:text-muted-foreground focus-visible:border-primary/40 focus-visible:bg-background focus-visible:ring-2 focus-visible:ring-ring xl:h-10"
         />
       </form>
       {show && (

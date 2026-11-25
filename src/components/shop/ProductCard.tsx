@@ -36,7 +36,7 @@ export const ProductCard = memo(function ProductCard({ product, priority = false
           </span>
         )}
       </Link>
-      <WishlistButton productId={product.id} productName={product.name} className="absolute right-2 top-2 h-9 w-9 bg-background/90 shadow-sm hover:bg-background" />
+      <WishlistButton productId={product.id} productName={product.name} className="absolute right-2 top-2 h-11 w-11 bg-background/90 shadow-sm hover:bg-background" />
       <div className="flex flex-1 flex-col gap-1 p-3 sm:p-4">
         {product.brand && <p className="truncate text-[11px] font-medium uppercase tracking-wide text-muted-foreground">{product.brand}</p>}
         <h3 className="line-clamp-2 min-h-[2.5rem] break-words text-sm font-semibold leading-snug text-foreground">
@@ -48,7 +48,6 @@ export const ProductCard = memo(function ProductCard({ product, priority = false
         </div>
         <p className={`text-xs ${out ? "text-muted-foreground" : "text-primary"}`}>{out ? "Indisponibil momentan" : product.stock <= 3 ? `Ultimele ${product.stock} bucăți` : "În stoc"}</p>
         <Button
-          size="sm"
           variant={out ? "outline" : "default"}
           className="mt-auto w-full"
           disabled={out || adding}

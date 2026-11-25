@@ -32,7 +32,7 @@ export function StockAlertForm({ productId, kind }: { productId: string; kind: "
   };
 
   if (done) return <p className="rounded-lg border border-primary/30 bg-primary/5 p-3 text-sm" role="status">Gata! Îți scriem o singură dată, la {email}, {kind === "back_in_stock" ? "când produsul revine în stoc" : "dacă prețul scade"}.</p>;
-  if (!open) return <button type="button" onClick={() => setOpen(true)} className="inline-flex items-center gap-2 py-1 text-sm font-medium text-primary hover:underline"><Bell className="h-4 w-4" />{label}</button>;
+  if (!open) return <button type="button" onClick={() => setOpen(true)} className="inline-flex min-h-11 items-center gap-2 text-sm font-medium text-primary hover:underline"><Bell className="h-4 w-4" />{label}</button>;
   return (
     <form onSubmit={submit} className="space-y-2 rounded-lg border border-border bg-card p-3">
       <p className="flex items-center gap-2 text-sm font-semibold"><Bell className="h-4 w-4 text-primary" />{label}</p>
