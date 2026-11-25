@@ -21,9 +21,9 @@ const Footer = () => {
   return (
     <footer className="bg-foreground text-background py-14 border-t border-border/20">
       <div className="container mx-auto px-4">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8 mb-12">
+        <div className="grid grid-cols-2 gap-x-6 gap-y-8 md:grid-cols-2 lg:grid-cols-5 lg:gap-8 mb-12">
           {/* Brand info */}
-          <div className="lg:col-span-2 space-y-4">
+          <div className="col-span-2 lg:col-span-2 space-y-4">
             <Link to="/" className="inline-flex min-h-11 items-center gap-2">
               <img src="/logo-white-sm.png" alt="AirLife" width={161} height={36} className="h-9 w-auto" loading="lazy" />
             </Link>
@@ -118,9 +118,9 @@ const Footer = () => {
           </div>
 
           {/* Informații Legale & Suport */}
-          <div>
+          <div className="col-span-2 md:col-span-1">
             <h3 className="font-semibold text-sm mb-4 text-white uppercase tracking-wider">Informații &amp; Legal</h3>
-            <ul className="space-y-2 text-sm opacity-80">
+            <ul className="grid grid-cols-2 gap-x-6 text-sm opacity-80 md:block md:space-y-2">
               <li>
                 <Link to="/blog" className="inline-flex min-h-11 items-center hover:text-brandlight transition-colors md:min-h-0 md:py-1.5">
                   Blog

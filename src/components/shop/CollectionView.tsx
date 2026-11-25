@@ -127,7 +127,7 @@ export function CollectionView({ cards, hideCategory = false, heading = "Produse
   return (
     <div ref={top} className="scroll-mt-24">
       <div className="mb-4 flex flex-col gap-3 sm:flex-row sm:items-center">
-        <div className="relative flex-1 sm:max-w-md">
+        <div className="relative hidden flex-1 sm:block sm:max-w-md">
           <Search className="pointer-events-none absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
           <Input value={f.q} onChange={(e) => update({ q: e.target.value })} placeholder="Caută în produse" aria-label="Caută în produse" className="pl-9" />
         </div>

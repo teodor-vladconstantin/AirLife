@@ -349,14 +349,14 @@ const Checkout = () => {
                   </>
                 )}
 
-                <div className="flex flex-wrap items-center justify-between gap-3">
+                <div className="flex flex-col-reverse items-stretch gap-3 sm:flex-row sm:flex-wrap sm:items-center sm:justify-between">
                   {step > 1 ? <Button type="button" variant="ghost" onClick={() => setStep(step - 1)}><ChevronLeft className="mr-1 h-4 w-4" /> Înapoi</Button> : <Link to="/produse"><Button type="button" variant="ghost"><ChevronLeft className="mr-1 h-4 w-4" /> Înapoi la magazin</Button></Link>}
                   {step < 3 ? (
-                    <Button type="submit" size="lg">Continuă</Button>
+                    <Button type="submit" size="lg" className="w-full sm:w-auto">Continuă</Button>
                   ) : (
-                    <div className="flex flex-col items-end gap-2">
+                    <div className="flex flex-col items-stretch gap-2 sm:items-end">
                       {tsWidget}
-                      <Button type="submit" size="lg" disabled={isSubmitting}>
+                      <Button type="submit" size="lg" className="w-full sm:w-auto" disabled={isSubmitting}>
                         {isSubmitting ? (<><Loader2 className="mr-2 h-4 w-4 animate-spin" /> Se procesează...</>) : `Plătește ${grandTotal.toFixed(2)} RON`}
                       </Button>
                       <PaymentBadges className="justify-end text-xs" />
