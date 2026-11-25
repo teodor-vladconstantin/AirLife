@@ -2,7 +2,7 @@
 
 Reguli pentru orice pagină nouă sau modificată. Valorile concrete stau în `src/index.css` (tokeni și clase `.section`, `.text-title`, `.text-lead`, `.text-price`) și în `src/components/ui/button.tsx`. Nu se hardcodează spațieri, culori sau dimensiuni de text în pagini.
 
-Brand: verde `#08AC48` (logo), verde închis `#0F2A1D` pentru text, fundaluri albe/mint, font Inter. Fără albastru, fără culoare de accent în afara verdelui.
+Brand (din Brand Book v1.0): verde `#08AC48`, verde text `#0A7A35`, mentă `#E8F6EE`, verde închis `#0F2A1D`, gri-verde `#4A5F54`, alb-verzui `#F4F8F5`, font Inter. Fără albastru. Accent mov `#7C3AED` (`--promo`), varianta de test din Brand Book p.10: doar pe bara de anunț de sus; orice altă folosire se decide separat.
 
 ## 1. Ierarhie: un singur element dominant pe ecran
 - Pe fiecare ecran (viewport) există **o singură acțiune primară** (buton verde plin). Restul sunt secundare (outline) sau text.
@@ -14,7 +14,7 @@ Brand: verde `#08AC48` (logo), verde închis `#0F2A1D` pentru text, fundaluri al
 - Mai multe opțiuni înseamnă decizie mai lentă (legea lui Hick, [Telerik](https://www.telerik.com/blogs/ux-laws-build-better-mobile-experiences)). Nu e o limită numerică fixă, deci tratăm ca regulă de prudență: **meniu principal ≤ 5 elemente**.
 - Ce nu e esențial se pliază: meniul mobil (Produse/Servicii pliabile), footer pe 2 coloane pe telefon.
 - **Dar nu ascundem informația de decizie în tab-uri sau sub-pagini**: utilizatorii o ignoră ([Baymard, Product page](https://baymard.com/research-articles/current-state-ecommerce-product-page-ux)). Pe produs, descrierea, specificațiile și livrarea sunt secțiuni una sub alta.
-- Fără informații duplicate pe același ecran (telefon în antet și în bara de jos, două căsuțe de căutare).
+- Fără informații duplicate pe același ecran (telefon repetat în același ecran, două căsuțe de căutare).
 
 ## 3. Spațiere: scară 4/8px, ritm constant
 - Spațiu între secțiuni: `.section` (3rem pe mobil, 5rem de la 768px). Între titlu de secțiune și conținut: `.section-head`.
@@ -29,7 +29,7 @@ Brand: verde `#08AC48` (logo), verde închis `#0F2A1D` pentru text, fundaluri al
 
 ## 5. Atingere și ergonomie pe telefon
 - Ținte de atingere **≥ 44px** (NN/g recomandă minim ~1cm × 1cm, [touch target size](https://www.nngroup.com/articles/touch-target-size/)). Butoane: 44px implicit, 48px `lg`.
-- Acțiunile frecvente stau în zona de jos, ușor de atins cu degetul mare ([Smashing, Thumb zone](https://www.smashingmagazine.com/2016/09/the-thumb-zone-designing-for-mobile-users)): bara „Sună/WhatsApp", butonul „Adaugă în coș".
+- Acțiunile frecvente stau în zona de jos, ușor de atins cu degetul mare ([Smashing, Thumb zone](https://www.smashingmagazine.com/2016/09/the-thumb-zone-designing-for-mobile-users)): butonul „Adaugă în coș". Telefonul rămâne la un tap: bara de anunț (desktop) și rândul „Sună" din meniul mobil. Bara fixă „Sună/WhatsApp" a fost scoasă în #13, nu se reintroduce fără decizie.
 - **Prețul și acțiunea principală sunt vizibile fără scroll** pe pagina de produs (testat pe 390×844).
 - Butonul primar dintr-un formular e pe toată lățimea pe telefon.
 - Fără scroll orizontal la 360 / 390 / 768px.

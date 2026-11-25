@@ -271,6 +271,9 @@ const Navbar = () => {
               <Link to="/favorite" onClick={closeMenu} className="inline-flex min-h-11 items-center gap-2 font-medium hover:text-foreground">
                 <Heart className="h-4 w-4" />Favorite{wish.signedIn && wish.count ? ` (${wish.count})` : ""}
               </Link>
+              <a href={`tel:${PHONE_TEL}`} onClick={() => trackClickToCall("navbar-mobile-menu")} className="inline-flex min-h-11 items-center gap-2 font-semibold text-primary" aria-label={`Sună la ${PHONE_DISPLAY}`}>
+                <Phone className="h-4 w-4" />Sună
+              </a>
               {!user && (
                 <Link to="/auth" rel="nofollow" onClick={closeMenu} className="inline-flex min-h-11 items-center gap-2 font-semibold text-primary">
                   <User className="h-4 w-4" />Conectare
