@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 import { Link } from "@/lib/router";
 import { Button } from "@/components/ui/button";
-import { ShieldCheck } from "lucide-react";
 import { setCookieConsent } from "@/lib/analytics";
 
 export const CookieBanner = () => {
@@ -27,34 +26,19 @@ export const CookieBanner = () => {
   if (!isVisible) return null;
 
   return (
-    <div className="fixed bottom-0 left-0 right-0 z-50 bg-background/95 backdrop-blur-md border-t border-border p-4 shadow-2xl animate-in slide-in-from-bottom duration-500">
-      <div className="container mx-auto max-w-5xl flex flex-col sm:flex-row items-center justify-between gap-4">
-        <div className="flex items-start gap-3">
-          <ShieldCheck className="w-5 h-5 text-primary mt-1 flex-shrink-0" />
-          <div className="text-sm text-muted-foreground">
-            <p className="font-medium text-foreground">Respectăm confidențialitatea datelor tale</p>
-            <p>
-              Folosim cookie-uri esențiale pentru funcționarea magazinului și, cu acordul tău, cookie-uri de analiză pentru a
-              îmbunătăți experiența de navigare. Citește mai multe în{" "}
-              <Link to="/politica-de-cookies" className="text-primary underline hover:text-primary/80">
-                Politica de Cookies
-              </Link>{" "}
-              și{" "}
-              <Link to="/politica-de-confidentialitate" className="text-primary underline hover:text-primary/80">
-                Politica de Confidențialitate
-              </Link>
-              .
-            </p>
-          </div>
-        </div>
-        <div className="flex items-center gap-2 flex-shrink-0 w-full sm:w-auto">
-          <Button variant="outline" size="sm" onClick={handleDecline} className="flex-1 sm:flex-none">
-            Doar esențiale
-          </Button>
-          <Button size="sm" onClick={handleAccept} className="flex-1 sm:flex-none">
-            Accept toate
-          </Button>
-        </div>
+    <div
+      role="dialog"
+      aria-label="Preferințe cookies"
+      style={{ bottom: "var(--bar-contact, 0px)" }}
+      className="fixed inset-x-0 z-50 border-t border-border bg-background p-3 shadow-lg animate-in slide-in-from-bottom duration-300 md:inset-x-auto md:bottom-4 md:left-4 md:max-w-sm md:rounded-xl md:border md:p-4"
+    >
+      <p className="mb-3 text-sm leading-snug text-muted-foreground">
+        Folosim cookie-uri esențiale și, cu acordul tău, de analiză.{" "}
+        <Link to="/politica-de-cookies" className="font-medium text-primary underline">Detalii</Link>
+      </p>
+      <div className="grid grid-cols-2 gap-2">
+        <Button variant="outline" size="sm" onClick={handleDecline}>Doar esențiale</Button>
+        <Button size="sm" onClick={handleAccept}>Accept toate</Button>
       </div>
     </div>
   );

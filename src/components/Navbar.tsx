@@ -227,7 +227,7 @@ const Navbar = () => {
               </DropdownMenu>
             ) : (
               <Link to="/auth" rel="nofollow" className="hidden sm:inline-block">
-                <Button size="sm">Conectare</Button>
+                <Button size="sm" variant="outline">Conectare</Button>
               </Link>
             )}
 

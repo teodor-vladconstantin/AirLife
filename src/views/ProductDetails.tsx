@@ -289,7 +289,7 @@ const ProductDetails = ({ initial, reviews = NO_REVIEWS }: { initial: Loaded; re
 
       <main className="flex-1 bg-background py-6 md:py-10 pb-24 md:pb-10">
         <div className="container mx-auto px-4 max-w-6xl">
-          <nav aria-label="Breadcrumb" className="mb-5 text-sm text-muted-foreground">
+          <nav aria-label="Breadcrumb" className="mb-3 text-sm text-muted-foreground md:mb-5">
             <ol className="flex items-center gap-2 flex-wrap">
               <li><Link to="/" className="hover:text-primary transition-colors">Acasă</Link></li>
               <li aria-hidden>/</li>
@@ -300,16 +300,16 @@ const ProductDetails = ({ initial, reviews = NO_REVIEWS }: { initial: Loaded; re
                   <li><Link to={`/${categorySlug}`} className="hover:text-primary transition-colors">{product.category}</Link></li>
                 </>
               )}
-              <li aria-hidden>/</li>
-              <li aria-current="page" className="text-foreground font-medium truncate max-w-[16rem] sm:max-w-md">{product.name}</li>
+              <li aria-hidden className="hidden sm:block">/</li>
+              <li aria-current="page" className="hidden sm:block text-foreground font-medium truncate max-w-[16rem] sm:max-w-md">{product.name}</li>
             </ol>
           </nav>
 
-          <div className="grid gap-8 md:grid-cols-2 lg:gap-12 mb-12">
+          <div className="grid gap-5 md:grid-cols-2 md:gap-8 lg:gap-12 mb-12">
             {/* Gallery */}
             <div className="space-y-3 md:sticky md:top-24 md:self-start">
               <div
-                className="relative aspect-square bg-white rounded-2xl border border-border/60 p-6 flex items-center justify-center overflow-hidden select-none"
+                className="relative h-44 sm:h-auto sm:aspect-square bg-white rounded-xl border border-border/60 p-4 sm:p-6 flex items-center justify-center overflow-hidden select-none"
                 tabIndex={0}
                 onKeyDown={(e) => {
                   if (e.key === "ArrowLeft") go(-1);
@@ -409,14 +409,14 @@ const ProductDetails = ({ initial, reviews = NO_REVIEWS }: { initial: Loaded; re
             </div>
 
             {/* Buy box */}
-            <div className="min-w-0 space-y-5">
+            <div className="min-w-0 space-y-4 md:space-y-5">
               <div>
                 {product.brand && (
                   <Link to={`/produse?brand=${encodeURIComponent(product.brand)}`} className="inline-block py-1 text-xs font-semibold uppercase tracking-wide text-primary hover:underline">
                     {product.brand}
                   </Link>
                 )}
-                <h1 className="mt-1 text-2xl sm:text-3xl font-bold text-foreground leading-tight">{product.name}</h1>
+                <h1 className="mt-1 text-xl sm:text-3xl font-bold text-foreground leading-tight">{product.name}</h1>
                 {reviews.count > 0 && (
                   <a href="#reviews-h" className="mt-2 inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-primary">
                     <Stars value={reviews.average} /> {reviews.average.toFixed(1)} ({reviews.count})
@@ -427,7 +427,7 @@ const ProductDetails = ({ initial, reviews = NO_REVIEWS }: { initial: Loaded; re
 
               <div>
                 <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
-                  <span className="text-3xl sm:text-4xl font-bold text-foreground">{formatPrice(product.price)}</span>
+                  <span className="text-price">{formatPrice(product.price)}</span>
                   {product.compare_at ? <span className="text-lg text-muted-foreground line-through">{formatPrice(product.compare_at)}</span> : null}
                   {pct > 0 && <span className="rounded-full bg-primary px-2.5 py-0.5 text-xs font-semibold text-primary-foreground">-{pct}%</span>}
                 </div>
@@ -441,15 +441,15 @@ const ProductDetails = ({ initial, reviews = NO_REVIEWS }: { initial: Loaded; re
                 <span className={out ? "text-muted-foreground" : product.stock <= 3 ? "text-foreground" : "text-primary"}>{stockLine}</span>
               </p>
 
-              {intro && <p className="text-sm text-muted-foreground leading-relaxed">{intro}</p>}
+              {intro && <p className="hidden text-sm text-muted-foreground leading-relaxed md:block">{intro}</p>}
 
               {/* Quantity + purchase */}
-              <div ref={buyRef} className="space-y-3 border-t border-border pt-5">
+              <div ref={buyRef} className="space-y-3 border-t border-border pt-4 md:pt-5">
                 {!out && (
                   <div className="flex items-center gap-4">
                     <span className="text-sm font-semibold text-foreground" id="qty-label">Cantitate</span>
                     <div className="flex items-center gap-2" role="group" aria-labelledby="qty-label">
-                      <Button variant="outline" size="icon" className="h-10 w-10" onClick={decrementQuantity} disabled={quantity <= 1} aria-label="Scade cantitatea">
+                      <Button variant="outline" size="icon" onClick={decrementQuantity} disabled={quantity <= 1} aria-label="Scade cantitatea">
                         <Minus className="w-3.5 h-3.5" />
                       </Button>
                       <Input
@@ -459,12 +459,12 @@ const ProductDetails = ({ initial, reviews = NO_REVIEWS }: { initial: Loaded; re
                           const val = parseInt(e.target.value);
                           if (val >= 1 && val <= product.stock) setQuantity(val);
                         }}
-                        className="text-center w-16 h-10 font-semibold text-sm"
+                        className="text-center w-16 h-11 font-semibold"
                         min={1}
                         max={product.stock}
                         aria-label="Cantitate produs"
                       />
-                      <Button variant="outline" size="icon" className="h-10 w-10" onClick={incrementQuantity} disabled={quantity >= product.stock} aria-label="Crește cantitatea">
+                      <Button variant="outline" size="icon" onClick={incrementQuantity} disabled={quantity >= product.stock} aria-label="Crește cantitatea">
                         <Plus className="w-3.5 h-3.5" />
                       </Button>
                     </div>
@@ -476,7 +476,7 @@ const ProductDetails = ({ initial, reviews = NO_REVIEWS }: { initial: Loaded; re
                     {out ? "Indisponibil" : busy === "add" ? "Se adaugă…" : "Adaugă în coș"}
                   </Button>
                   {!out && (
-                    <Button size="lg" variant="outline" className="font-semibold lg:flex-1 border-primary text-primary hover:bg-primary/5" disabled={!!busy} aria-busy={busy === "buy"} onClick={handleBuyNow}>
+                    <Button size="lg" variant="ghost" className="text-primary hover:bg-primary/5 hover:text-primary lg:flex-1" disabled={!!busy} aria-busy={busy === "buy"} onClick={handleBuyNow}>
                       {busy === "buy" ? <Loader2 className="w-4 h-4 mr-2 animate-spin" /> : <CreditCard className="w-4 h-4 mr-2" />} {busy === "buy" ? "Se pregătește…" : "Cumpără acum"}
                     </Button>
                   )}
@@ -491,7 +491,7 @@ const ProductDetails = ({ initial, reviews = NO_REVIEWS }: { initial: Loaded; re
                 <li className="flex items-start gap-3 p-3"><Truck className="mt-0.5 h-4 w-4 shrink-0 text-primary" /><span><strong>Livrare în 24-48h lucrătoare</strong><br /><span className="text-muted-foreground">Gratuită peste 1.000 RON, altfel 20 RON</span></span></li>
                 <li className="flex items-start gap-3 p-3"><RotateCcw className="mt-0.5 h-4 w-4 shrink-0 text-primary" /><span><strong>Retur în 14 zile</strong><br /><span className="text-muted-foreground">Conform OUG 34/2014</span></span></li>
                 <li className="flex items-start gap-3 p-3"><ShieldCheck className="mt-0.5 h-4 w-4 shrink-0 text-primary" /><span><strong>Garanție 24 de luni</strong><br /><span className="text-muted-foreground">Conformitate legală, factură cu TVA</span></span></li>
-                <li className="flex flex-wrap items-center gap-x-4 gap-y-2 p-3">
+                <li className="hidden flex-wrap items-center gap-x-4 gap-y-2 p-3 md:flex">
                   <a href={`tel:${PHONE_TEL}`} onClick={() => trackClickToCall("product-page")} className="inline-flex items-center gap-2 font-semibold hover:text-primary"><PhoneCall className="h-4 w-4 text-primary" /> {PHONE_DISPLAY}</a>
                   <a href={whatsappLink(`Bună! Mă interesează ${product.name}`)} target="_blank" rel="noopener noreferrer" onClick={() => trackClickWhatsApp("product-page")} className="inline-flex items-center gap-2 font-semibold text-primary hover:underline">
                     <MessageCircle className="h-4 w-4" /> Întreabă pe WhatsApp

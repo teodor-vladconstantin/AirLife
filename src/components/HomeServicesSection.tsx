@@ -1,7 +1,5 @@
 import { Link } from "@/lib/router";
-import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
-import { Wrench, Sparkles, Activity, MapPin, ArrowRight, CheckCircle2 } from "lucide-react";
+import { Wrench, Sparkles, Activity, ArrowRight, CheckCircle2 } from "lucide-react";
 
 const services = [
   {
@@ -32,69 +30,41 @@ const services = [
 
 export const HomeServicesSection = () => {
   return (
-    <section className="py-20 bg-secondary/20 border-y border-border/40">
+    <section className="section bg-secondary/40">
       <div className="container mx-auto px-4">
-        <div className="text-center mb-16 animate-in fade-in duration-700">
-          <div className="inline-flex items-center gap-1.5 px-3 py-1 bg-primary/10 text-primary rounded-full text-xs font-semibold mb-3">
-            <MapPin className="w-3.5 h-3.5" /> Servicii în Buzău și tot județul
-          </div>
-          <h2 className="text-3xl md:text-5xl font-bold mb-4 text-foreground">
-            Montaj și mentenanță climatizare
-          </h2>
-          <p className="text-base md:text-lg text-muted-foreground max-w-2xl mx-auto">
-            Ai nevoie de montaj, igienizare profesională sau reparație pentru aparatul tău de aer condiționat? Echipa AirLife intervine în municipiul Buzău și în tot județul.
-          </p>
+        <div className="section-head">
+          <span className="eyebrow">Servicii în Buzău și tot județul</span>
+          <h2 className="text-title mb-3">Montaj și mentenanță climatizare</h2>
+          <p className="text-lead">Ai nevoie de montaj, igienizare profesională sau reparație pentru aparatul tău de aer condiționat? Echipa AirLife intervine în municipiul Buzău și în tot județul.</p>
         </div>
 
-        <div className="grid md:grid-cols-3 gap-6 mb-10">
-          {services.map((svc, i) => {
+        <div className="grid gap-4 md:grid-cols-3 md:gap-6">
+          {services.map((svc) => {
             const Icon = svc.icon;
             return (
-              <Card
-                key={i}
-                className="flex flex-col justify-between border-border hover:border-primary/50 transition-all duration-300 hover:shadow-lg bg-card"
+              <Link
+                key={svc.slug}
+                to={`/servicii/${svc.slug}`}
+                className="group flex flex-col gap-3 rounded-xl border border-border bg-card p-6 transition-shadow hover:shadow-md"
               >
-                <CardContent className="p-6 flex flex-col h-full justify-between">
-                  <div>
-                    <div className="inline-flex items-center justify-center p-3 rounded-xl bg-primary/10 text-primary mb-4">
-                      <Icon className="w-6 h-6" />
-                    </div>
-                    <span className="text-[11px] font-semibold px-2 py-0.5 rounded-full bg-secondary text-secondary-foreground block w-fit mb-2">
-                      {svc.badge}
-                    </span>
-                    <h3 className="text-xl font-bold mb-2 text-foreground">{svc.title}</h3>
-                    <p className="text-xs text-muted-foreground mb-4 leading-relaxed">
-                      {svc.desc}
-                    </p>
-
-                    <ul className="space-y-1.5 mb-6 text-xs text-muted-foreground">
-                      {svc.features.map((f, idx) => (
-                        <li key={idx} className="flex items-center gap-2">
-                          <CheckCircle2 className="w-3.5 h-3.5 text-primary flex-shrink-0" />
-                          <span>{f}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-
-                  <Link to={`/servicii/${svc.slug}`}>
-                    <Button variant="outline" size="sm" className="w-full justify-between group">
-                      Programare &amp; Detalii
-                      <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
-                    </Button>
-                  </Link>
-                </CardContent>
-              </Card>
+                <span className="inline-flex h-12 w-12 items-center justify-center rounded-lg bg-primary/10 text-primary">
+                  <Icon className="h-6 w-6" />
+                </span>
+                <span className="w-fit rounded-full bg-secondary px-2 py-0.5 text-xs font-semibold text-secondary-foreground">{svc.badge}</span>
+                <h3 className="text-subtitle">{svc.title}</h3>
+                <p className="text-sm leading-relaxed text-muted-foreground">{svc.desc}</p>
+                <ul className="space-y-1.5 text-sm text-muted-foreground">
+                  {svc.features.map((f) => (
+                    <li key={f} className="flex items-center gap-2"><CheckCircle2 className="h-4 w-4 shrink-0 text-primary" />{f}</li>
+                  ))}
+                </ul>
+                <span className="mt-auto inline-flex items-center gap-1 pt-2 text-sm font-semibold text-primary">
+                  Detalii și programare
+                  <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+                </span>
+              </Link>
             );
           })}
-        </div>
-
-        <div className="text-center">
-          <Link to="/servicii">
-            <Button variant="link" className="h-11 text-primary font-semibold text-sm">
-              Vezi toate serviciile oferite &rarr;
-            </Button>
-          </Link>
         </div>
       </div>
     </section>

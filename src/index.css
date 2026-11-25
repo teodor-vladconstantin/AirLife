@@ -72,6 +72,11 @@ All colors MUST be HSL.
     --ring: 143 91% 35%;
 
     --radius: 0.75rem;
+
+    /* Spacing scale (4/8px). Sections use --section-y, headings use --section-gap. */
+    --section-y: 3rem;
+    --section-gap: 2rem;
+    --gutter: 1rem;
     
     --hero-gradient: linear-gradient(135deg, hsl(143 91% 35%) 0%, hsl(143 85% 26%) 100%);
     --subtle-gradient: linear-gradient(180deg, hsl(0 0% 100%) 0%, hsl(135 22% 96%) 100%);
@@ -134,6 +139,25 @@ All colors MUST be HSL.
     --sidebar-border: 240 3.7% 15.9%;
     --sidebar-ring: 217.2 91.2% 59.8%;
   }
+}
+
+@media (min-width: 768px) {
+  :root {
+    --section-y: 5rem;
+    --section-gap: 3rem;
+  }
+}
+
+/* Shared type and layout roles: use these instead of ad-hoc font sizes and section padding on each page. */
+@layer components {
+  .section { padding-block: var(--section-y); }
+  .section-head { margin: 0 auto var(--section-gap); max-width: 42rem; text-align: center; }
+  .eyebrow { @apply mb-2 block text-xs font-semibold uppercase tracking-wider text-primary; }
+  .text-display { @apply text-4xl font-bold leading-tight tracking-tight md:text-6xl; }
+  .text-title { @apply text-2xl font-bold leading-tight tracking-tight text-foreground md:text-4xl; }
+  .text-subtitle { @apply text-lg font-semibold text-foreground; }
+  .text-lead { @apply text-base leading-relaxed text-muted-foreground md:text-lg; }
+  .text-price { @apply text-3xl font-bold tracking-tight text-foreground sm:text-4xl; }
 }
 
 @layer base {

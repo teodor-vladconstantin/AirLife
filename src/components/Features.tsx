@@ -25,30 +25,23 @@ const features = [
 
 const Features = () => {
   return (
-    <section className="py-20 bg-background">
+    <section className="section bg-background">
       <div className="container mx-auto px-4">
-        <div className="text-center mb-16 animate-in fade-in duration-700">
-          <h2 className="text-3xl md:text-5xl font-bold mb-4 text-foreground">
-            De ce să lucrezi cu AirLife?
-          </h2>
-          <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            Prioritizăm corectitudinea tehnică, transparența costurilor și respectul pentru casa ta.
-          </p>
+        <div className="section-head">
+          <h2 className="text-title mb-3">De ce să lucrezi cu AirLife?</h2>
+          <p className="text-lead">Prioritizăm corectitudinea tehnică, transparența costurilor și respectul pentru casa ta.</p>
         </div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-          {features.map((feature, index) => {
+        <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4">
+          {features.map((feature) => {
             const Icon = feature.icon;
             return (
-              <div
-                key={index}
-                className="text-center group p-6 rounded-2xl bg-card border border-border/60 hover:border-primary/40 transition-all duration-300 shadow-sm hover:shadow-md"
-              >
-                <div className="inline-flex items-center justify-center w-14 h-14 bg-primary/10 text-primary rounded-xl mb-5 transition-transform duration-300 group-hover:scale-110">
-                  <Icon className="w-7 h-7" />
-                </div>
-                <h3 className="text-lg font-bold mb-2 text-foreground">{feature.title}</h3>
-                <p className="text-sm text-muted-foreground leading-relaxed">{feature.description}</p>
+              <div key={feature.title} className="flex flex-col items-center gap-2 text-center">
+                <span className="mb-1 inline-flex h-12 w-12 items-center justify-center rounded-lg bg-primary/10 text-primary">
+                  <Icon className="h-6 w-6" />
+                </span>
+                <h3 className="text-subtitle">{feature.title}</h3>
+                <p className="text-sm leading-relaxed text-muted-foreground">{feature.description}</p>
               </div>
             );
           })}

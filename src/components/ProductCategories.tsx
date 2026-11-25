@@ -1,48 +1,67 @@
 import { Link } from "@/lib/router";
-import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
 import type { CategorySummary } from "@/lib/catalog";
 
+const FEATURED = 6;
+
 // Cards come from the database: only categories that have real products with photos.
+// Home shows the 6 biggest; the rest live in the menu and on /produse.
 const ProductCategories = ({ categories }: { categories: CategorySummary[] }) => {
   if (!categories.length) return null;
+  const sorted = [...categories].sort((a, b) => b.count - a.count);
+  const shown = sorted.filter((c) => c.image).slice(0, FEATURED);
+  const rest = sorted.filter((c) => !shown.includes(c));
   return (
-    <section className="py-20 bg-gradient-to-b from-background to-secondary/30">
+    <section className="section bg-background">
       <div className="container mx-auto px-4">
-        <div className="text-center mb-16 animate-in fade-in duration-700">
-          <span className="text-xs font-semibold uppercase tracking-wider text-primary mb-2 block">Magazin online HVAC</span>
-          <h2 className="text-3xl md:text-5xl font-bold mb-4 text-foreground">Categorii de produse</h2>
-          <p className="text-base md:text-lg text-muted-foreground max-w-2xl mx-auto">
-            Aparate, ventilație și accesorii pentru un aer curat acasă sau la birou. Livrare prin curier în toată țara.
-          </p>
+        <div className="section-head">
+          <span className="eyebrow">Magazin online HVAC</span>
+          <h2 className="text-title mb-3">Categorii de produse</h2>
+          <p className="text-lead">Aparate, ventilație și accesorii pentru un aer curat acasă sau la birou. Livrare prin curier în toată țara.</p>
         </div>
 
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {categories.map((c) => (
-            <Card key={c.slug} className="group flex flex-col justify-between overflow-hidden border-border/60 hover:border-primary/40 transition-all duration-300 hover:shadow-lg bg-card">
-              <div>
-                <div className="relative h-48 bg-white flex items-center justify-center p-4 border-b border-border/40">
-                  <img src={c.image} alt={`${c.name} - AirLife Buzău`} className="max-h-full max-w-full object-contain group-hover:scale-105 transition-transform duration-500" loading="lazy" />
-                </div>
-                <div className="p-5">
-                  <h3 className="text-lg font-bold mb-2 text-foreground group-hover:text-primary transition-colors">{c.title}</h3>
-                  <p className="text-xs text-muted-foreground mb-3 leading-relaxed line-clamp-3">{c.description}</p>
-                  <span className="px-2 py-0.5 bg-primary/10 text-primary text-[11px] font-medium rounded-md">
-                    {c.count} {c.count === 1 ? "produs" : "produse"}
-                  </span>
-                </div>
+        <div className="grid grid-cols-2 gap-3 md:gap-6 lg:grid-cols-3">
+          {shown.map((c) => (
+            <Link
+              key={c.slug}
+              to={`/${c.slug}`}
+              className="group flex flex-col overflow-hidden rounded-xl border border-border bg-card transition-shadow hover:shadow-md"
+            >
+              <div className="aspect-[4/3] border-b border-border/60 bg-white p-4">
+                <img src={c.image} alt={`${c.name} - AirLife Buzău`} className="h-full w-full object-contain transition-transform duration-500 group-hover:scale-105" loading="lazy" />
               </div>
-              <div className="p-5 pt-0">
-                <Link to={`/${c.slug}`} className="w-full block">
-                  <Button variant="outline" size="sm" className="w-full justify-between text-xs group-hover:border-primary/40 group-hover:bg-primary/5">
-                    Explorează categoria
-                    <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
-                  </Button>
-                </Link>
+              <div className="flex flex-1 flex-col gap-1 p-4">
+                <h3 className="text-sm font-bold leading-snug text-foreground group-hover:text-primary md:text-base">{c.title}</h3>
+                <p className="line-clamp-2 text-xs leading-relaxed text-muted-foreground">{c.description}</p>
+                <p className="mt-auto pt-1 text-xs font-medium text-primary">{c.count} {c.count === 1 ? "produs" : "produse"}</p>
               </div>
-            </Card>
+            </Link>
           ))}
+        </div>
+
+        {rest.length > 0 && (
+          <nav aria-label="Toate categoriile" className="mt-8">
+            <p className="mb-3 text-center text-sm font-semibold text-foreground">Alte categorii</p>
+            <ul className="flex flex-wrap justify-center gap-2">
+              {rest.map((c) => (
+                <li key={c.slug}>
+                  <Link to={`/${c.slug}`} className="inline-flex min-h-11 items-center rounded-full border border-border bg-card px-4 text-sm font-medium text-foreground hover:border-primary hover:text-primary">
+                    {c.title}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </nav>
+        )}
+
+        <div className="mt-8 text-center">
+          <Link to="/produse">
+            <Button variant="outline" size="lg" className="group">
+              Vezi toate produsele
+              <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
+            </Button>
+          </Link>
         </div>
       </div>
     </section>
