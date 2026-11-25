@@ -31,11 +31,3 @@ nul
 !.env.example
 supabase/.temp/
 2026-*-claude-*.txt
-
-.vercel
-.env*
-
-.next
-next-env.d.ts
-gbp-photos/
-.env.local

@@ -1,11 +1,14 @@
+body {
+  cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"><circle cx="12" cy="12" r="6" fill="%2322c55e"/></svg>') 12 12, auto;
+}
 /* Brand selection color: must be after all Tailwind/base layers to override */
 ::selection {
-  background: #08AC48 !important; /* Verde AirLife (brand book) */
-  color: #0F2A1D !important; /* dark text on AirLife green: white only has 3:1 */
+  background: #22c55e !important; /* Tailwind green-500 */
+  color: #fff !important;
 }
 ::-moz-selection {
-  background: #08AC48 !important;
-  color: #0F2A1D !important;
+  background: #22c55e !important;
+  color: #fff !important;
 }
 @tailwind base;
 @tailwind components;
@@ -15,79 +18,44 @@
 All colors MUST be HSL.
 */
 
-/* Native form controls that are not replaced by a component still follow the AirLife brand. */
-@layer base {
-  :root { accent-color: #08AC48; color-scheme: light; } /* Verde AirLife: checkboxes, radios, range, progress */
-  .dark { color-scheme: dark; }
-  input[type="number"]::-webkit-inner-spin-button,
-  input[type="number"]::-webkit-outer-spin-button { -webkit-appearance: none; margin: 0; }
-  input[type="number"] { -moz-appearance: textfield; appearance: textfield; }
-  input[type="search"]::-webkit-search-cancel-button { -webkit-appearance: none; appearance: none; }
-  input::file-selector-button {
-    margin-right: 0.75rem; border: 0; border-radius: calc(var(--radius) - 4px);
-    background: hsl(var(--accent)); color: hsl(var(--primary)); font-weight: 600; padding: 0.4rem 0.9rem; cursor: pointer;
-  }
-  input:-webkit-autofill, textarea:-webkit-autofill, select:-webkit-autofill {
-    -webkit-text-fill-color: hsl(var(--foreground));
-    box-shadow: 0 0 0 1000px hsl(var(--accent)) inset;
-    transition: background-color 9999s ease-out 0s;
-  }
-  select {
-    appearance: none; -webkit-appearance: none; border-radius: calc(var(--radius) - 2px);
-    padding-right: 2.25rem;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%230A7A35' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
-    background-repeat: no-repeat; background-position: right 0.75rem center;
-  }
-  * { scrollbar-color: hsl(var(--primary) / 0.35) transparent; }
-}
-
 @layer base {
   :root {
     --background: 0 0% 100%;
-    --foreground: 151 47% 11%;
+    --foreground: 160 20% 15%;
 
     --card: 0 0% 100%;
-    --card-foreground: 151 47% 11%;
+    --card-foreground: 160 20% 15%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 151 47% 11%;
+    --popover-foreground: 160 20% 15%;
 
-    --primary: 143 85% 26%;
+    --primary: 145 65% 45%;
     --primary-foreground: 0 0% 100%;
 
-    --secondary: 135 22% 96%;
-    --secondary-foreground: 143 85% 26%;
+    --secondary: 145 30% 95%;
+    --secondary-foreground: 145 65% 25%;
 
-    --muted: 135 22% 96%;
-    --muted-foreground: 149 12% 33%;
+    --muted: 145 20% 96%;
+    --muted-foreground: 160 10% 50%;
 
-    --accent: 146 44% 94%;
-    --accent-foreground: 151 47% 11%;
+    --accent: 145 65% 45%;
+    --accent-foreground: 0 0% 100%;
 
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 0 0% 100%;
 
     --border: 145 20% 90%;
     --input: 145 20% 90%;
-    --ring: 143 91% 35%;
+    --ring: 145 65% 45%;
 
     --radius: 0.75rem;
-
-    /* Brand Book p.10, accent mov (test): only for the promo bar. #7C3AED, white text = 5.7:1 */
-    --promo: 262 83% 58%;
-    --promo-foreground: 0 0% 100%;
-
-    /* Spacing scale (4/8px). Sections use --section-y, headings use --section-gap. */
-    --section-y: 3rem;
-    --section-gap: 2rem;
-    --gutter: 1rem;
     
-    --hero-gradient: linear-gradient(135deg, hsl(143 91% 35%) 0%, hsl(143 85% 26%) 100%);
-    --subtle-gradient: linear-gradient(180deg, hsl(0 0% 100%) 0%, hsl(135 22% 96%) 100%);
+    --hero-gradient: linear-gradient(135deg, hsl(145 65% 45%) 0%, hsl(145 65% 55%) 100%);
+    --subtle-gradient: linear-gradient(180deg, hsl(0 0% 100%) 0%, hsl(145 30% 98%) 100%);
     
     --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    --shadow-soft: 0 4px 20px -4px hsl(143 91% 35% / 0.15);
-    --shadow-hover: 0 8px 30px -6px hsl(143 91% 35% / 0.25);
+    --shadow-soft: 0 4px 20px -4px hsl(145 40% 45% / 0.15);
+    --shadow-hover: 0 8px 30px -6px hsl(145 40% 45% / 0.25);
 
     --sidebar-background: 0 0% 98%;
 
@@ -107,8 +75,8 @@ All colors MUST be HSL.
   }
 
   .dark {
-    --background: 151 47% 11%;
-    --foreground: 135 22% 96%;
+    --background: 160 20% 10%;
+    --foreground: 145 20% 95%;
 
     --card: 160 20% 12%;
     --card-foreground: 145 20% 95%;
@@ -116,8 +84,8 @@ All colors MUST be HSL.
     --popover: 160 20% 12%;
     --popover-foreground: 145 20% 95%;
 
-    --primary: 143 91% 35%;
-    --primary-foreground: 151 47% 11%;
+    --primary: 145 65% 50%;
+    --primary-foreground: 160 20% 10%;
 
     --secondary: 160 20% 18%;
     --secondary-foreground: 145 20% 95%;
@@ -125,15 +93,15 @@ All colors MUST be HSL.
     --muted: 160 20% 18%;
     --muted-foreground: 145 20% 70%;
 
-    --accent: 145 25% 22%;
-    --accent-foreground: 145 20% 95%;
+    --accent: 145 65% 45%;
+    --accent-foreground: 0 0% 100%;
 
     --destructive: 0 62.8% 50%;
     --destructive-foreground: 0 0% 100%;
 
     --border: 160 20% 22%;
     --input: 160 20% 22%;
-    --ring: 143 91% 35%;
+    --ring: 145 65% 50%;
     --sidebar-background: 240 5.9% 10%;
     --sidebar-foreground: 240 4.8% 95.9%;
     --sidebar-primary: 224.3 76.3% 48%;
@@ -145,25 +113,6 @@ All colors MUST be HSL.
   }
 }
 
-@media (min-width: 768px) {
-  :root {
-    --section-y: 5rem;
-    --section-gap: 3rem;
-  }
-}
-
-/* Shared type and layout roles: use these instead of ad-hoc font sizes and section padding on each page. */
-@layer components {
-  .section { padding-block: var(--section-y); }
-  .section-head { margin: 0 auto var(--section-gap); max-width: 42rem; text-align: center; }
-  .eyebrow { @apply mb-2 block text-xs font-semibold uppercase tracking-wider text-primary; }
-  .text-display { @apply text-3xl font-semibold leading-tight tracking-tight sm:text-4xl md:text-6xl; }
-  .text-title { @apply text-2xl font-semibold leading-tight tracking-tight text-foreground md:text-4xl; }
-  .text-subtitle { @apply text-lg font-semibold text-foreground; }
-  .text-lead { @apply text-base leading-relaxed text-muted-foreground md:text-lg; }
-  .text-price { @apply text-3xl font-bold tracking-tight text-foreground sm:text-4xl; }
-}
-
 @layer base {
   * {
     @apply border-border;
@@ -171,6 +120,5 @@ All colors MUST be HSL.
 
   body {
     @apply bg-background text-foreground;
-    overflow-x: clip;
   }
 }

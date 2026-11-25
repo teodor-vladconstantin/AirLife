@@ -1,5 +1,4 @@
 import { Button } from "@/components/ui/button";
-import { thumbUrl, fallbackTo } from "@/lib/thumb";
 import { Minus, Plus, Trash2 } from "lucide-react";
 import { CartItem as CartItemType } from "@/contexts/CartContext";
 
@@ -18,8 +17,7 @@ export const CartItem = ({ item, onUpdateQuantity, onRemove }: CartItemProps) =>
       <div className="w-20 h-20 flex-shrink-0 bg-secondary rounded-lg overflow-hidden">
         {item.image_url ? (
           <img
-            src={thumbUrl(item.image_url)}
-            onError={fallbackTo(item.image_url)}
+            src={item.image_url}
             alt={item.name}
             className="w-full h-full object-cover"
           />
@@ -32,7 +30,7 @@ export const CartItem = ({ item, onUpdateQuantity, onRemove }: CartItemProps) =>
 
       {/* Product Info */}
       <div className="flex-1 min-w-0">
-        <h4 className="line-clamp-2 break-words text-sm font-semibold">{item.name}</h4>
+        <h4 className="font-semibold text-sm truncate">{item.name}</h4>
         <p className="text-xs text-muted-foreground mt-1">{item.category}</p>
         <p className="text-sm font-bold text-primary mt-2">{item.price.toFixed(2)} RON</p>
 
@@ -59,13 +57,11 @@ export const CartItem = ({ item, onUpdateQuantity, onRemove }: CartItemProps) =>
           </Button>
           <Button
             variant="ghost"
-            size="sm"
-            className="ml-auto h-8 gap-1 px-2 text-destructive hover:text-destructive"
+            size="icon"
+            className="h-7 w-7 ml-auto text-destructive hover:text-destructive"
             onClick={() => onRemove(item.product_id)}
-            aria-label={`Elimină ${item.name} din coș`}
           >
             <Trash2 className="h-4 w-4" />
-            <span className="text-xs">Elimină</span>
           </Button>
         </div>
 

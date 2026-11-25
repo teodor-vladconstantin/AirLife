@@ -1,72 +1,93 @@
-import { Link } from "@/lib/router";
+import { Link } from "react-router-dom";
+import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { ArrowRight } from "lucide-react";
-import { thumbUrl, fallbackTo } from "@/lib/thumb";
-import type { CategorySummary } from "@/lib/catalog";
+import { Wind, Droplets, Sparkles } from "lucide-react";
+import airConditioner from "@/assets/air-conditioner.jpg";
+import dehumidifier from "@/assets/dehumidifier.jpg";
+import airPurifier from "@/assets/air-purifier.jpg";
 
-// Order chosen by the owner: dezumidificatoare, umidificatoare, purificatoare, aeroterme, ventilatoare, monitoare calitate
-// aer, ventilatoare baie, aere condiționate, recuperatoare de căldură. The cards show these; every other category follows
-// as a link below, so all of them stay one click away.
-const ORDER = [
-  "dezumidificatoare", "umidificatoare", "purificatoare-aer", "aeroterme", "ventilatoare", "monitoare-calitate-aer",
-  "ventilatoare-baie", "aer-conditionat", "aer-conditionat-fara-unitate-exterioara", "aer-conditionat-portabil", "recuperatoare-caldura",
+const categories = [
+  {
+    title: "Aer Condiționat",
+    description: "Climatizare eficientă cu tehnologie eco-friendly. Confort maxim, consum minim.",
+    icon: Wind,
+    image: airConditioner,
+    features: ["A+++", "Inverter", "Wi-Fi"]
+  },
+  {
+    title: "Dezumidificatoare",
+    description: "Controlează umiditatea pentru un mediu sănătos. Previn mucegaiul și alergiile.",
+    icon: Droplets,
+    image: dehumidifier,
+    features: ["Silențios", "Auto-stop", "Eficient"]
+  },
+  {
+    title: "Purificatoare Aer",
+    description: "Elimină poluanții, alergenii și virușii. Aer pur pentru toată familia.",
+    icon: Sparkles,
+    image: airPurifier,
+    features: ["HEPA", "Ionizare", "Smart"]
+  }
 ];
 
-// Cards come from the database: only categories that have real products with photos.
-const ProductCategories = ({ categories }: { categories: CategorySummary[] }) => {
-  if (!categories.length) return null;
-  const shown = ORDER.map((slug) => categories.find((c) => c.slug === slug)).filter((c): c is CategorySummary => !!c && !!c.image);
-  const rest = [...categories].filter((c) => !shown.includes(c)).sort((a, b) => b.count - a.count);
+const ProductCategories = () => {
   return (
-    <section className="section bg-background">
+    <section className="py-24 bg-gradient-to-b from-background to-secondary/30">
       <div className="container mx-auto px-4">
-        <div className="section-head">
-          <span className="eyebrow">Magazin online HVAC</span>
-          <h2 className="text-title mb-3">Categorii de produse</h2>
-          <p className="text-lead">Aparate, ventilație și accesorii pentru un aer curat acasă sau la birou. Livrare prin curier în toată țara.</p>
+        <div className="text-center mb-16 animate-in fade-in duration-700">
+          <h2 className="text-4xl md:text-5xl font-bold mb-4 text-foreground">
+            Gama Noastră de Produse
+          </h2>
+          <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
+            Soluții complete pentru confortul și sănătatea ta
+          </p>
         </div>
 
-        <div className="grid grid-cols-2 gap-3 md:gap-6 lg:grid-cols-3">
-          {shown.map((c) => (
-            <Link
-              key={c.slug}
-              to={`/${c.slug}`}
-              className="group flex flex-col"
-            >
-              <div className="aspect-[4/3] overflow-hidden rounded-xl bg-secondary/70 p-4">
-                <img src={thumbUrl(c.image)} onError={fallbackTo(c.image)} alt={`${c.name} - AirLife Buzău`} className="h-full w-full object-contain mix-blend-multiply transition-transform duration-500 group-hover:scale-105" loading="lazy" />
-              </div>
-              <div className="flex flex-1 flex-col gap-1 pt-3">
-                <h3 className="text-sm font-bold leading-snug text-foreground group-hover:text-primary md:text-base">{c.title}</h3>
-                <p className="line-clamp-2 text-xs leading-relaxed text-muted-foreground">{c.description}</p>
-                <p className="mt-auto pt-1 text-xs font-medium text-primary">{c.count} {c.count === 1 ? "produs" : "produse"}</p>
-              </div>
-            </Link>
-          ))}
-        </div>
-
-        {rest.length > 0 && (
-          <nav aria-label="Toate categoriile" className="mt-8">
-            <p className="mb-3 text-center text-sm font-semibold text-foreground">Și alte categorii</p>
-            <ul className="flex flex-wrap justify-center gap-2">
-              {rest.map((c) => (
-                <li key={c.slug}>
-                  <Link to={`/${c.slug}`} className="inline-flex min-h-11 items-center rounded-full border border-border bg-card px-4 text-sm font-medium text-foreground hover:border-primary hover:text-primary">
-                    {c.title}
+        <div className="grid md:grid-cols-3 gap-8">
+          {categories.map((category, index) => {
+            const Icon = category.icon;
+            return (
+              <Card
+                key={index}
+                className="group overflow-hidden border-border/50 hover:border-primary/30 transition-opacity duration-400 will-change-opacity hover:opacity-90 bg-card/50 backdrop-blur-sm animate-in fade-in"
+                style={{ animationDelay: `${(index + 2) * 150}ms`, animationDuration: '600ms' }}
+              >
+                <div className="relative h-64 overflow-hidden">
+                  <img 
+                    src={category.image} 
+                    alt={category.title}
+                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-card via-transparent to-transparent opacity-90" />
+                  <div className="absolute bottom-4 left-4 bg-primary text-primary-foreground p-3 rounded-full">
+                    <Icon className="w-6 h-6" />
+                  </div>
+                </div>
+                
+                <div className="p-6">
+                  <h3 className="text-2xl font-bold mb-3 text-foreground">{category.title}</h3>
+                  <p className="text-muted-foreground mb-4">{category.description}</p>
+                  
+                  <div className="flex gap-2 mb-6">
+                    {category.features.map((feature, idx) => (
+                      <span 
+                        key={idx}
+                        className="px-3 py-1 bg-primary/10 text-primary text-sm rounded-full border border-primary/20"
+                      >
+                        {feature}
+                      </span>
+                    ))}
+                  </div>
+                  
+                    <Link to="/products" className="w-full">
+                    <Button variant="outline" className="w-full border-primary/30 text-primary hover:bg-primary/5 hover:text-foreground transition-all duration-300 hover:-translate-y-1 hover:shadow-md">
+                      Vezi Produsele
+                    </Button>
                   </Link>
-                </li>
-              ))}
-            </ul>
-          </nav>
-        )}
-
-        <div className="mt-8 text-center">
-          <Link to="/produse" className="inline-block">
-            <Button variant="outline" size="lg" className="group">
-              Vezi toate produsele
-              <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
-            </Button>
-          </Link>
+                </div>
+              </Card>
+            );
+          })}
         </div>
       </div>
     </section>

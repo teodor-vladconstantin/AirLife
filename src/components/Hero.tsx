@@ -1,60 +1,62 @@
-import { Link } from "@/lib/router";
+import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { ArrowRight, MapPin } from "lucide-react";
-import hero1920 from "@/assets/hero-image-1920.webp";
-import hero1024 from "@/assets/hero-image-1024.webp";
+import { ArrowRight, Leaf } from "lucide-react";
+import heroImage from "@/assets/hero-image.jpg";
 
 const Hero = () => {
   return (
-    <section className="relative flex min-h-[60vh] items-center justify-center overflow-hidden bg-foreground md:min-h-[70vh]">
+    <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-background via-secondary to-background">
       <div className="absolute inset-0">
-        <img
-          src={hero1920.src}
-          srcSet={`${hero1024.src} 1024w, ${hero1920.src} 1920w`}
-          sizes="100vw"
-          width={1920}
-          height={1080}
-          alt="Soluții climatizare și HVAC în Buzău - AirLife"
-          className="h-full w-full object-cover"
-          loading="eager"
-          // React 18 has no fetchPriority prop; the lowercase attribute is passed to the DOM as is
-          {...{ fetchpriority: "high" }}
+        <img 
+          src={heroImage} 
+          alt="Eco-friendly HVAC solutions" 
+          className="w-full h-full object-cover"
         />
-        <div className="absolute inset-0 bg-black/65" />
+        <div className="absolute inset-0 bg-black/60" />
       </div>
-
-      <div className="container relative z-10 mx-auto px-4 py-16 text-center md:py-24">
-        <p className="mb-4 flex items-center justify-center gap-2 text-sm font-medium text-white animate-in fade-in duration-700">
-          <MapPin className="h-4 w-4 text-brandlight" />
-          Magazin HVAC Online &amp; Servicii în Buzău
-        </p>
-
-        <h1
-          className="text-display mx-auto mb-4 max-w-3xl text-white animate-in fade-in duration-700"
-          style={{ textShadow: "0 2px 16px rgba(0,0,0,0.4)" }}
-        >
-          Magazin HVAC și Servicii <br />
-          <span className="text-brandlight">Aer Condiționat Buzău</span>
-        </h1>
-
-        <p className="mx-auto mb-8 max-w-xl text-base leading-relaxed text-white md:text-lg animate-in fade-in duration-700">
-          Aparate de aer condiționat și ventilație cu livrare rapidă în toată țara, plus montaj, igienizare și service aer condiționat în Buzău și tot județul.
-        </p>
-
-        <div className="flex flex-col items-center justify-center gap-3 sm:flex-row animate-in fade-in duration-700">
-          <Link to="/produse" className="w-full sm:w-auto">
-            <Button size="lg" className="group w-full sm:w-auto">
-              Vezi produsele
-              <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
-            </Button>
-          </Link>
-          <Link to="/servicii" className="w-full sm:w-auto">
-            <Button size="lg" variant="ghost" className="w-full text-white hover:bg-white/10 hover:text-white sm:w-auto">
-              Servicii montaj
-            </Button>
-          </Link>
+      
+      <div className="relative z-10 container mx-auto px-4 py-20 text-center">
+        <div className="inline-flex items-center gap-2 px-4 py-2 bg-primary/10 border border-primary/20 rounded-full mb-8 animate-in fade-in duration-700">
+          <Leaf className="w-4 h-4 text-primary" />
+          <span className="text-sm font-medium text-primary">100% Eco-Friendly</span>
         </div>
 
+        <h1 className="text-5xl md:text-7xl font-bold mb-6 text-white leading-tight animate-in fade-in duration-700" style={{textShadow: '0 2px 16px rgba(0,0,0,0.32)'}}>
+          Aer Curat,<br />
+          <span className="text-primary">Viață Pură</span>
+        </h1>
+
+        <p className="text-xl md:text-2xl text-white mb-12 max-w-3xl mx-auto animate-in fade-in duration-700" style={{textShadow: '0 2px 12px rgba(0,0,0,0.24)'}}>
+          Soluții HVAC sustenabile pentru o casă mai sănătoasă și un mediu mai curat.
+          Economisește energie, respiră aer pur.
+        </p>
+
+        <div className="flex flex-col sm:flex-row gap-4 justify-center items-center animate-in fade-in duration-700">
+          <Link to="/products">
+            <Button size="lg" className="bg-primary hover:bg-primary/90 text-primary-foreground shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1 group">
+              Descoperă Produsele
+              <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
+            </Button>
+          </Link>
+          <Button size="lg" variant="outline" className="border-primary text-primary hover:bg-primary/5 hover:text-primary-foreground transition-all duration-300 hover:-translate-y-1">
+            Află Mai Multe
+          </Button>
+        </div>
+
+        <div className="grid grid-cols-3 gap-8 max-w-2xl mx-auto mt-20 pt-12 border-t border-border/50">
+          <div className="text-center animate-in fade-in duration-700">
+            <div className="text-3xl font-bold text-primary mb-2" style={{textShadow: '0 2px 12px rgba(0,0,0,0.24)'}}>95%</div>
+            <div className="text-sm text-white" style={{textShadow: '0 2px 8px rgba(0,0,0,0.18)'}}>Eficiență Energetică</div>
+          </div>
+          <div className="text-center animate-in fade-in duration-700">
+            <div className="text-3xl font-bold text-primary mb-2" style={{textShadow: '0 2px 12px rgba(0,0,0,0.24)'}}>10+</div>
+            <div className="text-sm text-white" style={{textShadow: '0 2px 8px rgba(0,0,0,0.18)'}}>Ani Garanție</div>
+          </div>
+          <div className="text-center animate-in fade-in duration-700">
+            <div className="text-3xl font-bold text-primary mb-2" style={{textShadow: '0 2px 12px rgba(0,0,0,0.24)'}}>5000+</div>
+            <div className="text-sm text-white" style={{textShadow: '0 2px 8px rgba(0,0,0,0.18)'}}>Clienți Fericiți</div>
+          </div>
+        </div>
       </div>
     </section>
   );

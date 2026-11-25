@@ -1,6 +1,4 @@
 import type { Config } from "tailwindcss";
-import tailwindcssAnimate from "tailwindcss-animate";
-import typography from "@tailwindcss/typography";
 
 export default {
   darkMode: ["class"],
@@ -24,12 +22,6 @@ export default {
         ring: "hsl(var(--ring))",
         background: "hsl(var(--background))",
         foreground: "hsl(var(--foreground))",
-        // light green for text/icons on dark backgrounds (hero, footer); --primary is darker for contrast on white
-        brandlight: "hsl(143 91% 35%)",
-        promo: {
-          DEFAULT: "hsl(var(--promo))",
-          foreground: "hsl(var(--promo-foreground))",
-        },
         primary: {
           DEFAULT: "hsl(var(--primary))",
           foreground: "hsl(var(--primary-foreground))",
@@ -91,10 +83,6 @@ export default {
             height: "0",
           },
         },
-        marquee: {
-          from: { transform: "translateX(0)" },
-          to: { transform: "translateX(-50%)" },
-        },
         "fade-in": {
           "0%": {
             opacity: "0",
@@ -119,11 +107,10 @@ export default {
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
-        marquee: "marquee 45s linear infinite",
         "fade-in": "fade-in 0.6s ease-out",
         "scale-in": "scale-in 0.4s ease-out",
       },
     },
   },
-  plugins: [tailwindcssAnimate, typography],
+  plugins: [require("tailwindcss-animate")],
 } satisfies Config;

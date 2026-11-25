@@ -1,5 +1,4 @@
 import { Badge } from "@/components/ui/badge";
-import { orderStatusLabel } from "@/lib/orderStatus";
 
 interface OrderStatusBadgeProps {
   status: string;
@@ -23,7 +22,24 @@ export const OrderStatusBadge = ({ status }: OrderStatusBadgeProps) => {
     }
   };
 
-  const getLabel = () => orderStatusLabel(status);
+  const getLabel = () => {
+    switch (status) {
+      case "pending":
+        return "În așteptare";
+      case "confirmed":
+        return "Confirmată";
+      case "processing":
+        return "În procesare";
+      case "shipped":
+        return "Expediată";
+      case "delivered":
+        return "Livrată";
+      case "cancelled":
+        return "Anulată";
+      default:
+        return status;
+    }
+  };
 
   return <Badge variant={getVariant()}>{getLabel()}</Badge>;
 };
