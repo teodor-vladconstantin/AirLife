@@ -4,7 +4,6 @@ import { createPortal } from "react-dom";
 import { useBarOffset } from "@/lib/bars";
 import { Link, useNavigate } from "@/lib/router";
 import type { loadProduct, Product, ReviewData } from "@/lib/catalog";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { ProductReviews, Stars } from "@/components/shop/ProductReviews";
 import { StockAlertForm } from "@/components/shop/StockAlertForm";
 import { WishlistButton } from "@/components/shop/WishlistButton";
@@ -501,16 +500,11 @@ const ProductDetails = ({ initial, reviews = NO_REVIEWS }: { initial: Loaded; re
             </div>
           </div>
 
-          {/* Details tabs */}
-          <Tabs defaultValue="descriere" className="mb-12">
-            <TabsList className="h-auto w-full justify-start overflow-x-auto">
-              <TabsTrigger value="descriere">Descriere</TabsTrigger>
-              <TabsTrigger value="specificatii">Specificații</TabsTrigger>
-              <TabsTrigger value="livrare">Livrare și retur</TabsTrigger>
-            </TabsList>
-            <TabsContent value="descriere" className="mt-4 rounded-xl border border-border bg-card p-5">
-              <h2 className="mb-3 text-lg font-bold text-foreground">Despre {product.name}</h2>
-              <p className="whitespace-pre-line text-sm leading-relaxed text-muted-foreground">{product.description}</p>
+          {/* Details: stacked sections instead of tabs (content hidden in tabs gets overlooked) */}
+          <div className="mb-12 divide-y divide-border">
+            <section className="pb-8" aria-labelledby="desc-h">
+              <h2 id="desc-h" className="mb-3 text-xl font-bold text-foreground">Despre {product.name}</h2>
+              <p className="whitespace-pre-line text-sm leading-relaxed text-muted-foreground md:text-base">{product.description}</p>
               {product.features.length > 0 && (
                 <ul className="mt-4 grid gap-2 sm:grid-cols-2">
                   {product.features.map((f, i) => (
@@ -518,21 +512,21 @@ const ProductDetails = ({ initial, reviews = NO_REVIEWS }: { initial: Loaded; re
                   ))}
                 </ul>
               )}
-            </TabsContent>
-            <TabsContent value="specificatii" className="mt-4 rounded-xl border border-border bg-card p-5">
-              <h2 className="mb-3 text-lg font-bold text-foreground">Specificații tehnice</h2>
+            </section>
+            <section className="py-8" aria-labelledby="spec-h">
+              <h2 id="spec-h" className="mb-3 text-xl font-bold text-foreground">Specificații tehnice</h2>
               <dl className="divide-y text-sm">
                 {specRows.map(([k, v]) => (
                   <div key={k} className="grid grid-cols-2 gap-4 py-2 sm:grid-cols-[14rem_1fr]"><dt className="text-muted-foreground">{k}</dt><dd className="font-medium">{v}</dd></div>
                 ))}
               </dl>
-            </TabsContent>
-            <TabsContent value="livrare" className="mt-4 rounded-xl border border-border bg-card p-5 text-sm leading-relaxed text-muted-foreground">
-              <h2 className="mb-3 text-lg font-bold text-foreground">Livrare și retur</h2>
+            </section>
+            <section className="pt-8 text-sm leading-relaxed text-muted-foreground" aria-labelledby="ship-h">
+              <h2 id="ship-h" className="mb-3 text-xl font-bold text-foreground">Livrare și retur</h2>
               <p>Comenzile se expediază în 24-48h lucrătoare, cu curier, în toată țara. Livrarea este gratuită pentru comenzi de peste 1.000 RON; sub această valoare transportul costă 20 RON.</p>
               <p className="mt-2">Ai 14 zile să te răzgândești, conform OUG 34/2014. Produsele au garanție de 24 de luni. Detalii complete: <Link to="/livrare-si-retur" className="font-medium text-primary hover:underline">Livrare și retur</Link>.</p>
-            </TabsContent>
-          </Tabs>
+            </section>
+          </div>
 
           <ProductReviews productId={product.id} data={reviews} />
 

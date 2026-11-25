@@ -55,10 +55,10 @@ const Hero = () => {
           </Link>
         </div>
 
-        <ul className="mx-auto mt-10 grid max-w-3xl gap-4 border-t border-white/20 pt-6 text-white sm:grid-cols-3">
-          <li><MapPin className="mx-auto mb-1 h-5 w-5 text-brandlight" /><span className="block font-semibold">Buzău &amp; Județ</span><span className="block text-sm">Montaj &amp; igienizare</span></li>
-          <li><Truck className="mx-auto mb-1 h-5 w-5 text-brandlight" /><span className="block font-semibold">Livrare Rapidă</span><span className="block text-sm">Gratuit peste 1000 RON</span></li>
-          <li><ShieldCheck className="mx-auto mb-1 h-5 w-5 text-brandlight" /><span className="block font-semibold">Garanție Legală</span><span className="block text-sm">24 luni persoane fizice</span></li>
+        <ul className="mx-auto mt-10 grid max-w-3xl grid-cols-3 gap-2 border-t border-white/20 pt-5 text-xs text-white sm:gap-4 sm:pt-6 sm:text-base">
+          <li><MapPin className="mx-auto mb-1 h-4 w-4 sm:h-5 sm:w-5 text-brandlight" /><span className="block font-semibold">Buzău &amp; Județ</span><span className="hidden text-sm sm:block">Montaj &amp; igienizare</span></li>
+          <li><Truck className="mx-auto mb-1 h-4 w-4 sm:h-5 sm:w-5 text-brandlight" /><span className="block font-semibold">Livrare Rapidă</span><span className="hidden text-sm sm:block">Gratuit peste 1000 RON</span></li>
+          <li><ShieldCheck className="mx-auto mb-1 h-4 w-4 sm:h-5 sm:w-5 text-brandlight" /><span className="block font-semibold">Garanție Legală</span><span className="hidden text-sm sm:block">24 luni persoane fizice</span></li>
         </ul>
       </div>
     </section>
