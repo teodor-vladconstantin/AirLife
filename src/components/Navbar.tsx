@@ -179,23 +179,6 @@ const Navbar = () => {
 
           {/* Right Action Buttons */}
           <div className="flex items-center gap-0.5 sm:gap-3">
-            <a
-              href={`tel:${PHONE_TEL}`}
-              onClick={() => trackClickToCall("navbar")}
-              className="hidden xl:inline-flex items-center gap-1.5 text-sm font-semibold text-primary hover:underline"
-              aria-label={`Sună la ${PHONE_DISPLAY}`}
-            >
-              <Phone className="w-4 h-4" />
-              {PHONE_DISPLAY}
-            </a>
-            <a
-              href={`tel:${PHONE_TEL}`}
-              onClick={() => trackClickToCall("navbar-mobile")}
-              className="hidden sm:inline-flex xl:hidden h-11 w-11 items-center justify-center rounded-md text-primary hover:bg-secondary"
-              aria-label={`Sună la ${PHONE_DISPLAY}`}
-            >
-              <Phone className="w-5 h-5" />
-            </a>
             <Link to="/favorite" aria-label={`Favorite${wish.signedIn && wish.count ? ` (${wish.count})` : ""}`} className="relative hidden h-11 w-11 items-center justify-center rounded-md hover:bg-secondary sm:inline-flex">
               <Heart className="h-5 w-5" />
               {wish.signedIn && wish.count > 0 && <span className="absolute -right-0.5 -top-0.5 flex h-5 min-w-5 items-center justify-center rounded-full bg-primary px-1 text-[11px] font-semibold text-primary-foreground">{wish.count > 99 ? "99+" : wish.count}</span>}
@@ -205,7 +188,7 @@ const Navbar = () => {
             {user ? (
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
-                  <Button variant="outline" size="icon" aria-label="Cont utilizator">
+                  <Button variant="ghost" size="icon" aria-label="Cont utilizator">
                     <User className="w-4 h-4" />
                   </Button>
                 </DropdownMenuTrigger>
@@ -232,7 +215,7 @@ const Navbar = () => {
               </DropdownMenu>
             ) : (
               <Link to="/auth" rel="nofollow" className="hidden sm:inline-block">
-                <Button variant="outline">Conectare</Button>
+                <Button variant="ghost" size="icon" aria-label="Conectare"><User className="h-5 w-5" /></Button>
               </Link>
             )}
 
