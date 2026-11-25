@@ -323,7 +323,7 @@ const ProductDetails = ({ initial, reviews = NO_REVIEWS }: { initial: Loaded; re
                 }}
               >
                 {(pct > 0 || out) && (
-                  <span className={`absolute left-3 top-3 z-10 rounded-full px-3 py-1 text-xs font-semibold ${out ? "bg-muted text-muted-foreground" : "bg-primary text-primary-foreground"}`}>
+                  <span className={`absolute left-3 top-3 z-10 rounded-full px-3 py-1 text-xs font-semibold ${out ? "bg-muted text-muted-foreground" : "bg-promo text-promo-foreground"}`}>
                     {out ? "Indisponibil" : `-${pct}%`}
                   </span>
                 )}
@@ -426,12 +426,12 @@ const ProductDetails = ({ initial, reviews = NO_REVIEWS }: { initial: Loaded; re
 
               <div>
                 <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
-                  <span className="text-price">{formatPrice(product.price)}</span>
+                  <span className={`text-price ${product.compare_at ? "!text-promo" : ""}`}>{formatPrice(product.price)}</span>
                   {product.compare_at ? <span className="text-lg text-muted-foreground line-through">{formatPrice(product.compare_at)}</span> : null}
-                  {pct > 0 && <span className="rounded-full bg-primary px-2.5 py-0.5 text-xs font-semibold text-primary-foreground">-{pct}%</span>}
+                  {pct > 0 && <span className="rounded-full bg-promo px-2.5 py-0.5 text-xs font-semibold text-promo-foreground">-{pct}%</span>}
                 </div>
                 <p className="mt-1 text-xs text-muted-foreground">
-                  Preț final, TVA inclus{saving > 0 ? <> · <span className="font-semibold text-primary">Economisești {formatPrice(saving)}</span></> : null}
+                  Preț final, TVA inclus{saving > 0 ? <> · <span className="font-semibold text-promo">Economisești {formatPrice(saving)}</span></> : null}
                 </p>
               </div>
 
