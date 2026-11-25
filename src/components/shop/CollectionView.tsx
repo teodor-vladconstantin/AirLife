@@ -46,9 +46,9 @@ function FilterPanel({ f, fx, set, hideCategory }: { f: Filters; fx: Facets; set
       </Group>
       <Group title="Preț">
         <div className="flex items-center gap-2">
-          <Input type="number" inputMode="numeric" min={0} aria-label="Preț minim" placeholder={`${fx.priceMin}`} value={f.min ?? ""} onChange={(e) => set({ min: e.target.value === "" ? undefined : Math.max(0, Number(e.target.value)) })} />
+          <Input type="number" inputMode="numeric" min={0} aria-label="Preț minim" placeholder={`Min ${fx.priceMin}`} value={f.min ?? ""} onChange={(e) => set({ min: e.target.value === "" ? undefined : Math.max(0, Number(e.target.value)) })} />
           <span className="text-muted-foreground">-</span>
-          <Input type="number" inputMode="numeric" min={0} aria-label="Preț maxim" placeholder={`${fx.priceMax}`} value={f.max ?? ""} onChange={(e) => set({ max: e.target.value === "" ? undefined : Math.max(0, Number(e.target.value)) })} />
+          <Input type="number" inputMode="numeric" min={0} aria-label="Preț maxim" placeholder={`Max ${fx.priceMax}`} value={f.max ?? ""} onChange={(e) => set({ max: e.target.value === "" ? undefined : Math.max(0, Number(e.target.value)) })} />
         </div>
         <p className="text-xs text-muted-foreground">Între {formatPrice(fx.priceMin)} și {formatPrice(fx.priceMax)}</p>
       </Group>
@@ -127,7 +127,7 @@ export function CollectionView({ cards, hideCategory = false, heading = "Produse
   return (
     <div ref={top} className="scroll-mt-24">
       <div className="mb-4 flex flex-col gap-3 sm:flex-row sm:items-center">
-        <div className="relative hidden flex-1 sm:block sm:max-w-md">
+        <div className="relative hidden flex-1 sm:max-w-md">
           <Search className="pointer-events-none absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
           <Input value={f.q} onChange={(e) => update({ q: e.target.value })} placeholder="Caută în produse" aria-label="Caută în produse" className="pl-9" />
         </div>

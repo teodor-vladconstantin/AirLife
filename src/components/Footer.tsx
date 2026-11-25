@@ -193,9 +193,9 @@ const Footer = () => {
         <div className="border-t border-background/20 pt-8 flex flex-col sm:flex-row items-center justify-between text-xs opacity-75 gap-4">
           <div className="space-y-1 text-center sm:text-left">
             <p>&copy; {new Date().getFullYear()} Teta ABC SRL. Toate drepturile rezervate.</p>
-            <p className="text-[11px]">CUI {company.cui} | {company.regCom}</p>
-            <PaymentBadges dark className="justify-center pt-1 text-[11px] sm:justify-start" />
-            <p className="text-[11px]">
+            <p className="text-xs">CUI {company.cui} | {company.regCom}</p>
+            <PaymentBadges dark className="justify-center pt-1 text-xs sm:justify-start" />
+            <p className="text-xs">
               <a href={SAL_URL} target="_blank" rel="noopener noreferrer" className="inline-block py-1" aria-label="ANPC Soluționarea Alternativă a Litigiilor">
                 <img src="/legal/anpc-sal-badge.png" alt="ANPC SAL - Soluționarea Alternativă a Litigiilor" width={250} height={62} className="inline-block h-auto w-[250px] max-w-full rounded bg-white" loading="lazy" />
               </a>
@@ -204,7 +204,7 @@ const Footer = () => {
             </p>
           </div>
           <div className="flex items-center gap-4">
-            <span className="text-[11px]">Buzău, România</span>
+            <span className="text-xs">Buzău, România</span>
             <span>•</span>
             <Link to="/politica-de-cookies" className="inline-flex min-h-11 items-center hover:underline md:min-h-0 md:py-1.5">
               Setări Cookies

@@ -18,8 +18,8 @@ export const ProductCard = memo(function ProductCard({ product, priority = false
   const href = `/produse/${product.slug}`;
 
   return (
-    <article className="group relative flex min-w-0 flex-col overflow-hidden rounded-xl border border-border bg-card transition-shadow hover:shadow-md">
-      <Link to={href} className="relative block aspect-square bg-white" aria-label={product.name}>
+    <article className="group relative flex min-w-0 flex-col">
+      <Link to={href} className="relative block aspect-square overflow-hidden rounded-xl bg-secondary/70" aria-label={product.name}>
         <img
           src={product.image_url}
           alt={`${product.name} - AirLife Buzău`}
@@ -28,7 +28,7 @@ export const ProductCard = memo(function ProductCard({ product, priority = false
           loading={priority ? undefined : "lazy"}
           decoding="async"
           {...(priority ? { fetchPriority: "high" as const } : {})}
-          className={`h-full w-full object-contain p-3 transition-transform duration-300 group-hover:scale-[1.03] ${out ? "opacity-60" : ""}`}
+          className={`h-full w-full object-contain p-4 mix-blend-multiply transition-transform duration-300 group-hover:scale-[1.03] ${out ? "opacity-60" : ""}`}
         />
         {(pct > 0 || out) && (
           <span className={`absolute left-2 top-2 rounded-full px-2.5 py-1 text-xs font-semibold ${out ? "bg-muted text-muted-foreground" : "bg-primary text-primary-foreground"}`}>
@@ -37,8 +37,8 @@ export const ProductCard = memo(function ProductCard({ product, priority = false
         )}
       </Link>
       <WishlistButton productId={product.id} productName={product.name} className="absolute right-2 top-2 h-11 w-11 bg-background/90 shadow-sm hover:bg-background" />
-      <div className="flex flex-1 flex-col gap-1 p-3 sm:p-4">
-        {product.brand && <p className="truncate text-[11px] font-medium uppercase tracking-wide text-muted-foreground">{product.brand}</p>}
+      <div className="flex flex-1 flex-col gap-1 pt-3">
+        {product.brand && <p className="truncate text-xs font-medium uppercase tracking-wide text-muted-foreground">{product.brand}</p>}
         <h3 className="line-clamp-2 min-h-[2.5rem] break-words text-sm font-semibold leading-snug text-foreground">
           <Link to={href} className="hover:text-primary">{product.name}</Link>
         </h3>
@@ -48,8 +48,8 @@ export const ProductCard = memo(function ProductCard({ product, priority = false
         </div>
         <p className={`text-xs ${out ? "text-muted-foreground" : "text-primary"}`}>{out ? "Indisponibil momentan" : product.stock <= 3 ? `Ultimele ${product.stock} bucăți` : "În stoc"}</p>
         <Button
-          variant={out ? "outline" : "default"}
-          className="mt-auto w-full"
+          variant="outline"
+          className="mt-2 w-full border-foreground/20"
           disabled={out || adding}
           aria-busy={adding}
           onClick={async () => {

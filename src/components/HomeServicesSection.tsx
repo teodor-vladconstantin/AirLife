@@ -45,7 +45,7 @@ export const HomeServicesSection = () => {
               <Link
                 key={svc.slug}
                 to={`/servicii/${svc.slug}`}
-                className="group flex flex-col gap-3 rounded-xl border border-border bg-card p-6 transition-shadow hover:shadow-md"
+                className="group flex flex-col gap-3 rounded-xl bg-card p-6 transition-shadow hover:shadow-md"
               >
                 <span className="inline-flex h-12 w-12 items-center justify-center rounded-lg bg-primary/10 text-primary">
                   <Icon className="h-6 w-6" />

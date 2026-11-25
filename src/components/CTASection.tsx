@@ -16,8 +16,8 @@ const CTASection = () => {
           </p>
 
           <a href={`tel:${PHONE_TEL}`} onClick={() => trackClickToCall("home-cta")} className="inline-block w-full sm:w-auto">
-            <Button size="lg" className="w-full bg-brandlight text-white hover:bg-brandlight/90 sm:w-auto">
-              <PhoneCall className="mr-2 h-4 w-4" />
+            <Button size="lg" className="w-full bg-background text-foreground hover:bg-background/90 sm:w-auto">
+              <PhoneCall className="mr-2 h-4 w-4 text-primary" />
               Sună acum: {PHONE_DISPLAY}
             </Button>
           </a>

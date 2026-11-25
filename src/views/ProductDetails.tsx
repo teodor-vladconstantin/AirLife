@@ -308,7 +308,7 @@ const ProductDetails = ({ initial, reviews = NO_REVIEWS }: { initial: Loaded; re
             {/* Gallery */}
             <div className="space-y-3 md:sticky md:top-24 md:self-start">
               <div
-                className="relative h-44 sm:h-auto sm:aspect-square bg-white rounded-xl border border-border/60 p-4 sm:p-6 flex items-center justify-center overflow-hidden select-none"
+                className="relative h-44 sm:h-auto sm:aspect-square bg-secondary/70 rounded-xl p-4 sm:p-6 flex items-center justify-center overflow-hidden select-none"
                 tabIndex={0}
                 onKeyDown={(e) => {
                   if (e.key === "ArrowLeft") go(-1);
@@ -332,7 +332,7 @@ const ProductDetails = ({ initial, reviews = NO_REVIEWS }: { initial: Loaded; re
                   alt={`${product.name} Buzău - poza ${idx + 1}`}
                   fetchPriority="high"
                   decoding="async"
-                  className={`max-h-full max-w-full object-contain cursor-zoom-in ${out ? "opacity-70" : ""}`}
+                  className={`max-h-full max-w-full object-contain mix-blend-multiply cursor-zoom-in ${out ? "opacity-70" : ""}`}
                   onClick={() => setZoom(true)}
                 />
                 {images.length > 1 && (
@@ -486,7 +486,7 @@ const ProductDetails = ({ initial, reviews = NO_REVIEWS }: { initial: Loaded; re
               </div>
 
               {/* Delivery / returns / warranty */}
-              <ul className="divide-y rounded-xl border border-border bg-card text-sm">
+              <ul className="divide-y border-y border-border text-sm">
                 <li className="flex items-start gap-3 p-3"><Truck className="mt-0.5 h-4 w-4 shrink-0 text-primary" /><span><strong>Livrare în 24-48h lucrătoare</strong><br /><span className="text-muted-foreground">Gratuită peste 1.000 RON, altfel 20 RON</span></span></li>
                 <li className="flex items-start gap-3 p-3"><RotateCcw className="mt-0.5 h-4 w-4 shrink-0 text-primary" /><span><strong>Retur în 14 zile</strong><br /><span className="text-muted-foreground">Conform OUG 34/2014</span></span></li>
                 <li className="flex items-start gap-3 p-3"><ShieldCheck className="mt-0.5 h-4 w-4 shrink-0 text-primary" /><span><strong>Garanție 24 de luni</strong><br /><span className="text-muted-foreground">Conformitate legală, factură cu TVA</span></span></li>

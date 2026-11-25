@@ -26,12 +26,12 @@ const ProductCategories = ({ categories }: { categories: CategorySummary[] }) =>
             <Link
               key={c.slug}
               to={`/${c.slug}`}
-              className="group flex flex-col overflow-hidden rounded-xl border border-border bg-card transition-shadow hover:shadow-md"
+              className="group flex flex-col"
             >
-              <div className="aspect-[4/3] border-b border-border/60 bg-white p-4">
-                <img src={c.image} alt={`${c.name} - AirLife Buzău`} className="h-full w-full object-contain transition-transform duration-500 group-hover:scale-105" loading="lazy" />
+              <div className="aspect-[4/3] overflow-hidden rounded-xl bg-secondary/70 p-4">
+                <img src={c.image} alt={`${c.name} - AirLife Buzău`} className="h-full w-full object-contain mix-blend-multiply transition-transform duration-500 group-hover:scale-105" loading="lazy" />
               </div>
-              <div className="flex flex-1 flex-col gap-1 p-4">
+              <div className="flex flex-1 flex-col gap-1 pt-3">
                 <h3 className="text-sm font-bold leading-snug text-foreground group-hover:text-primary md:text-base">{c.title}</h3>
                 <p className="line-clamp-2 text-xs leading-relaxed text-muted-foreground">{c.description}</p>
                 <p className="mt-auto pt-1 text-xs font-medium text-primary">{c.count} {c.count === 1 ? "produs" : "produse"}</p>

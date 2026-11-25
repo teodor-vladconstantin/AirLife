@@ -3,6 +3,8 @@ import { useEffect, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { UTM_CHANNELS, utmUrl } from "@/lib/utm";
 import { X } from "lucide-react";
+import { PHONE_DISPLAY, PHONE_TEL } from "@/data/localSeo";
+import { trackClickToCall } from "@/lib/analytics";
 
 type Campaign = { id: string; name: string; headline: string; cta_label: string | null; cta_url: string | null; utm_campaign: string | null };
 
@@ -20,7 +22,18 @@ const CampaignBanner = () => {
       }, () => undefined);
     return () => { alive = false; };
   }, []);
-  if (!c) return null;
+  if (!c) {
+    return (
+      <div className="bg-foreground text-xs text-background sm:text-sm">
+        <div className="container mx-auto flex items-center justify-center gap-x-6 px-4 py-2 sm:justify-between">
+          <span>Livrare gratuită peste 1000 RON</span>
+          <a href={`tel:${PHONE_TEL}`} onClick={() => trackClickToCall("announcement-bar")} className="hidden font-semibold hover:underline sm:inline">
+            Sună: {PHONE_DISPLAY}
+          </a>
+        </div>
+      </div>
+    );
+  }
 
   const banner = UTM_CHANNELS.find((x) => x.key === "site_banner")!;
   const href = c.cta_url ? utmUrl(c.cta_url, banner, c.utm_campaign || c.name).replace("https://airlife.ro", "") : null;

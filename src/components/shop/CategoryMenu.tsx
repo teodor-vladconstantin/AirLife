@@ -46,10 +46,9 @@ export function CategoryMenu() {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Button size="sm" className="flex items-center gap-1.5 font-bold">
-          <LayoutGrid className="h-4 w-4" />
+        <Button variant="ghost" size="sm" className="flex items-center gap-1">
           <span>Magazin</span>
-          <ChevronDown className="h-3.5 w-3.5 opacity-80" />
+          <ChevronDown className="h-3.5 w-3.5 opacity-70" />
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="start" className="w-[min(62rem,94vw)] overflow-hidden p-0">
