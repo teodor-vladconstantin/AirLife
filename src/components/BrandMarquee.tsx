@@ -7,7 +7,10 @@ import { BRAND_LOGOS } from "@/data/brandLogos";
 // Brands are shown only to identify the products sold; AirLife is not affiliated with them (note under the strip).
 export type MarqueeBrand = { name: string; count: number };
 
-const BrandMarquee = ({ brands }: { brands: MarqueeBrand[] }) => {
+const BrandMarquee = ({ brands: all }: { brands: MarqueeBrand[] }) => {
+  // one consistent look: only brands that have a logo file (text wordmarks only if there are too few logos)
+  const withLogo = all.filter((b) => BRAND_LOGOS[b.name]);
+  const brands = withLogo.length >= 6 ? withLogo : all;
   if (brands.length < 4) return null;
   const set = (hidden: boolean) =>
     brands.map((b) => {
@@ -18,10 +21,10 @@ const BrandMarquee = ({ brands }: { brands: MarqueeBrand[] }) => {
             to={`/produse${toQuery({ ...DEFAULT_FILTERS, brands: [b.name] })}`}
             tabIndex={hidden ? -1 : undefined}
             aria-label={hidden ? undefined : `${b.name}: ${b.count} ${b.count === 1 ? "produs" : "produse"}`}
-            className="flex min-h-11 items-center px-6 text-foreground/55 transition-colors hover:text-foreground md:px-8"
+            className="group flex min-h-11 items-center px-6 text-foreground/55 transition-colors hover:text-foreground md:px-8"
           >
             {logo ? (
-              <img src={logo} alt={hidden ? "" : b.name} loading="lazy" decoding="async" className="h-8 w-auto max-w-[8rem] object-contain grayscale md:h-9" />
+              <img src={logo} alt={hidden ? "" : b.name} loading="lazy" decoding="async" className="h-8 w-auto max-w-[8rem] object-contain opacity-60 grayscale transition-opacity group-hover:opacity-100 md:h-9" />
             ) : (
               <span className="whitespace-nowrap text-xl font-bold tracking-tight md:text-2xl">{b.name}</span>
             )}
