@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import { useCart } from "@/contexts/CartContext";
 import { trackAddToCart } from "@/lib/analytics";
 import { WishlistButton } from "@/components/shop/WishlistButton";
+import { thumbUrl, fallbackTo } from "@/lib/thumb";
 import { discountPct, formatPrice, type ProductCardData } from "@/lib/shop";
 
 // Collection card in the usual online-store layout: square photo with a badge, brand, two-line title, price (with the
@@ -21,7 +22,8 @@ export const ProductCard = memo(function ProductCard({ product, priority = false
     <article className="group relative flex min-w-0 flex-col">
       <Link to={href} className="relative block aspect-square overflow-hidden rounded-xl bg-secondary/70" aria-label={product.name}>
         <img
-          src={product.image_url}
+          src={thumbUrl(product.image_url)}
+          onError={fallbackTo(product.image_url)}
           alt={`${product.name} - AirLife Buzău`}
           width={400}
           height={400}

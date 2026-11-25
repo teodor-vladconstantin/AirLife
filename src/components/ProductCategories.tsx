@@ -1,6 +1,7 @@
 import { Link } from "@/lib/router";
 import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
+import { thumbUrl, fallbackTo } from "@/lib/thumb";
 import type { CategorySummary } from "@/lib/catalog";
 
 const FEATURED = 6;
@@ -29,7 +30,7 @@ const ProductCategories = ({ categories }: { categories: CategorySummary[] }) =>
               className="group flex flex-col"
             >
               <div className="aspect-[4/3] overflow-hidden rounded-xl bg-secondary/70 p-4">
-                <img src={c.image} alt={`${c.name} - AirLife Buzău`} className="h-full w-full object-contain mix-blend-multiply transition-transform duration-500 group-hover:scale-105" loading="lazy" />
+                <img src={thumbUrl(c.image)} onError={fallbackTo(c.image)} alt={`${c.name} - AirLife Buzău`} className="h-full w-full object-contain mix-blend-multiply transition-transform duration-500 group-hover:scale-105" loading="lazy" />
               </div>
               <div className="flex flex-1 flex-col gap-1 pt-3">
                 <h3 className="text-sm font-bold leading-snug text-foreground group-hover:text-primary md:text-base">{c.title}</h3>
