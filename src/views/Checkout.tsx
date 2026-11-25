@@ -20,7 +20,7 @@ import { Separator } from "@/components/ui/separator";
 import { Check, ChevronLeft, CreditCard, Loader2 } from "lucide-react";
 import { newId, readProfile, saveProfile, withDefault, type SavedAddress } from "@/lib/account";
 import { useTurnstile } from "@/components/Turnstile";
-import { trackBeginCheckout, trackError } from "@/lib/analytics";
+import { trackBeginCheckout, trackCheckoutStep, trackError } from "@/lib/analytics";
 
 // Validation schema
 // Online payments are off until NEXT_PUBLIC_PAYMENTS=on (needs the Stripe keys, see docs/stripe.md). Off = the old quote flow.
@@ -114,6 +114,7 @@ const Checkout = () => {
   // validates only the fields of the current step before moving on
   const next = async () => {
     if (await trigger(STEP_FIELDS[step - 1])) {
+      trackCheckoutStep(Math.min(3, step + 1), total);
       setStep((s) => Math.min(3, s + 1));
       window.scrollTo({ top: 0, behavior: "smooth" });
     }

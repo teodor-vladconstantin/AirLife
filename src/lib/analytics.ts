@@ -208,6 +208,18 @@ const sendEvent = (eventName: string, params: Record<string, unknown> = {}) => {
   if (c === null && pending.length < 30) pending.push([eventName, params]);
 };
 
+// Generic event for the funnels doc (docs/funnels.md). Use GA4 recommended names where one exists.
+export const trackEvent = sendEvent;
+
+const cartItem = (i: AnalyticsItem) => ({ item_id: i.item_id, item_name: i.item_name, price: i.price, item_category: i.item_category || "HVAC", quantity: i.quantity || 1 });
+export const trackRemoveFromCart = (i: AnalyticsItem) => sendEvent("remove_from_cart", { currency: "RON", value: i.price * (i.quantity || 1), items: [cartItem(i)] });
+export const trackViewCart = (items: AnalyticsItem[], total: number) => sendEvent("view_cart", { currency: "RON", value: total, items: items.map(cartItem) });
+export const trackCheckoutStep = (step: number, total: number) => sendEvent(step === 2 ? "add_shipping_info" : "add_payment_info", { currency: "RON", value: total, checkout_step: step });
+export const trackSearch = (term: string, source: "box" | "suggestion" | "url") => sendEvent("search", { search_term: term.slice(0, 80), search_source: source });
+export const trackFilter = (filter: string, value: string) => sendEvent("filter_products", { filter, value: value.slice(0, 80) });
+export const trackWishlist = (productId: string, on: boolean) => sendEvent(on ? "add_to_wishlist" : "remove_from_wishlist", { item_id: productId });
+export const trackAuth = (kind: "login" | "sign_up") => sendEvent(kind, { method: "email" });
+
 export const trackViewItem = (item: AnalyticsItem) => {
   sendEvent("view_item", {
     currency: "RON",

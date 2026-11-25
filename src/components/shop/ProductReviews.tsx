@@ -1,4 +1,5 @@
 "use client";
+import { trackEvent } from "@/lib/analytics";
 import { useEffect, useState } from "react";
 import { Star } from "lucide-react";
 import { Link } from "@/lib/router";
@@ -63,6 +64,7 @@ export function ProductReviews({ productId, data }: { productId: string; data: R
       const out = await res.json().catch(() => ({}));
       if (!res.ok) return toast({ title: ERR[out.error] ?? "Nu am putut trimite recenzia", description: out.error === "invalid_request" ? "Verifică numele și textul (minim 10 caractere)." : undefined, variant: "destructive" });
       setSent(true);
+      trackEvent("review_submitted", { item_id: productId, rating });
     } finally { setBusy(false); }
   };
 

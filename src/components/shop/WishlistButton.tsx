@@ -4,6 +4,7 @@ import { useNavigate } from "@/lib/router";
 import { ToastAction } from "@/components/ui/toast";
 import { useToast } from "@/hooks/use-toast";
 import { useWishlist } from "@/lib/wishlist";
+import { trackWishlist, trackEvent } from "@/lib/analytics";
 
 export function WishlistButton({ productId, productName, className = "", withLabel = false }: { productId: string; productName: string; className?: string; withLabel?: boolean }) {
   const { has, toggle } = useWishlist();
@@ -15,6 +16,8 @@ export function WishlistButton({ productId, productName, className = "", withLab
     e.preventDefault();
     e.stopPropagation();
     const r = await toggle(productId);
+    if (r === "login_required") trackEvent("wishlist_login_required", { item_id: productId });
+    else if (r !== "error") trackWishlist(productId, !on);
     if (r === "login_required") {
       toast({
         title: "Conectează-te ca să salvezi la favorite",

@@ -1,5 +1,7 @@
 "use client";
+import { useEffect } from "react";
 import { Link } from "@/lib/router";
+import { trackEvent } from "@/lib/analytics";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import SEO from "@/components/SEO";
@@ -11,6 +13,7 @@ import { bylineName } from "@/data/author";
 import { postSchemas, roDate } from "@/lib/blogSchema";
 
 const BlogPost = ({ post, related }: { post: Tables<"blog_posts">; related: { slug: string; title: string }[] }) => {
+  useEffect(() => { trackEvent("blog_read", { post_slug: post.slug }); }, [post.slug]);
   const url = `https://airlife.ro/blog/${post.slug}`;
   const mainGuide = BLOG_CANONICAL[post.slug];
   const structuredData = postSchemas(post);
