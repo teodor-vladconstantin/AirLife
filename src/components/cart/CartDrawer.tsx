@@ -1,4 +1,6 @@
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetFooter } from "@/components/ui/sheet";
+import { useEffect } from "react";
+import { trackRemoveFromCart, trackViewCart } from "@/lib/analytics";
 import PaymentBadges from "@/components/PaymentBadges";
 import { Button } from "@/components/ui/button";
 import { ScrollArea } from "@/components/ui/scroll-area";
@@ -18,12 +20,17 @@ export const CartDrawer = ({ open, onClose }: CartDrawerProps) => {
   const { items, updateQuantity, removeFromCart, addToCart, total, itemCount } = useCart();
   const navigate = useNavigate();
   const { toast } = useToast();
+  useEffect(() => {
+    if (open && items.length) trackViewCart(items.map((i) => ({ item_id: i.product_id, item_name: i.name, price: i.price, quantity: i.quantity, item_category: i.category })), total);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [open]);
 
   // Remove a line, and offer "Anulează" in case it was a mistake.
   const handleRemove = async (productId: string) => {
     const item = items.find((i) => i.product_id === productId);
     await removeFromCart(productId);
     if (!item) return;
+    trackRemoveFromCart({ item_id: item.product_id, item_name: item.name, price: item.price, quantity: item.quantity, item_category: item.category });
     toast({
       title: "Produs scos din coș",
       description: item.name,

@@ -1,4 +1,5 @@
 "use client";
+import { trackSearch } from "@/lib/analytics";
 import { useEffect, useId, useRef, useState } from "react";
 import { Loader2, Search } from "lucide-react";
 import { useLocation, useNavigate } from "@/lib/router";
@@ -61,7 +62,8 @@ export function SearchBox({ className = "", autoFocus = false, onDone }: { class
   };
   const submit = () => {
     const term = q.trim();
-    if (active >= 0 && hits[active]) return go(`/produse/${hits[active].slug}`);
+    if (active >= 0 && hits[active]) { trackSearch(term, "suggestion"); return go(`/produse/${hits[active].slug}`); }
+    if (term) trackSearch(term, "box");
     go(term ? `/produse?q=${encodeURIComponent(term)}` : "/produse");
   };
   const show = open && q.trim().length >= 2;

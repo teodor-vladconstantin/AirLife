@@ -1,4 +1,5 @@
 "use client";
+import { trackEvent } from "@/lib/analytics";
 import { useState } from "react";
 import { CheckCircle2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -27,6 +28,7 @@ export default function SubscribeForm({ source, dark = false }: { source: string
         body: JSON.stringify({ email, consent, website, source, captcha: tsToken }),
       });
       setState(res.ok ? "done" : "error");
+      if (res.ok) trackEvent("newsletter_signup", { source });
       if (!res.ok) tsReset();
     } catch {
       setState("error");
@@ -37,7 +39,7 @@ export default function SubscribeForm({ source, dark = false }: { source: string
     return (
       <div className="flex items-start gap-3 text-sm">
         <CheckCircle2 className="w-5 h-5 text-primary shrink-0 mt-0.5" />
-        <p>Ți-am trimis un email de confirmare. Apasă linkul din el ca să finalizezi abonarea (verifică și Spam sau Promotions).</p>
+        <p>Gata, ești abonat! Din acum primești ofertele și sfaturile AirLife. Te poți dezabona oricând dintr-un link din fiecare email.</p>
       </div>
     );
   }

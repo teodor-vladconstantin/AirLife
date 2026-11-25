@@ -1,4 +1,5 @@
 "use client";
+import { trackEvent } from "@/lib/analytics";
 import { useEffect, useState } from "react";
 import { Bell } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
@@ -26,7 +27,7 @@ export function StockAlertForm({ productId, kind }: { productId: string; kind: "
     try {
       const res = await fetch("/api/alerts", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ productId, email, kind, token: tsToken }) });
       const out = await res.json().catch(() => ({}));
-      if (res.ok) setDone(true);
+      if (res.ok) { setDone(true); trackEvent("stock_alert_signup", { kind, item_id: productId }); }
       else toast({ title: out.error === "already_in_stock" ? "Produsul este deja în stoc" : "Nu am putut salva alerta", description: out.error === "invalid_request" ? "Verifică adresa de email." : undefined, variant: "destructive" });
     } finally { setBusy(false); tsReset(); }
   };

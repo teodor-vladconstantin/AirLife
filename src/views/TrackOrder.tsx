@@ -1,4 +1,5 @@
 "use client";
+import { trackEvent } from "@/lib/analytics";
 import { useState } from "react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -30,7 +31,7 @@ export default function TrackOrder({ initialOrder = "" }: { initialOrder?: strin
       const r = await fetch("/api/order-lookup", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ orderNumber: num, email }) });
       if (r.status === 429) setErr("Prea multe încercări. Încearcă din nou peste câteva minute.");
       else if (!r.ok) setErr("Nu am găsit comanda. Verifică numărul comenzii și emailul folosit la plasare.");
-      else setFound(await r.json());
+      else { setFound(await r.json()); trackEvent("order_lookup"); }
     } catch {
       setErr("Nu am putut verifica acum. Încearcă din nou.");
     } finally {

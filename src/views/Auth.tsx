@@ -1,4 +1,5 @@
 "use client";
+import { trackAuth } from "@/lib/analytics";
 import { useState, useEffect, useRef } from "react";
 import { useNavigate } from "@/lib/router";
 import { supabase } from "@/integrations/supabase/client";
@@ -52,6 +53,7 @@ const Auth = () => {
           password,
         });
         if (error) throw error;
+        trackAuth("login");
         toast({ title: "Bine ai venit!" });
       } else {
         const { error } = await supabase.auth.signUp({
@@ -65,6 +67,7 @@ const Auth = () => {
           },
         });
         if (error) throw error;
+        trackAuth("sign_up");
         toast({ title: "Cont creat cu succes!" });
       }
     } catch (error: any) {

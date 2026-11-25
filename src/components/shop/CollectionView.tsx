@@ -1,4 +1,5 @@
 "use client";
+import { trackFilter } from "@/lib/analytics";
 import { Suspense, useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import { ChevronLeft, ChevronRight, Search, SlidersHorizontal, X } from "lucide-react";
@@ -109,6 +110,7 @@ export function CollectionView({ cards, hideCategory = false, heading = "Produse
   }, []);
 
   const update = useCallback((patch: Partial<Filters>, keepPage = false) => {
+    Object.entries(patch).forEach(([k, v]) => { if (k !== "page" && v != null && v !== "" && v !== false && !(Array.isArray(v) && !v.length)) trackFilter(k, String(v)); });
     setF((prev) => {
       const next = { ...prev, ...patch, page: keepPage ? (patch.page ?? prev.page) : 1 };
       written.current = new URLSearchParams(toQuery(next)).toString();

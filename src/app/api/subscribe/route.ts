@@ -1,11 +1,7 @@
 import { NextResponse } from "next/server";
-import { render } from "@react-email/components";
 import { z } from "zod";
-import { resend, NEWS_FROM, REPLY_TO } from "@/lib/email/client";
-import { adminDb, siteUrl } from "@/lib/email/db";
+import { adminDb } from "@/lib/email/db";
 import { CONSENT_TEXT } from "@/lib/email/consent";
-import { unsubscribeHeaders } from "@/lib/email/headers";
-import Confirm from "@/emails/Confirm";
 import { verifyTurnstile } from "@/lib/turnstile";
 
 const schema = z.object({
@@ -39,8 +35,6 @@ export async function POST(req: Request) {
   const ip = req.headers.get("x-forwarded-for")?.split(",")[0]?.trim() ?? "unknown";
   if (limited(`ip:${ip}`, 5, 10 * 60_000)) return NextResponse.json({ error: "rate_limited" }, { status: 429 });
   if (!(await verifyTurnstile(captcha, ip))) return NextResponse.json({ error: "captcha" }, { status: 403 });
-  // One confirmation mail per address per 5 minutes, so the form can't be used to spam someone's inbox.
-  if (limited(`email:${email}`, 1, 5 * 60_000)) return ok();
 
   const db = adminDb();
   const { data: row, error: readError } = await db
@@ -50,35 +44,14 @@ export async function POST(req: Request) {
     .maybeSingle();
   if (readError) return NextResponse.json({ error: "server" }, { status: 500 });
 
-  let token: string;
+  const now = new Date().toISOString();
   if (!row) {
-    const { data, error } = await db
-      .from("subscribers")
-      .insert({ email, source, consent_text: CONSENT_TEXT })
-      .select("unsubscribe_token")
-      .single();
+    const { error } = await db.from("subscribers").insert({ email, source, consent_text: CONSENT_TEXT, status: "active", consent_at: now });
     if (error) return NextResponse.json({ error: "server" }, { status: 500 });
-    token = data.unsubscribe_token;
-  } else if (["active", "bounced", "complained"].includes(row.status)) {
-    return ok(); // same answer for every case so the form can't reveal who is subscribed
-  } else {
-    if (row.status === "unsubscribed") {
-      await db.from("subscribers").update({ status: "pending", consent_at: null, consent_text: CONSENT_TEXT }).eq("email", email);
-    }
-    token = row.unsubscribe_token;
+  } else if (row.status === "pending" || row.status === "unsubscribed") {
+    // single opt-in: the ticked consent checkbox is the consent, no confirmation mail
+    const { error } = await db.from("subscribers").update({ status: "active", consent_at: now, consent_text: CONSENT_TEXT }).eq("email", email);
+    if (error) return NextResponse.json({ error: "server" }, { status: 500 });
   }
-
-  const base = siteUrl();
-  const element = Confirm({ confirmUrl: `${base}/confirm?token=${token}`, unsubscribeUrl: `${base}/unsubscribe?token=${token}` });
-  const { error } = await resend.emails.send({
-    from: NEWS_FROM,
-    to: email,
-    replyTo: REPLY_TO,
-    headers: unsubscribeHeaders(token),
-    subject: "Confirmă abonarea la AirLife",
-    html: await render(element),
-    text: await render(element, { plainText: true }),
-  });
-  if (error) return NextResponse.json({ error: "email_failed" }, { status: 502 });
-  return ok();
+  return ok(); // same answer for every case so the form can't reveal who is subscribed
 }
