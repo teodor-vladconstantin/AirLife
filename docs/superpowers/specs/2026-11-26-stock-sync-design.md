@@ -5,7 +5,11 @@ Data: 2026-11-26. Design aprobat; precomenzile Novingair se tratează ca indispo
 ## Scop
 
 Stocul de pe airlife.ro urmează zilnic disponibilitatea din cataloagele publice ale furnizorilor.
-Se modifică doar `products.stock`. Prețurile și vizibilitatea rămân neatinse.
+Din 2026-11-27 urmează și prețurile: vindem la prețul curent al furnizorului (`products.price`), iar
+`supplier_products.purchase_price` = acel preț minus discountul contractual (20%), ținut în
+`suppliers.default_markup_percent` (coloana își păstrează numele vechi). `sale_price` rămâne neatins; un preț pus manual
+la un produs legat de furnizor este suprascris; cu mai mulți furnizori pe produs, prețul de vânzare nu se schimbă.
+Un preț sub jumătate sau peste dublul celui actual nu se scrie și apare în raport. Vizibilitatea rămâne neatinsă.
 
 ## Surse
 
@@ -55,4 +59,4 @@ furnizorilor (`robots.txt` la Novingair interzice accesul automat la `/wp-json/`
 
 ## În afara scopului
 
-Cantități reale, prețuri de achiziție, eticheta „La comandă”, listă în admin, import de produse noi.
+Cantități reale, eticheta „La comandă”, listă în admin, import de produse noi.

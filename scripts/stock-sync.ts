@@ -1,6 +1,6 @@
-// Manual supplier stock sync. Report only by default:
+// Manual supplier stock and price sync. Report only by default:
 //   npx tsx --env-file=.env.local scripts/stock-sync.ts [--apply] [--force]
-// --apply writes products.stock; --force also lets more than 30% of a supplier's products drop to 0 (first run).
+// --apply writes stock, selling prices and purchase prices; --force also lets more than 30% of a supplier's products drop to 0 (first run).
 import { reportText, runStockSync } from "../src/lib/stockSync";
 
 const apply = process.argv.includes("--apply");

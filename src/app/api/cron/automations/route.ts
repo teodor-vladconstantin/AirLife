@@ -15,17 +15,17 @@ type Row = { id: string; email: string; unsubscribe_token: string };
 // Reading the supplier catalogs can take a few minutes when they rate limit us.
 export const maxDuration = 300;
 
-// Supplier stock sync, off until STOCK_SYNC_ENABLED=1. E-mails the shop when stock changes or something needs attention.
+// Supplier stock and price sync, off until STOCK_SYNC_ENABLED=1. E-mails the shop when something changes or needs attention.
 async function stockSync() {
   if (process.env.STOCK_SYNC_ENABLED !== "1") return { disabled: true };
   const notify = async (text: string) =>
-    (await resend.emails.send({ from: ORDERS_FROM, to: REPLY_TO, subject: "Sincronizare stoc furnizori", text })).error?.message;
+    (await resend.emails.send({ from: ORDERS_FROM, to: REPLY_TO, subject: "Sincronizare stoc și prețuri furnizori", text })).error?.message;
   try {
     const plan = await runStockSync({ apply: true });
     const text = reportText(plan, true);
-    return { changed: plan.changes.length, suppliers: plan.reports, emailError: text ? await notify(text) : undefined };
+    return { changed: plan.changes.length, prices: plan.prices.length, purchases: plan.purchases.length, suppliers: plan.reports, emailError: text ? await notify(text) : undefined };
   } catch (e) {
-    await notify(`Sincronizarea stocului a eșuat: ${(e as Error).message}`);
+    await notify(`Sincronizarea cu furnizorii a eșuat: ${(e as Error).message}`);
     throw e;
   }
 }
